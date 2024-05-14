@@ -9,12 +9,24 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.4.21"
+    "axios": "^1.6.8",
+    "dayjs": "^1.11.10",
+    "echarts": "^5.5.0",
+    "normalize.css": "^8.0.1",
+    "pinia": "^2.1.7",
+    "pinia-plugin-persist": "^1.0.0",
+    "sass": "^1.75.0",
+    "scss": "^0.2.4",
+    "toyar-design": "^0.0.35",
+    "vue": "^3.4.21",
+    "vue-i18n": "^9.13.1",
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
+    "vite-plugin-html": "^3.2.2",
     "vue-tsc": "^2.0.6"
   }
 }
