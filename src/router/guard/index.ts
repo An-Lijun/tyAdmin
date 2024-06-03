@@ -11,12 +11,12 @@ function createPageGuard(router: Router){
   const userStore =useUserStore()
   
   router.beforeEach((to) => {
-    if (
-      !userStore.token&& to.fullPath !=='/login'
-    ) {
-      // 将用户重定向到登录页面
-      return { name: 'Login' }
-    }
-    return true
+    // if (
+    //   !userStore.token&& to.fullPath !=='/login'
+    // ) {
+    //   // 将用户重定向到登录页面
+    //   return { name: 'Login' }
+    // }
+    // return true
   })
 }

@@ -5,6 +5,31 @@ export function getAsset(imgUrl:string) {
   return new URL('../'+imgUrl, import.meta.url).href;
 }
 
+export function openWindow(url,option={}){
+
+  //const windowFeatures = "left=100,top=100,width=320,height=320";
+  const {
+    target = '_self', //_self、_blank、_parent 和 _top。 mozillaWindow
+    popup = true,
+    top,
+    left,
+    width,
+    height,
+    noreferrer,
+    noopener
+  } = option
+
+  let windowFeatures =`popup=${popup},left=${left},top=${top},
+  width=${width},height=${height},noreferrer:${noreferrer},noopener:${noopener}`
+
+  window.open(url, target, windowFeatures.slice(0,-1))
+  
+}
+
+
+
+
+
 // export function  numberAnimation({  number, s }) {
 //   let handle, //句柄
 //     content = 0; //内容

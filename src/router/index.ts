@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router';
 import type { App } from 'vue';
 
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHashHistory,createWebHistory } from 'vue-router';
 import installRouterGuard from './guard';
 
 const routes=[
@@ -26,7 +26,35 @@ const routes=[
       {
         path:'icon',
         component: () => import('@/views/trade/feat/icon.vue'), 
-      }
+      },
+      {
+        path:'download',
+        component: () => import('@/views/trade/download/index.vue'), 
+      },
+      {
+        path:'echarsMap',
+        component: () => import('@/views/trade/map/echarsMap.vue'), 
+      },
+      {
+        path:'inner',
+        component: () => import('@/views/trade/website/inner.vue'), 
+      },
+      {
+        path:'out',
+        component: () => import('@/views/trade/website/out.vue'), 
+      },
+      {
+        path:'wicket',
+        component: () => import('@/views/trade/website/wicket.vue'), 
+      },
+      {
+        path:'outByIframe',
+        component: () => import('@/views/trade/website/outByIframe.vue'), 
+      },
+      {
+        path:'interaction',
+        component: () => import('@/views/trade/website/interaction.vue'), 
+      },
     ],
   }
 ]
@@ -37,6 +65,7 @@ export const router = createRouter({
   // 创建一个 hash 历史记录。
   // import.meta.env.VITE_PUBLIC_PATH
   history: createWebHashHistory(),
+  // history:createWebHistory(),
   // 应该添加到路由的初始路由列表。
   routes: routes as unknown as RouteRecordRaw[],
   // 是否应该禁止尾部斜杠。默认为假

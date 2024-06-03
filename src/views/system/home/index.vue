@@ -149,7 +149,7 @@
           </div>
         </div>
       </TyHeader>
-      <TyMain style="overflow: auto;">
+      <TyMain>
         <div style="width: 100%; ">
           <RouterView />
         </div>

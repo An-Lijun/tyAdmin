@@ -38,7 +38,6 @@
             <div class="card-item" v-for="item in listData" :key="item.title">
               <TyCard :border="false" shadow="hover" :isLoading="isLoading">
                 <div class="line1">
-                  <!-- <img :src="getAsset(item.icon)" alt="" /> -->
                   <svgIcon
                     :icon="item.icon"
                     :style="{ color: item.color, fontSize: '35px' }"
