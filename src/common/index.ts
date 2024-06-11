@@ -22,7 +22,7 @@ export function openWindow(url,option={}){
   let windowFeatures =`popup=${popup},left=${left},top=${top},
   width=${width},height=${height},noreferrer:${noreferrer},noopener:${noopener}`
 
-  window.open(url, target, windowFeatures.slice(0,-1))
+ return window.open(url, target, windowFeatures.slice(0,-1))
   
 }
 

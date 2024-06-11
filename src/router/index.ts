@@ -1,10 +1,10 @@
 import type { RouteRecordRaw } from 'vue-router';
 import type { App } from 'vue';
 
-import { createRouter, createWebHashHistory,createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import installRouterGuard from './guard';
 
-const routes=[
+const routes = [
   {
     path: '/login',
     name: 'Login',
@@ -13,49 +13,75 @@ const routes=[
   {
     path: '/',
     name: 'Home',
+
+  },
+  {
+    path: '/trade',
+    name: 'Trade',
     component: () => import('@/views/system/home/index.vue'),
-    children:[
+    redirect: { name: 'propduct' },
+    children: [
       {
-        path:'propduct',
+        name: 'propduct',
+        path: 'propduct',
         component: () => import('@/views/trade/dashboard/analysis.vue'),
       },
       {
-        path:'workbench',
+        path: 'workbench',
         component: () => import('@/views/trade/dashboard/workbench.vue'),
       },
       {
-        path:'icon',
-        component: () => import('@/views/trade/feat/icon.vue'), 
+        path: 'icon',
+        component: () => import('@/views/trade/feat/icon.vue'),
       },
       {
-        path:'download',
-        component: () => import('@/views/trade/download/index.vue'), 
+        path: 'download',
+        component: () => import('@/views/trade/download/index.vue'),
       },
       {
-        path:'echarsMap',
-        component: () => import('@/views/trade/map/echarsMap.vue'), 
+        path: 'echarsMap',
+        component: () => import('@/views/trade/map/echarsMap.vue'),
       },
       {
-        path:'inner',
-        component: () => import('@/views/trade/website/inner.vue'), 
+        path: 'inner',
+        component: () => import('@/views/trade/website/inner.vue'),
       },
       {
-        path:'out',
-        component: () => import('@/views/trade/website/out.vue'), 
+        path: 'out',
+        component: () => import('@/views/trade/website/out.vue'),
       },
       {
-        path:'wicket',
-        component: () => import('@/views/trade/website/wicket.vue'), 
+        path: 'wicket',
+        component: () => import('@/views/trade/website/wicket.vue'),
       },
       {
-        path:'outByIframe',
-        component: () => import('@/views/trade/website/outByIframe.vue'), 
+        path: 'outByIframe',
+        component: () => import('@/views/trade/website/outByIframe.vue'),
       },
       {
-        path:'interaction',
-        component: () => import('@/views/trade/website/interaction.vue'), 
-      },
+        path: '/:catchAll(.*)',
+        redirect: { name: 'notFound' },
+      }
     ],
+  },
+  {
+    path: '/outByIframe',
+    name: 'outByIframe',
+    component: () => import('@/views/trade/website/outByIframe.vue'),
+  },
+  {
+    path: '/lock',
+    name: 'Lock',
+    component: () => import('@/views/system/lock/index.vue'),
+  },
+  {
+    path: '/404',
+    name: 'notFound',
+    component: () => import('@/views/system/404/index.vue'),
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/404',
   }
 ]
 // app router
@@ -65,12 +91,11 @@ export const router = createRouter({
   // 创建一个 hash 历史记录。
   // import.meta.env.VITE_PUBLIC_PATH
   history: createWebHashHistory(),
-  // history:createWebHistory(),
   // 应该添加到路由的初始路由列表。
   routes: routes as unknown as RouteRecordRaw[],
   // 是否应该禁止尾部斜杠。默认为假
   strict: true,
-  
+
 });
 
 // config router

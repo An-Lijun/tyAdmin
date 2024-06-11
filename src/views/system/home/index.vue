@@ -150,7 +150,7 @@
         </div>
       </TyHeader>
       <TyMain>
-        <div style="width: 100%; ">
+        <div style="width: 100%; overflow-y: auto;max-height: calc(100vh - 100px)">
           <RouterView />
         </div>
       </TyMain>

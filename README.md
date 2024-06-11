@@ -63,6 +63,25 @@ ps 本来打算使用?raw 读出字符串渲染到根html中然后使用svguse �
 获取资源使用getAsset 获取src下的任意资源 如 getAsset('assets/xxx.png') 返回形式如 http://xxx:xxx/src/assets/xxx.png
 
 
+### 窗口化
+
+在实际功能中存在在交易区块打开, 新窗口打开,模态窗口打开三种方式
+而实际上打开的页面又分为 项目内的静态html 和项目外的网站两种网站
+使用postMessage 进行iframe通信
+
+使用common 的 openWindow方法打开窗口 使用uiFrame组件进行路由结合
+```JavaScript
+  参数1 url 实际要打开网站的地址
+  参数2 object  target 原iframetarget 扩展 mozillaWindow 当为这个值时 结合宽高 形成模态窗口
+  剩下与iframe 原来的值功能一样
+    popup = true,
+    top,
+    left,
+    width,
+    height,
+    noreferrer,
+    noopener
+```
 
 
 ## 环境变量

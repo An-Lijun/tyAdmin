@@ -6,6 +6,7 @@
 
 <script setup>
 import uiFrame from '@/components/uiFrame.vue'
+// 在内部显示网页
 </script>
 <style lang="scss" scoped>
 </style>
