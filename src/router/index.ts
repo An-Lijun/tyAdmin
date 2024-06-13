@@ -43,6 +43,10 @@ const routes = [
         component: () => import('@/views/trade/map/echarsMap.vue'),
       },
       {
+        path: 'echarsMapTwo',
+        component: () => import('@/views/trade/map/echarsMapTwo.vue'),
+      },
+      {
         path: 'inner',
         component: () => import('@/views/trade/website/inner.vue'),
       },
