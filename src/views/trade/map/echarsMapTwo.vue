@@ -1,58 +1,54 @@
 <template>
-    <ty-button  @click="goBack">返回</ty-button>
-    {{ count }}
-  <tChart
-    @click="handleClick"
-    height="700px"
-    :option="mapOption"
-    :deepDraw="true"
-  ></tChart>
+  <ty-button @click="goBack">返回</ty-button>
+  <tChart @click="handleClick" height="700px" :option="mapOption" :deepDraw="true"></tChart>
 </template>
 <script setup lang="ts">
 import * as echarts from 'echarts'
 import { ref } from 'vue'
 import tChart from '@/components/tChart.vue'
-import { TyMessage } from 'toyar-design/dist/index.js';
-
+import { TyMessage } from 'toyar-design/dist/index.js'
+const mapOption = ref()  //echars的opeiton
+const mapList = ref<string[]>([]) // 记录上次地图
 const registerMap = echarts.registerMap
-const mapOption = ref()
-const mapList = ref<string[]>([]) // 记录地图
-let lastNM = []
-let count = ref(0)
-const writeJson=(url,mapName,jsonData)=>{
-  let el =document.createElement('a')
-  el.download = mapName+'.json'
-  count.value++
-  let data =JSON.stringify(jsonData,undefined,4)
-  let BLOB  = new Blob([data],{type:'text/json'})
-  el.href = URL.createObjectURL(BLOB)
-  setTimeout(()=>{
-    count.value--
-    el.click()
-  },1000*60*4)
-}
-const getMapJson = async (mapName: string) => {
-  const url = `https://geo.datav.aliyun.com/areas_v3/bound/${mapName}.json`
-  const mapJson = await fetch(url).then(res => res.json())
-  if(!getAssetLs()[`./maps/${mapName}.json`]&& !lastNM.includes(mapName)){
 
-    lastNM.push(mapName)
-    writeJson(url,mapName,mapJson)
-  }
-  return mapJson
+const writeJson = (url, mapName, jsonData) => {
+  let el = document.createElement('a')
+  el.download = mapName + '.json'
+  let data = JSON.stringify(jsonData, undefined, 4)
+  let BLOB = new Blob([data], { type: 'text/json' })
+  el.href = URL.createObjectURL(BLOB)
+  el.click()
 }
-const setOptions = (mapName, mapData: any) => {
+
+// 获取地图数据
+const getMapJson = async (mapName: string) => {
+  try {
+    // 首先通过本地获取 
+    let res = await import(`./maps/${mapName}.json`) || {}
+    if (res.default) {
+      return res.default
+    }
+  } catch (error) {
+
+    // 否则通过cdn获取
+    const url = `https://geo.datav.aliyun.com/areas_v3/bound/${mapName}.json`
+    //并且copy到本地
+    const mapJson = await fetch(url).then(res => res.json())
+    // if (!import.meta.glob('./maps/*.json')[`./maps/${mapName}.json`]) {
+    //   writeJson(url, mapName, mapJson)
+    // }
+    writeJson(url, mapName, mapJson)
+    return mapJson
+  }
+
+}
+
+// 绘制地图
+const setOptions = (mapName, mapData: any, formatter) => {
   return {
     tooltip: {
       show: true,
-      formatter: function (params: any) {
-        // 根据需要进行数据处理或格式化操作
-        if (params && params.data) {
-          const { adcode, name, data } = params.data
-          // 返回自定义的tooltip内容
-          return `adcode: ${adcode}<br>name: ${name}<br>data: ${data}`
-        }
-      }
+      formatter
     },
     visualMap: {
       show: true,
@@ -64,29 +60,29 @@ const setOptions = (mapName, mapData: any) => {
       calculable: true,
       seriesIndex: [0],
       inRange: {
-        color: ['#00467F', '#A5CC82'] // 蓝绿
+        color: ['#00467F', '#A5CC82'] // 蓝绿 data数值越低越蓝色 否则越绿
       }
     },
     geo: {
-      map: mapName,
-      roam: true,
-      select: false,
-      // zoom: 1.6,
-      // layoutCenter: ['45%', '70%'],
-      // layoutSize: 750,
+      map: mapName, //geo数据
+      roam: true, //是否可以放大
+      select: false, 
+      zoom: 1, //初始的地图放大倍数
+      layoutCenter: ['45%', '60%'], //图形中心点
+      layoutSize: 750, //初始大小
       // 图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
       selectedMode: 'single',
       label: {
-        show: true
+        show: true //是否显示地图的背景名称
       },
       emphasis: {
         itemStyle: {
-          areaColor: '#389BB7',
-          borderColor: '#389BB7',
-          borderWidth: 0
+          areaColor: '#389BB7', //鼠标悬浮颜色
+          borderColor: '#389BB7', //鼠标悬浮边框颜色
+          borderWidth:1//鼠标悬浮边框粗细
         },
         label: {
-          fontSize: 14
+          fontSize: 14  // 鼠标悬浮后的文字大小
         }
       }
     },
@@ -101,19 +97,19 @@ const setOptions = (mapName, mapData: any) => {
         data: mapData
       },
       {
-        name: '散点',
+        name: '圆点',
         type: 'scatter',
         coordinateSystem: 'geo',
         data: mapData,
         itemStyle: {
-          color: '#05C3F9'
+          color: '#05C3F9' //散点颜色
         }
       },
       {
-        name: '点',
+        name: '气泡点',
         type: 'scatter',
         coordinateSystem: 'geo',
-        symbol: 'pin', //气泡
+        symbol: 'pin', //气泡 circle reect roundRect triangle diamond pin arrow none
         symbolSize: function (val: any) {
           if (val) {
             return val[2] / 4 + 20
@@ -125,7 +121,7 @@ const setOptions = (mapName, mapData: any) => {
             return params.data.data || 0
           },
           color: '#fff',
-          fontSize: 9
+          fontSize: 7
         },
         itemStyle: {
           color: '#F62157' //标志颜色
@@ -133,7 +129,7 @@ const setOptions = (mapName, mapData: any) => {
         zlevel: 6,
         data: mapData
       },
-      {
+      { //大于某个值的采用黄色显示
         name: 'Top 5',
         type: 'effectScatter',
         coordinateSystem: 'geo',
@@ -160,24 +156,44 @@ const setOptions = (mapName, mapData: any) => {
     ]
   }
 }
+
+// 渲染地图
 const renderMapEcharts = async (mapName: string) => {
   const mapJson = await getMapJson(mapName)
+  // 注册地图数据
   registerMap(mapName, mapJson)
+
+  // 生成数据
   const mapdata = mapJson.features.map((item: { properties: any }) => {
+
+    const { name, adcode, level, parent } = item.properties;
+    const pAdcode = parent?.adcode //这是上一级的地图编码;
+
+    //这里的数据是模拟的 也可以根据这个adcode|name 去请求
     const data = (Math.random() * 80 + 20).toFixed(0) // 20-80随机数
+
     const tempValue = item.properties.center
       ? [...item.properties.center, data]
       : item.properties.center
     return {
-      name: item.properties.name,
-      value: tempValue, // 中心点经纬度
-      adcode: item.properties.adcode, // 区域编码
-      level: item.properties.level, // 层级
+      name,   //获取每一个名称
+      value: tempValue,             // 中心点经纬度
+      adcode, // 区域编码 表示点击后的下一个层级
+      level, // 层级
       data // 模拟数据
     }
   })
 
-  mapOption.value = setOptions(mapName, mapdata)
+  const formatter = (params: any) => {
+    // 根据需要进行数据处理或格式化操作
+    if (params && params.data) {
+      const { adcode, name, data } = params.data
+      // 返回自定义的tooltip内容
+      return `adcode: ${adcode}<br>name: ${name}<br>data: ${data}`
+    }
+  }
+  // 修改 echarsMap 数据
+  mapOption.value = setOptions(mapName, mapdata, formatter)
 }
 const handleClick = param => {
   // 只有点击地图才触发
@@ -191,7 +207,6 @@ const handleClick = param => {
   mapList.value.push(mapName)
   renderMapEcharts(mapName)
 }
-renderMapEcharts('100000_full')
 
 // 点击返回上一级地图
 const goBack = () => {
@@ -199,12 +214,11 @@ const goBack = () => {
   mapList.value.pop()
   renderMapEcharts(mapName)
 }
- function getAssetLs(url:string) {
-  return import.meta.glob('./maps/*.json')
-}
 
-window.addEventListener('keydown',()=>{
-  goBack()
-})
+
+
+// 初始生成全部地图
+renderMapEcharts('100000_full')
+
 </script>
 <style lang="less" scoped></style>

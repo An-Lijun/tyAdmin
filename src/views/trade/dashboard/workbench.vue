@@ -3,7 +3,7 @@
     <TyCard :border="false">
       <div class="header-card">
         <TyImage
-          :src="getAsset('/assets/system/header.png')"
+          :src="getAssetURL('/assets/system/header.png')"
           fit="cover"
           shape="circle"
         />
@@ -69,7 +69,7 @@
           </template>
           <div class="zxdt-row" v-for="item in userList" :key="item">
             <TyImage
-              :src="getAsset(item.icon)"
+              :src="getAssetURL(item.icon)"
               fit="cover"
               shape="circle"
               size="40"
@@ -90,7 +90,7 @@
             <div class="card-item" v-for="item in rightData" :key="item.title">
               <TyCard :border="false" shadow="hover" :isLoading="isLoading">
                 <div>
-                  <!-- <img :src="getAsset(item.icon)" alt="" /> -->
+                  <!-- <img :src="getAssetURL(item.icon)" alt="" /> -->
                   <svgIcon
                     :icon="item.icon"
                     :style="{ color: item.color }"
@@ -123,7 +123,7 @@
   </div>
 </template>
 <script setup>
-import { getAsset } from '@/common'
+import { getAssetURL } from '@/common'
 import tChart from '@/components/tChart.vue'
 import svgIcon from '@/components/svgIcon.vue'
 import { ref } from 'vue'

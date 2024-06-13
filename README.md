@@ -60,7 +60,7 @@ ps 本来打算使用?raw 读出字符串渲染到根html中然后使用svguse �
 ### 路由 vue-router
 ### store pinia
 ### common
-获取资源使用getAsset 获取src下的任意资源 如 getAsset('assets/xxx.png') 返回形式如 http://xxx:xxx/src/assets/xxx.png
+获取资源使用getAsset 获取src下的任意资源 如 getAssetURL('assets/xxx.png') 返回形式如 http://xxx:xxx/src/assets/xxx.png
 
 
 ### 窗口化

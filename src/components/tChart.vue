@@ -7,6 +7,7 @@
 </template>
 <script setup lang="ts">
 import { ECharts, EChartsOption, init } from 'echarts'
+// import * as echarts from 'echarts'
 import { ref, onUnmounted, onMounted,watch, defineEmits } from 'vue'
 // 定义props
 interface Props {
@@ -27,12 +28,12 @@ let myChart: ECharts
 let timer:null|Timeout 
 
 let emit = defineEmits(['click'])
-
 let eventMap:{[key: string]:any}={
   click:(params:Object)=>{
     emit('click',params)
   }
 }
+
 const addEvent=()=>{
   //绑定事件
   for (const key in eventMap) {
@@ -79,7 +80,6 @@ if(props.deepDraw){
     deep:true
   })
 }
-
 onMounted(() => {
   if (props.option) {
     setTimeout(()=>{
@@ -100,6 +100,7 @@ onUnmounted(() => {
   clearTimeout(timer)
   window.removeEventListener('resize', resizeChart)
 })
+
 
 
 </script>

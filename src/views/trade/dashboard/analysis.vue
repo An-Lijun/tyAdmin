@@ -31,7 +31,7 @@
                 </template>
               </countTo>
 
-              <img :src="getAsset(item.img)" alt="" />
+              <img :src="getAssetURL(item.img)" alt="" />
             </div>
             <div class="line2">
               <span>总访问数 </span>
@@ -79,7 +79,7 @@
   </div>
 </template>
 <script setup>
-import { getAsset } from '@/common'
+import { getAssetURL } from '@/common'
 // import { numberAnimation } from '@/common';
 import tChart from '@/components/tChart.vue'
 import countTo from '@/components/countTo.vue'

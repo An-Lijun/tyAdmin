@@ -9,7 +9,7 @@
 </template>
 <script setup>
 //打开外部页面
-import {getAsset} from '@/common'
+import {getAssetURL} from '@/common'
 
 // 打开外部网站
 const open =()=>{
