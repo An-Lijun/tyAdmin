@@ -51,7 +51,7 @@ const removeEvent=()=>{
     }
 }
 // 初始化渲染echars
-const initChart = () => {
+const renderChart = () => {
   if(myChart){
     removeEvent()
   }
@@ -75,7 +75,7 @@ const resizeChart = (): void => {
 
 if(props.deepDraw){
   watch(()=>props.option,()=>{
-    initChart()
+    renderChart()
   },{
     deep:true
   })
@@ -83,7 +83,7 @@ if(props.deepDraw){
 onMounted(() => {
   if (props.option) {
     setTimeout(()=>{
-      initChart()
+      renderChart()
     })
     window.addEventListener('resize', resizeChart)
   }
@@ -102,6 +102,10 @@ onUnmounted(() => {
 })
 
 
+defineExpose({
+  getMyChart:()=>myChart,
+  renderChart
+})
 
 </script>
 <style lang="scss" scoped>

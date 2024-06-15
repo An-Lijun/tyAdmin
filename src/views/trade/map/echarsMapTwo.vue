@@ -1,16 +1,22 @@
 <template>
   <ty-button @click="goBack">返回</ty-button>
-  <tChart @click="handleClick" height="700px" :option="mapOption" :deepDraw="true"></tChart>
+  <tChart
+    ref="tchart"
+    @click="handleClick"
+    height="700px"
+    :option="mapOption"
+    :deepDraw="true"
+  ></tChart>
 </template>
 <script setup lang="ts">
 import * as echarts from 'echarts'
 import { ref } from 'vue'
 import tChart from '@/components/tChart.vue'
 import { TyMessage } from 'toyar-design/dist/index.js'
-const mapOption = ref()  //echars的opeiton
+const mapOption = ref() //echars的opeiton
 const mapList = ref<string[]>([]) // 记录上次地图
 const registerMap = echarts.registerMap
-
+const tchart = ref()
 const writeJson = (url, mapName, jsonData) => {
   let el = document.createElement('a')
   el.download = mapName + '.json'
@@ -23,13 +29,12 @@ const writeJson = (url, mapName, jsonData) => {
 // 获取地图数据
 const getMapJson = async (mapName: string) => {
   try {
-    // 首先通过本地获取 
-    let res = await import(`./maps/${mapName}.json`) || {}
+    // 首先通过本地获取
+    let res = (await import(`./maps/${mapName}.json`)) || {}
     if (res.default) {
       return res.default
     }
   } catch (error) {
-
     // 否则通过cdn获取
     const url = `https://geo.datav.aliyun.com/areas_v3/bound/${mapName}.json`
     //并且copy到本地
@@ -40,7 +45,6 @@ const getMapJson = async (mapName: string) => {
     writeJson(url, mapName, mapJson)
     return mapJson
   }
-
 }
 
 // 绘制地图
@@ -66,7 +70,7 @@ const setOptions = (mapName, mapData: any, formatter) => {
     geo: {
       map: mapName, //geo数据
       roam: true, //是否可以放大
-      select: false, 
+      select: false,
       zoom: 1, //初始的地图放大倍数
       layoutCenter: ['45%', '60%'], //图形中心点
       layoutSize: 750, //初始大小
@@ -79,10 +83,10 @@ const setOptions = (mapName, mapData: any, formatter) => {
         itemStyle: {
           areaColor: '#389BB7', //鼠标悬浮颜色
           borderColor: '#389BB7', //鼠标悬浮边框颜色
-          borderWidth:1//鼠标悬浮边框粗细
+          borderWidth: 1 //鼠标悬浮边框粗细
         },
         label: {
-          fontSize: 14  // 鼠标悬浮后的文字大小
+          fontSize: 14 // 鼠标悬浮后的文字大小
         }
       }
     },
@@ -129,7 +133,8 @@ const setOptions = (mapName, mapData: any, formatter) => {
         zlevel: 6,
         data: mapData
       },
-      { //大于某个值的采用黄色显示
+      {
+        //大于某个值的采用黄色显示
         name: 'Top 5',
         type: 'effectScatter',
         coordinateSystem: 'geo',
@@ -165,8 +170,7 @@ const renderMapEcharts = async (mapName: string) => {
 
   // 生成数据
   const mapdata = mapJson.features.map((item: { properties: any }) => {
-
-    const { name, adcode, level, parent } = item.properties;
+    const { name, adcode, level, parent } = item.properties
     const pAdcode = parent?.adcode //这是上一级的地图编码;
 
     //这里的数据是模拟的 也可以根据这个adcode|name 去请求
@@ -176,8 +180,8 @@ const renderMapEcharts = async (mapName: string) => {
       ? [...item.properties.center, data]
       : item.properties.center
     return {
-      name,   //获取每一个名称
-      value: tempValue,             // 中心点经纬度
+      name, //获取每一个名称
+      value: tempValue, // 中心点经纬度
       adcode, // 区域编码 表示点击后的下一个层级
       level, // 层级
       data // 模拟数据
@@ -204,8 +208,17 @@ const handleClick = param => {
   if (mapList.value[mapList.value.length - 1] === mapName) {
     return TyMessage.error('您已经在最底层了')
   }
+
+  console.log(tchart.value)
+
+  tchart.value.getMyChart().showLoading()
+
   mapList.value.push(mapName)
-  renderMapEcharts(mapName)
+  setTimeout(() => {
+    renderMapEcharts(mapName)
+
+    tchart.value.getMyChart().hideLoading()
+  }, 1500)
 }
 
 // 点击返回上一级地图
@@ -215,10 +228,7 @@ const goBack = () => {
   renderMapEcharts(mapName)
 }
 
-
-
 // 初始生成全部地图
 renderMapEcharts('100000_full')
-
 </script>
 <style lang="less" scoped></style>

@@ -1,0 +1,161 @@
+.load-container {
+  /* 去除body自带的外边距 */
+  height: calc(100vh - 16px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.boxLoading {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+}
+.boxLoading:before {
+  content: "";
+  width: 50px;
+  height: 5px;
+  background: #000;
+  opacity: 0.1;
+  position: absolute;
+  top: 63px;
+  left: 0;
+  border-radius: 50%;
+  animation: shadow 0.8s linear infinite;
+}
+.boxLoading:after {
+  content: "T";
+  color: #FFF;
+  line-height: 50PX;
+  text-align: center;
+  font-size: 28px;
+  width: 50px;
+  height: 50px;
+  font-weight: bold;
+  background: #00adb5;
+  animation: animate 3.2s linear infinite;
+  position: absolute;
+  font-family: serif;
+  top: 0;
+  left: 0;
+}
+
+@keyframes animate {
+  3%{
+    border-bottom-right-radius: 13px;
+    transform: translateY(5px) rotate(22.5deg);
+  }
+  10%{
+    transform: translateY(22px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 30px;
+  }
+  15%{
+    transform: translateY(5px) rotate(67.5deg);
+
+  }
+  25%{
+    transform: translateY(0) rotate(90deg);
+    border-radius: 3px;
+
+
+  }
+  
+  28%{
+    border-top-right-radius: 13px;
+    transform: translateY(5px) rotate(112.5deg);
+  }
+  40%{
+    transform: translateY(22px) scale(1, 0.9) rotate(135deg);
+    border-top-right-radius: 30px;
+  }
+  45%{
+    transform: translateY(5px) rotate(157.5deg);
+  }
+  50%{
+    transform: translateY(0) rotate(180deg);
+    border-radius: 3px;
+  }
+
+
+  53%{
+    border-top-left-radius: 13px;
+    transform: translateY(5px) rotate(202.5deg);
+  }
+  65%{
+    transform: translateY(22px) scale(1, 0.9) rotate(225deg);
+    border-top-left-radius:30px;
+  }
+  70%{
+    transform: translateY(5px) rotate(247.5deg);
+  }
+  75%{
+    transform: translateY(0) rotate(270deg);
+    border-radius: 3px;
+
+
+  }
+  
+  78%{
+    border-bottom-left-radius: 13px;
+    transform: translateY(5px) rotate(292.5deg);
+  }
+  90%{
+    transform: translateY(22px) scale(1, 0.9) rotate(315deg);
+    border-bottom-left-radius: 30px;
+  }
+  95%{
+    transform: translateY(5px) rotate(337.5deg);
+  }
+  100%{
+    transform: translateY(0) rotate(360deg);
+    border-radius: 3px;
+
+
+  }
+  /* 17% {
+    border-bottom-right-radius: 13px;
+    transform: translateY(5px) rotate(22.5deg);
+  }
+
+  50% {
+    transform: translateY(22px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 40px;
+  }
+  75% {
+    transform: translateY(5px) rotate(67.5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(90deg);
+  } */
+}
+
+@keyframes shadow {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.4, 1);
+  }
+}
+
+.loadingText {
+  transform: translateY(60px);
+  display: inline-block;
+  font: bold 200% Consolas, Monaco, monospace;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 500;
+  width: 0;
+  border-right: 1px solid transparent;
+  animation: typing 5s steps(14), caret .5s steps(1) infinite;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+}
+
+@keyframes typing {
+  to { width: 14ch; }
+}
+
+@keyframes caret{
+  0% { border-right-color: currentColor}
+}
