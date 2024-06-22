@@ -47,10 +47,10 @@
         <TyCol>
           <TyTabs v-model="tabs" style="border: unset;">
             <TyTabItem title="流量趋势" name="a">
-              <tChart height="270px" :option="option" v-if="tabs === 'a'" />
+              <tChart :deepRender="true" height="270px" :option="option" v-if="tabs === 'a'" />
             </TyTabItem>
             <TyTabItem title="访问量" name="b">
-              <tChart height="270px" :option="option2" v-if="tabs === 'b'" />
+              <tChart :deepRender="true" height="270px" :option="option2" v-if="tabs === 'b'" />
             </TyTabItem>
           </TyTabs>
         </TyCol>

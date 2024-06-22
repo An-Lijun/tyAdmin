@@ -45,7 +45,14 @@ ps 本来打算使用?raw 读出字符串渲染到根html中然后使用svguse �
 
 4. 封装echars
 使用tChart组件 传入 width height option 则可以直接绘图 不用考虑浏览器窗口变化, 里面封装好了
+deepDraw 当开启 deepDraw 时当option 发生改变则会触发echars重新绘制
+deepRender 当开启 deepRender 时当绘制tChart组件发生宽高改变时候重新绘制
+click 事件触发echars的click事件 相当于myChat.on(click,()=>{自定义事件})
 
+```html
+  <tChart option={} :deepDraw="true" :deepRender="true" @click="()=>{}">
+
+```
 ### 国际化 i18n
   关于国际化入口文件集成注入和配置文件, lang目录暴露当前语言的配置变了constant 自动读取模块并且导出的exportLang, 使用方法在lang下创建任意名称的一级文件夹目录, 在这个文件夹下新增index.ts其中默认导出语言对象如:
   ```JavaScript

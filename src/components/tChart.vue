@@ -1,65 +1,63 @@
 <template>
-  <div
-    class="ty-adnin-tChart"
-    ref="myChartsRef"
-    :style="{ height: height, width: width }"
-  ></div>
+  <div class="ty-adnin-tChart" ref="myChartsRef" :style="{ height: height, width: width }"></div>
 </template>
 <script setup lang="ts">
 import { ECharts, EChartsOption, init } from 'echarts'
+import { log } from 'echarts/types/src/util/log.js';
 // import * as echarts from 'echarts'
-import { ref, onUnmounted, onMounted,watch, defineEmits } from 'vue'
+import { ref, onUnmounted, onMounted, watch, defineEmits } from 'vue'
 // 定义props
 interface Props {
   width?: string
   height?: string
   option: EChartsOption,
-  deepDraw:boolean
+  deepDraw: boolean,
+  deepRender: boolean
+
 }
 const props = withDefaults(defineProps<Props>(), {
   width: '100%',
   height: '100%',
   option: () => ({}),
-  deepDraw:false
+  deepDraw: false,
+  deepRender: false
 })
 
 const myChartsRef = ref<HTMLDivElement>()
 let myChart: ECharts
-let timer:null|Timeout 
-
+let timer: null | Timeout
 let emit = defineEmits(['click'])
-let eventMap:{[key: string]:any}={
-  click:(params:Object)=>{
-    emit('click',params)
+let eventMap: { [key: string]: any } = {
+  click: (params: Object) => {
+    emit('click', params)
   }
 }
 
-const addEvent=()=>{
+const addEvent = () => {
   //绑定事件
   for (const key in eventMap) {
-      if (Object.prototype.hasOwnProperty.call(eventMap, key)) {
-        myChart.on(key,eventMap[key])
-      }
+    if (Object.prototype.hasOwnProperty.call(eventMap, key)) {
+      myChart.on(key, eventMap[key])
+    }
   }
 }
-const removeEvent=()=>{
+const removeEvent = () => {
   //解绑事件
   for (const key in eventMap) {
-      if (Object.prototype.hasOwnProperty.call(eventMap, key)) {
-        myChart.off(key,eventMap[key])
-      }
+    if (Object.prototype.hasOwnProperty.call(eventMap, key)) {
+      myChart.off(key, eventMap[key])
     }
+  }
 }
 // 初始化渲染echars
 const renderChart = () => {
-  if(myChart){
+  if (myChart) {
     removeEvent()
   }
   // 拿到option配置项，渲染echarts
   myChart = init(myChartsRef.value as HTMLDivElement)
   myChart?.setOption(props.option, true)
   addEvent()
-
 }
 
 // 重新渲染echarts
@@ -68,21 +66,39 @@ const resizeChart = (): void => {
   timer = setTimeout(() => {
     if (myChart) {
       myChart.resize()
+      timer = null
+      let div = myChartsRef.value?.querySelector('div')
+      if(!div){
+        return
+      }
+      div.style.width = 'unset'
+      let canvas = myChartsRef.value?.querySelector('canvas')
+      canvas.style.width = 'unset'
     }
   }, 500)
 }
 
 
-if(props.deepDraw){
-  watch(()=>props.option,()=>{
+if (props.deepDraw) {
+  watch(() => props.option, () => {
     renderChart()
-  },{
-    deep:true
+  }, {
+    deep: true
   })
+}
+if (props.deepRender) {
+  onMounted(() => {
+    const watchChartOb = new ResizeObserver(() => {
+      resizeChart()
+    })
+
+    watchChartOb.observe(myChartsRef.value)
+  })
+
 }
 onMounted(() => {
   if (props.option) {
-    setTimeout(()=>{
+    setTimeout(() => {
       renderChart()
     })
     window.addEventListener('resize', resizeChart)
@@ -103,10 +119,9 @@ onUnmounted(() => {
 
 
 defineExpose({
-  getMyChart:()=>myChart,
+  getMyChart: () => myChart,
   renderChart
 })
 
 </script>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

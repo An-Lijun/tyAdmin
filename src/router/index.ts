@@ -19,11 +19,11 @@ const routes = [
     path: '/trade',
     name: 'Trade',
     component: () => import('@/views/system/home/index.vue'),
-    redirect: { name: 'propduct' },
+    redirect: { name: 'analysis' },
     children: [
       {
-        name: 'propduct',
-        path: 'propduct',
+        name: 'analysis',
+        path: 'analysis',
         component: () => import('@/views/trade/dashboard/analysis.vue'),
       },
       {

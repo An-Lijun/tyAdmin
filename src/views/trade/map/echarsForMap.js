@@ -53,7 +53,7 @@ export default class ChinaMap {
   }
   /* 重置 */
   resize() {
-    this.myChart.resize()
+    this.myChart?.resize()
   }
   /* 画地图 */
   geo() {
