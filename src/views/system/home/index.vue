@@ -206,7 +206,27 @@ const option = [
         path: '/map/echarsMapTwo',
       }
     ],
-  }, 
+  },
+  {
+    label: '码',
+    key: 'code',
+    icon: 'ty-speaker-3-line',
+    type: 'subMenu',
+    children: [
+      {
+        label: '条形码',
+        key: 'barcode',
+        type: 'menu',
+        path: '/trade/barcode',
+      },
+      {
+        label: '二维码',
+        key: 'qrcode',
+        type: 'menu',
+        path: '/trade/qrcode',
+      },
+    ],
+  },
   {
     icon: 'ty-pie-chart-fill',
     label: '图表',
@@ -214,6 +234,7 @@ const option = [
     type: 'menu',
     path: '/trade/charts',
   },
+
   {
     icon: 'ty-markup-fill',
     label: '关于',

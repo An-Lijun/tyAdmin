@@ -85,6 +85,14 @@ const routes = [
         component: () => import('@/views/trade/about/index.vue')
       },
       {
+        path: 'barcode',
+        component: () => import('@/views/trade/qrcode/one.vue')
+      },
+      {
+        path: 'qrcode',
+        component: () => import('@/views/trade/qrcode/two.vue')
+      },
+      {
         path: '/:catchAll(.*)',
         redirect: { name: 'notFound' },
       }

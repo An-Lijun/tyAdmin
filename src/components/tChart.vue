@@ -3,9 +3,8 @@
 </template>
 <script setup lang="ts">
 import { ECharts, EChartsOption, init } from 'echarts'
-import { log } from 'echarts/types/src/util/log.js';
-// import * as echarts from 'echarts'
 import { ref, onUnmounted, onMounted, watch, defineEmits } from 'vue'
+// import * as echarts from 'echarts'
 // 定义props
 interface Props {
   width?: string
