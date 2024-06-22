@@ -1,7 +1,7 @@
 <!-- 分析页 -->
 <template>
   <div class="tyAdmin__container">
-    <TyRow :gutter="8" style="margin: 0">
+    <TyRow :gutter="8" style="margin: 0 -4px -8px">
       <TyCol
         :span="{
           xxl: 6,
@@ -42,7 +42,7 @@
         <!-- <div class="colBox"></div> -->
       </TyCol>
     </TyRow>
-    <TyCard :isLoading="isLoading" style="margin: 14px 8px; padding: unset" :border="false">
+    <TyCard :isLoading="isLoading" style="margin: 16px 0px; padding: unset" :border="false">
       <TyRow :gutter="8">
         <TyCol>
           <TyTabs v-model="tabs" style="border: unset;">

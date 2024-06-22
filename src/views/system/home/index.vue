@@ -99,8 +99,8 @@
           text-align: center;
           line-height: 50px;
         ">
-        xxx软件系统股份有限公司 版权所有 任何单位及个人未经许可不可擅自使用 ©
-        CSII 1999-2020 京ICP备1200886号
+        拓源软件系统股份有限公司 版权所有 任何单位及个人未经许可不可擅自使用 ©
+        Toyar 1999-2024 京ICP备12008816号
       </TyFooter>
     </TyContainer>
   </TyContainer>
@@ -119,19 +119,19 @@ const option = [
     label: '仪表盘',
     key: 'dashboard',
     icon: 'ty-dashboard-fill',
-    type:'subMenu',
+    type: 'subMenu',
     children: [
       {
         label: '分析页',
         key: 'analysis',
         type: 'menu',
-        path: '/trade/analysis',
+        path: '/system/analysis',
       },
       {
         label: '工作台',
         key: 'workbench',
         type: 'menu',
-        path: '/trade/workbench',
+        path: '/system/workbench',
       }
     ],
   },
@@ -139,7 +139,7 @@ const option = [
     label: '嵌入页面',
     key: 'dashboard',
     icon: 'ty-pages-fill',
-    type:'subMenu',
+    type: 'subMenu',
     children: [
       {
         label: '内嵌外部页面',
@@ -171,7 +171,7 @@ const option = [
     label: '功能',
     key: 'dashboard',
     icon: 'ty-plug-2-fill',
-    type:'subMenu',
+    type: 'subMenu',
     children: [
       {
         label: '图标',
@@ -191,21 +191,35 @@ const option = [
     label: '地图',
     key: 'map',
     icon: 'ty-road-map-fill',
-    type:'subMenu',
+    type: 'subMenu',
     children: [
       {
         label: '地图(echars)',
         key: 'echarsMap',
         type: 'menu',
-        path: '/trade/echarsMap',
+        path: '/map/echarsMap',
       },
       {
         label: '省地图(echars)',
         key: 'echarsMapTwo',
         type: 'menu',
-        path: '/trade/echarsMapTwo',
+        path: '/map/echarsMapTwo',
       }
     ],
+  }, 
+  {
+    icon: 'ty-pie-chart-fill',
+    label: '图表',
+    key: 'chars',
+    type: 'menu',
+    path: '/trade/charts',
+  },
+  {
+    icon: 'ty-markup-fill',
+    label: '关于',
+    key: 'about',
+    type: 'menu',
+    path: '/trade/about',
   }
 ]
 const fn = () => {

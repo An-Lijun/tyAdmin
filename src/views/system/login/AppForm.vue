@@ -31,7 +31,7 @@ const formData = ref({
 const login=()=>{
   userStore.token="1111111111"
   router.push({
-    name:'Trade'
+    name:'System'
   })
 }
 

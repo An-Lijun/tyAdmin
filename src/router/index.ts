@@ -13,11 +13,10 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-
   },
   {
-    path: '/trade',
-    name: 'Trade',
+    path: '/system',
+    name: 'System',
     component: () => import('@/views/system/home/index.vue'),
     redirect: { name: 'analysis' },
     children: [
@@ -30,14 +29,13 @@ const routes = [
         path: 'workbench',
         component: () => import('@/views/trade/dashboard/workbench.vue'),
       },
-      {
-        path: 'icon',
-        component: () => import('@/views/trade/feat/icon.vue'),
-      },
-      {
-        path: 'download',
-        component: () => import('@/views/trade/download/index.vue'),
-      },
+    ]
+  },
+  {
+    path: '/map',
+    name: 'Map',
+    component: () => import('@/views/system/home/index.vue'),
+    children: [
       {
         path: 'echarsMap',
         component: () => import('@/views/trade/map/echarsMap.vue'),
@@ -46,6 +44,22 @@ const routes = [
         path: 'echarsMapTwo',
         component: () => import('@/views/trade/map/echarsMapTwo.vue'),
       },
+    ]
+  },
+  {
+    path: '/trade',
+    name: 'Trade',
+    component: () => import('@/views/system/home/index.vue'),
+    children: [
+      {
+        path: 'icon',
+        component: () => import('@/views/trade/feat/icon.vue'),
+      },
+      {
+        path: 'download',
+        component: () => import('@/views/trade/download/index.vue'),
+      },
+
       {
         path: 'inner',
         component: () => import('@/views/trade/website/inner.vue'),
@@ -60,7 +74,15 @@ const routes = [
       },
       {
         path: 'outByIframe',
-        component: () => import('@/views/trade/website/outByIframe.vue'),
+        component: () => import('@/views/trade/website/outByIframe.vue')
+      },
+      {
+        path: 'charts',
+        component: () => import('@/views/trade/charts/index.vue')
+      },
+      {
+        path: 'about',
+        component: () => import('@/views/trade/about/index.vue')
       },
       {
         path: '/:catchAll(.*)',
