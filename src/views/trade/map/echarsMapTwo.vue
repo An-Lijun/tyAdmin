@@ -209,8 +209,6 @@ const handleClick = param => {
     return TyMessage.error('您已经在最底层了')
   }
 
-  console.log(tchart.value)
-
   tchart.value.getMyChart().showLoading()
 
   mapList.value.push(mapName)

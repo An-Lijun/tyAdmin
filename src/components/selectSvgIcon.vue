@@ -5,7 +5,6 @@
 </template>
 <script setup>
 const modules = import.meta.glob('../assets/system/**.svg', { eager: true });
-console.log(modules);
 // let start ='../assets/system/'
 </script>
 <style lang="scss" scoped>

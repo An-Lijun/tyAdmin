@@ -216,7 +216,6 @@ export default class ChinaMap {
             },
             normal: {
               color: (e) => {
-                // console.log(e, '---------------')
                 if (e.data.name === '东营市') {
                   return 'red'
                 }
