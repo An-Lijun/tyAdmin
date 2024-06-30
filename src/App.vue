@@ -1,16 +1,22 @@
 <template>
   <!-- 这里应该先注入内个ConfigProvide 但是组件未完成 -->
-  <TyWaterMark :options="{
-    width: 500,
-    height: 300,
-    antiTamper: true
-  }" :markInfo="['TyAdmin', formatDate(new Date())]">
-    <RouterView />
-  </TyWaterMark>
+  <TyConfigProvider style="    height: 100vh;" :options="{resetPrimary:appStore.pColor}">
+    <TyWaterMark :options="{
+      width: 500,
+      height: 300,
+      antiTamper: true
+    }" :markInfo="['TyAdmin', formatDate(new Date())]">
+      <RouterView />
+    </TyWaterMark>
+  </TyConfigProvider>
 </template>
 
 <script setup lang="ts">
 import { formatDate } from 'robinson'
+import useAppStore from '@/store/modules/app'
+const appStore = useAppStore()
+
+// 165DFF
 </script>
 <style>
 #app {

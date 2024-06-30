@@ -57,19 +57,19 @@
       </TyRow>
     </TyCard>
     <TyRow :gutter="8" style="margin: 14px 0 0">
-      <TyCol span="8">
+      <TyCol :span="8">
         <TyCard :isLoading="isLoading" :border="false">
           <template #header> 转化率 </template>
           <tChart height="230px" :option="option3" />
         </TyCard>
       </TyCol>
-      <TyCol span="8">
+      <TyCol :span="8">
         <TyCard :isLoading="isLoading" :border="false">
           <template #header> 访问来源 </template>
           <tChart height="230px" :option="option4" />
         </TyCard>
       </TyCol>
-      <TyCol span="8">
+      <TyCol :span="8">
         <TyCard :isLoading="isLoading" :border="false">
           <template #header> 成交占比 </template>
           <tChart height="230px" :option="option5" />

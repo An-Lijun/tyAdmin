@@ -1,5 +1,6 @@
 <template>
-  <TyMenu :isFold="appStore.isFold" style="width: unset" v-model="menuNm" :option="option">
+  <!-- v-model=""  -->
+  <TyMenu :isFold="appStore.isFold" style="width: unset"  :option="option">
     <template #header>
       <div style="
           height: 50px;

@@ -1,8 +1,8 @@
 <template>
   <div class="ty-lock">
-    <header class="ty-header-lock">
-      <TyIcon icon="ty-lock-line"></TyIcon>
-      <div>点击解锁</div>
+    <header class="ty-header-lock" @click="unLock"`>
+        <TyIcon icon="ty-lock-line"></TyIcon>
+        <div>点击解锁</div>
     </header>
     <div class="ty-inner">
         <div class="left">
@@ -31,6 +31,7 @@
 </template>
 <script setup>
 import { nextTick, ref } from 'vue';
+import { router } from '@/router'
 
   let hourNew =ref('00')
   let hourOld =ref('00')
@@ -60,6 +61,11 @@ import { nextTick, ref } from 'vue';
       render(new Date())
   },1000)
 
+const unLock =()=>{
+  router.push({
+    name:'System'
+  })
+}
 </script>
 <style lang="scss" scoped>
 .ty-lock {

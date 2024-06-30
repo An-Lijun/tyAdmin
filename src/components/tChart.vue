@@ -3,7 +3,7 @@
 </template>
 <script setup lang="ts">
 import { ECharts, EChartsOption, init } from 'echarts'
-import { ref, onUnmounted, onMounted, watch, defineEmits } from 'vue'
+import { ref, onBeforeUnmount, onMounted, watch, defineEmits } from 'vue'
 // import * as echarts from 'echarts'
 // 定义props
 interface Props {
@@ -103,7 +103,8 @@ onMounted(() => {
     window.addEventListener('resize', resizeChart)
   }
 })
-onUnmounted(() => {
+
+onBeforeUnmount(() => {
   /**
    * clear 方法是清空缓存的图形，但不会释放实例占用的其他资源，比如容器DOM及绑定的事件等。
    * dispose 方法则是彻底释放ECharts实例占用的所有资源，包括DOM、事件、定时器等。
