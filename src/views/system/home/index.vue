@@ -82,7 +82,7 @@
                 class="bd ml-10" shape="circle" />
               <span style="margin-left: 5px"> Ty Admin </span>
             </div>
-            <div class="contruller">
+            <div class="contruller" @click="openCont">
               <TyIcon icon="ty-settings-4-line" size="20"></TyIcon>
             </div>
           </div>
@@ -102,6 +102,38 @@
         拓源软件系统股份有限公司 版权所有 任何单位及个人未经许可不可擅自使用 ©
         Toyar 1999-2024 京ICP备12008816号
       </TyFooter>
+      <TyDrawer v-model="model">
+        <template #header>
+          系统设置
+        </template>
+
+        <div>
+          <div style="height: 30px;">
+            <ty-divider style="--font-body-3:16px">
+              <ty-icon icon="ty-layout-line" class="mw-10"></ty-icon>
+              排版样式
+            </ty-divider>
+          </div>
+          <div class="tyadmin-layout">
+            
+
+          </div>
+          <div style="height: 30px;">
+            <ty-divider style="--font-body-3:16px">
+              <ty-icon icon="ty-t-shirt-line" class="mw-10"></ty-icon>
+              全局主题
+            </ty-divider>
+          </div>
+          <div style="height: 30px;">
+
+            <ty-divider style="--font-body-3:16px">
+              <ty-icon icon="ty-settings-4-line" class="mw-10"></ty-icon>
+              界面设置
+            </ty-divider>
+          </div>
+
+        </div>
+      </TyDrawer>
     </TyContainer>
   </TyContainer>
 </template>
@@ -252,6 +284,11 @@ const fn = () => {
 }
 const toFold = () => {
   isFlod.value = !isFlod.value
+}
+
+const model = ref(false)
+const openCont = () => {
+  model.value = !model.value
 }
 </script>
 <style lang="scss" scoped>

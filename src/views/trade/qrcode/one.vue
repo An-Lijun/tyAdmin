@@ -18,7 +18,7 @@
               {{ item.title }}
             </template>
             <div style="overflow: hidden; display: flex;justify-content: center;align-items: center;">
-                <tBarCode style="min-height: 150px;" :value="item.value" :options="item.options"/>
+              <tBarCode style="min-height: 150px;" :value="item.value" :options="item.options" />
             </div>
           </TyCard>
         </ty-col>
@@ -29,73 +29,86 @@
 <script setup>
 import tBarCode from '@/components/tBarCode/index.vue';
 import { getAssetURL } from '@/common'
-import {ref} from 'vue'
+import { ref } from 'vue'
 const qrList = [
   {
-    title:'普通用法',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
+    title: '普通用法',
+    value: 'HELLOToyar',
+    options: {
+
+      height: 100,//高度
     }
   },
   {
-    title:'不显示文字用法',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
+    title: '不显示文字用法',
+    value: 'HELLOToyar',
+    options: {
+
+
+      height: 100,//高度
       displayValue: false //是否在条形码下方显示文字
     }
   },
   {
-    title:'设置条码距离',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
-      width:3,
+    title: '设置条码距离',
+    value: 'HELLOToyar',
+    options: {
+
+
+      height: 100,//高度
+      width: 3,
       displayValue: false //是否在条形码下方显示文字
     }
   },
   {
-    title:'覆盖显示的文本',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
-      width:3,
-      text:"Toyar",//覆盖显示的文本
-      displayValue: true ,//是否在条形码下方显示文字
+    title: '覆盖显示的文本',
+    value: 'HELLOToyar',
+    options: {
+
+
+      height: 100,//高度
+      width: 3,
+      text: "Toyar",//覆盖显示的文本
+      displayValue: true,//是否在条形码下方显示文字
     }
   },
   {
-    title:'覆盖显示的文本(斜体)',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
-      width:3,
-      text:"Toyar",//覆盖显示的文本
-      displayValue: true ,//是否在条形码下方显示文字
-      fontOptions:"italic",//使文字加粗体或变斜体
+    title: '覆盖显示的文本(斜体)',
+    value: 'HELLOToyar',
+    options: {
+
+
+      height: 100,//高度
+      width: 3,
+      text: "Toyar",//覆盖显示的文本
+      displayValue: true,//是否在条形码下方显示文字
+      fontOptions: "italic",//使文字加粗体或变斜体
     }
   },
   {
-    title:'覆盖显示的文本(加粗)',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
-      width:3,
-      text:"Toyar",//覆盖显示的文本
-      displayValue: true ,//是否在条形码下方显示文字
-      fontOptions:"bold",//使文字加粗体或变斜体
+    title: '覆盖显示的文本(加粗)',
+    value: 'HELLOToyar',
+    options: {
+
+
+      height: 100,//高度
+      width: 3,
+      text: "Toyar",//覆盖显示的文本
+      displayValue: true,//是否在条形码下方显示文字
+      fontOptions: "bold",//使文字加粗体或变斜体
     }
   },
   {
-    title:'覆盖显示的文本(加粗斜体)',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
-      width:3,
-      text:"Toyar",//覆盖显示的文本
-      displayValue: true ,//是否在条形码下方显示文字
-      fontOptions:"bold italic",//使文字加粗体或变斜体
+    title: '覆盖显示的文本(加粗斜体)',
+    value: 'HELLOToyar',
+    options: {
+
+
+      height: 100,//高度
+      width: 3,
+      text: "Toyar",//覆盖显示的文本
+      displayValue: true,//是否在条形码下方显示文字
+      fontOptions: "bold italic",//使文字加粗体或变斜体
       // font:"fantasy",//设置文本的字体
       // textAlign:"right",//设置文本的水平对齐方式
       // textPosition:"top",//设置文本的垂直位置
@@ -107,127 +120,127 @@ const qrList = [
     }
   },
   {
-    title:'覆盖显示的文本(修改字体)',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
-      width:3,
-      text:"Toyar",//覆盖显示的文本
-      displayValue: true ,//是否在条形码下方显示文字
+    title: '覆盖显示的文本(修改字体)',
+    value: 'HELLOToyar',
+    options: {
+      height: 100,//高度
+      width: 3,
+      text: "Toyar",//覆盖显示的文本
+      displayValue: true,//是否在条形码下方显示文字
       // fontOptions:"bold italic",//使文字加粗体或变斜体
-      font:"fantasy",//设置文本的字体
+      font: "fantasy",//设置文本的字体
     }
   },
   {
-    title:'覆盖显示的文本(对齐方式1)',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
-      width:3,
-      text:"Toyar",//覆盖显示的文本
-      displayValue: true ,//是否在条形码下方显示文字
+    title: '覆盖显示的文本(对齐方式1)',
+    value: 'HELLOToyar',
+    options: {
+      height: 100,//高度
+      width: 3,
+      text: "Toyar",//覆盖显示的文本
+      displayValue: true,//是否在条形码下方显示文字
       // fontOptions:"bold italic",//使文字加粗体或变斜体
-      font:"fantasy",//设置文本的字体
-      textAlign:"right",//设置文本的水平对齐方式
+      font: "fantasy",//设置文本的字体
+      textAlign: "right",//设置文本的水平对齐方式
     }
   },
   {
-    title:'覆盖显示的文本(对齐方式2)',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
-      width:3,
-      text:"Toyar",//覆盖显示的文本
-      displayValue: true ,//是否在条形码下方显示文字
+    title: '覆盖显示的文本(对齐方式2)',
+    value: 'HELLOToyar',
+    options: {
+      height: 100,//高度
+      width: 3,
+      text: "Toyar",//覆盖显示的文本
+      displayValue: true,//是否在条形码下方显示文字
       // fontOptions:"bold italic",//使文字加粗体或变斜体
-      font:"fantasy",//设置文本的字体
-      textAlign:"right",//设置文本的水平对齐方式
-      textPosition:"top",//设置文本的垂直位置
+      font: "fantasy",//设置文本的字体
+      textAlign: "right",//设置文本的水平对齐方式
+      textPosition: "top",//设置文本的垂直位置
     }
   },
   {
-    title:'设置条形码和文本之间的间距',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
-      width:3,
-      text:"Toyar",//覆盖显示的文本
-      displayValue: true ,//是否在条形码下方显示文字
+    title: '设置条形码和文本之间的间距',
+    value: 'HELLOToyar',
+    options: {
+      height: 100,//高度
+      width: 3,
+      text: "Toyar",//覆盖显示的文本
+      displayValue: true,//是否在条形码下方显示文字
       // fontOptions:"bold italic",//使文字加粗体或变斜体
-      font:"fantasy",//设置文本的字体
-      textAlign:"right",//设置文本的水平对齐方式
-      textPosition:"top",//设置文本的垂直位置
-      textMargin:5,//设置条形码和文本之间的间距
+      font: "fantasy",//设置文本的字体
+      textAlign: "right",//设置文本的水平对齐方式
+      textPosition: "top",//设置文本的垂直位置
+      textMargin: 5,//设置条形码和文本之间的间距
     }
   },
   {
-    title:'设置文本的大小',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
-      width:3,
-      text:"Toyar",//覆盖显示的文本
-      displayValue: true ,//是否在条形码下方显示文字
+    title: '设置文本的大小',
+    value: 'HELLOToyar',
+    options: {
+      height: 100,//高度
+      width: 3,
+      text: "Toyar",//覆盖显示的文本
+      displayValue: true,//是否在条形码下方显示文字
       // fontOptions:"bold italic",//使文字加粗体或变斜体
-      font:"fantasy",//设置文本的字体
-      textAlign:"right",//设置文本的水平对齐方式
-      textPosition:"top",//设置文本的垂直位置
-      textMargin:5,//设置条形码和文本之间的间距
-      fontSize:15,//设置文本的大小
+      font: "fantasy",//设置文本的字体
+      textAlign: "right",//设置文本的水平对齐方式
+      textPosition: "top",//设置文本的垂直位置
+      textMargin: 5,//设置条形码和文本之间的间距
+      fontSize: 15,//设置文本的大小
     }
   },
   {
-    title:'设置条形码的背景',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
-      width:3,
-      text:"Toyar",//覆盖显示的文本
-      displayValue: true ,//是否在条形码下方显示文字
+    title: '设置条形码的背景',
+    value: 'HELLOToyar',
+    options: {
+      height: 100,//高度
+      width: 3,
+      text: "Toyar",//覆盖显示的文本
+      displayValue: true,//是否在条形码下方显示文字
       // fontOptions:"bold italic",//使文字加粗体或变斜体
-      font:"fantasy",//设置文本的字体
-      textAlign:"right",//设置文本的水平对齐方式
-      textPosition:"top",//设置文本的垂直位置
-      textMargin:5,//设置条形码和文本之间的间距
-      fontSize:15,//设置文本的大小
-      background:"#eee",//设置条形码的背景
+      font: "fantasy",//设置文本的字体
+      textAlign: "right",//设置文本的水平对齐方式
+      textPosition: "top",//设置文本的垂直位置
+      textMargin: 5,//设置条形码和文本之间的间距
+      fontSize: 15,//设置文本的大小
+      background: "#eee",//设置条形码的背景
     }
   },
   {
-    title:'设置条和文本的颜色',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
-      width:3,
-      text:"Toyar",//覆盖显示的文本
-      displayValue: true ,//是否在条形码下方显示文字
+    title: '设置条和文本的颜色',
+    value: 'HELLOToyar',
+    options: {
+      height: 100,//高度
+      width: 3,
+      text: "Toyar",//覆盖显示的文本
+      displayValue: true,//是否在条形码下方显示文字
       // fontOptions:"bold italic",//使文字加粗体或变斜体
-      font:"fantasy",//设置文本的字体
-      textAlign:"right",//设置文本的水平对齐方式
-      textPosition:"top",//设置文本的垂直位置
-      textMargin:5,//设置条形码和文本之间的间距
-      fontSize:15,//设置文本的大小
-      background:"#eee",//设置条形码的背景
-      lineColor:"skyblue",//设置条和文本的颜色。
+      font: "fantasy",//设置文本的字体
+      textAlign: "right",//设置文本的水平对齐方式
+      textPosition: "top",//设置文本的垂直位置
+      textMargin: 5,//设置条形码和文本之间的间距
+      fontSize: 15,//设置文本的大小
+      background: "#eee",//设置条形码的背景
+      lineColor: "skyblue",//设置条和文本的颜色。
     }
   },
   {
-    title:'设置条形码周围的空白边距',
-    value:'你好Toyar',
-    options:{
-      height:100,//高度
-      width:3,
-      text:"Toyar",//覆盖显示的文本
-      displayValue: true ,//是否在条形码下方显示文字
+    title: '设置条形码周围的空白边距',
+    value: 'HELLOToyar',
+    options: {
+      height: 100,//高度
+      width: 3,
+      text: "Toyar",//覆盖显示的文本
+      displayValue: true,//是否在条形码下方显示文字
       // fontOptions:"bold italic",//使文字加粗体或变斜体
-      font:"fantasy",//设置文本的字体
-      textAlign:"right",//设置文本的水平对齐方式
-      textPosition:"top",//设置文本的垂直位置
-      textMargin:5,//设置条形码和文本之间的间距
-      fontSize:15,//设置文本的大小
-      background:"#eee",//设置条形码的背景
-      lineColor:"skyblue",//设置条和文本的颜色。
-      margin:15//设置条形码周围的空白边距
+      font: "fantasy",//设置文本的字体
+      textAlign: "right",//设置文本的水平对齐方式
+      textPosition: "top",//设置文本的垂直位置
+      textMargin: 5,//设置条形码和文本之间的间距
+      fontSize: 15,//设置文本的大小
+      background: "#eee",//设置条形码的背景
+      lineColor: "skyblue",//设置条和文本的颜色。
+      margin: 15//设置条形码周围的空白边距
     }
   }
 ]
