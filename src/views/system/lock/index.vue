@@ -1,6 +1,6 @@
 <template>
   <div class="ty-lock">
-    <header class="ty-header-lock" @click="unLock"`>
+    <header class="ty-header-lock" @click="unLock">
         <TyIcon icon="ty-lock-line"></TyIcon>
         <div>点击解锁</div>
     </header>

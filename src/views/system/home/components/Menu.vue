@@ -1,6 +1,6 @@
 <template>
   <!-- v-model=""  -->
-  <TyMenu :isFold="appStore.isFold" style="width: unset"  :option="option">
+  <TyMenu :isFold="appStore.isFold" style="width: unset" v-model="menuStore.activeMenu" :option="option">
     <template #header>
       <div style="
           height: 50px;
@@ -17,6 +17,9 @@
 import svgIcon from '@/components/svgIcon.vue'
 import {ref} from 'vue'
 import useAppStore from '@/store/modules/app'
+import useMenuStore from '@/store/modules/menu'
+
+const menuStore = useMenuStore()
 const appStore = useAppStore()
 
 const option = [

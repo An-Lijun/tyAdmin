@@ -17,7 +17,7 @@ const routes = [
   {
     path: '/system',
     name: 'System',
-    component: () => import('@/views/system/home/index.vue'),
+    component: () => import('@/views/system/home/index.ts'),
     redirect: { name: 'analysis' },
     children: [
       {
@@ -34,7 +34,7 @@ const routes = [
   {
     path: '/map',
     name: 'Map',
-    component: () => import('@/views/system/home/index.vue'),
+    component: () => import('@/views/system/home/index.ts'),
     children: [
       {
         path: 'echarsMap',
@@ -49,7 +49,7 @@ const routes = [
   {
     path: '/trade',
     name: 'Trade',
-    component: () => import('@/views/system/home/index.vue'),
+    component: () => import('@/views/system/home/index.ts'),
     children: [
       {
         path: 'icon',

@@ -123,7 +123,9 @@
         <div class="tyadmin-layout">
           <TyRow :gutter="16">
             <TyCol :span="12">
-              <div class="layout-1 active layout">
+              <div @click="changeLayout(1)" class="layout-1  layout" :class="{
+            active: appStore.layout === 1
+          }">
                 <div class="left"></div>
                 <div class="right">
                   <div class="top"></div>
@@ -132,7 +134,9 @@
               </div>
             </TyCol>
             <TyCol :span="12">
-              <div class="layout-2 layout">
+              <div @click="changeLayout(2)" class="layout-2 layout" :class="{
+            active: appStore.layout === 2
+          }">
                 <div class="top"></div>
                 <div class="bottom">
                   <div class="left"></div>
@@ -358,6 +362,10 @@ const getAssetsFile = (url: string) => {
   return new URL(`${url}`, import.meta.url).href
 }
 
+const changeLayout=(value)=>{
+  appStore.layout=value
+}
+
 const model = ref(false)
 const openCont = () => {
   model.value = !model.value
@@ -373,9 +381,9 @@ const sureToExit = () => {
     name: 'Login'
   })
 }
-const toLock =()=>{
+const toLock = () => {
   router.push({
-    name:'Lock'
+    name: 'Lock'
   })
 }
 watch(
