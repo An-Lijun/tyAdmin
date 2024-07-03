@@ -26,7 +26,7 @@
 <script>
 export default {
   props: {
-    modelValue:{
+    modelValue: {
       type: Boolean,
       default: false
     },
@@ -45,17 +45,18 @@ export default {
         scale: 1,
         rotate: 0
       },
-      currentIndex:0
+      currentIndex: 0
     }
   },
 
   watch: {
     modelValue: { // 给body动态增加style属性，禁止背景内容的鼠标滚轮滚动
       handler(newVal) {
-        if(newVal) {
-          this.currentIndex =this.index
+        if (newVal) {
+          this.currentIndex = this.index
           document.body.style.overflow = "hidden";
           this.initImgHandle() // 每次打开图片初始化
+          window.addEventListener('keydown', this.watchEvent)
         } else {
           document.body.style.overflow = "";
         }
@@ -63,6 +64,19 @@ export default {
     },
   },
   methods: {
+    watchEvent(event) {
+      switch (event.key) {
+        case 'Escape':
+          this.closeTyAdmin()
+          break
+        case 'ArrowRight':
+          this.nextImage()
+          break
+        case 'ArrowLeft':
+          this.prevImage()
+          break
+      }
+    },
     // 鼠标滚轮
     handleScroll(event) {
       if (event.deltaY > 0) {
@@ -106,7 +120,6 @@ export default {
     },
     // 缩小图片
     async shrinkHandle() {
-      console.log(this.imgHandle.scale, 'scale')
       if (this.imgHandle.scale === 0.2) { // 最低缩放到0.2倍
         return
       }
@@ -134,11 +147,14 @@ export default {
     },
     // 关闭预览图片组件
     closeTyAdmin() {
-      this.$emit('update:modelValue',false)
+      this.$emit('update:modelValue', false)
     }
   },
   mounted() { // 插入body
     document.body.appendChild(this.$el);
+  },
+  beforeUnmount(){
+    window.removeEventListener('keydown',this.watchEvent)
   },
   destroyed() { // 组件销毁后同步清除元素
     this.$el.parentNode.removeChild(this.$el);
@@ -146,7 +162,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.tyAdmin_wrapper{
+.tyAdmin_wrapper {
   position: fixed;
   top: 0;
   right: 0;
@@ -154,64 +170,77 @@ export default {
   left: 0;
   background: rgba(0, 0, 0, .5);
   z-index: 9999;
-  .tyAdmin_image{
+
+  .tyAdmin_image {
     display: flex;
     align-items: center;
     justify-content: center;
+
     img {
       width: 100vw;
       height: 100vh;
       object-fit: scale-down;
-      transition: transform 0.3s ease; 
+      transition: transform 0.3s ease;
     }
   }
-  .tyAdmin_close{
+
+  .tyAdmin_close {
     position: absolute;
     right: 20px;
     top: 20px;
     transition: transform 0.2s ease-out;
-    &:hover{
+
+    &:hover {
       transform: scale(1.2);
     }
   }
-  .tyAdmin_navigation{
-    &_left{
+
+  .tyAdmin_navigation {
+    &_left {
       position: absolute;
       left: 15px;
       top: 50%;
       transform: translate(0, -50%);
       transition: transform 0.2s ease-out;
     }
-    &_right{
+
+    &_right {
       position: absolute;
       right: 15px;
       top: 50%;
       transform: translate(0, -50%);
       transition: transform 0.2s ease-out;
     }
-    &_left:hover,&_right:hover{
+
+    &_left:hover,
+    &_right:hover {
       transform: translate(0, -50%) scale(1.2);
     }
   }
-  .tyAdmin_toolbar{
+
+  .tyAdmin_toolbar {
     position: absolute;
     bottom: 10px;
     left: 50%;
     transform: translate(-50%, 0);
     display: flex;
     align-items: center;
-    span{
+
+    span {
       margin-right: 10px;
       transition: transform 0.2s ease-out;
-      &:hover{
-        transform: scale(1.1) ;
+
+      &:hover {
+        transform: scale(1.1);
       }
     }
-    span:last-child{
+
+    span:last-child {
       margin-right: 0;
     }
   }
-  .tyAdmin_btn{
+
+  .tyAdmin_btn {
     width: 50px;
     height: 50px;
     display: flex;
@@ -225,22 +254,35 @@ export default {
     user-select: none;
   }
 }
-.zoom-enter, .zoom-leave-to { // 元素进入和离开时的动作
+
+.zoom-enter,
+.zoom-leave-to {
+  // 元素进入和离开时的动作
   transform: scale(0);
 }
-.zoom-enter-active, .zoom-leave-active { // 元素进入和离开时的过渡动画定义
+
+.zoom-enter-active,
+.zoom-leave-active {
+  // 元素进入和离开时的过渡动画定义
   transition: transform 0.3s;
 }
 
-.slide-enter, .slide-leave-to { // 元素进入和离开时的动作
+.slide-enter,
+.slide-leave-to {
+  // 元素进入和离开时的动作
   transform: translateX(100%);
 }
-.slide-enter-active, .slide-leave-active { // 元素进入和离开时的过渡动画定义
+
+.slide-enter-active,
+.slide-leave-active {
+  // 元素进入和离开时的过渡动画定义
   transition: transform 0.3s ease-in-out;
 }
-.tyAdmin_navigation_left, .tyAdmin_navigation_right{
+
+.tyAdmin_navigation_left,
+.tyAdmin_navigation_right {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-</style>  
+</style>
