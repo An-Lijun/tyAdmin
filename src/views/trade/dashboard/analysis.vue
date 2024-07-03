@@ -133,8 +133,7 @@ let option = {
     trigger: 'axis',
     axisPointer: {
       lineStyle: {
-        width: 1,
-        color: '#019680'
+        width: 1
       }
     }
   },
@@ -146,8 +145,7 @@ let option = {
       show: true,
       lineStyle: {
         width: 1,
-        type: 'solid',
-        color: 'rgba(226,226,226,0.5)'
+        type: 'solid'
       }
     },
     axisTick: {
@@ -181,7 +179,6 @@ let option = {
       type: 'line',
       areaStyle: {},
       itemStyle: {
-        color: '#5ab1ef'
       }
     },
     {
@@ -193,7 +190,6 @@ let option = {
       type: 'line',
       areaStyle: {},
       itemStyle: {
-        color: '#019680'
       }
     }
   ]
@@ -204,8 +200,7 @@ let option2 = {
     trigger: 'axis',
     axisPointer: {
       lineStyle: {
-        width: 1,
-        color: '#019680'
+        width: 1
       }
     }
   },
@@ -276,14 +271,12 @@ let option3 = {
           value: [90, 50, 86, 40, 50, 20],
           name: '访问',
           itemStyle: {
-            color: '#b6a2de'
           }
         },
         {
           value: [70, 75, 70, 76, 20, 85],
           name: '购买',
           itemStyle: {
-            color: '#5ab1ef'
           }
         }
       ]
@@ -301,7 +294,6 @@ let option4 = {
   },
   series: [
     {
-      color: ['#5ab1ef', '#b6a2de', '#67e0e3', '#2ec7c9'],
       name: '访问来源',
       type: 'pie',
       radius: ['40%', '70%'],
@@ -350,7 +342,6 @@ let option5 = {
       type: 'pie',
       radius: '80%',
       center: ['50%', '50%'],
-      color: ['#5ab1ef', '#b6a2de', '#67e0e3', '#2ec7c9'],
       data: [
         { value: 500, name: '电子产品' },
         { value: 310, name: '服装' },
@@ -384,7 +375,7 @@ let option5 = {
     margin: 10px 0 20px;
     span {
       font-size: 25px;
-      color: #333;
+      color: var(--text-1);
       font-weight: normal;
     }
     img {
@@ -396,7 +387,7 @@ let option5 = {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #333;
+    color: var(--text-2);
   }
 }
 .colBox {

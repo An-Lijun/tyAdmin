@@ -25,7 +25,11 @@ export default defineComponent({
 
             h(TyContainer, { column: true },
               [h(SHeader),
-              h(TyMain, {},
+              h(TyMain, {
+                style:{
+                  background:' var(--fill-2)'
+                }
+              },
                 h('div', {
                   style: {
                     width: '100%',
@@ -55,7 +59,11 @@ export default defineComponent({
               }
             }, h(Menu)),
             h(TyContainer, { column: true }, [
-              h(TyMain, {},
+              h(TyMain, {
+                style:{
+                  background:' var(--fill-2)'
+                }
+              },
                 h('div', {
                   style: {
                     width: '100%',

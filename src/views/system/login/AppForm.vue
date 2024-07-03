@@ -55,6 +55,7 @@ const login=()=>{
       line-height: 30px;
       font-size: 30px;
       letter-spacing: 10px;
+      color: var(--text-1);
     }
   }
   ::v-deep .ty-form-item__label {

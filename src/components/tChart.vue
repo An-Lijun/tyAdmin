@@ -4,6 +4,8 @@
 <script setup lang="ts">
 import { ECharts, EChartsOption, init } from 'echarts'
 import { ref, onBeforeUnmount, onMounted, watch, defineEmits } from 'vue'
+import useAppStore from '@/store/modules/app'
+
 // import * as echarts from 'echarts'
 // 定义props
 interface Props {
@@ -21,11 +23,15 @@ const props = withDefaults(defineProps<Props>(), {
   deepDraw: false,
   deepRender: false
 })
-
+const emit = defineEmits(['click'])
 const myChartsRef = ref<HTMLDivElement>()
+const appStore =useAppStore()
+
 let myChart: ECharts
 let timer: null | Timeout
-let emit = defineEmits(['click'])
+let timer2: null | Timeout
+
+
 let eventMap: { [key: string]: any } = {
   click: (params: Object) => {
     emit('click', params)
@@ -48,15 +54,34 @@ const removeEvent = () => {
     }
   }
 }
+
+const getOption = () => {
+  let targetOptions: EChartsOption = {...props.option}
+  if (appStore.pColors.length>0) {
+    targetOptions.color = appStore.pColors
+  }
+  return targetOptions
+}
+
 // 初始化渲染echars
 const renderChart = () => {
   if (myChart) {
     removeEvent()
   }
-  // 拿到option配置项，渲染echarts
-  myChart = init(myChartsRef.value as HTMLDivElement)
-  myChart?.setOption(props.option, true)
+
+  myChart?.setOption(getOption(), true)
   addEvent()
+}
+const lazyRenderChart = () => {
+  clearTimeout(timer2)
+
+  if (myChart) {
+    removeEvent()
+  }
+  timer2 =setTimeout(()=>{
+    myChart?.setOption(getOption(), true)
+    addEvent()
+  },500)
 }
 
 // 重新渲染echarts
@@ -67,7 +92,7 @@ const resizeChart = (): void => {
       myChart.resize()
       timer = null
       let div = myChartsRef.value?.querySelector('div')
-      if(!div){
+      if (!div) {
         return
       }
       div.style.width = 'unset'
@@ -77,7 +102,11 @@ const resizeChart = (): void => {
   }, 500)
 }
 
-
+watch(() => appStore.pColors, () => {
+  lazyRenderChart()
+  }, {
+    deep: true
+  })
 if (props.deepDraw) {
   watch(() => props.option, () => {
     renderChart()
@@ -90,12 +119,14 @@ if (props.deepRender) {
     const watchChartOb = new ResizeObserver(() => {
       resizeChart()
     })
-
     watchChartOb.observe(myChartsRef.value)
   })
 
 }
+
 onMounted(() => {
+  // 拿到option配置项，渲染echarts
+  myChart = init(myChartsRef.value as HTMLDivElement)
   if (props.option) {
     setTimeout(() => {
       renderChart()

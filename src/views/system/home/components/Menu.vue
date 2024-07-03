@@ -142,7 +142,20 @@ const option = [
     type: 'menu',
     path: '/trade/charts',
   },
-
+  {
+    icon: 'ty-markup-fill',
+    label: '预览',
+    key: 'previewImg',
+    type: 'menu',
+    path: '/trade/previewImg',
+  },
+  {
+    icon: 'ty-markup-fill',
+    label: '签字版',
+    key: 'signingBoard',
+    type: 'menu',
+    path: '/trade/signingBoard',
+  },
   {
     icon: 'ty-markup-fill',
     label: '关于',
@@ -153,27 +166,27 @@ const option = [
 ]
 </script>
 <style lang="scss" scoped>
-html[toyar-theme='light'] {
-  .ty-menu {
-    --color-bg-2: #001529;
-    --text-2: rgba(255, 255, 255, 0.6);
+// html[toyar-theme='light'] {
+//   .ty-menu {
+//     --color-bg-2: #001529;
+//     --text-2: rgba(255, 255, 255, 0.6);
 
-    .ty-sub-menu,
-    .ty-menu-item {
-      background-color: unset;
-    }
+//     .ty-sub-menu,
+//     .ty-menu-item {
+//       background-color: unset;
+//     }
 
-    .ty-menu-item:hover {
-      color: #fff;
-    }
-  }
-}
+//     .ty-menu-item:hover {
+//       color: #fff;
+//     }
+//   }
+// }
 
 
-html[toyar-theme='dark'] {
-  .ty-menu {
-    --color-bg-2: #001529;
-  }
-}
+// html[toyar-theme='dark'] {
+//   .ty-menu {
+//     --color-bg-2: #001529;
+//   }
+// }
 
 </style>

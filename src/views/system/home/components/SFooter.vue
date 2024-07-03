@@ -1,7 +1,7 @@
 <template>
   <TyFooter height="50" style="
-          background-color: #fff;
-          color: var(--color-text-4);
+          background-color: var(--color-bg-2);
+          color: var(--text-2);
           text-align: center;
           line-height: 50px;
         ">
@@ -11,4 +11,4 @@
 </template>
 <script setup>
 </script>
-<style lang="less" scoped></style>
+<style lang="scss" scoped></style>

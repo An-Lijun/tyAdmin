@@ -5,8 +5,10 @@ export default defineStore('useAppStore', {
     // 用户信息
     isFold: false,
     pColor:'#165dff',
+    pColors:[],
     isBlackModel:false,
     isTritanopeModel:false,
+    isDark:false,
     layout:2
   }),
   persist: {

@@ -1,6 +1,6 @@
 <template>
   <!-- 这里应该先注入内个ConfigProvide 但是组件未完成 -->
-  <TyConfigProvider style="    height: 100vh;" :options="{resetPrimary:appStore.pColor}">
+  <TyConfigProvider style=" height: 100vh;" :options="{resetPrimary:appStore.pColor}">
     <TyWaterMark :options="{
       width: 500,
       height: 300,

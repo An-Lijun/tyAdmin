@@ -93,6 +93,14 @@ const routes = [
         component: () => import('@/views/trade/qrcode/two.vue')
       },
       {
+        path: 'previewImg',
+        component: () => import('@/views/trade/preview/index.vue')
+      },
+      {
+        path: 'signingBoard',
+        component: () => import('@/views/trade/signingboard/index.vue')
+      },
+      {
         path: '/:catchAll(.*)',
         redirect: { name: 'notFound' },
       }

@@ -1,9 +1,9 @@
 <template>
-  <TyHeader height="70" class="tyAdmin-header">
+  <TyHeader height="70" class="tyAdmin-header" style="background-color: var(--color-bg-2);">
     <div class="tyAdmin-header__content">
       <div class="tyAdmin-header__left">
         <span class="foldBtn">
-          <TyIcon :icon="appStore.isFold ? 'ty-indent-increase' : 'ty-indent-decrease'
+          <TyIcon style="color: var(--toyar-gray-10);" :icon="appStore.isFold ? 'ty-indent-increase' : 'ty-indent-decrease'
             " size="20" @click="toFold"></TyIcon>
         </span>
         <TyBreadcrumb>
@@ -15,13 +15,12 @@
       </div>
       <div class="tyAdmin-header__right">
         <div class="contruller">
-          <TyIcon icon="ty-search-line" size="20"></TyIcon>
+          <TyIcon icon="ty-search-line" size="20" style="color: var(--toyar-gray-10);"></TyIcon>
         </div>
         <div class="contruller">
           <TyBadge class="message" :dot="true" :max="5" :text="10">
             <TyPoppover trigger="click" placement="bottom">
-              <TyIcon icon="ty-notification-2-line" size="20"></TyIcon>
-
+              <TyIcon icon="ty-notification-2-line" size="20" style="color: var(--toyar-gray-10);"></TyIcon>
               <template #content>
                 <TyTabs v-model="tabKey">
                   <TyTabItem title="通知(5)" name="inform">
@@ -79,7 +78,7 @@
         </div>
 
         <div class="contruller">
-          <TyIcon icon="ty-translate-2" size="20"></TyIcon>
+          <TyIcon icon="ty-translate-2" size="20" style="color: var(--toyar-gray-10);"></TyIcon>
         </div>
         <div class="contruller sys">
           <TyPoppover trigger="hover" placement="bottom">
@@ -105,7 +104,7 @@
           </TyPoppover>
         </div>
         <div class="contruller" @click="openCont">
-          <TyIcon icon="ty-settings-4-line" size="20"></TyIcon>
+          <TyIcon icon="ty-settings-4-line" size="20" style="color: var(--toyar-gray-10);"></TyIcon>
         </div>
       </div>
     </div>
@@ -151,6 +150,10 @@
             <ty-icon icon="ty-t-shirt-line" class="mw-10"></ty-icon>
             全局主题
           </ty-divider>
+        </div>
+        <div class="flex-between">
+          <label> 暗黑模式</label>
+          <TySwitch v-model="appStore.isDark" />
         </div>
         <div class="flex-between">
           <label> 主题颜色</label>
@@ -372,7 +375,7 @@ const openCont = () => {
 }
 let body = document.querySelector('body')
 
-const openMessage = () => { }
+// const openMessage = () => { }
 
 let tabKey = ref('inform')
 
@@ -410,6 +413,16 @@ watch(
     } else if (body.style.filter === 'invert(80%)') {
       body.style.filter = ''
     }
+  },
+  {
+    immediate: true
+  }
+)
+let html =document.querySelector('html')
+watch(
+  () => appStore.isDark,
+  newV => {
+    html?.setAttribute('toyar-theme', newV?'dark':'light'  )
   },
   {
     immediate: true

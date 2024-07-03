@@ -94,7 +94,7 @@ for (const key in devDependencies) {
   }
 
   .header-info {
-    color: #333;
+    color: var(--text-2);
   }
 }
 </style>

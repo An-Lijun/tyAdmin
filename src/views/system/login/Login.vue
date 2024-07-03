@@ -44,4 +44,7 @@ import AppForm from './AppForm.vue'
     transform: translate(-50%,-50%);
   }
 }
+::v-deep .ty-main{
+  background: var(--fill-2);
+}
 </style>
