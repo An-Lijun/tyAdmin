@@ -1,15 +1,6 @@
 <template>
   <div class="divRoot">
-    <TyCard :border="false">
-      <div class="header-card">
-        <div class="header-title">
-          一维码(条形码)
-        </div>
-        <div class="header-info">
-          toyar-admin 集成jsbarcode库 使用tBarCode组件进行使用 以下是使用实例
-        </div>
-      </div>
-    </TyCard>
+    <tHeader title="一维码(条形码)" info="toyar-admin 集成jsbarcode库 使用tBarCode组件进行使用 以下是使用实例" />
     <div class="tyAdmin__container">
       <ty-row :gutter="8" style="margin: 0 -4px;">
         <ty-col :span="6" v-for="item in qrList">
@@ -29,6 +20,7 @@
 <script setup>
 import tBarCode from '@/components/tBarCode/index.vue';
 import { getAssetURL } from '@/common'
+import tHeader from '@/components/tHeader.vue'
 import { ref } from 'vue'
 const qrList = [
   {

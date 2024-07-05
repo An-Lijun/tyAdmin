@@ -118,7 +118,7 @@ const option = [
   {
     label: '码',
     key: 'code',
-    icon: 'ty-speaker-3-line',
+    icon: 'ty-qr-code-fill ',
     type: 'subMenu',
     children: [
       {
@@ -143,18 +143,32 @@ const option = [
     path: '/trade/charts',
   },
   {
-    icon: 'ty-markup-fill',
+    icon: 'ty-file-image-fill',
     label: '预览',
     key: 'previewImg',
     type: 'menu',
     path: '/trade/previewImg',
   },
   {
-    icon: 'ty-markup-fill',
+    icon: 'ty-pen-nib-fill',
     label: '签字版',
     key: 'signingBoard',
     type: 'menu',
     path: '/trade/signingBoard',
+  },
+  {
+    icon: 'ty-pen-nib-fill',
+    label: '绘制图形',
+    key: 'drawImg',
+    type: 'menu',
+    path: '/trade/drawImg',
+  },
+  {
+    icon: 'ty-pen-nib-fill',
+    label: '动画',
+    key: 'animation',
+    type: 'menu',
+    path: '/trade/animation',
   },
   {
     icon: 'ty-markup-fill',

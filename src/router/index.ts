@@ -101,6 +101,15 @@ const routes = [
         component: () => import('@/views/trade/signingboard/index.vue')
       },
       {
+        path: 'drawImg',
+        component: () => import('@/views/trade/drawImg/index.vue')
+      },
+      {
+        path: 'animation',
+        component: () => import('@/views/trade/animation/clipath.vue')
+      },
+      
+      {
         path: '/:catchAll(.*)',
         redirect: { name: 'notFound' },
       }

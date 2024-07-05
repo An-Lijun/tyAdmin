@@ -1,15 +1,6 @@
 <template>
   <div class="divRoot">
-    <TyCard :border="false">
-      <div class="header-card">
-        <div class="header-title">
-          二维码
-        </div>
-        <div class="header-info">
-          toyar-admin 集成qrcode库 使用tQrCode组件进行使用 以下是使用实例
-        </div>
-      </div>
-    </TyCard>
+    <tHeader title="二维码" info="toyar-admin 集成qrcode库 使用tQrCode组件进行使用 以下是使用实例" />
     <div class="tyAdmin__container">
       <ty-row :gutter="8" style="margin: 0 -4px;">
         <ty-col :span="6" v-for="item in qrList">
@@ -31,6 +22,8 @@
 import tQrCode from '@/components/tQrCode/index.vue';
 import { getAssetURL } from '@/common'
 import {ref} from 'vue'
+import tHeader from '@/components/tHeader.vue'
+
 const qrList = [
   {
     title: '网址',

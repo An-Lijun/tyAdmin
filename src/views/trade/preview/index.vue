@@ -1,24 +1,14 @@
 <template>
   <div>
-    <TyCard :border="false">
-      <div class="header-card">
-        <div class="header-title">
-          图片预览
-        </div>
-        <div class="header-info">
-          toyar-admin 支持图片预览
-        </div>
-      </div>
-    </TyCard>
+    <tHeader title="图片预览" info="toyar-admin 支持图片预览" />
     <div class="tyAdmin__container">
       <TyCard :border="false">
         <TyRow :gutter="16">
           <TyCol span="6" v-for="(img,index) in previewImgList">
-            <img :src="img" style="width: 100%; height: 180px; border-radius: 4px;" @click="open(index)"/>
+            <img :src="img" style="width: 100%; height: 200px; border-radius: 4px;" @click="open(index)"/>
           </TyCol>
         </TyRow>
         <tPreviewImg v-model="pre" :previewImgList="previewImgList" :index="index"></tPreviewImg>
-
       </TyCard>
     </div>
   </div>
@@ -26,6 +16,8 @@
 <script setup>
 import tPreviewImg from '../../../components/tPreviewImg.vue';
 import { ref } from 'vue'
+import tHeader from '@/components/tHeader.vue'
+
 let previewImgList = [
   'https://tse4-mm.cn.bing.net/th/id/OIP-C.mH9YLFEL5YdVxJM82mjVJQAAAA?rs=1&pid=ImgDetMain',
   'https://ts1.cn.mm.bing.net/th/id/R-C.66d7b796377883a92aad65b283ef1f84?rik=sQ%2fKoYAcr%2bOwsw&riu=http%3a%2f%2fwww.quazero.com%2fuploads%2fallimg%2f140305%2f1-140305131415.jpg&ehk=Hxl%2fQ9pbEiuuybrGWTEPJOhvrFK9C3vyCcWicooXfNE%3d&risl=&pid=ImgRaw&r=0',
