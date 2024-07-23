@@ -5,14 +5,9 @@
     </TyCard>
     <div class="tyAdmin__container">
       <TyCard :border="false">
-        <TyButton @click="downByUrl"> url下载</TyButton>
-      </TyCard>
-      <TyCard :border="false">
-        <TyButton @click="downByBlob"> blob流下载</TyButton>
-      </TyCard>
-
-      <TyCard :border="false">
-        <TyButton @click="downByBase64"> base64流下载</TyButton>
+        <TyButton @click="downByUrl" style="margin-right: 15px;"> url下载</TyButton>
+        <TyButton @click="downByBlob" style="margin-right: 15px;"> blob流下载</TyButton>
+        <TyButton @click="downByBase64" style="margin-right: 15px;"> base64流下载</TyButton>
       </TyCard>
     </div>
   </div>

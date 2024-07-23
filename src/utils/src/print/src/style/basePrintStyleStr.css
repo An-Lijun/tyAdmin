@@ -1,0 +1,40 @@
+@page{
+  size:auto !important;
+  margin:0mm;
+  position:absolute;
+  -webkit-print-color-adjust: exact !important;
+}
+table.base-printPage{
+  border:unset;
+  -webkit-print-color-adjust: exact !important;
+}
+
+/* .base-printPage td ,.base-printPage  th ,.base-printPage  tr .base-printPage tbody{
+  border:unset;
+} */
+ .base-printBody > tr >td{
+   border:unset;
+ }
+
+
+
+td.base-printHeader__inner,td.base-printFooter__inner{
+  width:100%;
+  font-size:10px !important;
+  color:#666 !important;
+  height:30px;
+  text-align:right;
+  line-height:30px;
+  box-sizing: border-box;
+}
+td.base-printHeader__inner{
+  text-align:center;
+  border: unset;
+  border-bottom: 1px solid #999 !important;
+  -webkit-print-color-adjust: exact; 
+}
+td.base-printFooter__inner{
+  -webkit-print-color-adjust: exact; 
+  border: unset;
+  border-top: 1px solid #999 !important;
+}

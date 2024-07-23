@@ -92,6 +92,12 @@ const option = [
         key: 'download',
         type: 'menu',
         path: '/trade/download',
+      },
+      {
+        label: '打印',
+        key: 'print',
+        type: 'menu',
+        path: '/trade/print',
       }
     ],
   },

@@ -1,0 +1,14 @@
+.base-printBody,
+.base-printBody  table  th,
+.base-printBody  table td,
+.base-printBody  table  td {
+  border-color: #D0D0D0;
+  border-style: solid;
+  border-width: 1;
+}
+
+.base-printBody  table {
+  border-collapse: collapse;
+  text-align: left;
+  border-spacing: 0;
+}

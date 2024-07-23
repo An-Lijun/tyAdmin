@@ -59,7 +59,10 @@ const routes = [
         path: 'download',
         component: () => import('@/views/trade/download/index.vue'),
       },
-
+      {
+        path: 'print',
+        component: () => import('@/views/trade/print/index.vue'),
+      },
       {
         path: 'inner',
         component: () => import('@/views/trade/website/inner.vue'),

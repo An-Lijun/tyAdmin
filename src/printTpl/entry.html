@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div style="margin-top: 10px;">
+      <style>
+        table {
+          width: 100%;
+          border: unset;
+          border: 1px solid #666;
+          border-right: unset;
+          
+        }
+        table tr:first-child > td{
+          border-top: unset;
+        }
+        .firstTable{
+          border: unset;
+          border-left: 1px solid #666;
+          border-top: 1px solid #666;
+        }
+        caption {
+          border: 1px solid #666;
+          border-bottom: unset;
+          padding: 24px 15px;
+          height: 42px;
+          font-size: 28px;
+          line-height: 42px;
+        }
+        td {
+          /* border: 1px solid #666; */
+          border-top: 1px solid #666;
+          border-right: 1px solid #666;
+          padding: 16px 15px;
+          height: 28px;
+          line-height: 28px;
+          font-size: 14px;
+        }
+
+        tr>td:nth-child(even){
+          color: #666;
+        }
+        .table2  tbody{
+          width: 100%;
+        }
+        .table2 tr{
+          display: flex;
+          width: 100%;
+        }
+        .table2  tr > td:nth-child(odd){
+          width: 100px;
+        }
+        .table2  tr > td:nth-child(even){
+          flex:1;
+          width: 150px;
+        }
+        .seal{
+          width: 160px;
+          height: 160px;
+          position: fixed;
+          background-image: url('/test.png');
+          background-size: 100%;
+          right: 50px;
+          bottom: 80px;
+          z-index: 99;
+        }
+        .firstTable tr>td{
+          height: 14px;
+          line-height: 14px;
+          padding: 8px 15px;
+          font-size: 13px;
+        }
+      </style>
+
+      <table border="0" cellspacing="0" cellpadding="0" class="firstTable">
+        <caption>
+          入库单
+        </caption>
+        <colgroup>
+          <col span="1" width="90px" />
+          <col span="1" />
+          <col span="1" width="90px" />
+          <col span="1" />
+          <col span="1" width="90px" />
+          <col span="1" />
+        </colgroup>
+        <tr>
+          <td>单据号</td>
+          <td> {{djh}} </td>
+          <td>日期</td>
+          <td> {{riqi}} </td>
+          <td>入库仓库</td>
+          <td>{{rkck}}</td>
+        </tr>
+      </table>
+      <table border="0" cellspacing="0" cellpadding="0" class="table2">
+          <tr>
+          <td>押品编号</td>
+          <td>{{ypbh}}</td>
+          <td>押品分类</td>
+          <td>{{ypfl}}</td>
+        </tr>
+
+        <tr>
+          <td>客户号</td>
+          <td></td>
+          <td>客户名称</td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>担保合同号</td>
+          <td></td>
+          <td>担保类型</td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>数量</td>
+          <td></td>
+          <td>单价</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>直接价值</td>
+          <td></td>
+          <td>抵押价值</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>评估价值</td>
+          <td></td>
+          <td>抵质押率</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>登记日期</td>
+          <td></td>
+          <td>登记人员</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>审批人</td>
+          <td></td>
+          <td>负责人</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>入库理由</td>
+          <td></td>
+          <td>入库说明</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>总批次</td>
+          <td></td>
+          <td>本批次</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>入库数量</td>
+          <td></td>
+          <td>入库价值占比</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>入库日期</td>
+          <td></td>
+          <td>入库人员</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>库管员</td>
+          <td></td>
+          <td>备注</td>
+          <td></td>
+        </tr>
+      </table>
+      <div class="seal">
+
+      </div>
+    </div>
+  </body>
+</html>
