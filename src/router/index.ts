@@ -9,8 +9,8 @@ export const pageRoute = [
     label: '仪表盘',
     icon: 'ty-dashboard-fill',
     type: 'subMenu',
-    path: '/system',
-    name: 'System',
+    path: '/dashboard',
+    name: 'Dashboard',
     redirect: { name: 'analysis' },
     children: [
       {
@@ -18,21 +18,21 @@ export const pageRoute = [
         type: 'menu',
         name: 'analysis',
         path: 'analysis',
-        component: () => import('@/views/trade/dashboard/analysis.vue'),
+        component: () => import('@/views/pages/dashboard/analysis.vue'),
       },
       {
         label: '工作台',
         type: 'menu',
         name: 'workbench',
         path: 'workbench',
-        component: () => import('@/views/trade/dashboard/workbench.vue'),
+        component: () => import('@/views/pages/dashboard/workbench.vue'),
       },
       {
         label: '快速导航',
         type: 'menu',
         name: 'tradeNav',
         path: 'tradeNav',
-        component: () => import('@/views/trade/dashboard/tradeNav.vue'),
+        component: () => import('@/views/pages/dashboard/tradeNav.vue'),
       },
     ]
   },
@@ -49,14 +49,14 @@ export const pageRoute = [
         type: 'menu',
         name: 'echarsMap',
         path: 'echarsMap',
-        component: () => import('@/views/trade/map/echarsMap.vue'),
+        component: () => import('@/views/pages/map/echarsMap.vue'),
       },
       {
         label: '省地图(echars)',
         type: 'menu',
         name: 'echarsMapTwo',
         path: 'echarsMapTwo',
-        component: () => import('@/views/trade/map/echarsMapTwo.vue'),
+        component: () => import('@/views/pages/map/echarsMapTwo.vue'),
       },
     ]
   },
@@ -73,28 +73,28 @@ export const pageRoute = [
         type: 'menu',
         path: 'inner',
         name: 'inner',
-        component: () => import('@/views/trade/website/inner.vue'),
+        component: () => import('@/views/pages/website/inner.vue'),
       },
       {
         label: '打开外部页面',
         type: 'menu',
         path: 'out',
         name: 'out',
-        component: () => import('@/views/trade/website/out.vue'),
+        component: () => import('@/views/pages/website/out.vue'),
       },
       {
         label: '内嵌html页面',
         type: 'menu',
         path: 'outByIframe',
         name: 'outByIframe',
-        component: () => import('@/views/trade/website/wicket.vue'),
+        component: () => import('@/views/pages/website/wicket.vue'),
       },
       {
         label: '打开内部html页面',
         type: 'menu',
         name: 'outByIframe',
         path: 'outByIframe',
-        component: () => import('@/views/trade/website/outByIframe.vue')
+        component: () => import('@/views/pages/website/outByIframe.vue')
 
       }
     ]
@@ -113,7 +113,7 @@ export const pageRoute = [
         type: 'menu',
         path: 'icon',
         name: 'icon',
-        component: () => import('@/views/trade/feat/icon.vue'),
+        component: () => import('@/views/pages/feat/icon.vue'),
 
       },
       {
@@ -121,7 +121,7 @@ export const pageRoute = [
         type: 'menu',
         path: 'download',
         name: 'download',
-        component: () => import('@/views/trade/download/index.vue'),
+        component: () => import('@/views/pages/download/index.vue'),
 
       },
       {
@@ -129,7 +129,7 @@ export const pageRoute = [
         type: 'menu',
         path: 'print',
         name: 'print',
-        component: () => import('@/views/trade/print/index.vue'),
+        component: () => import('@/views/pages/print/index.vue'),
       }
     ]
   },
@@ -147,14 +147,14 @@ export const pageRoute = [
         type: 'menu',
         path: 'barcode',
         name: 'barcode',
-        component: () => import('@/views/trade/qrcode/one.vue')
+        component: () => import('@/views/pages/qrcode/one.vue')
       },
       {
         label: '二维码',
         type: 'menu',
         path: 'qrcode',
         name: 'qrcode',
-        component: () => import('@/views/trade/qrcode/two.vue')
+        component: () => import('@/views/pages/qrcode/two.vue')
       }
     ]
   },
@@ -169,31 +169,31 @@ export const pageRoute = [
         label: '图表',
         type: 'menu',
         path: 'charts',
-        component: () => import('@/views/trade/charts/index.vue')
+        component: () => import('@/views/pages/charts/index.vue')
       },
       {
         label: '二维码',
         type: 'menu',
         path: 'previewImg',
-        component: () => import('@/views/trade/preview/index.vue')
+        component: () => import('@/views/pages/preview/index.vue')
       },
       {
         label: '签字版',
         type: 'menu',
         path: 'signingBoard',
-        component: () => import('@/views/trade/signingboard/index.vue')
+        component: () => import('@/views/pages/signingboard/index.vue')
       },
       {
         label: '绘制图形',
         type: 'menu',
         path: 'drawImg',
-        component: () => import('@/views/trade/drawImg/index.vue')
+        component: () => import('@/views/pages/drawImg/index.vue')
       },
       {
         label: '动画',
         type: 'menu',
         path: 'animation',
-        component: () => import('@/views/trade/animation/clipath.vue')
+        component: () => import('@/views/pages/animation/clipath.vue')
       },
     ],
   },
@@ -206,7 +206,7 @@ export const pageRoute = [
       {
         type: 'menu',
         path: '/about',
-        component: () => import('@/views/trade/about/index.vue')
+        component: () => import('@/views/pages/about/index.vue')
       },
     ]
   },
@@ -227,7 +227,7 @@ const routes = [
   {
     path: '/outByIframe',
     name: 'outByIframe',
-    component: () => import('@/views/trade/website/outByIframe.vue'),
+    component: () => import('@/views/pages/website/outByIframe.vue'),
   },
   {
     path: '/lock',
