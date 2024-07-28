@@ -1,7 +1,7 @@
 <template>
   <!-- v-model=""  -->
   <TyMenu :isFold="appStore.isFold" style="width: unset" v-model="menuStore.activeMenu"
-    :option="routerTransMenu(getRouters, '')">
+    :option="routerTransMenu(pageRoute, '')">
     <template #header>
       <div style="
           height: 50px;
@@ -19,7 +19,7 @@ import svgIcon from '@/components/svgIcon.vue'
 import { ref } from 'vue'
 import useAppStore from '@/store/modules/app'
 import useMenuStore from '@/store/modules/menu'
-import { getRouters } from '@/router/index'
+import { pageRoute } from '@/router/index'
 const menuStore = useMenuStore()
 const appStore = useAppStore()
 function routerTransMenu(menuLs, pPath) {
@@ -48,11 +48,11 @@ function routerTransMenu(menuLs, pPath) {
   }
 
   // 对于没有type 的视为非菜单路由
-  return menuLs.filter(item => item.type).map(item => {
+  return menuLs.map(item => {
     return getMenuItem(item);
   });
 }
-console.log(routerTransMenu(getRouters, ''));
+console.log(routerTransMenu(pageRoute, ''));
  
 </script>
 <style lang="scss" scoped>

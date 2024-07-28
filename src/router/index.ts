@@ -4,23 +4,13 @@ import type { App } from 'vue';
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import installRouterGuard from './guard';
 
-const routes = [
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/system/login/Login.vue'),
-  },
-  {
-    path: '/',
-    name: 'Home',
-  },
+export const pageRoute = [
   {
     label: '仪表盘',
     icon: 'ty-dashboard-fill',
     type: 'subMenu',
     path: '/system',
     name: 'System',
-    component: () => import('@/views/system/home/index.ts'),
     redirect: { name: 'analysis' },
     children: [
       {
@@ -53,7 +43,6 @@ const routes = [
     type: 'subMenu',
     path: '/map',
     name: 'Map',
-    component: () => import('@/views/system/home/index.ts'),
     children: [
       {
         label: '地图(echars)',
@@ -71,14 +60,12 @@ const routes = [
       },
     ]
   },
-
   {
     label: '嵌入页面',
     icon: 'ty-pages-fill',
     type: 'subMenu',
     path: '/page',
     name: 'Page',
-    component: () => import('@/views/system/home/index.ts'),
     redirect: { name: 'analysis' },
     children: [
       {
@@ -119,7 +106,6 @@ const routes = [
     type: 'subMenu',
     path: '/fucs',
     name: 'Fucs',
-    component: () => import('@/views/system/home/index.ts'),
     redirect: { name: 'icon' },
     children: [
       {
@@ -148,14 +134,12 @@ const routes = [
     ]
   },
 
-
   {
     label: '码',
     icon: 'ty-qr-code-fill',
     type: 'subMenu',
     path: '/qr',
     name: 'Qr',
-    component: () => import('@/views/system/home/index.ts'),
     redirect: { name: 'analysis' },
     children: [
       {
@@ -180,7 +164,6 @@ const routes = [
     type: 'subMenu',
     path: '/trade',
     name: 'Trade',
-    component: () => import('@/views/system/home/index.ts'),
     children: [
       {
         label: '图表',
@@ -212,22 +195,13 @@ const routes = [
         path: 'animation',
         component: () => import('@/views/trade/animation/clipath.vue')
       },
-
-      {
-        path: '/:catchAll(.*)',
-        redirect: { name: 'notFound' },
-      }
     ],
   },
-
-
-
   {
     label: '关于',
     type: 'menu',
     path: '/about',
-    icon:'ty-markup-fill',
-    component: () => import('@/views/system/home/index.ts'),
+    icon: 'ty-markup-fill',
     children: [
       {
         type: 'menu',
@@ -236,7 +210,20 @@ const routes = [
       },
     ]
   },
+]
 
+const routes = [
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/system/login/Login.vue'),
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: () => import('@/views/system/home/index.ts'),
+    children:pageRoute
+  },
   {
     path: '/outByIframe',
     name: 'outByIframe',
@@ -258,7 +245,6 @@ const routes = [
   }
 ]
 
-export const getRouters = routes
 // app router
 // 创建一个可以被 Vue 应用程序使用的路由实例
 export const router = createRouter({
