@@ -15,114 +15,228 @@ const routes = [
     name: 'Home',
   },
   {
+    label: '仪表盘',
+    icon: 'ty-dashboard-fill',
+    type: 'subMenu',
     path: '/system',
     name: 'System',
     component: () => import('@/views/system/home/index.ts'),
     redirect: { name: 'analysis' },
     children: [
       {
+        label: '分析页',
+        type: 'menu',
         name: 'analysis',
         path: 'analysis',
         component: () => import('@/views/trade/dashboard/analysis.vue'),
       },
       {
+        label: '工作台',
+        type: 'menu',
+        name: 'workbench',
         path: 'workbench',
         component: () => import('@/views/trade/dashboard/workbench.vue'),
       },
       {
+        label: '快速导航',
+        type: 'menu',
         name: 'tradeNav',
         path: 'tradeNav',
         component: () => import('@/views/trade/dashboard/tradeNav.vue'),
       },
     ]
   },
+
   {
+    label: '地图',
+    icon: 'ty-road-map-fill',
+    type: 'subMenu',
     path: '/map',
     name: 'Map',
     component: () => import('@/views/system/home/index.ts'),
     children: [
       {
+        label: '地图(echars)',
+        type: 'menu',
+        name: 'echarsMap',
         path: 'echarsMap',
         component: () => import('@/views/trade/map/echarsMap.vue'),
       },
       {
+        label: '省地图(echars)',
+        type: 'menu',
+        name: 'echarsMapTwo',
         path: 'echarsMapTwo',
         component: () => import('@/views/trade/map/echarsMapTwo.vue'),
       },
     ]
   },
+
   {
+    label: '嵌入页面',
+    icon: 'ty-pages-fill',
+    type: 'subMenu',
+    path: '/page',
+    name: 'Page',
+    component: () => import('@/views/system/home/index.ts'),
+    redirect: { name: 'analysis' },
+    children: [
+      {
+        label: '内嵌外部页面',
+        type: 'menu',
+        path: 'inner',
+        name: 'inner',
+        component: () => import('@/views/trade/website/inner.vue'),
+      },
+      {
+        label: '打开外部页面',
+        type: 'menu',
+        path: 'out',
+        name: 'out',
+        component: () => import('@/views/trade/website/out.vue'),
+      },
+      {
+        label: '内嵌html页面',
+        type: 'menu',
+        path: 'outByIframe',
+        name: 'outByIframe',
+        component: () => import('@/views/trade/website/wicket.vue'),
+      },
+      {
+        label: '打开内部html页面',
+        type: 'menu',
+        name: 'outByIframe',
+        path: 'outByIframe',
+        component: () => import('@/views/trade/website/outByIframe.vue')
+
+      }
+    ]
+  },
+
+  {
+    label: '功能',
+    icon: 'ty-plug-2-fill',
+    type: 'subMenu',
+    path: '/fucs',
+    name: 'Fucs',
+    component: () => import('@/views/system/home/index.ts'),
+    redirect: { name: 'icon' },
+    children: [
+      {
+        label: '图标',
+        type: 'menu',
+        path: 'icon',
+        name: 'icon',
+        component: () => import('@/views/trade/feat/icon.vue'),
+
+      },
+      {
+        label: '下载',
+        type: 'menu',
+        path: 'download',
+        name: 'download',
+        component: () => import('@/views/trade/download/index.vue'),
+
+      },
+      {
+        label: '打印',
+        type: 'menu',
+        path: 'print',
+        name: 'print',
+        component: () => import('@/views/trade/print/index.vue'),
+      }
+    ]
+  },
+
+
+  {
+    label: '码',
+    icon: 'ty-qr-code-fill',
+    type: 'subMenu',
+    path: '/qr',
+    name: 'Qr',
+    component: () => import('@/views/system/home/index.ts'),
+    redirect: { name: 'analysis' },
+    children: [
+      {
+        label: '条形码',
+        type: 'menu',
+        path: 'barcode',
+        name: 'barcode',
+        component: () => import('@/views/trade/qrcode/one.vue')
+      },
+      {
+        label: '二维码',
+        type: 'menu',
+        path: 'qrcode',
+        name: 'qrcode',
+        component: () => import('@/views/trade/qrcode/two.vue')
+      }
+    ]
+  },
+  {
+    label: '交易',
+    icon: 'ty-qr-code-fill',
+    type: 'subMenu',
     path: '/trade',
     name: 'Trade',
     component: () => import('@/views/system/home/index.ts'),
     children: [
       {
-        path: 'icon',
-        component: () => import('@/views/trade/feat/icon.vue'),
-      },
-      {
-        path: 'download',
-        component: () => import('@/views/trade/download/index.vue'),
-      },
-      {
-        path: 'print',
-        component: () => import('@/views/trade/print/index.vue'),
-      },
-      {
-        path: 'inner',
-        component: () => import('@/views/trade/website/inner.vue'),
-      },
-      {
-        path: 'out',
-        component: () => import('@/views/trade/website/out.vue'),
-      },
-      {
-        path: 'wicket',
-        component: () => import('@/views/trade/website/wicket.vue'),
-      },
-      {
-        path: 'outByIframe',
-        component: () => import('@/views/trade/website/outByIframe.vue')
-      },
-      {
+        label: '图表',
+        type: 'menu',
         path: 'charts',
         component: () => import('@/views/trade/charts/index.vue')
       },
       {
-        path: 'about',
-        component: () => import('@/views/trade/about/index.vue')
-      },
-      {
-        path: 'barcode',
-        component: () => import('@/views/trade/qrcode/one.vue')
-      },
-      {
-        path: 'qrcode',
-        component: () => import('@/views/trade/qrcode/two.vue')
-      },
-      {
+        label: '二维码',
+        type: 'menu',
         path: 'previewImg',
         component: () => import('@/views/trade/preview/index.vue')
       },
       {
+        label: '签字版',
+        type: 'menu',
         path: 'signingBoard',
         component: () => import('@/views/trade/signingboard/index.vue')
       },
       {
+        label: '绘制图形',
+        type: 'menu',
         path: 'drawImg',
         component: () => import('@/views/trade/drawImg/index.vue')
       },
       {
+        label: '动画',
+        type: 'menu',
         path: 'animation',
         component: () => import('@/views/trade/animation/clipath.vue')
       },
-      
+
       {
         path: '/:catchAll(.*)',
         redirect: { name: 'notFound' },
       }
     ],
   },
+
+
+
+  {
+    label: '关于',
+    type: 'menu',
+    path: '/about',
+    icon:'ty-markup-fill',
+    component: () => import('@/views/system/home/index.ts'),
+    children: [
+      {
+        type: 'menu',
+        path: '/about',
+        component: () => import('@/views/trade/about/index.vue')
+      },
+    ]
+  },
+
   {
     path: '/outByIframe',
     name: 'outByIframe',
@@ -143,6 +257,8 @@ const routes = [
     redirect: '/404',
   }
 ]
+
+export const getRouters = routes
 // app router
 // 创建一个可以被 Vue 应用程序使用的路由实例
 export const router = createRouter({
