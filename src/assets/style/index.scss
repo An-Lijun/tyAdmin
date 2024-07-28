@@ -5,3 +5,12 @@ html{
   padding: 16px;
   background: var(--fill-2);
 }
+
+::selection {
+  color: #fff;
+  background: var(--primary-6);
+}
+
+::v-deep .ty-aside{
+  transition: width 5s;
+}

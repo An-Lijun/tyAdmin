@@ -29,6 +29,11 @@ const routes = [
         path: 'workbench',
         component: () => import('@/views/trade/dashboard/workbench.vue'),
       },
+      {
+        name: 'tradeNav',
+        path: 'tradeNav',
+        component: () => import('@/views/trade/dashboard/tradeNav.vue'),
+      },
     ]
   },
   {

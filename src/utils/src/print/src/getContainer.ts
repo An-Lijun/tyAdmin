@@ -7,6 +7,7 @@ import { formatDom } from './formatDom'
 import { h } from 'vue'
 import { nodeTypeArr, tableStyle } from './constant'
 import { genTemplate } from './genTemplate'
+import { genDialog } from './dialog'
 interface Container {
   style?: Node,
   link?: Array<Node>,
@@ -14,7 +15,7 @@ interface Container {
   body: Node,
 }
 // 如果是选择器 或者dom 则尽量使用原来的样式
-export function getContainer(el, custStyle, data = {}): Promise<Container> {
+export function getContainer(el, custStyle, data = {},iframe): Promise<Container> {
   return new Promise((reslove, reject) => {
     if (is(el, 'string')) {
 
@@ -70,120 +71,50 @@ export function getContainer(el, custStyle, data = {}): Promise<Container> {
         }
         selectedVal.push(value)
       }
-      const getTableColumn = () => {
-        return h('div', {}, [
-          ...filterCoLumns.map(
-            item =>
-              h('a-checkbox', {
-                domProps: {
-                  value: item.dataIndex,  // 类似于使用v-bind将data选项中的value变量绑定到input的value属性上
+      const clickOkFn = () => {
+        let columns = el.columns.filter(item =>
+          selectedVal.includes(item.dataIndex)
+        )
+        const getBody = () => {
+          let str = ''
 
-                },
-                props: {
-                  value: item.dataIndex,
-                  defaultChecked: true
-                },
-                on: {
-                  input: function () {
-                    changeSelected(item.dataIndex)
-                  }
-                }
-              }, item.title)
-          ),
-        ])
-      }
-      // Modal.confirm({
-      //   title: '请选择需要打印的列',
-      //   content: () => getTableColumn(),
-      //   okText: '打印',
-      //   cancelText: '取消',
+          const getTrInner = (element) => {
+            columns.forEach(item => {
+              str += '<td>' + element[item.dataIndex] + '</td>'
+            })
+          }
+          el.data.forEach(element => {
+            str += '<tr>'
+            getTrInner(element)
+            str += '</tr>'
+          });
 
-      //   onOk() {
-      //     // selectedVal
-      //     // el.columns && el.data
-      //     let columns = el.columns.filter(item =>
-      //       selectedVal.includes(item.dataIndex)
-      //     )
-      //     const getBody = () => {
-      //       let str = ''
-
-
-      //       const getTrInner = (element) => {
-      //         columns.forEach(item => {
-      //           str += '<td>' + element[item.dataIndex] + '</td>'
-      //         })
-      //       }
-      //       el.data.forEach(element => {
-      //         str += '<tr>'
-      //         getTrInner(element)
-      //         str += '</tr>'
-      //       });
-
-      //       return str
-      //     }
-      //     let domStr = `
-      //       <table width="100%">
-      //         <thead>
-      //           <tr>
-      //               ${columns.map(item => {
-      //       return `<th> ${item.title}</th>`
-      //     }).join(' ')
-      //       }                
-      //           </tr>
-      //         </thead>
-
-      //         <tbody>
-      //               ${getBody()}
-      //         </tbody>
-      //       </table>
-      //     `
-      //     reslove(
-      //       {
-      //         selfStyle: getPrintStyle(tableStyle + custStyle),
-      //         body: createDom(domStr)
-      //       }
-      //     )
-      //   }
-      // })
-
-
-      const getBody = () => {
-        let str = ''
-        const getTrInner = (element) => {
-          el.columns.forEach(item => {
-            str += '<td>' + element[item.dataIndex] + '</td>'
-          })
+          return str
         }
-        el.data.forEach(element => {
-          str += '<tr>'
-          getTrInner(element)
-          str += '</tr>'
-        });
-
-        return str
+        let domStr = `
+          <table width="100%">
+            <thead>
+              <tr>
+                 ${columns.map(item => `<th> ${item.title}</th>`).join(' ')}
+              </tr>
+            </thead>
+    
+            <tbody>
+                  ${getBody()}
+            </tbody>
+          </table>
+        `
+        reslove(
+          {
+            selfStyle: getPrintStyle(tableStyle + custStyle),
+            body: createDom(domStr)
+          }
+        )
       }
-      let domStr = `
-            <table width="100%">
-              <thead>
-                <tr>
-                    ${el.columns.map(item => {
-        return `<th> ${item.title}</th>`
-      }).join(' ')
-        }                
-                </tr>
-              </thead>
+      genDialog(iframe,filterCoLumns, changeSelected, clickOkFn)
 
-              <tbody>
-                    ${getBody()}
-              </tbody>
-            </table>
-          `
-      reslove(
-        {
-          selfStyle: getPrintStyle(tableStyle + custStyle),
-          body: createDom(domStr)
-        }
-      )
+
+
     }
 
     else {

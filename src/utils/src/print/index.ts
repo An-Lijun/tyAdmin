@@ -41,6 +41,7 @@ interface Ioptions {
 }
 import { createWaterMark } from './src/createWatermark'
 
+
 export default async function print(el, options: Ioptions = {
   header: '',
   footer: '',
@@ -52,7 +53,7 @@ export default async function print(el, options: Ioptions = {
 }) {
 
   const { iframe, iframeDoc } = getIframe()
-  const { style, link, selfStyle, body } = await getContainer(el, options.custStyle, options.data)
+  const { style, link, selfStyle, body } = await getContainer(el, options.custStyle, options.data,iframe)
   
 
   //创建一个文档片段，此时还没有插入到DOM树中
@@ -79,6 +80,10 @@ export default async function print(el, options: Ioptions = {
     
     options?.afterPrint&& options.afterPrint()
     setTimeout(() => {
+      let dialog = document.querySelector('#print__dialog')
+      if(dialog){
+        document.body.removeChild(dialog)
+      }
       document.body.removeChild(iframe)
     });
   });

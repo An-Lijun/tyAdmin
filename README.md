@@ -13,12 +13,12 @@
 2 解决了普通svg 使用use 时候全量导入的问题, 这里打包后会作为单独的svg进行渲染
 3 虽然使用innerHTML,但是由于这里使用的是import svg 基本可以避免xls
 使用方法:
-svgicon 需要将所需要的svg 导入到@/assets/system目录下,以为svg文件名作为icon参数传入,注意不用重名,
+svgicon 需要将所需要的svg 导入到@/assets/system目录下,以为svg文件名作为icon参数传入,注意不能重名,
 使用color fill 或则stroke 修改svg颜色,这个具体取决了svg本身的代码
 使用fontSize 修改svg大小
 
 ```html
-   <svgIcon :icon="item.icon" :style="{color: item.color,fontSize:'35px'}" >
+   <svgIcon :icon="item.icon"     >
    </svgIcon>
 ```
 

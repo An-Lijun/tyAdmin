@@ -40,6 +40,12 @@ const option = [
         key: 'workbench',
         type: 'menu',
         path: '/system/workbench',
+      },
+      {
+        label: '快速导航',
+        key: 'tradeNav',
+        type: 'menu',
+        path: '/system/tradeNav',
       }
     ],
   },

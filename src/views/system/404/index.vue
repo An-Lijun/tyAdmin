@@ -4,13 +4,20 @@
     <div class="right">
       <div class="title">404</div>
       <div class="subTitle">抱歉，你访问的页面不存在或无权访问</div>
-      <TyButton>返回首页</TyButton>
+      <TyButton @click="back">返回首页</TyButton>
     </div>
   </div>
 </template>
 <script setup>
 import svgIcon from '@/components/svgIcon.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const back = () => {
+  router.push('/system')
+}
 </script>
+
 <style lang="scss" scoped>
 .ty-container {
   position: absolute;
