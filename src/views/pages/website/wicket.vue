@@ -1,37 +1,46 @@
 <template>
   <div class="divRoot">
-    <TyButton @click="open" style="margin-right: 20px;">打开外部网页模态</TyButton>
+    <tHeader title="使用窗口打开路由" info="toyar-admin 使用openWindow 函数打开新窗口切换路由/ 模态窗口等" />
 
-    <TyButton @click="open1" style="margin-right: 20px;">打开内部html模态</TyButton>
 
-    <TyButton @click="send">向外部推送消息 </TyButton>
+    <div class="tyAdmin__container">
+      <TyCard>
+        <TySpace>
+          <TyButton @click="open" style="margin-right: 20px;">打开外部网页模态</TyButton>
+          <TyButton @click="open1" style="margin-right: 20px;">打开内部html模态</TyButton>
+          <TyButton @click="send">向外部推送消息 </TyButton>
+        </TySpace>
+      </TyCard>
+    </div>
+
 
   </div>
 </template>
 <script setup>
 const windowFeatures = "left=100,top=100,width=320,height=320";
-import {openWindow} from '@/common'
+import { openWindow } from '@/common'
+import tHeader from '@/components/tHeader.vue'
 
 
 let model1;
 // 打开模态窗口  也可以打开内部的html 模板
 let url = 'https://an-lijun.github.io/toyarDesign/index.html'
-const open =()=>{
-   openWindow(url,{
-    target:'mozillaWindow',
-    left:100,top:100,width:320,height:320
+const open = () => {
+  openWindow(url, {
+    target: 'mozillaWindow',
+    left: 100, top: 100, width: 320, height: 320
   })
 }
 
-const open1 =()=>{
-  model1= openWindow('http://localhost/#/outByIframe',{
-    target:'mozillaWindow',
-    left:100,top:100,width:320,height:320
+const open1 = () => {
+  model1 = openWindow('http://localhost/#/outByIframe', {
+    target: 'mozillaWindow',
+    left: 100, top: 100, width: 320, height: 320
   })
 }
 
-const send=()=>{
-  if(!model1){
+const send = () => {
+  if (!model1) {
     return
   }
   // console.log(model);
@@ -46,9 +55,8 @@ const send=()=>{
   //  model1.window
   // console.log(model1.window);
   // console.log();
-  model1.window.postMessage('你好','*')
+  model1.window.postMessage('你好', '*')
 
 }
 </script>
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

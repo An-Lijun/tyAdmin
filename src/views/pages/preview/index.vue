@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="divRoot">
+
     <tHeader title="图片预览" info="toyar-admin 支持图片预览" />
     <div class="tyAdmin__container">
       <TyCard :border="false">
@@ -12,6 +13,7 @@
       </TyCard>
     </div>
   </div>
+
 </template>
 <script setup>
 import tPreviewImg from '../../../components/tPreviewImg.vue';
@@ -32,17 +34,5 @@ const open = (val) => {
 }
 </script>
 <style lang="scss" scoped>
-.header-card {
-  padding: 16px;
 
-  .header-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 14px;
-  }
-
-  .header-info {
-    color: var(--text-2);
-  }
-}
 </style>

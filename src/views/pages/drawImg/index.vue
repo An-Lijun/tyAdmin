@@ -2,8 +2,6 @@
   <div>
     <tHeader title="绘制图形" info="toyar-admin支持绘制图形" />
     <div class="tyAdmin__container">
-
-      
       <TyCard class="zhqp">
         <template #header>
           三角形
@@ -49,7 +47,6 @@ import clpath from './view/clipath.vue'
 <style lang="scss" scoped>
 
 .zhqp {
-  margin-top: 16px;
   .sjx{
     display: inline-block;
     margin-bottom: 20px;

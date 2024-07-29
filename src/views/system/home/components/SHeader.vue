@@ -1,5 +1,5 @@
 <template>
-  <TyHeader height="70" class="tyAdmin-header" style="background-color: var(--color-bg-2);">
+  <TyHeader height="70"  class="tyAdmin-header" style="min-height: 70px;background-color: var(--color-bg-2);">
     <div class="tyAdmin-header__content">
       <div class="tyAdmin-header__left">
         <span class="foldBtn">

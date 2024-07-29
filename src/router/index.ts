@@ -61,7 +61,7 @@ export const pageRoute = [
     ]
   },
   {
-    label: '嵌入页面',
+    label: '外链/页面',
     icon: 'ty-pages-fill',
     type: 'subMenu',
     path: '/page',
@@ -69,14 +69,14 @@ export const pageRoute = [
     redirect: { name: 'analysis' },
     children: [
       {
-        label: '内嵌外部页面',
+        label: '内嵌外链',
         type: 'menu',
         path: 'inner',
         name: 'inner',
         component: () => import('@/views/pages/website/inner.vue'),
       },
       {
-        label: '打开外部页面',
+        label: '打开外链',
         type: 'menu',
         path: 'out',
         name: 'out',
@@ -171,7 +171,7 @@ export const pageRoute = [
         type: 'menu',
         path: 'errorPage',
         name: 'errorPage',
-        component: () => import('@/views/pages/error/index.vue')
+        component: () => import('@/views/pages/error/index.vue'),
       }
     ]
   },
@@ -183,13 +183,25 @@ export const pageRoute = [
     name: 'Trade',
     children: [
       {
+        label: '水波纹',
+        type: 'menu',
+        path: 'waterButton',
+        component: () => import('@/views/pages/waterButton/index.vue')
+      },
+      {
+        label: '离开提醒',
+        type: 'menu',
+        path: 'pageLeaveRem',
+        component: () => import('@/views/pages/pageLeaveRem/index.vue')
+      },
+      {
         label: '图表',
         type: 'menu',
         path: 'charts',
         component: () => import('@/views/pages/charts/index.vue')
       },
       {
-        label: '二维码',
+        label: '图片预览',
         type: 'menu',
         path: 'previewImg',
         component: () => import('@/views/pages/preview/index.vue')
@@ -214,6 +226,8 @@ export const pageRoute = [
       },
     ],
   },
+
+  
   {
     label: '关于',
     type: 'menu',
@@ -253,7 +267,7 @@ const routes = [
   },
   {
     path: '/403',
-    name: 'notFound',
+    name: 'noaccess',
     component: () => import('@/views/system/403/index.vue'),
   },
   {

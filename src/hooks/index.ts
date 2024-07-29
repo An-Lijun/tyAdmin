@@ -1,6 +1,8 @@
 import { watch } from "vue";
 import useAppStore from '@/store/modules/app'
 import {generateColor} from 'toyar-design/dist/index.js'
+import { onBeforeRouteLeave } from 'vue-router'
+import { TyAlert } from 'toyar-design'
 
 export function watchPcolor(){
   const appStore =useAppStore()
@@ -9,4 +11,40 @@ export function watchPcolor(){
   },{
     immediate:true
   })
+}
+
+
+
+export function leaveAlert(){
+  const handleRouteLeave = () => {
+    return new Promise((resolve,reject) => {
+      TyAlert('Are you sure you want to leave?', {
+        type: 'warning',
+        sure: {
+          code: () => {
+            console.log("reslove");
+            resolve(true);
+          }
+        },
+        cancel: {
+          code: () => {
+            console.log("cancel");
+            reject(false);
+          }
+        },
+      });
+    });
+  };
+  
+  
+  
+  onBeforeRouteLeave(async (to, from) => {
+    try {
+      await handleRouteLeave()
+      return true
+    } catch (error) {
+      return false
+    }
+  })
+  
 }

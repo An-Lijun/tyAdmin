@@ -1,5 +1,5 @@
 <template>
-  <TyCard :border="false">
+  <TyCard :border="true" shadow="shadow" >
     <div class="header-card">
       <div class="header-title">
         {{ title }}
@@ -22,13 +22,23 @@ const props = defineProps({
 })
 </script>
 <style lang="scss" scoped>
-.header-card {
-  padding: 16px;
+::v-deep.ty-card.is-border{
+  border-right: unset ;
+  border-top: unset;
+  border-left: unset;
 
+  border-radius: unset;
+}
+.header-card {
+  height: 100px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 16px;
   .header-title {
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 14px;
   }
 
   .header-info {

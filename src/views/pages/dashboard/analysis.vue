@@ -1,7 +1,7 @@
 <!-- 分析页 -->
 <template>
   <div class="tyAdmin__container">
-    <TyRow :gutter="8" style="margin: 0 -4px -8px">
+    <TyRow :gutter="16" style="margin: 0 -8px -16px">
       <TyCol
         :span="{
           xxl: 6,
@@ -43,7 +43,7 @@
       </TyCol>
     </TyRow>
     <TyCard :isLoading="isLoading" style="margin: 16px 0px; padding: unset" :border="false">
-      <TyRow :gutter="8">
+      <TyRow :gutter="16"  style="margin: 16px 0px;">
         <TyCol>
           <TyTabs v-model="tabs" style="border: unset;">
             <TyTabItem title="流量趋势" name="a">
@@ -56,8 +56,8 @@
         </TyCol>
       </TyRow>
     </TyCard>
-    <TyRow :gutter="8" style="margin: 14px 0 0">
-      <TyCol :span="8">
+    <TyRow :gutter="16" style="margin: 0 -8px ">
+      <TyCol :span="8" >
         <TyCard :isLoading="isLoading" :border="false">
           <template #header> 转化率 </template>
           <tChart height="230px" :option="option3" />
