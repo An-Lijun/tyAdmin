@@ -4,41 +4,71 @@
     <div class="tyAdmin__container">
       <TyCard>
 
-        <TyButton @click="printByhtmlTpl" style="margin-right: 10px;">打印html模板</TyButton>
-        <TyButton @click="printDataSource" style="margin-right: 10px;">打印表格</TyButton>
-        <TyButton @click="printByHTMLStr" style="margin-right: 10px;">打印HTML字符串</TyButton>
-        <TyButton @click="printByClass" style="margin-right: 10px;">打印class名</TyButton>
+        <TySpace>
+          <TyButton @click="printByhtmlTpl">打印html模板</TyButton>
+        <TyButton @click="printDataSource">打印表格</TyButton>
+        <TyButton @click="printByHTMLStr">打印HTML字符串</TyButton>
+        <TyButton @click="printByClass">打印class名</TyButton>
         <TyButton @click="printByID">打印id</TyButton>
+        <TyButton @click="printAndSign">打印并签字</TyButton>
+        </TySpace>
+
       </TyCard>
+      <TyCard style="margin-top: 20px; ">
+        这里class名为print1 的容器
+        <div class="print1">
+          <h1>12346</h1>
+          <ty-button>ty按钮</ty-button>
+          <h2>666</h2>
+        </div>
+      </TyCard>
+      <TyCard style="margin-top: 20px; ">
+        这里id名为printid的容器
 
+        <div id="printid">
+          <h1>12346</h1>
+          <ty-button>ty按钮</ty-button>
+          <h2>666</h2>
 
-        <TyCard style="margin-top: 20px; ">
-          这里class名为print1 的容器
-          <div class="print1">
-            <h1>12346</h1>
-            <ty-button>ty按钮</ty-button>
-            <h2>666</h2>
-          </div>
-        </TyCard>
-        <TyCard style="margin-top: 20px; ">
-          这里id名为printid的容器
-
-          <div id="printid">
-            <h1>12346</h1>
-            <ty-button>ty按钮</ty-button>
-            <h2>666</h2>
-
-          </div>
-        </TyCard>
+        </div>
+      </TyCard>
     </div>
-
+    <TyDialog v-model="isShow">
+      <tSigningBoard width="480" height="300" fileType="base64" @finished="finished">
+      </tSigningBoard>
+    </TyDialog>
   </div>
 </template>
 <script setup>
 import tHeader from '@/components/tHeader.vue'
 import enterTpl from '@/printTpl/entry.html?raw'
+import signTpl from '@/printTpl/sign.html?raw'
+import{ref} from 'vue'
 import printer from '@/utils/src/print'
+import tSigningBoard from '@/components/tSigningBoard.vue';
+const isShow =ref(false)
 
+const finished=(res)=>{
+  // console.log(res);
+  isShow.value =false
+    printer(signTpl, {
+    data: {
+      djh: 'No1055391601',
+      riqi: '2024-07-23',
+      rkck: '南京市雨花台区仓库',
+      ypbh: '10306014',
+      ypfl: '入库111111111111',
+      img: res
+    },
+    header: '北京拓源软件系统股份有限公司',
+    waterMark: '北京拓源软件系统股份有限公司'
+  })
+}
+const printAndSign = () => {
+  isShow.value =true
+
+
+}
 const printByhtmlTpl = () => {
   printer(enterTpl, {
     data: {

@@ -109,77 +109,13 @@
       </div>
     </div>
 
-    <TyDrawer v-model="model">
-      <template #header> 系统设置 </template>
-
-      <div>
-        <div style="height: 30px">
-          <ty-divider style="--font-body-3: 16px">
-            <ty-icon icon="ty-layout-line" class="mw-10"></ty-icon>
-            排版样式
-          </ty-divider>
-        </div>
-        <div class="tyadmin-layout">
-          <TyRow :gutter="16">
-            <TyCol :span="12">
-              <div @click="changeLayout(1)" class="layout-1  layout" :class="{
-            active: appStore.layout === 1
-          }">
-                <div class="left"></div>
-                <div class="right">
-                  <div class="top"></div>
-                  <div class="bottom"></div>
-                </div>
-              </div>
-            </TyCol>
-            <TyCol :span="12">
-              <div @click="changeLayout(2)" class="layout-2 layout" :class="{
-            active: appStore.layout === 2
-          }">
-                <div class="top"></div>
-                <div class="bottom">
-                  <div class="left"></div>
-                  <div class="right"></div>
-                </div>
-              </div>
-            </TyCol>
-          </TyRow>
-        </div>
-        <div style="height: 30px">
-          <ty-divider style="--font-body-3: 16px">
-            <ty-icon icon="ty-t-shirt-line" class="mw-10"></ty-icon>
-            全局主题
-          </ty-divider>
-        </div>
-        <div class="flex-between">
-          <label> 暗黑模式</label>
-          <TySwitch v-model="appStore.isDark" />
-        </div>
-        <div class="flex-between">
-          <label> 主题颜色</label>
-          <input type="color" v-model="appStore.pColor" />
-        </div>
-        <div class="flex-between">
-          <label> 灰色模式</label>
-          <TySwitch v-model="appStore.isBlackModel" />
-        </div>
-        <div class="flex-between">
-          <label> 色弱模式</label>
-          <TySwitch v-model="appStore.isTritanopeModel" />
-        </div>
-        <div style="height: 30px">
-          <ty-divider style="--font-body-3: 16px">
-            <ty-icon icon="ty-settings-4-line" class="mw-10"></ty-icon>
-            界面设置
-          </ty-divider>
-        </div>
-      </div>
-    </TyDrawer>
+    <SConfig v-model="model"/>
   </TyHeader>
 </template>
 <script setup lang="ts">
 import useAppStore from '@/store/modules/app'
-import { ref, watch } from 'vue'
+import SConfig from './SConfig.vue'
+import { ref } from 'vue'
 import { router } from '@/router'
 let dataArr = {
   inform: [
@@ -358,6 +294,7 @@ let dataArr = {
 }
 
 const appStore = useAppStore()
+
 const toFold = () => {
   appStore.isFold = !appStore.isFold
 }
@@ -365,17 +302,12 @@ const getAssetsFile = (url: string) => {
   return new URL(`${url}`, import.meta.url).href
 }
 
-const changeLayout=(value)=>{
-  appStore.layout=value
-}
 
 const model = ref(false)
 const openCont = () => {
   model.value = !model.value
 }
-let body = document.querySelector('body')
 
-// const openMessage = () => { }
 
 let tabKey = ref('inform')
 
@@ -389,45 +321,10 @@ const toLock = () => {
     name: 'Lock'
   })
 }
-watch(
-  () => appStore.isBlackModel,
-  newV => {
-    if (newV) {
-      body.style.filter = 'grayscale(1)'
-      appStore.isTritanopeModel = false
-    } else if (body.style.filter === 'grayscale(1)') {
-      body.style.filter = ''
-    }
-  },
-  {
-    immediate: true
-  }
-)
 
-watch(
-  () => appStore.isTritanopeModel,
-  newV => {
-    if (newV) {
-      body.style.filter = 'invert(80%)'
-      appStore.isBlackModel = false
-    } else if (body.style.filter === 'invert(80%)') {
-      body.style.filter = ''
-    }
-  },
-  {
-    immediate: true
-  }
-)
-let html =document.querySelector('html')
-watch(
-  () => appStore.isDark,
-  newV => {
-    html?.setAttribute('toyar-theme', newV?'dark':'light'  )
-  },
-  {
-    immediate: true
-  }
-)
+
+
+
 </script>
 <style lang="scss" scoped>
 .sys {
@@ -568,14 +465,6 @@ watch(
   }
 }
 
-.flex-between {
-  display: flex;
-  justify-content: space-between;
-  height: 30px;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
 .tyAdmin-header {
   background-color: #fff;
 
@@ -621,130 +510,4 @@ watch(
   }
 }
 
-.tyadmin-layout {
-  .active {
-    position: relative;
-    border: var(--border-2) solid var(--primary-6);
-    box-sizing: border-box;
-
-    &:after {
-      content: '';
-      display: inline-block;
-      width: 35px;
-      height: 35px;
-      position: absolute;
-      background-color: var(--primary-6);
-      right: 0;
-      color: #fff;
-      bottom: 0;
-      line-height: 30px;
-      text-align: right;
-      font-size: 10px;
-      clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-      background-image: url('../../../../assets/analysis/right.png');
-      background-position: right bottom;
-      background-size: 60%;
-      background-repeat: no-repeat;
-    }
-  }
-
-  .layout {
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  .layout-1 {
-    height: 70px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    border-radius: var(--border-radius-8);
-    padding: 5px 0;
-    box-shadow: var(--box-shadow-3);
-
-    .left {
-      height: 100%;
-      width: 25%;
-      background-color: var(--primary-6);
-      border-radius: var(--border-radius-4);
-    }
-
-    .right {
-      height: 100%;
-      width: 60%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      .top {
-        height: 25%;
-        background-color: var(--primary-3);
-        border-radius: var(--border-radius-2);
-      }
-
-      .bottom {
-        height: 65%;
-        background-color: var(--primary-2);
-        border-radius: var(--border-radius-2);
-        border: var(--border-1) dashed var(--primary-5);
-      }
-    }
-  }
-
-  .layout-2 {
-    height: 70px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    border-radius: var(--border-radius-8);
-    padding: 0 5px;
-    box-shadow: var(--box-shadow-3);
-
-    .top {
-      height: 25%;
-      width: 100%;
-      background-color: var(--primary-6);
-      border-radius: var(--border-radius-4);
-    }
-
-    .bottom {
-      height: 55%;
-      display: flex;
-      justify-content: space-between;
-
-      .left {
-        background-color: var(--primary-3);
-        border-radius: var(--border-radius-2);
-        height: 100%;
-        width: 15%;
-      }
-
-      .right {
-        height: 100%;
-        width: 80%;
-        box-sizing: border-box;
-        background-color: var(--primary-2);
-        border-radius: var(--border-radius-2);
-        border: var(--border-1) dashed var(--primary-5);
-      }
-    }
-  }
-
-  // <div class="layout-2">
-
-  // <div class="top"></div>
-  // <div class="bottom">
-  //   <div class="left"></div>
-  //   <div class="right"></div>
-  // </div>
-  // </div>
-}
-
-// .       <div class="layout-1">
-//                 <div class="left"></div>
-//                 <div class="right">
-//                   <div class="top"></div>
-//                   <div class="bottom"></div>
-//                 </div>
-//               </div></style>
+</style>

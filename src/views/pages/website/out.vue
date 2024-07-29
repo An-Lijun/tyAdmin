@@ -10,22 +10,22 @@
 <script setup>
 //打开外部页面
 import {getAssetURL} from '@/common'
-
+import {openWindow} from '@/common'
 // 打开外部网站
 const open =()=>{
-  window.open('https://an-lijun.github.io/toyarDesign/index.html')
+  openWindow('https://an-lijun.github.io/toyarDesign/index.html',{target:'_blank'})
 }
 
 // 打开半屏幕新窗口的iframe
 const openOut =()=>{
-  window.open('http://localhost/#/trade/outByIframe',{
+  openWindow('http://localhost/#/page/openHarfoutByIframe',{
     target:'_blank'
   })
 }
 
 //打开全屏的新窗口iframe
 const openOut1 =()=>{
-  window.open('http://localhost/#/outByIframe',{
+  openWindow('http://localhost/#/outByIframe',{
     target:'_blank'
   })
 }

@@ -11,9 +11,12 @@
         class="uiSigningBoard__Canvas" :width="cWidth" :height="cHeight">
       </canvas>
       <div class="uiSigningBoard__btn">
-        <ty-button @click="back" type="dashed"> 取消 </ty-button>
-        <ty-button @click="clearBoard" style="margin: 0 10px;" type="secondary"> 清屏</ty-button>
-        <ty-button @click="save"> 确定 </ty-button>
+        <slot>
+          <ty-button @click="back" type="dashed"> 取消 </ty-button>
+          <ty-button @click="clearBoard" style="margin: 0 10px;" type="secondary"> 清屏</ty-button>
+          <ty-button @click="save"> 确定 </ty-button>
+        </slot>
+
       </div>
     </div>
   </div>
@@ -45,6 +48,9 @@ export default {
     pageMargin: {
       type: Number,
       default: 10
+    },
+    fileType:{
+      type:String,
     }
   },
   data() {
@@ -86,6 +92,14 @@ export default {
       this.canvas.removeEventListener('mousemove', this.draw)
     },
     save() {
+      if(!this.fileType){
+        return
+      }
+      if(this.fileType ==='base64') {
+
+          this.$emit('finished', this.canvas.toDataURL( 'image/png',1 ))
+          return this.clearBoard()
+      } 
       const { jsPDF } = window.jspdf
       if (!jsPDF) return
       const doc = new jsPDF({

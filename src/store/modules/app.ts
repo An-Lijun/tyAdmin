@@ -8,7 +8,7 @@ export default defineStore('useAppStore', {
     pColors:[],
     isBlackModel:false,
     isTritanopeModel:false,
-    isDark:false,
+    themeState:1,
     layout:2
   }),
   persist: {

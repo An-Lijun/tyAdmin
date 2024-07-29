@@ -85,15 +85,15 @@ export const pageRoute = [
       {
         label: '内嵌html页面',
         type: 'menu',
-        path: 'outByIframe',
-        name: 'outByIframe',
+        path: 'wicket',
+        name: 'wicket',
         component: () => import('@/views/pages/website/wicket.vue'),
       },
       {
         label: '打开内部html页面',
         type: 'menu',
-        name: 'outByIframe',
-        path: 'outByIframe',
+        name: 'openHarfoutByIframe',
+        path: 'openHarfoutByIframe',
         component: () => import('@/views/pages/website/outByIframe.vue')
 
       }
@@ -155,6 +155,23 @@ export const pageRoute = [
         path: 'qrcode',
         name: 'qrcode',
         component: () => import('@/views/pages/qrcode/two.vue')
+      }
+    ]
+  },
+  {
+    label: '异常',
+    icon: 'ty-file-forbid-line',
+    type: 'subMenu',
+    path: '/error',
+    name: 'Error',
+    redirect: { name: 'analysis' },
+    children: [
+      {
+        label: '异常页',
+        type: 'menu',
+        path: 'errorPage',
+        name: 'errorPage',
+        component: () => import('@/views/pages/error/index.vue')
       }
     ]
   },
@@ -235,10 +252,21 @@ const routes = [
     component: () => import('@/views/system/lock/index.vue'),
   },
   {
+    path: '/403',
+    name: 'notFound',
+    component: () => import('@/views/system/403/index.vue'),
+  },
+  {
     path: '/404',
     name: 'notFound',
     component: () => import('@/views/system/404/index.vue'),
   },
+
+  // {
+  //   path: '/500',
+  //   name: 'notFound',
+  //   component: () => import('@/views/system/404/index.vue'),
+  // },
   {
     path: '/:catchAll(.*)',
     redirect: '/404',

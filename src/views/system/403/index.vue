@@ -2,8 +2,8 @@
   <div class="ty-container">
     <svgIcon icon="404"></svgIcon>
     <div class="right">
-      <div class="title">404</div>
-      <div class="subTitle">抱歉，你访问的页面不存在</div>
+      <div class="title">403</div>
+      <div class="subTitle">抱歉，你无权限访问</div>
       <TyButton @click="back">返回首页</TyButton>
     </div>
   </div>

@@ -7,24 +7,34 @@ export function getAssetURL(url:string) {
 
 
 
-export function openWindow(url,option={}){
+export function openWindow(url,option={target:'_self'}){
 
   //const windowFeatures = "left=100,top=100,width=320,height=320";
-  const {
-    target = '_self', //_self、_blank、_parent 和 _top。 mozillaWindow
-    popup = true,
-    top,
-    left,
-    width,
-    height,
-    noreferrer,
-    noopener
-  } = option
+  // const {
+  //   target = '_self', //_self、_blank、_parent 和 _top。 mozillaWindow
+  //   popup = true,
+  //   top,
+  //   left,
+  //   width,
+  //   height,
+  //   noreferrer,
+  //   noopener
+  // } = option
 
-  let windowFeatures =`popup=${popup},left=${left},top=${top},
-  width=${width},height=${height},noreferrer:${noreferrer},noopener:${noopener}`
+  let windowFeatures = '';
 
- return window.open(url, target, windowFeatures.slice(0,-1))
+  for (const key in option) {
+    if (Object.prototype.hasOwnProperty.call(option, key) && key !=='target') {
+      windowFeatures += `${key} = ${option[key]},`
+    }
+  }
+  console.log(windowFeatures);
+  
+
+  // let windowFeatures =`popup=${popup},left=${left},top=${top},
+  // width=${width},height=${height},noreferrer:${noreferrer},noopener:${noopener}`
+
+ return window.open(url, option.target||'_self', windowFeatures.slice(0,-1))
   
 }
 
