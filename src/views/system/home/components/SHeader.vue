@@ -1,10 +1,20 @@
 <template>
-  <TyHeader height="70"  class="tyAdmin-header" style="min-height: 70px;background-color: var(--color-bg-2);">
+  <TyHeader
+    height="80"
+    class="tyAdmin-header"
+    style="min-height: 70px; background-color: var(--color-bg-2)"
+  >
     <div class="tyAdmin-header__content">
       <div class="tyAdmin-header__left">
         <span class="foldBtn">
-          <TyIcon style="color: var(--toyar-gray-10);" :icon="appStore.isFold ? 'ty-indent-increase' : 'ty-indent-decrease'
-            " size="20" @click="toFold"></TyIcon>
+          <TyIcon
+            style="color: var(--toyar-gray-10)"
+            :icon="
+              appStore.isFold ? 'ty-indent-increase' : 'ty-indent-decrease'
+            "
+            size="20"
+            @click="toFold"
+          ></TyIcon>
         </span>
         <TyBreadcrumb>
           <TyBreadcrumbItem to="home">首页</TyBreadcrumbItem>
@@ -15,12 +25,20 @@
       </div>
       <div class="tyAdmin-header__right">
         <div class="contruller">
-          <TyIcon icon="ty-search-line" size="20" style="color: var(--toyar-gray-10);"></TyIcon>
+          <TyIcon
+            icon="ty-search-line"
+            size="20"
+            style="color: var(--toyar-gray-10)"
+          ></TyIcon>
         </div>
         <div class="contruller">
           <TyBadge class="message" :dot="true" :max="5" :text="10">
             <TyPoppover trigger="click" placement="bottom">
-              <TyIcon icon="ty-notification-2-line" size="20" style="color: var(--toyar-gray-10);"></TyIcon>
+              <TyIcon
+                icon="ty-notification-2-line"
+                size="20"
+                style="color: var(--toyar-gray-10)"
+              ></TyIcon>
               <template #content>
                 <TyTabs v-model="tabKey">
                   <TyTabItem title="通知(5)" name="inform">
@@ -61,7 +79,11 @@
                       <div class="info">
                         <div class="title">
                           <span>{{ item.title }}</span>
-                          <TyButton type="secondary" size="mini" :state="item.state">
+                          <TyButton
+                            type="secondary"
+                            size="mini"
+                            :state="item.state"
+                          >
                             {{ item.extra }}
                           </TyButton>
                         </div>
@@ -78,45 +100,71 @@
         </div>
 
         <div class="contruller">
-          <TyIcon icon="ty-translate-2" size="20" style="color: var(--toyar-gray-10);"></TyIcon>
+          <TyIcon
+            icon="ty-translate-2"
+            size="20"
+            style="color: var(--toyar-gray-10)"
+          ></TyIcon>
         </div>
         <div class="contruller sys">
           <TyPoppover trigger="hover" placement="bottom">
             <div style="display: flex; align-items: center">
-              <TyImage :size="30" fit="contain" :src="getAssetsFile('../../../../assets/system/header.png')"
-                class="bd ml-10" shape="circle" />
+              <TyImage
+                :size="30"
+                fit="contain"
+                :src="getAssetsFile('../../../../assets/system/header.png')"
+                class="bd ml-10"
+                shape="circle"
+              />
               <span style="margin-left: 5px"> Ty Admin </span>
             </div>
             <template #content>
               <div @click="toLock">
                 <TyIcon icon="ty-lock-line"></TyIcon>
-                <span>
-                  锁定屏幕
-                </span>
+                <span> 锁定屏幕 </span>
               </div>
               <div @click="sureToExit">
                 <TyIcon icon="ty-shut-down-line"></TyIcon>
-                <span>
-                  退出登录
-                </span>
+                <span> 退出登录 </span>
               </div>
             </template>
           </TyPoppover>
         </div>
         <div class="contruller" @click="openCont">
-          <TyIcon icon="ty-settings-4-line" size="20" style="color: var(--toyar-gray-10);"></TyIcon>
+          <TyIcon
+            icon="ty-settings-4-line"
+            size="20"
+            style="color: var(--toyar-gray-10)"
+          ></TyIcon>
         </div>
       </div>
     </div>
-
-    <SConfig v-model="model"/>
+    <div class="tyAdmin-header__visitingList">
+      <span
+        class="tyAdmin-header_visitingMenu"
+        style="margin-right: 5px"
+        v-for="menu in menuStore.visitingMenu"
+        :class="{
+          active:getMkey(menu.path )=== menuStore.activeMenu
+        }"
+        @click="changeMenu(menu)"
+      >
+        {{ menu.label}}
+      </span>
+    </div>
+    <SConfig v-model="model" />
   </TyHeader>
 </template>
 <script setup lang="ts">
 import useAppStore from '@/store/modules/app'
+import useMenuStore from '@/store/modules/menu'
+
 import SConfig from './SConfig.vue'
 import { ref } from 'vue'
-import { router } from '@/router'
+import { useRouter } from 'vue-router'
+const router =useRouter()
+console.log(useRouter);
+
 let dataArr = {
   inform: [
     {
@@ -294,7 +342,7 @@ let dataArr = {
 }
 
 const appStore = useAppStore()
-
+const menuStore = useMenuStore()
 const toFold = () => {
   appStore.isFold = !appStore.isFold
 }
@@ -302,12 +350,12 @@ const getAssetsFile = (url: string) => {
   return new URL(`${url}`, import.meta.url).href
 }
 
-
 const model = ref(false)
 const openCont = () => {
+console.log("@@@@@@@@@@@@@");
+
   model.value = !model.value
 }
-
 
 let tabKey = ref('inform')
 
@@ -321,10 +369,11 @@ const toLock = () => {
     name: 'Lock'
   })
 }
-
-
-
-
+const getMkey=(path)=>'/'+ path.replaceAll('/','')
+const changeMenu =(menu)=>{
+  router.push(menu.path)
+  menuStore.activeMenu = getMkey(menu.path)
+}
 </script>
 <style lang="scss" scoped>
 .sys {
@@ -365,7 +414,7 @@ const toLock = () => {
     transform: translate(-50%) !important;
   }
 
-  ::v-deep .ty-tabs>main {
+  ::v-deep .ty-tabs > main {
     height: 300px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -378,7 +427,7 @@ const toLock = () => {
     padding: 5px;
     align-items: center;
 
-    .img>img {
+    .img > img {
       width: 30px;
       height: 30px;
     }
@@ -409,7 +458,7 @@ const toLock = () => {
     padding: 5px;
     align-items: center;
 
-    .img>img {
+    .img > img {
       width: 30px;
       height: 30px;
     }
@@ -469,7 +518,7 @@ const toLock = () => {
   background-color: #fff;
 
   .tyAdmin-header__content {
-    height: 50px;
+    height: 48px;
     padding: 0 10px;
     width: 100%;
     display: flex;
@@ -506,6 +555,31 @@ const toLock = () => {
           cursor: pointer;
         }
       }
+    }
+  }
+  .tyAdmin-header__visitingList{
+    overflow-x: hidden;
+    padding: 0 5px;
+    display: flex;
+    height: 32px;
+    max-height: 32px;
+    align-items: center
+  }
+  .tyAdmin-header_visitingMenu{
+    border: 1px solid var(--border-color-1);
+    background-color:var(--fill-2);
+    font-size: 12px;
+    color: var(--text-1);
+    padding: 5px 10px;
+    border-radius: var(--border-radius-4);
+    &:hover{
+      cursor: pointer;
+      background-color: var(--primary-8);
+      color: #fff;
+    }
+    &.active{
+      background-color: var(--primary-6);
+      color: #fff;
     }
   }
 }

@@ -25,8 +25,6 @@ async function bootstrap() {
   // 注册ui组件
   installComponents(app)
 
-  
-
   // 挂载echarts
   app.config.globalProperties.$echarts = echarts;
 

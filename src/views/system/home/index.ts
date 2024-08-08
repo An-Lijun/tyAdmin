@@ -34,7 +34,7 @@ export default defineComponent({
                   style: {
                     width: '100%',
                     'overflow-y': 'auto',
-                    'max-height': 'calc(100vh - 120px)'
+                    'max-height': 'calc(100vh - 130px)'
                   }
                 }, h(RouterView))),
               h(SFooter)
@@ -68,7 +68,7 @@ export default defineComponent({
                   style: {
                     width: '100%',
                     'overflow-y': 'auto',
-                    'max-height': 'calc(100vh - 120px)'
+                    'max-height': 'calc(100vh - 130px)'
                   }
                 }, h(RouterView))),
               h(SFooter)

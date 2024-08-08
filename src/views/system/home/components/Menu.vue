@@ -1,7 +1,9 @@
 <template>
   <!-- v-model=""  -->
-  <TyMenu :isFold="appStore.isFold" style="width: unset" v-model="menuStore.activeMenu"
-    :option="routerTransMenu(pageRoute, '')">
+  <TyMenu theme="rDesign" @open="handleOpenMenu" :isFold="appStore.isFold" style="width: unset" v-model="menuStore.activeMenu"
+    :option="routerTransMenu(pageRoute, '')"
+    @click="handleOpenMenu"
+  >
     <template #header>
       <div style="
           height: 50px;
@@ -52,30 +54,15 @@ function routerTransMenu(menuLs, pPath) {
     return getMenuItem(item);
   });
 }
-console.log(routerTransMenu(pageRoute, ''));
+const handleOpenMenu =(menu)=>{
+  let list = menuStore.visitingMenu
+  if(menu.label && !list.find(item=>item.path === menu.path) ){
+    
+    menuStore.addVisitingMenu(menu)
+  }
+}
+routerTransMenu(pageRoute, '')
  
 </script>
 <style lang="scss" scoped>
-
-// html[toyar-theme='light'] {
-//   .ty-menu {
-//     --color-bg-2: #001529;
-//     --text-2: rgba(255, 255, 255, 0.6);
-
-//     .ty-sub-menu,
-//     .ty-menu-item {
-//       background-color: unset;
-//     }
-
-//     .ty-menu-item:hover {
-//       color: #fff;
-//     }
-//   }
-// }
-
-
-// html[toyar-theme='dark'] {
-//   .ty-menu {
-//     --color-bg-2: #001529;
-//   }
-// }</style>
+</style>

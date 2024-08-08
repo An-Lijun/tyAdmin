@@ -13,6 +13,7 @@
     "dayjs": "^1.11.10",
     "echarts": "^5.5.0",
     "jsbarcode": "^3.11.6",
+    "localforage": "^1.10.0",
     "normalize.css": "^8.0.1",
     "pinia": "^2.1.7",
     "pinia-plugin-persist": "^1.0.0",
@@ -20,7 +21,7 @@
     "robinson": "^1.0.8",
     "sass": "^1.75.0",
     "scss": "^0.2.4",
-    "toyar-design": "^0.0.54",
+    "toyar-design": "^0.0.56",
     "vue": "^3.4.21",
     "vue-i18n": "^9.13.1",
     "vue-router": "^4.3.0"
