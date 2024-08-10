@@ -108,6 +108,15 @@ export const pageRoute = [
     name: 'Fucs',
     redirect: { name: 'icon' },
     children: [
+      
+      {
+        label: 'http',
+        type: 'menu',
+        path: 'http',
+        name: 'http',
+        component: () => import('@/views/pages/http/index.vue'),
+
+      },
       {
         label: '图标',
         type: 'menu',
