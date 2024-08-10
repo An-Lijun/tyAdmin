@@ -66,8 +66,6 @@ const finished=(res)=>{
 }
 const printAndSign = () => {
   isShow.value =true
-
-
 }
 const printByhtmlTpl = () => {
   printer(enterTpl, {

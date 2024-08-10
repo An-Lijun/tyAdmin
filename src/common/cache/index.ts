@@ -1,5 +1,5 @@
 import localforage from 'localforage'
-import createCache from './cache'
+import createCache from './src/cache'
 /** 
  * 
  * LocalForage 

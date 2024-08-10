@@ -4,7 +4,7 @@
       <div class="tyAdmin_image">
         <img ref="tyAdmin_img" :src="previewImgList[currentIndex] || ''">
       </div>
-      <div class="tyAdmin_close tyAdmin_btn" @click="closeTyAdmin">&times;</div>
+      <div class="tyAdmin_close tyAdmin_btn" @click="closePriview">&times;</div>
       <div class="tyAdmin_navigation">
         <span class="tyAdmin_navigation_left tyAdmin_btn" @click="prevImage">
           <TyIcon icon="ty-arrow-left-s-fill" style="color: #fff;"></TyIcon>
@@ -67,7 +67,7 @@ export default {
     watchEvent(event) {
       switch (event.key) {
         case 'Escape':
-          this.closeTyAdmin()
+          this.closePriview()
           break
         case 'ArrowRight':
           this.nextImage()
@@ -146,7 +146,7 @@ export default {
       this.initImgHandle()
     },
     // 关闭预览图片组件
-    closeTyAdmin() {
+    closePriview() {
       this.$emit('update:modelValue', false)
     }
   },

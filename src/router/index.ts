@@ -130,7 +130,22 @@ export const pageRoute = [
         path: 'print',
         name: 'print',
         component: () => import('@/views/pages/print/index.vue'),
-      }
+      },
+      {
+        label: '编码',
+        type: 'menu',
+        path: 'encode',
+        name: 'encode',
+        component: () => import('@/views/pages/encode/index.vue'),
+      },
+      {
+        label: '加密',
+        type: 'menu',
+        path: 'encrypt',
+        name: 'encrypt',
+        component: () => import('@/views/pages/encrypt/index.vue'),
+      },
+      
     ]
   },
 
