@@ -1,4 +1,6 @@
-
+import AxiosRetry from './retry'
+import checkStatus from './checkStatus'
+const retryRequest = new AxiosRetry();
 // 添加请求拦截器
 export function addReqInterceptor(http) {
   http.interceptors.request.use(
@@ -23,7 +25,12 @@ export function addResInterceptor(http) {
       return response
     },
     function (error) {
+      const { response, code, message, config } = error || {};
+      const msg: string = response?.data?.error?.message ?? '';
+      const errorMessageMode = config?.requestOptions?.errorMessageMode || 'none';
 
+      // retryRequest.retry(http, error);
+      checkStatus(error?.response?.status, msg, errorMessageMode);
       // 超出 2xx 范围的状态码都会触发该函数。
       // 对响应错误做点什么
       return Promise.reject(error)
