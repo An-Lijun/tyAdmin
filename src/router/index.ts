@@ -99,7 +99,24 @@ export const pageRoute = [
       }
     ]
   },
+  {
+    label: '编辑器',
+    icon: 'ty-plug-2-fill',
+    type: 'subMenu',
+    path: '/editor',
+    name: 'Editor',
+    redirect: { name: 'icon' },
+    children: [
+      {
+        label: 'mdEditor',
+        type: 'menu',
+        path: 'mdEditor',
+        name: 'mdEditor',
+        component: () => import('@/views/pages/editor/mdEditor.vue'),
 
+      },
+    ]
+  },
   {
     label: '功能',
     icon: 'ty-plug-2-fill',
