@@ -1,5 +1,7 @@
 import type { App } from 'vue';
 // @ts-ignore
+import 'toyar-design/dist/index2.js'
+
 import toyar from 'toyar-design/dist/index.js'
 import 'toyar-design/dist/style.css'
 import mavonEditor from 'mavon-editor'

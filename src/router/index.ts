@@ -265,9 +265,27 @@ export const pageRoute = [
         path: 'animation',
         component: () => import('@/views/pages/animation/clipath.vue')
       },
+      {
+        label: '马',
+        type: 'horse',
+        path: 'horse',
+        component: () => import('@/views/pages/horse/index.vue')
+      },
     ],
   },
-
+  {
+    label: '流程',
+    type: 'menu',
+    path: '/flow',
+    icon: 'ty-markup-fill',
+    children: [
+      {
+        type: 'menu',
+        path: '/flow',
+        component: () => import('@/views/pages/flow/index.vue')
+      },
+    ]
+  },
   
   {
     label: '关于',
