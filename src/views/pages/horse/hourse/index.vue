@@ -6,8 +6,9 @@
     '--color-horse-back': backColor,
     '--speed': speed + 's',
     '--delay-gap': speed*10,
-
-  }">
+  }"
+    @mouseenter="fn($event)"
+  >
     <div class="horse animate">
       <headHorse />
       <neckHorse />
@@ -44,7 +45,13 @@ const props = defineProps({
     default: 0.8
   },
 })
+const fn=(e)=>{
+  console.log(
 
+
+  );
+  e.target.class
+}
 </script>
 <style lang="scss" scoped>
 .hourse-container {

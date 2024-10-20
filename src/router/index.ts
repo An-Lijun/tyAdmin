@@ -271,6 +271,14 @@ export const pageRoute = [
         path: 'horse',
         component: () => import('@/views/pages/horse/index.vue')
       },
+
+
+      {
+        label: '魔法图片',
+        type: 'magicImg',
+        path: 'magicImg',
+        component: () => import('@/views/pages/magicImg/index.vue')
+      },
     ],
   },
   {
