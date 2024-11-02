@@ -11,7 +11,13 @@
           justify-content: center;
           align-items: center;
         ">
-        <svgIcon icon="logo" />
+               <svgIcon icon="mlogo" v-if="appStore.isFold" style="
+            position: relative;
+          transform: scale(0.45);
+        "  /> 
+        <svgIcon icon="logo" v-else style="
+          transform: scale(0.45);
+        "  />
       </div>
     </template>
   </TyMenu>

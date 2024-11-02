@@ -1,6 +1,6 @@
 <template>
   <div class="tyAdmin-logo">
-    <img src="@/assets/system/logo.png" alt="" />
+    <img src="@/assets/system/logo.svg" alt="" />
   </div>
 </template>
 <script setup lang="ts"></script>
@@ -8,11 +8,10 @@
 .tyAdmin-logo {
   position: absolute;
   right: 150px;
-  top: 50px;
+  top: 50px;  
 
   img {
-    width: 180px;
-    height: 180px;
+    width: 250px;
   }
 }
 </style>
