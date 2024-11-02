@@ -12,6 +12,10 @@ const props = defineProps({
     required:true
   }
 })
+const emit = defineEmits(['load'])
+const handleLoad =()=>{
+  emit('load')
+}
 // let loading1 = ref(false)
   // setTimeout(() => {
   //   loading1.value = true    

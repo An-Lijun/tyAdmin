@@ -18,21 +18,25 @@ export function watchPcolor(){
 export function leaveAlert(){
   const handleRouteLeave = () => {
     return new Promise((resolve,reject) => {
-      TyAlert('Are you sure you want to leave?', {
+    const  {distroy} = TyAlert('Are you sure you want to leave?', {
         type: 'warning',
         sure: {
           code: () => {
             console.log("reslove");
             resolve(true);
+            distroy()
           }
         },
         cancel: {
           code: () => {
             console.log("cancel");
             reject(false);
+            distroy()
           }
         },
       });
+      console.log(distroy);
+      
     });
   };
   

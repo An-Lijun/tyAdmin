@@ -242,6 +242,12 @@ export const pageRoute = [
         component: () => import('@/views/pages/charts/index.vue')
       },
       {
+        label: 'pdf预览',
+        type: 'menu',
+        path: 'pdfView',
+        component: () => import('@/views/pages/pdfView/index.vue')
+      },
+      {
         label: '图片预览',
         type: 'menu',
         path: 'previewImg',

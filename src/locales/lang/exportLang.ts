@@ -4,8 +4,8 @@
  *  export default的文件进行导出,合并成vue-i18n需要的数据格式
  *   export default {
  *      userNm:{
- *        zh:'牛',
- *        en:'niu'
+ *        zh:'拓源',
+ *        en:'toyar'
  *      }
  *   }
  * 

@@ -5,18 +5,22 @@
 ### 组件
 
 1. 通用组件 自己开发的 toyar-design
-2. 封装Icon
+2. 封装svgIcon
+
    好处:
    1 解决了普通svg 使用image 导入无法修改颜色的问题
+   
    2 解决了普通svg 使用use 时候全量导入的问题, 这里打包后会作为单独的svg进行渲染
+   
    3 虽然使用innerHTML,但是由于这里使用的是import svg 基本可以避免xls
+   
    使用方法:
    svgicon 需要将所需要的svg 导入到@/assets/system目录下,以为svg文件名作为icon参数传入,注意不能重名,
    使用color fill 或则stroke 修改svg颜色,这个具体取决了svg本身的代码
    使用fontSize 修改svg大小
 
 ```html
-   <svgIcon :icon="item.icon"     >
+   <svgIcon :icon="item.icon" >
    </svgIcon>
 ```
 
@@ -60,8 +64,8 @@ ps 本来打算使用?raw 读出字符串渲染到根html中然后使用svguse �
   locales/lang/system/index.ts
     export default {
       userNm:{
-        zh:'牛',
-        en:'niu'
+        zh:'拓源',
+        en:'toyar'
       }
     }
 ```
