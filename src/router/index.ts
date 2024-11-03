@@ -248,6 +248,18 @@ export const pageRoute = [
         component: () => import('@/views/pages/pdfView/index.vue')
       },
       {
+        label: 'doc预览',
+        type: 'menu',
+        path: 'docView',
+        component: () => import('@/views/pages/docView/index.vue')
+      },
+      {
+        label: 'excel预览',
+        type: 'menu',
+        path: 'excelView',
+        component: () => import('@/views/pages/excelView/index.vue')
+      },
+      {
         label: '图片预览',
         type: 'menu',
         path: 'previewImg',
