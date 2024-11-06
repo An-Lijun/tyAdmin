@@ -53,9 +53,10 @@ export default defineComponent({
             h(TyAside, {
               width: this.appStore.isFold ? '50' : '210',
               style: {
-                height: '100%',
                 transition: 'width 0.5s',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                height:'calc(100vh - 80px)'
+
               }
             }, h(Menu)),
             h(TyContainer, { column: true }, [

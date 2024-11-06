@@ -26,4 +26,8 @@ import {ref} from 'vue'
  * https://gitcode.com/gh_mirrors/ma/mavonEditor/overview?utm_source=csdn_github_accelerator&isLogin=1
 */
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+::v-deep .v-note-wrapper.v-note-wrapper.v-note-wrapper {
+  z-index: unset ;
+}
+</style>

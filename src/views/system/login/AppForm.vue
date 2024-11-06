@@ -13,21 +13,37 @@
              v-model="formData.password">
           </TyInputPassword>
         </TyFormItem>
+        <TyFormItem class="captchaItem">
+          <div style="display: flex; align-items: center;">
+            <TyInput v-model="formData.account"></TyInput>
+             <canvas @click="resetCaptcha" ref="captchaRef" style="width: 150px;height: 40px;"></canvas>
+          </div>
+        </TyFormItem>
         <TyButton @click="login" block size="large" style="margin-top: 20px">登录</TyButton>
       </TyForm>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import useUserStore from '@/store/modules/user'
 import { router } from '@/router';
+import  Captcha  from './captcha.js'
 const userStore = useUserStore()
 const formData = ref({
   account: '',
   password: ''
 })
+const captchaRef =ref()
+let ccCode,restore 
+onMounted(()=>{
+   ccCode = new Captcha(captchaRef.value)
+    restore = ccCode.render()
+})
+const resetCaptcha =()=>{
+  restore = ccCode.render()
 
+}
 const login=()=>{
   userStore.token="1111111111"
   router.push({
@@ -60,6 +76,11 @@ const login=()=>{
   }
   ::v-deep .ty-form-item__label {
     text-align: left;
+  }
+  .captchaItem ::v-deep .ty-form-item__label {
+    &::after{
+      display: none;
+    }  
   }
 }
 </style>

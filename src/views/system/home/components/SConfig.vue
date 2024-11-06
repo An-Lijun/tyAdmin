@@ -8,13 +8,10 @@
       </ty-divider>
 
       <div class="flex-center">
-        <div  class="theme-swatches">
-          <div v-for="theme in themeStateLs" 
-            :key="theme" class="theme-swatch" 
-            :class="{ active: theme.value === appStore.themeState }" 
-            @click="changeThemeState(theme.value)"
-            >
-             <TyIcon :icon="theme.icon"/>   {{theme.label}} 
+        <div class="theme-swatches">
+          <div v-for="theme in themeStateLs" :key="theme" class="theme-swatch"
+            :class="{ active: theme.value === appStore.themeState }" @click="changeThemeState(theme.value, $event)">
+            <TyIcon :icon="theme.icon" /> {{ theme.label }}
           </div>
         </div>
       </div>
@@ -37,7 +34,7 @@
 
       <div class="flex-between">
         <label> 主题颜色</label>
-       
+
       </div>
 
 
@@ -51,8 +48,8 @@
         <TyRow :gutter="16">
           <TyCol :span="12">
             <div @click="changeLayout(1)" class="layout-1  layout" :class="{
-    active: appStore.layout === 1
-  }">
+              active: appStore.layout === 1
+            }">
               <div class="left"></div>
               <div class="right">
                 <div class="top"></div>
@@ -62,8 +59,8 @@
           </TyCol>
           <TyCol :span="12">
             <div @click="changeLayout(2)" class="layout-2 layout" :class="{
-    active: appStore.layout === 2
-  }">
+              active: appStore.layout === 2
+            }">
               <div class="top"></div>
               <div class="bottom">
                 <div class="left"></div>
@@ -83,7 +80,7 @@
 
       <div class="flex-between">
         <label> 灰色模式</label>
-        <TySwitch v-model="appStore.isBlackModel"  size="mini"/>
+        <TySwitch v-model="appStore.isBlackModel" size="mini" />
       </div>
       <div class="flex-between">
         <label> 色弱模式</label>
@@ -101,36 +98,59 @@
 <script setup>
 import useAppStore from '@/store/modules/app'
 import { ref, watch } from 'vue'
-import {TyThemeChange} from 'toyar-design'
-const props =defineProps(['model'])
+import { TyThemeChange } from 'toyar-design'
+const props = defineProps(['model'])
 const appStore = useAppStore()
 let body = document.querySelector('body')
 
-const selectedColor = (color)=>{
+const selectedColor = (color) => {
   appStore.pColor = color
 }
 const changeLayout = (value) => {
   appStore.layout = value
 }
-const changeThemeState =(value)=>{
-  appStore.themeState =value
+const changeBtn = (func, $eve) => {
+  const x = $eve.clientX
+  const y = $eve.clientY
+  // 计算鼠标点击位置距离视窗的最大圆半径
+  const endRadius = Math.hypot(
+    Math.max(x, innerWidth - x),
+    Math.max(y, innerHeight - y),
+  )
+  document.documentElement.style.setProperty('--x', x + 'px')
+  document.documentElement.style.setProperty('--y', y + 'px')
+  document.documentElement.style.setProperty('--r', endRadius + 'px')
+  // 判断浏览器是否支持document.startViewTransition
+  if (document.startViewTransition) {
+    // 如果支持就使用document.startViewTransition方法
+    document.startViewTransition(() => {
+      func.call() // 这里的函数是切换主题的函数，调用changeBtn函数时进行传入
+    })
+  } else {
+    // 如果不支持，就使用最原始的方式，切换主题
+    func.call()
+  }
+}
+const changeThemeState = (value, e) => {
+
+  changeBtn(() => appStore.themeState = value, e)
 }
 
-const themeStateLs=[
+const themeStateLs = [
   {
-    label:'明亮',
-    icon:'ty-sun-line',
-    value:1
+    label: '明亮',
+    icon: 'ty-sun-line',
+    value: 1
   },
   {
-    label:'暗黑',
-    icon:'ty-moon-line',
-    value:2
+    label: '暗黑',
+    icon: 'ty-moon-line',
+    value: 2
   },
   {
-    label:'系统',
-    icon:'ty-contrast-fill',
-    value:3
+    label: '系统',
+    icon: 'ty-contrast-fill',
+    value: 3
   }
   // ty-contrast-2-fill
 ]
@@ -176,7 +196,7 @@ let html = document.querySelector('html')
 watch(
   () => appStore.themeState,
   newV => {
-    html?.setAttribute('toyar-theme', newV===1 ? 'light' : 'dark')
+    html?.setAttribute('toyar-theme', newV === 1 ? 'light' : 'dark')
   },
   {
     immediate: true
@@ -199,15 +219,17 @@ watch(
   align-items: center;
   margin-bottom: 16px;
 }
-.selThemeColor{
-  width:35px;
-  height:35px;  
+
+.selThemeColor {
+  width: 35px;
+  height: 35px;
   border: 1px solid var(--primary-4);
   box-sizing: border-box;
   border-radius: 5px;
-  background:var(--color-bg-2);
+  background: var(--color-bg-2);
 
 }
+
 .theme-color {
   border: 1px solid var(--primary-4);
   width: 35px;
@@ -218,9 +240,9 @@ watch(
   border-radius: 5px;
   box-sizing: border-box;
 
-  &:hover{
+  &:hover {
     cursor: pointer;
-    border:2px solid var(--primary-6);
+    border: 2px solid var(--primary-6);
   }
 
   span {
@@ -230,45 +252,49 @@ watch(
     border-radius: 50%;
     transform: rotate(-45deg)
   }
-  &.active{
-    border:2px solid var(--primary-6);
 
-    span{
+  &.active {
+    border: 2px solid var(--primary-6);
+
+    span {
       transform: rotate(0deg);
 
     }
   }
 }
 
-.flex-center{
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.theme-swatches{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:3px;
-  border-radius:5px;
-  background:var(--toyar-gray-3);
-  color:var(--text-1);
-  margin-top:20px;
 
-  .theme-swatch{
-    min-width:50px;
-    height:25px;
-    line-height:25px;
-    padding:0 3px;
-    text-align:center;  
-    font-size:13px;
-    border-radius:5px;
-    &:hover{
+.theme-swatches {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  border-radius: 5px;
+  background: var(--toyar-gray-3);
+  color: var(--text-1);
+  margin-top: 20px;
+
+  .theme-swatch {
+    min-width: 50px;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 3px;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 5px;
+
+    &:hover {
       cursor: pointer;
-      color:var(--primary-6)
+      color: var(--primary-6)
     }
-    &.active{
-      background:var(--color-bg-2);
+
+    &.active {
+      background: var(--color-bg-2);
     }
   }
 }
@@ -385,5 +411,4 @@ watch(
 
 
 }
-
 </style>

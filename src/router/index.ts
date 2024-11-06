@@ -118,6 +118,40 @@ export const pageRoute = [
     ]
   },
   {
+    label: '预览',
+    icon: 'ty-plug-2-fill',
+    type: 'subMenu',
+    path: '/view',
+    name: 'View',
+    redirect: { name: 'icon' },
+    children: [
+      {
+        label: 'pdf预览',
+        type: 'menu',
+        path: 'pdfView',
+        component: () => import('@/views/pages/pdfView/index.vue')
+      },
+      {
+        label: 'doc预览',
+        type: 'menu',
+        path: 'docView',
+        component: () => import('@/views/pages/docView/index.vue')
+      },
+      {
+        label: 'excel预览',
+        type: 'menu',
+        path: 'excelView',
+        component: () => import('@/views/pages/excelView/index.vue')
+      },
+      {
+        label: '图片预览',
+        type: 'menu',
+        path: 'previewImg',
+        component: () => import('@/views/pages/preview/index.vue')
+      },
+    ]
+  },
+  {
     label: '功能',
     icon: 'ty-plug-2-fill',
     type: 'subMenu',
@@ -241,30 +275,7 @@ export const pageRoute = [
         path: 'charts',
         component: () => import('@/views/pages/charts/index.vue')
       },
-      {
-        label: 'pdf预览',
-        type: 'menu',
-        path: 'pdfView',
-        component: () => import('@/views/pages/pdfView/index.vue')
-      },
-      {
-        label: 'doc预览',
-        type: 'menu',
-        path: 'docView',
-        component: () => import('@/views/pages/docView/index.vue')
-      },
-      {
-        label: 'excel预览',
-        type: 'menu',
-        path: 'excelView',
-        component: () => import('@/views/pages/excelView/index.vue')
-      },
-      {
-        label: '图片预览',
-        type: 'menu',
-        path: 'previewImg',
-        component: () => import('@/views/pages/preview/index.vue')
-      },
+      
       {
         label: '签字版',
         type: 'menu',

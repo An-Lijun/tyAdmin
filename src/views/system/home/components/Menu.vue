@@ -11,7 +11,7 @@
           justify-content: center;
           align-items: center;
         ">
-               <svgIcon icon="mlogo" v-if="appStore.isFold" style="
+        <svgIcon icon="mlogo" v-if="appStore.isFold" style="
             position: relative;
           transform: scale(0.45);
         "  /> 
