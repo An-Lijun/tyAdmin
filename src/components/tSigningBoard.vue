@@ -185,6 +185,7 @@ export default {
 
     &>.uiSigningBoard__Canvas {
       background-color: #fff;
+      width: 100%;
     }
 
     &>.uiSigningBoard__btn {

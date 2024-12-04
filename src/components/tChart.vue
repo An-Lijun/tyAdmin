@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
   deepDraw: false,
   deepRender: false
 })
-const emit = defineEmits(['click'])
+const emit = defineEmits(['click','brushselected','brushEnd'])
 const myChartsRef = ref<HTMLDivElement>()
 const appStore =useAppStore()
 
@@ -35,7 +35,13 @@ let timer2: null | Timeout
 let eventMap: { [key: string]: any } = {
   click: (params: Object) => {
     emit('click', params)
-  }
+  },
+  brushselected: (params: Object) => {
+    emit('brushselected', params,myChart)
+  },
+  brushEnd: (params: Object) => {
+    emit('brushEnd', params,myChart)
+  },
 }
 
 const addEvent = () => {

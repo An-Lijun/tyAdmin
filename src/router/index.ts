@@ -149,6 +149,12 @@ export const pageRoute = [
         path: 'previewImg',
         component: () => import('@/views/pages/preview/index.vue')
       },
+      {
+        label: '代码预览',
+        type: 'code',
+        path: 'codeView',
+        component: () => import('@/views/pages/codeView/index.vue')
+      },
     ]
   },
   {
@@ -258,10 +264,22 @@ export const pageRoute = [
     name: 'Trade',
     children: [
       {
+        label: 'soulBall',
+        type: 'menu',
+        path: 'soulBall',
+        component: () => import('@/views/pages/soulBall/index.vue')
+      },
+      {
         label: '水波纹',
         type: 'menu',
         path: 'waterButton',
         component: () => import('@/views/pages/waterButton/index.vue')
+      },
+      {
+        label: '进度条',
+        type: 'menu',
+        path: 'progress',
+        component: () => import('@/views/pages/progress/index.vue')
       },
       {
         label: '离开提醒',
@@ -275,7 +293,12 @@ export const pageRoute = [
         path: 'charts',
         component: () => import('@/views/pages/charts/index.vue')
       },
-      
+      {
+        label: '图表(放大)',
+        type: 'menu',
+        path: 'chartsZoom',
+        component: () => import('@/views/pages/charts/chartsZoom/index.vue')
+      },
       {
         label: '签字版',
         type: 'menu',
