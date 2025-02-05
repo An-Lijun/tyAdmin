@@ -1,0 +1,77 @@
+import RenderTail from '../utils/src/tail'
+import { isProd } from '../common/auth/index'
+class NoDebugger {
+  constructor(options) {
+    window.addEventListener("load", this.onOpenConsole);
+    window.addEventListener("resize", this.onOpenConsole);
+
+    if (options?.disRightClick) {
+      this.disRightClick()
+    }
+    if (options?.disF12) {
+      this.disF12()
+    }
+  }
+  // 禁用右键菜单
+  disRightClick() {
+    document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+    });
+  }
+  //  禁用F12
+  disF12() {
+    document.addEventListener('keydown', function (e) {
+      if (e.keyCode === 123) {
+        e.preventDefault();
+      }
+    });
+  }
+  // 当控制台打开时
+  onOpenConsole() {
+    const block = () => {
+      // 清除控制台
+      console.clear()
+      if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+        document.body.innerHTML = "检测到非法调试,请关闭后刷新重试!";
+        console.log('body内容已清除');
+        this.sremoveScriptsInHead();
+      }
+      setInterval(() => {
+        (function () {
+          return false;
+        }
+        ['constructor']('debugger')
+        ['call']());
+      }, 50);
+    }
+    try {
+      block();
+    } catch (err) { }
+  }
+
+  // 清除head中的js
+  removeScriptsInHead() {
+    const scripts = document.querySelectorAll('head script');
+    scripts.forEach(script => script.remove());
+    console.log('Head 中的 <script> 标签已清除');
+  }
+}
+export default function (vue) {
+  window.onload = function () {
+    let RT = new RenderTail(undefined, ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
+    RT.init()
+    
+    if (isProd) {
+      new NoDebugger({
+        disRightClick: true,
+        disF12: true
+      })
+    }
+
+  }
+}
+
+
+
+
+

@@ -264,10 +264,28 @@ export const pageRoute = [
     name: 'Trade',
     children: [
       {
+        label: 'shardCard',
+        type: 'menu',
+        path: 'shardCard',
+        component: () => import('@/views/pages/shardCard/index.vue')
+      },
+      {
+        label: 'tree',
+        type: 'menu',
+        path: 'tree',
+        component: () => import('@/views/pages/tree/index.vue')
+      },
+      {
         label: 'soulBall',
         type: 'menu',
         path: 'soulBall',
         component: () => import('@/views/pages/soulBall/index.vue')
+      },
+      {
+        label: 'scrollPage',
+        type: 'menu',
+        path: 'scrollPage',
+        component: () => import('@/views/pages/scrollPage/index.vue')
       },
       {
         label: '水波纹',

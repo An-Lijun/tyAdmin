@@ -124,25 +124,25 @@ export default {
   position: relative;
   overflow: hidden;
 
-  &::before {
-    content: '';
-    width: 2%;
-    height: 50%;
-    position: absolute;
-    bottom: 0;
-    background-color: var(--color-bg-2) ;
-    z-index: 5;
-  }
-  &::after {
-    content: '';
-    width: 2%;
-    height: 50%;
-    position: absolute;
-    bottom: 0;
-    background-color: var(--color-bg-2);
-    z-index: 5;
-    right: 0;
-  }
+  // &::before {
+  //   content: '';
+  //   width: 2%;
+  //   height: 50%;
+  //   position: absolute;
+  //   bottom: 0;
+  //   background-color: var(--color-bg-2) ;
+  //   z-index: 5;
+  // }
+  // &::after {
+  //   content: '';
+  //   width: 2%;
+  //   height: 50%;
+  //   position: absolute;
+  //   bottom: 0;
+  //   background-color: var(--color-bg-2);
+  //   z-index: 5;
+  //   right: 0;
+  // }
   .nav__inner {
     border: 2px solid var(--primary-6);
     width: 160%;
