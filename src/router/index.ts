@@ -211,7 +211,13 @@ export const pageRoute = [
         name: 'encrypt',
         component: () => import('@/views/pages/encrypt/index.vue'),
       },
-      
+      {
+        label: 'excel操作',
+        type: 'menu',
+        path: 'excelHandler',
+        name: 'excelHandler',
+        component: () => import('@/views/pages/excel/index.vue'),
+      },
     ]
   },
 
