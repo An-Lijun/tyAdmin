@@ -1,4 +1,4 @@
-html{
+html,:not(:root):-webkit-full-screen{
   background: var(--fill-2);
 }
 body{

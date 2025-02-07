@@ -218,6 +218,13 @@ export const pageRoute = [
         name: 'excelHandler',
         component: () => import('@/views/pages/excel/index.vue'),
       },
+      {
+        label: 'full操作',
+        type: 'menu',
+        path: 'full',
+        name: 'full',
+        component: () => import('@/views/pages/full/index.vue'),
+      },
     ]
   },
 
