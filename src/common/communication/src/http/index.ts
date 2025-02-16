@@ -21,12 +21,14 @@ const http=new AxiosPro({
   // 它只能用于 'PUT', 'POST' 和 'PATCH' 这几个请求方法
   // 数组中最后一个函数必须返回一个字符串， 一个Buffer实例，ArrayBuffer，FormData，或 Stream
   // 你可以修改请求头。
-  transformRequest: [
-    function (data, headers) {
-      // 对发送的 data 进行任意转换处理
-      return data
-    }
-  ],
+  // transformRequest: [
+  //   function (data, headers) {
+  //     // 对发送的 data 进行任意转换处理
+  //     console.log(data);
+      
+  //     return JSON.stringify(data)
+  //   }
+  // ],
 
   // `transformResponse` 在传递给 then/catch 前，允许修改响应数据
   transformResponse: [

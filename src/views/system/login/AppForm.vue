@@ -1,56 +1,40 @@
 <template>
   <div class="tyAdmin-form">
     <div class="tyAdmin-form__content">
-      <header class="tyAdmin-form__header">登录</header>
-      <TyForm size="large" :formData="formData">
-        <TyFormItem>
-          <template #label> 账户 </template>
-          <TyInput v-model="formData.account"></TyInput>
-        </TyFormItem>
-        <TyFormItem>
-          <template #label> 密码 </template>
-          <TyInputPassword size="large"
-             v-model="formData.password">
-          </TyInputPassword>
-        </TyFormItem>
-        <TyFormItem class="captchaItem">
-          <div style="display: flex; align-items: center;">
-            <TyInput v-model="formData.account"></TyInput>
-             <canvas @click="resetCaptcha" ref="captchaRef" style="width: 150px;height: 40px;"></canvas>
-          </div>
-        </TyFormItem>
-        <TyButton @click="login" block size="large" style="margin-top: 20px">登录</TyButton>
-      </TyForm>
+      <header class="tyAdmin-form__header">
+        {{ components[formType].header }}
+      </header>
+
+      <div style="display: flex;">
+        <Transition name="fade">
+        <component :is="components[formType].form" @changeType="changeType" />
+      </Transition>
+      </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import useUserStore from '@/store/modules/user'
-import { router } from '@/router';
-import  Captcha  from './captcha.js'
-const userStore = useUserStore()
-const formData = ref({
-  account: '',
-  password: ''
-})
-const captchaRef =ref()
-let ccCode,restore 
-onMounted(()=>{
-   ccCode = new Captcha(captchaRef.value)
-    restore = ccCode.render()
-})
-const resetCaptcha =()=>{
-  restore = ccCode.render()
+import TyPassword from './TyPassword.vue'
+import TyRegistry from './TyRegistry.vue'
 
-}
-const login=()=>{
-  userStore.token="1111111111"
-  router.push({
-    name:'Dashboard'
-  })
+import { ref } from 'vue'
+
+const formType = ref('registry')
+// 注册组件
+const components = {
+  password: {
+    header: '登录',
+    form: TyPassword
+  },
+  registry: {
+    header: '注册',
+    form: TyRegistry
+  }
 }
 
+const changeType = val => {
+  formType.value = val
+}
 </script>
 <style lang="scss" scoped>
 .tyAdmin-form {
@@ -62,9 +46,11 @@ const login=()=>{
   align-items: center;
   height: 100%;
   justify-content: center;
+
   .tyAdmin-form__content {
     height: 50%;
     width: 500px;
+
     .tyAdmin-form__header {
       margin: 120px 0 40px 0;
       height: 30px;
@@ -74,13 +60,35 @@ const login=()=>{
       color: var(--text-1);
     }
   }
-  ::v-deep .ty-form-item__label {
-    text-align: left;
-  }
-  .captchaItem ::v-deep .ty-form-item__label {
-    &::after{
-      display: none;
-    }  
-  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+
+/* 定义左右移动动画的 CSS 类 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: transform 0.5s ease;
+}
+
+.fade-enter-from {
+  transform: translateX(0);
+}
+
+.fade-enter-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.fade-leave-from {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.fade-leave-to {
+  transform: translateX(0);
 }
 </style>
