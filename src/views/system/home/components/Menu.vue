@@ -11,13 +11,19 @@
           justify-content: center;
           align-items: center;
         ">
-        <svgIcon icon="mlogo" v-if="appStore.isFold" style="
+        <svgIcon icon="logov3" v-if="appStore.isFold" style="
             position: relative;
-          transform: scale(0.45);
+            transform: scale(0.5);
         "  /> 
-        <svgIcon icon="logo" v-else style="
-          transform: scale(0.45);
+        <div v-else class="logoContainer">
+          <svgIcon icon="logov3"  style="
+          transform: scale(0.5);
         "  />
+          <span class="logoNm">
+            ToyarAdmin
+          </span>
+        </div>
+   
       </div>
     </template>
   </TyMenu>
@@ -71,4 +77,15 @@ routerTransMenu(pageRoute, '')
  
 </script>
 <style lang="scss" scoped>
+.logoContainer{
+  display: flex;
+  align-items: center;
+  .logoNm{
+   color: var(--text-1);
+   font-size: 19px;
+    margin-right: 15px;
+    font-weight: bold;
+  }
+}
+
 </style>

@@ -98,7 +98,6 @@
 <script setup>
 import useAppStore from '@/store/modules/app'
 import { ref, watch } from 'vue'
-import { TyThemeChange } from 'toyar-design'
 const props = defineProps(['model'])
 const appStore = useAppStore()
 let body = document.querySelector('body')

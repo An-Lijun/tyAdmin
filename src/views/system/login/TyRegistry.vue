@@ -1,28 +1,28 @@
 <template>
-  <TyForm style="width: 500px;" size="large" :formData="formData" :rules="rules" ref="formRef">
-    <TyFormItem prop="username">
+  <TyForm style="width: 500px;" size="large" :formData="formData" :rules="rules" ref="formRef"  class="animationBox">
+    <TyFormItem prop="username"  class="entry">
       <template #label> 账户 </template>
       <TyInput v-model="formData.username"></TyInput>
     </TyFormItem>
-    <TyFormItem prop="password">
+    <TyFormItem prop="password"  class="entry">
       <template #label> 密码 </template>
       <TyInputPassword size="large" v-model="formData.password">
       </TyInputPassword>
     </TyFormItem>
-    <TyFormItem prop="repassword">
+    <TyFormItem prop="repassword"  class="entry">
       <template #label> 确认密码 </template>
       <TyInputPassword size="large" v-model="formData.repassword">
       </TyInputPassword>
     </TyFormItem>
-    <TyFormItem prop="email">
+    <TyFormItem prop="email"  class="entry">
       <template #label> 邮箱 </template>
       <TyInput v-model="formData.email"></TyInput>
     </TyFormItem>
 
-    <TyButton @click="registry" block size="large" style="margin-top: 20px"
+    <TyButton @click="registry" block size="large" style="margin-top: 20px"  class="entry"
       >注册</TyButton
     >
-    <div class="selfButtonList">
+    <div class="selfButtonList entry">
       <TyButton type="secondary"> 手机登录 </TyButton>
       <TyButton type="secondary"> 二维码登录 </TyButton>
       <TyButton type="secondary" @click="toLogin"> 登录 </TyButton>
@@ -64,7 +64,7 @@ const registry = () => {
       return 
     }
     formData.value.account
-    const {data} = await http.post('/reigstry', {
+    const {data} = await http.post('/user/registry', {
       username:  formData.value.username,
       password: formData.value.password,
       email: formData.value.email
@@ -98,6 +98,9 @@ onMounted(() => {})
   }
 }
 
+::v-deep .ty-form-item__label {
+  color: var(--text-1);
+}
 
 
 </style>

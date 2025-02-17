@@ -1,22 +1,29 @@
 <template>
-  <TyForm  style="width: 500px;"  size="large" :formData="formData">
-    <TyFormItem>
+  <TyForm ref="formRef" style="width: 500px;" size="large" :formData="formData" :rules="rules" class="animationBox">
+
+    <TyFormItem prop="username" class="entry">
       <template #label> 账户 </template>
-      <TyInput v-model="formData.account"></TyInput>
+      <TyInput v-model="formData.username"></TyInput>
     </TyFormItem>
-    <TyFormItem>
+    <TyFormItem prop="password" class="entry">
       <template #label> 密码 </template>
       <TyInputPassword size="large" v-model="formData.password">
       </TyInputPassword>
     </TyFormItem>
-    <TyFormItem class="captchaItem">
+    <TyFormItem class="captchaItem entry" prop="account" v-if="errCount > 1" style="position: relative;">
+      <template #label> 验证码 </template>
       <div style="display: flex; align-items: center;">
-        <TyInput v-model="formData.account"></TyInput>
-        <canvas @click="resetCaptcha" ref="captchaRef" style="width: 150px;height: 40px;"></canvas>
+        <TyInput v-model="formData.account">
+          <template #innerAft>
+            <div style="width: 120px;">
+            </div>
+          </template>
+        </TyInput>
+        <canvas @click="resetCaptcha" ref="captchaRef" class="captcha"></canvas>
       </div>
     </TyFormItem>
-    <TyButton @click="login" block size="large" style="margin-top: 20px">登录</TyButton>
-    <div class="selfButtonList">
+    <TyButton @click="login" block size="large" style="margin-top: 20px" class="entry">登录</TyButton>
+    <div class="selfButtonList entry">
       <TyButton type="secondary">
         手机登录
       </TyButton>
@@ -34,32 +41,80 @@ import Captcha from './captcha.js'
 import http from '@/common/communication/src/http/index'
 import { router } from '@/router';
 const userStore = useUserStore()
-import { onMounted, ref } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 import useUserStore from '@/store/modules/user'
-const formData = ref({
-  account: '',
-  password: ''
-})
+import { TyMessage } from 'toyar-design'
+
+
 const emit = defineEmits('changeType')
 
-const toRegistry=()=>{
-   emit('changeType','registry')
-}
-const login = () => {
-  userStore.token = "1111111111"
-  router.push({
-    name: 'Dashboard'
-  })
-}
+const errCount = ref(0)
 let ccCode, restore
-onMounted(() => {
-  ccCode = new Captcha(captchaRef.value)
-  restore = ccCode.render()
+const formData = ref({
+  username: '',
+  password: '',
+  account: ''
 })
+const formRef = ref()
+
+
 const captchaRef = ref()
 const resetCaptcha = () => {
   restore = ccCode.render()
+}
+const toRegistry = () => {
+  emit('changeType', 'registry')
+}
+const coCodeFn = (data, cb) => {
+  if (data !== restore) {
+    return cb('请输入正确的验证码')
+  }
+  cb()
+}
+const rules = {
+  username: [
+    { required: true, message: `用户名是必填字段`, trigger: ['blur'] }
+  ],
+  password: [{ required: true, message: `密码是必填字段`, trigger: ['blur'] }],
+  account: [
+    { required: true, message: `验证码是必填字段`, trigger: ['blur'] },
+    {
+      validate: coCodeFn
+    }
+  ]
+}
+const login = () => {
+  formRef.value.validateAll().then(async res => {
+    try {
+      const { data } = await http.post('/user/login', {
+        username: formData.value.username,
+        password: formData.value.password
+      }) || {}
 
+      if (data && data.code === 200) {
+        userStore.token = data.data.token
+        router.push({
+          name: 'Dashboard'
+        })
+        TyMessage.success('登录成功')
+        errCount.value = 0
+      }
+    } catch (error) {
+      errCount.value = errCount.value + 1
+      if (errCount.value >= 2) {
+
+        if (!ccCode) {
+          nextTick(() => {
+            ccCode = new Captcha(captchaRef.value)
+            restore = ccCode.render()
+          })
+        } else {
+          restore = ccCode.render()
+
+        }
+      }
+    }
+  })
 }
 
 </script>
@@ -81,6 +136,21 @@ const resetCaptcha = () => {
 
   :deep(.ty-button) {
     padding: 0 45px;
+  }
+}
+
+::v-deep .ty-form-item__label {
+  color: var(--text-1);
+}
+
+.captcha {
+  width: 120px;
+  height: 36px;
+  border: unset;
+  position: absolute;
+  right: 25px;
+  &:hover{
+    cursor: pointer;
   }
 }
 </style>
