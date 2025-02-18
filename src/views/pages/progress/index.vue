@@ -59,7 +59,7 @@ import waterProgress from '@/components/waterProgress/index.vue';
 </script>
 <style lang="scss" scoped>
 .tyAdmin__container {
-  ::v-deep .ty-card__main {
+  :deep(.ty-card__main) {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -22,7 +22,7 @@ const props = defineProps({
 })
 </script>
 <style lang="scss" scoped>
-::v-deep.ty-card.is-border{
+:deep(.ty-card.is-border){
   border-right: unset ;
   border-top: unset;
   border-left: unset;

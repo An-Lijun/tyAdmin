@@ -94,7 +94,7 @@ importers:
         specifier: ^5.2.2
         version: 5.7.3
       vite:
-        specifier: ^5.2.0
+        specifier: ^5.4.14
         version: 5.4.14(@types/node@22.13.1)(sass@1.84.0)(terser@5.38.0)
       vite-plugin-html:
         specifier: ^3.2.2

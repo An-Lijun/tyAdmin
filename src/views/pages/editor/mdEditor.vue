@@ -27,7 +27,7 @@ import {ref} from 'vue'
 */
 </script>
 <style lang="scss" scoped>
-::v-deep .v-note-wrapper.v-note-wrapper.v-note-wrapper {
+:deep(.v-note-wrapper).v-note-wrapper.v-note-wrapper {
   z-index: unset ;
 }
 </style>

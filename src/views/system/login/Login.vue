@@ -67,7 +67,7 @@ watch(
     right: 20px;
     top: 20px;
     z-index: 99;
-    ::v-deep .ty-switch{
+    :deep(.ty-switch){
       .checkedText{
         font-size: 0 !important;
         background-image: url('../../../assets/system/sun.svg');

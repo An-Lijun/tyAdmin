@@ -45,12 +45,12 @@ const fileChange = (e) => {
   display: inline-block;
 }
 
-::v-deep .ty-dialog {
+:deep(.ty-dialog) {
   width: unset !important;
   display: inline-block;
 }
 
-::v-deep .ty-dialog__body {
+:deep(.ty-dialog__body) {
   .ty-tailor-img {
     position: relative;
 

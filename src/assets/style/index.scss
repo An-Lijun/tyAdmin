@@ -14,7 +14,7 @@ body{
   background: var(--primary-6);
 }
 
-::v-deep .ty-aside{
+:deep(.ty-aside){
   transition: width 5s;
 }
 

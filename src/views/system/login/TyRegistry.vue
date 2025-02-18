@@ -78,11 +78,11 @@ const registry = () => {
 onMounted(() => {})
 </script>
 <style lang="scss" scoped>
-::v-deep .ty-form-item__label {
+:deep(.ty-form-item__label) {
   text-align: left;
 }
 
-.captchaItem ::v-deep .ty-form-item__label {
+.captchaItem :deep(.ty-form-item__label) {
   &::after {
     display: none;
   }
@@ -98,7 +98,7 @@ onMounted(() => {})
   }
 }
 
-::v-deep .ty-form-item__label {
+:deep(.ty-form-item__label){
   color: var(--text-1);
 }
 

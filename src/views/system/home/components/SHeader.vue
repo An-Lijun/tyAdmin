@@ -355,7 +355,7 @@ const closeMenu = (id, trades, ev) => {
 </script>
 <style lang="scss" scoped>
 .sys {
-  ::v-deep .ty-poppover__content {
+  :deep(.ty-poppover__content ){
     width: 60px;
     padding: unset;
     --border-color-3: transparent;
@@ -383,7 +383,7 @@ const closeMenu = (id, trades, ev) => {
 }
 
 .message {
-  ::v-deep .ty-poppover__content {
+  :deep(.ty-poppover__content) {
     width: 310px;
     padding: unset;
     --border-color-3: transparent;
@@ -392,7 +392,7 @@ const closeMenu = (id, trades, ev) => {
     transform: translate(-50%) !important;
   }
 
-  ::v-deep .ty-tabs>main {
+  :deep(.ty-tabs)>main {
     height: 300px;
     overflow-x: hidden;
     overflow-y: auto;
