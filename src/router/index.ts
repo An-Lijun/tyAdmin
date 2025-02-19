@@ -66,7 +66,7 @@ export const pageRoute = [
   },
   {
     label: '外链/页面',
-    icon: 'ty-pages-fill',
+    icon: 'ty-links-line',
     type: 'subMenu',
     path: '/page',
     name: 'Page',
@@ -105,7 +105,7 @@ export const pageRoute = [
   },
   {
     label: '编辑器',
-    icon: 'ty-plug-2-fill',
+    icon: 'ty-pencil-line',
     type: 'subMenu',
     path: '/editor',
     name: 'Editor',
@@ -123,7 +123,7 @@ export const pageRoute = [
   },
   {
     label: '预览',
-    icon: 'ty-plug-2-fill',
+    icon: 'ty-bar-chart-grouped-line',
     type: 'subMenu',
     path: '/viewer',
     name: 'viewer',
@@ -346,7 +346,7 @@ export const pageRoute = [
   },
   {
     label: '交易',
-    icon: 'ty-qr-code-fill',
+    icon: 'ty-code-box-line',
     type: 'subMenu',
     path: '/trade',
     name: 'Trade',
@@ -370,7 +370,7 @@ export const pageRoute = [
     label: '流程',
     type: 'menu',
     path: '/flow',
-    icon: 'ty-markup-fill',
+    icon: 'ty-flow-chart',
     children: [
       {
         type: 'menu',

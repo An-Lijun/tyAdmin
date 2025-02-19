@@ -324,7 +324,7 @@ const sureToExit = () => {
 }
 const toLock = () => {
   router.push({
-    name: 'Lock'
+    name: 'lock'
   })
 }
 const getMkey = (path) => '/' + path.replaceAll('/', '')
