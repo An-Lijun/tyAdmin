@@ -14,10 +14,10 @@
   </TyContainer>
 </template>
 <script setup lang="ts">
-import AppLogo from './AppLogo.vue'
-import AppForm from './AppForm.vue'
+import AppLogo from './components/AppLogo.vue'
+import AppForm from './components/AppForm.vue'
 import {  watch,ref } from 'vue'
-import useAppStore from '@/store/modules/app'
+import useAppStore from '@/store/modules/app' 
 
 const isDark = ref(false)
 let html = document.querySelector('html')

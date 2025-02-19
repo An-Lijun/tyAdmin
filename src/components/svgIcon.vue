@@ -12,7 +12,7 @@ const props = defineProps({
 })
 const svgIcon = ref()
 ;(icon =>
-  import(`../assets/system/${icon}.svg?raw`)
+  import(`../assets/svgIcon/${icon}.svg?raw`)
     .then(obj => {
       svgIcon.value.innerHTML = obj.default || 'undefined'
     })

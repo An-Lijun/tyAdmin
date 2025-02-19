@@ -3,7 +3,12 @@ import type { App } from 'vue';
 
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import installRouterGuard from './guard';
+// 约定式路由源于系统
+import systemRouter from '~pages';
 
+let homeRouter =systemRouter.find(item =>
+  item.name ==="home"
+)
 export const pageRoute = [
   {
     label: '仪表盘',
@@ -337,6 +342,12 @@ export const pageRoute = [
         component: () => import('@/views/pages/signingboard/index.vue')
       },
       {
+        label: '点阵画板',
+        type: 'menu',
+        path: 'pixel',
+        component: () => import('@/views/pages/pixel/index.vue')
+      },
+      {
         label: '绘制图形',
         type: 'menu',
         path: 'drawImg',
@@ -393,49 +404,10 @@ export const pageRoute = [
   },
 ]
 
-const routes = [
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/system/login/Login.vue'),
-  },
-  {
-    path: '/',
-    name: 'Home',
-    component: () => import('@/views/system/home/index.ts'),
-    children:pageRoute
-  },
-  {
-    path: '/outByIframe',
-    name: 'outByIframe',
-    component: () => import('@/views/pages/website/outByIframe.vue'),
-  },
-  {
-    path: '/lock',
-    name: 'Lock',
-    component: () => import('@/views/system/lock/index.vue'),
-  },
-  {
-    path: '/403',
-    name: 'noaccess',
-    component: () => import('@/views/system/403/index.vue'),
-  },
-  {
-    path: '/404',
-    name: 'notFound',
-    component: () => import('@/views/system/404/index.vue'),
-  },
+homeRouter.children =pageRoute
 
-  // {
-  //   path: '/500',
-  //   name: 'notFound',
-  //   component: () => import('@/views/system/404/index.vue'),
-  // },
-  {
-    path: '/:catchAll(.*)',
-    redirect: '/404',
-  }
-]
+console.log(systemRouter);
+
 
 // app router
 // 创建一个可以被 Vue 应用程序使用的路由实例
@@ -445,7 +417,7 @@ export const router = createRouter({
   // import.meta.env.VITE_PUBLIC_PATH
   history: createWebHashHistory(),
   // 应该添加到路由的初始路由列表。
-  routes: routes as unknown as RouteRecordRaw[],
+  routes: systemRouter as unknown as RouteRecordRaw[],
   // 是否应该禁止尾部斜杠。默认为假
   strict: true,
 

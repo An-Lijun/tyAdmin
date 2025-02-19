@@ -1,9 +1,12 @@
 <template>
   <div class="tyAdmin-logo">
-    <img src="@/assets/system/logo.svg" alt="" />
+  <SvgIcon icon="logo"/>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import SvgIcon from '@/components/svgIcon.vue';
+
+</script>
 <style lang="scss" scoped>
 .tyAdmin-logo {
   position: absolute;

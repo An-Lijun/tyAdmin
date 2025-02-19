@@ -319,7 +319,7 @@ let tabKey = ref('inform')
 
 const sureToExit = () => {
   router.push({
-    name: 'Login'
+    name: 'login'
   })
 }
 const toLock = () => {

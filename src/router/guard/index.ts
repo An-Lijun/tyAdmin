@@ -15,7 +15,7 @@ function createPageGuard(router: Router){
       !userStore.token&& to.fullPath !=='/login'
     ) {
       // 将用户重定向到登录页面
-      return { name: 'Login' }
+      return { name: 'login' }
     }
     return true
   })

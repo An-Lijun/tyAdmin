@@ -72,6 +72,9 @@ ps 本来打算使用?raw 读出字符串渲染到根html中然后使用svguse �
 
 ### 路由 vue-router
 
+使用 vite-plugin-pages 自动生成admin 约定式路由
+
+
 ### store pinia
 
 ### common
