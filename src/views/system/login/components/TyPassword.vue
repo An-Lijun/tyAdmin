@@ -86,7 +86,7 @@ const rules = {
 const login = () => {
   formRef.value.validateAll().then(async res => {
     try {
-      const { data } = await http.post('/user/login', {
+      const { data } = await http.post('/api/user/login', {
         username: formData.value.username,
         password: formData.value.password
       }) || {}

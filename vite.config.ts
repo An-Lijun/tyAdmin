@@ -3,7 +3,7 @@ import { resolve } from 'path'
  import createPlugins from './config/vitePlugin';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode, ssrBuild })=>{
+export default defineConfig((options)=>{
   return{
     build:{
       rollupOptions:{
@@ -37,12 +37,12 @@ export default defineConfig(({ command, mode, ssrBuild })=>{
       proxy:{
         // 本地开发环境通过代理access接口
         '/api': {
-          target: 'http://127.0.0.1:3661',
+          target: 'http://localhost:3000',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
         }
       }
     },
-    plugins: createPlugins(true,{})
+    plugins: createPlugins(options)
   }
 })

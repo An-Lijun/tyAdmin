@@ -1,6 +1,17 @@
 import AxiosRetry from './retry'
 import checkStatus from './checkStatus'
+import { isDev } from '@/common/auth'
 import { TyAlert } from 'toyar-design'
+import axios from 'axios'
+
+const AxiosIn = axios.create({
+  baseURL: `http://127.0.0.1:${import.meta.env.VITE_MOCK_PORT}`,
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+
 const retryRequest = new AxiosRetry();
 // 添加请求拦截器
 export function addReqInterceptor(http) {
@@ -22,8 +33,16 @@ export function addResInterceptor(http) {
   http.interceptors.response.use(
     function (response) {
       const data = JSON.parse(response.data)
-      if(data.code !== 200){
-        const  {distroy} = TyAlert(data.message, {
+      if (isDev) {
+        console.log('请求返回', response);
+        AxiosIn.post('/handleCallFunction', {
+          url: response.config.url,
+          data: data,
+          method: response.config.method
+        })
+      }
+      if (data.code !== 200) {
+        const { distroy } = TyAlert(data.message, {
           type: 'error',
           sure: {
             code: () => {
@@ -40,7 +59,7 @@ export function addResInterceptor(http) {
       }
       // 2xx 范围内的状态码都会触发该函数。
       // 对响应数据做点什么
-      response.data =JSON.parse(response.data)
+      response.data = JSON.parse(response.data)
       return response
     },
     function (error) {
@@ -51,7 +70,7 @@ export function addResInterceptor(http) {
       // retryRequest.retry(http, error);
       // checkStatus(error?.response?.status, msg, errorMessageMode);
 
-      const  {distroy} = TyAlert(msg, {
+      const { distroy } = TyAlert(msg, {
         type: 'warning',
         sure: {
           code: () => {

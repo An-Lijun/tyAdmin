@@ -64,7 +64,7 @@ const registry = () => {
       return 
     }
     formData.value.account
-    const {data} = await http.post('/user/registry', {
+    const {data} = await http.post('/api/user/registry', {
       username:  formData.value.username,
       password: formData.value.password,
       email: formData.value.email
