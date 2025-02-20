@@ -34,7 +34,7 @@ export default function createPlugins(options): Array<any> {
       }),
       viteMockServe({
         mockPath: 'mock', // mock文件夹路径
-        enable: env.VITE_MOCK_OPEN && options.mode === 'development'   // 只有开发环境才开启mock
+        enable: env.VITE_MOCK_OPEN==="true" && options.mode === 'development'   // 只有开发环境才开启mock
       }),
       customServerPlugin({
         mockPath:'mock', // mock文件夹路径

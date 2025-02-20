@@ -5,6 +5,7 @@
           <div class="tyAdmin-login-btn">
           <TySwitch checkedText="0" uncheckedText="1" 
             v-model="isDark" 
+            @click="changeThemeState($event)"
           />
           </div>
           <AppLogo/>
@@ -16,21 +17,15 @@
 <script setup lang="ts">
 import AppLogo from './components/AppLogo.vue'
 import AppForm from './components/AppForm.vue'
-import {  watch,ref } from 'vue'
-import useAppStore from '@/store/modules/app' 
+import {ref} from 'vue'
+import {changeThemFn} from '@/hooks/index'
 
-const isDark = ref(false)
-let html = document.querySelector('html')
+const isDark = ref(true)
+const changeThemeState = (e) => {
+  let value =isDark.value?1:2
+  changeThemFn(value,e)
+}
 
-watch(
-  () => isDark.value,
-  newV => {
-    html?.setAttribute('toyar-theme',isDark.value ? 'light' : 'dark')
-  },
-  {
-    immediate: true
-  }
-)
 </script>
 <style lang="scss" scoped>
 .tyAdmin-login{
