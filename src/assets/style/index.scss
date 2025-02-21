@@ -70,9 +70,23 @@ body{
       opacity: 1;
   }
 }
-
+@keyframes slideLeft {
+  from {
+      transform: translateX(-50%);
+      opacity: 0;
+  }
+  to {
+      transform: translateX(0);
+      opacity: 1;
+  }
+}
 .animationBox .entry {
   animation: slideIn 0.5s ease-out;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+.animationBox .entry-left {
+  animation: slideLeft 0.5s ease-out;
   animation-fill-mode: forwards;
   opacity: 0;
 }
@@ -80,6 +94,11 @@ body{
 // 使用 @for 循环生成样式
 @for $i from 1 through 10 {
   .entry:nth-child(#{$i}) {
+    // 根据元素的顺序设置不同的动画延迟
+    animation-delay: $i * 0.1s;
+  }
+
+  .entry-left:nth-child(#{$i}) {
     // 根据元素的顺序设置不同的动画延迟
     animation-delay: $i * 0.1s;
   }

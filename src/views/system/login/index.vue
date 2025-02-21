@@ -1,15 +1,12 @@
 <template>
   <TyContainer>
-    <TyMain> 
-      <div class="tyAdmin-login">
-          <div class="tyAdmin-login-btn">
-          <TySwitch checkedText="0" uncheckedText="1" 
-            v-model="isDark" 
-            @click="changeThemeState($event)"
-          />
-          </div>
-          <AppLogo/>
-          <AppForm/>
+    <TyMain>
+      <div class="tyAdmin-login animationBox">
+        <div class="tyAdmin-login-btn entry">
+          <TySwitch checkedText="0" uncheckedText="1" v-model="isDark" @click="changeThemeState($event)" />
+        </div>
+        <AppLogo />
+        <AppForm />
       </div>
     </TyMain>
   </TyContainer>
@@ -17,53 +14,42 @@
 <script setup lang="ts">
 import AppLogo from './components/AppLogo.vue'
 import AppForm from './components/AppForm.vue'
-import {ref} from 'vue'
-import {changeThemFn} from '@/hooks/index'
+import { ref } from 'vue'
+import { changeThemFn } from '@/hooks/index'
 
 const isDark = ref(true)
 const changeThemeState = (e) => {
-  let value =isDark.value?1:2
-  changeThemFn(value,e)
+  let value = isDark.value ? 1 : 2
+  changeThemFn(value, e)
 }
 
 </script>
 <style lang="scss" scoped>
-.tyAdmin-login{
+.tyAdmin-login {
   position: relative;
   height: 100%;
-  &::before{
+
+  &::before {
     content: '';
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    margin-left: -50%;
+    margin-left: -45%;
     position: absolute;
     background: url(@/assets/svg/login-bg.svg);
     background-size: auto 100%;
     background-position: right;
   }
-  &::after{
-    position: absolute;
-    display: inline-block;
-    content: '';
-    background: url(@/assets/system/stripe.svg);
-    height: 50%;
-    width: 25%;
-    background-repeat: no-repeat;
-    background-size: 150% 150%;
-    background-position: center;
-    top: 50%;
-    left: 25%;
-    transform: translate(-50%,-50%);
-  }
-  .tyAdmin-login-btn{
+
+  .tyAdmin-login-btn {
     position: fixed;
     right: 20px;
     top: 20px;
     z-index: 99;
-    :deep(.ty-switch){
-      .checkedText{
+
+    :deep(.ty-switch) {
+      .checkedText {
         font-size: 0 !important;
         background-image: url('../../../assets/system/sun.svg');
         display: inline-block;
@@ -71,7 +57,8 @@ const changeThemeState = (e) => {
         background-size: contain;
         height: 15px;
       }
-      .uncheckedText{
+
+      .uncheckedText {
         font-size: 0 !important;
         background-image: url('../../../assets/system/moon.svg');
         display: inline-block;
@@ -82,12 +69,14 @@ const changeThemeState = (e) => {
     }
   }
 }
-html[toyar-theme="dark"]{
- .ty-main{
+
+html[toyar-theme="dark"] {
+  .ty-main {
     background: var(--toyar-gray-1);
   }
-  .tyAdmin-login{
-    &::before{
+
+  .tyAdmin-login {
+    &::before {
       top: 0;
       left: 0;
       height: 100%;
@@ -100,11 +89,18 @@ html[toyar-theme="dark"]{
     }
   }
 }
-html[toyar-theme='light']{
-  .ty-main{
+// .xl{
+//   .tyAdmin-login {
+//     &::before{
+//       // margin-left: -60%;
+//       display: none;
+//     }
+//   }
+// }
+
+html[toyar-theme='light'] {
+  .ty-main {
     background: var(--fill-white);
   }
 }
-
-
 </style>

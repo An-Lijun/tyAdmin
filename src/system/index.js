@@ -56,6 +56,10 @@ class NoDebugger {
     console.log('Head 中的 <script> 标签已清除');
   }
 }
+
+
+
+
 export default function (vue) {
   window.onload = function () {
     let RT = new RenderTail(undefined, ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
@@ -67,6 +71,30 @@ export default function (vue) {
         disF12: true
       })
     }
+
+    const paragraph = document.querySelector('#app');
+        const mediaQueries = {
+          '(max-width: 575px)':'xs',
+          '(min-width: 576px) and (max-width: 767px)':'sm',
+          '(min-width: 768px) and (max-width: 991px)':'md',
+          '(min-width: 992px) and (max-width: 1199px)':'lg',
+          '(min-width: 1200px) and (max-width: 1399px)':'xl',
+          '(min-width: 1399px)':'xxl'
+
+        }
+
+        function handleMediaQueryChange(mq) {
+                Object.keys(mediaQueries).forEach((key) => {
+                    paragraph.classList.remove(mediaQueries[key]);
+                });
+                paragraph.classList.add(mediaQueries[mq.media]);
+        }
+
+        Object.keys(mediaQueries).forEach(key => {
+            const mq = window.matchMedia(key);
+            handleMediaQueryChange(mq);
+            mq.addEventListener('change', handleMediaQueryChange);
+        });
 
   }
 }

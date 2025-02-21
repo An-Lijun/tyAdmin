@@ -1,7 +1,7 @@
 <template>
   <div class="tyAdmin-form">
-    <div class="tyAdmin-form__content">
-      <header class="tyAdmin-form__header">
+    <div class="tyAdmin-form__content animationBox" >
+      <header class="tyAdmin-form__header entry">
         {{ components[formType].header }}
       </header>
 

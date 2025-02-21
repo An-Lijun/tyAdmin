@@ -542,7 +542,7 @@ const closeMenu = (id, trades, ev) => {
     display: flex;
     height: 32px;
     max-height: 32px;
-    align-items: center
+    align-items: end;
   }
 
   .tyAdmin-header_visitingMenu {
@@ -550,9 +550,11 @@ const closeMenu = (id, trades, ev) => {
     background-color: var(--fill-2);
     font-size: 12px;
     color: var(--text-1);
-    padding: 5px 10px;
-    border-radius: var(--border-radius-4);
-
+    padding: 0 10px;
+    border-radius: var(--border-radius-8) var(--border-radius-8) 0 0;
+    height: 27px;
+    line-height: 27px;
+    
     &:hover {
       cursor: pointer;
       background-color: var(--primary-7);
