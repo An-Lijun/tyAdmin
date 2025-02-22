@@ -1,10 +1,13 @@
-html,:not(:root):-webkit-full-screen{
+html,
+:not(:root):-webkit-full-screen {
   background: var(--fill-2);
 }
-body{
+
+body {
   overflow: hidden;
 }
-.tyAdmin__container{
+
+.tyAdmin__container {
   padding: 16px !important;
   background: var(--fill-2);
 }
@@ -14,16 +17,18 @@ body{
   background: var(--primary-6);
 }
 
-:deep(.ty-aside){
+:deep(.ty-aside) {
   transition: width 5s;
 }
 
 ::view-transition-old(*) {
   animation: none;
 }
+
 ::view-transition-new(*) {
   animation: clip 0.5s ease-in;
 }
+
 ::view-transition-old(root) {
   z-index: 1;
 }
@@ -52,55 +57,81 @@ body{
 
 @keyframes clip {
   from {
-      clip-path: circle(0% at var(--x) var(--y));
+    clip-path: circle(0% at var(--x) var(--y));
   }
 
   to {
-      clip-path: circle(var(--r) at var(--x) var(--y));
+    clip-path: circle(var(--r) at var(--x) var(--y));
   }
 }
 
 @keyframes slideIn {
   from {
-      transform: translateX(50%);
-      opacity: 0;
+    transform: translateX(50%);
+    opacity: 0;
   }
+
   to {
-      transform: translateX(0);
-      opacity: 1;
+    transform: translateX(0);
+    opacity: 1;
   }
 }
+
 @keyframes slideLeft {
   from {
-      transform: translateX(-50%);
-      opacity: 0;
+    transform: translateX(-50%);
+    opacity: 0;
   }
+
   to {
-      transform: translateX(0);
-      opacity: 1;
+    transform: translateX(0);
+    opacity: 1;
   }
 }
+
 .animationBox .entry {
   animation: slideIn 0.5s ease-out;
   animation-fill-mode: forwards;
   opacity: 0;
 }
+
 .animationBox .entry-left {
   animation: slideLeft 0.5s ease-out;
   animation-fill-mode: forwards;
   opacity: 0;
 }
+
 .animationBox {
-// 使用 @for 循环生成样式
-@for $i from 1 through 10 {
-  .entry:nth-child(#{$i}) {
-    // 根据元素的顺序设置不同的动画延迟
-    animation-delay: $i * 0.1s;
+  // 使用 @for 循环生成样式
+  @for $i from 1 through 10 {
+    .entry:nth-child(#{$i}) {
+      // 根据元素的顺序设置不同的动画延迟
+      animation-delay: $i * 0.1s;
+    }
+
+    .entry-left:nth-child(#{$i}) {
+      // 根据元素的顺序设置不同的动画延迟
+      animation-delay: $i * 0.1s;
+    }
   }
 
-  .entry-left:nth-child(#{$i}) {
-    // 根据元素的顺序设置不同的动画延迟
-    animation-delay: $i * 0.1s;
-  }
+
 }
+
+.animationLeftToRight {
+  overflow-x: hidden;
+  @for $i from 1 through 10 {
+    &>:nth-child(#{$i}) {
+      // 根据元素的顺序设置不同的动画延迟
+      animation-delay: $i * 0.1s;
+      animation: slideIn 0.5s ease-out;
+      animation-fill-mode: forwards;
+      opacity: 0;
+    }
+
+    &>:nth-child(#{$i}) {
+      // 根据元素的顺序设置不同的动画延迟
+      animation-delay: $i * 0.1s;
+    }
+  }
 }

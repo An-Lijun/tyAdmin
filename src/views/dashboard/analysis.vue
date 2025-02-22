@@ -1,6 +1,6 @@
 <!-- 分析页 -->
 <template>
-  <div class="tyAdmin__container">
+  <div class="tyAdmin__container animationLeftToRight">
     <TyRow :gutter="16" style="margin: 0 -8px -16px">
       <TyCol
         :span="{

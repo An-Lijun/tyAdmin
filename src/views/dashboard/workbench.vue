@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="animationLeftToRight">
     <TyCard :border="false">
       <div class="header-card">
         <TyImage

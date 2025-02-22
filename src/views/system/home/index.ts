@@ -31,6 +31,7 @@ export default defineComponent({
                 }
               },
                 h('div', {
+                  class: 'animationLeftToRight',
                   style: {
                     width: '100%',
                     'overflow-y': 'auto',
@@ -66,6 +67,7 @@ export default defineComponent({
                 }
               },
                 h('div', {
+                  class: 'animationLeftToRight',
                   style: {
                     width: '100%',
                     'overflow-y': 'auto',
