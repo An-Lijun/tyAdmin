@@ -88,11 +88,11 @@
               <span style="margin-left: 5px"> Ty Admin </span>
             </div>
             <template #content>
-              <div @click="toLock">
+              <div @click="toLock" class="download-box">
                 <TyIcon icon="ty-lock-line"></TyIcon>
                 <span> 锁定屏幕 </span>
               </div>
-              <div @click="sureToExit">
+              <div @click="sureToExit" class="download-box">
                 <TyIcon icon="ty-shut-down-line"></TyIcon>
                 <span> 退出登录 </span>
               </div>
@@ -357,15 +357,8 @@ const closeMenu = (id, trades, ev) => {
 .sys {
   :deep(.ty-poppover__content ){
     width: 60px;
-    padding: unset;
-    --border-color-3: transparent;
-    top: 44px !important;
-    left: 50%;
-    transform: translate(-50%) !important;
-    height: 60px;
     padding: 10px 0;
-
-    div {
+    .download-box {
       height: 30px;
       display: flex;
       align-items: center;
@@ -379,6 +372,9 @@ const closeMenu = (id, trades, ev) => {
         color: var(--primary-6);
       }
     }
+    main{
+      margin-bottom: unset;
+    }
   }
 }
 
@@ -387,11 +383,17 @@ const closeMenu = (id, trades, ev) => {
     width: 310px;
     padding: unset;
     --border-color-3: transparent;
-    top: 44px !important;
-    left: 50%;
-    transform: translate(-50%) !important;
+    main{
+      margin-bottom: unset;
+    }
+    .ty-tabs.normal{
+      border: unset;
+    }
+    .ty-poppover__arrow{
+      top: -16px;
+    }
   }
-
+  // var(--bg-2);
   :deep(.ty-tabs)>main {
     height: 300px;
     overflow-x: hidden;

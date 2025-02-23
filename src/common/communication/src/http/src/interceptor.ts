@@ -33,7 +33,7 @@ export function addResInterceptor(http) {
   http.interceptors.response.use(
     function (response) {
       const data = JSON.parse(response.data)
-      if (isDev) {
+      if (isDev && import.meta.env.VITE_MOCK_OPEN === 'true') {
         console.log('请求返回', response);
         AxiosIn.post('/handleCallFunction', {
           url: response.config.url,
