@@ -6,16 +6,13 @@ import installRouterGuard from './guard';
 // 约定式路由源于系统
 import systemRouter from '~pages';
 
-let homeRouter =systemRouter.find(item =>
-  item.name ==="home"
-)
 export const pageRoute = [
   {
     label: '仪表盘',
     icon: 'ty-dashboard-fill',
     type: 'subMenu',
     path: '/dashboard',
-    name: 'Dashboard',
+    name: 'dashboard',
     redirect: { name: 'analysis' },
     children: [
       {
@@ -39,6 +36,23 @@ export const pageRoute = [
         path: 'tradeNav',
         component: () => import('@/views/dashboard/tradeNav.vue'),
       },
+    ]
+  },
+  {
+    label: '系统管理',
+    icon: 'ty-road-map-fill',
+    type: 'subMenu',
+    path: '/sysManage',
+    name: 'sysManage',
+    children: [
+      {
+        label: '菜单管理',
+        type: 'menu',
+        name: 'menuManage',
+        path: 'menuManage',
+        component: () => import('@/views/sysManage/menuManage.vue'),
+      },
+   
     ]
   },
   {
@@ -393,10 +407,6 @@ export const pageRoute = [
     ]
   },
 ]
-
-homeRouter.children =pageRoute
-
-console.log(systemRouter);
 
 
 // app router

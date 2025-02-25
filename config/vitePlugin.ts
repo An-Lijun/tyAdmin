@@ -4,7 +4,6 @@ import customServerPlugin  from './src/vite-mock-server';
 import Pages from 'vite-plugin-pages';
 import { viteMockServe } from 'vite-plugin-mock'
 import { loadEnv } from 'vite'
-
 export default function createPlugins(options): Array<any> {
   // {                                                                                                  13:22:32
   //   mode: 'development',
@@ -30,6 +29,20 @@ export default function createPlugins(options): Array<any> {
         dirs: 'src/views/system',
         // 支持的文件扩展名
         extensions: ['vue', 'js', 'jsx', 'ts', 'tsx'],
+        syncIndex: true,
+        importMode: (filepath) => {
+          if (filepath.includes('home')) {
+            return 'sync';
+          }
+          return 'async';
+        },
+        extendRoute(route, parent) {
+          if (route.name === 'home') {
+            route.path='/'
+          }
+
+          return route;
+        },
         exclude: ['**/components/*.vue'] // 排除某些文件
       }),
       viteMockServe({

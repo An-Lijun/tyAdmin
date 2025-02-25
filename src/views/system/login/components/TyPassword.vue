@@ -1,6 +1,5 @@
 <template>
-  <TyForm ref="formRef" style="width: 500px;" size="large" :formData="formData" :rules="rules" class="animationBox">
-
+  <TyForm ref="formRef" style="width: 500px" size="large" :formData="formData" :rules="rules" class="animationBox">
     <TyFormItem prop="username" class="entry">
       <template #label> 账户 </template>
       <TyInput v-model="formData.username"></TyInput>
@@ -10,13 +9,12 @@
       <TyInputPassword size="large" v-model="formData.password">
       </TyInputPassword>
     </TyFormItem>
-    <TyFormItem class="captchaItem entry" prop="account" v-if="errCount > 1" style="position: relative;">
+    <TyFormItem class="captchaItem entry" prop="account" v-if="errCount > 1" style="position: relative">
       <template #label> 验证码 </template>
-      <div style="display: flex; align-items: center;">
+      <div style="display: flex; align-items: center">
         <TyInput v-model="formData.account">
           <template #innerAft>
-            <div style="width: 120px;">
-            </div>
+            <div style="width: 120px"></div>
           </template>
         </TyInput>
         <canvas @click="resetCaptcha" ref="captchaRef" class="captcha"></canvas>
@@ -24,39 +22,33 @@
     </TyFormItem>
     <TyButton @click="login" block size="large" style="margin-top: 20px" class="entry">登录</TyButton>
     <div class="selfButtonList entry">
-      <TyButton type="secondary">
-        手机登录
-      </TyButton>
-      <TyButton type="secondary">
-        二维码登录
-      </TyButton>
-      <TyButton type="secondary" @click="toRegistry">
-        注册
-      </TyButton>
+      <TyButton type="secondary"> 手机登录 </TyButton>
+      <TyButton type="secondary"> 二维码登录 </TyButton>
+      <TyButton type="secondary" @click="toRegistry"> 注册 </TyButton>
     </div>
   </TyForm>
 </template>
 <script setup>
 import Captcha from './captcha.js'
 import http from '@/common/communication/src/http/index'
-import { router } from '@/router';
+import { router } from '@/router'
 const userStore = useUserStore()
 import { nextTick, onMounted, ref } from 'vue'
 import useUserStore from '@/store/modules/user'
 import { TyMessage } from 'toyar-design'
-
-
+import useMenuStore from '@/store/modules/menu'
+import generateRoutes from '@/router/generateRoutes'
 const emit = defineEmits('changeType')
+const menuStore = useMenuStore()
 
 const errCount = ref(0)
 let ccCode, restore
 const formData = ref({
-  username: '',
-  password: '',
+  username: 'admin',
+  password: 'admin',
   account: ''
 })
 const formRef = ref()
-
 
 const captchaRef = ref()
 const resetCaptcha = () => {
@@ -86,23 +78,32 @@ const rules = {
 const login = () => {
   formRef.value.validateAll().then(async res => {
     try {
-      const { data } = await http.post('/api/user/login', {
-        username: formData.value.username,
-        password: formData.value.password
-      }) || {}
+      const { data } =
+        (await http.post('/api/user/login', {
+          username: formData.value.username,
+          password: formData.value.password
+        })) || {}
 
       if (data && data.code === 200) {
         userStore.token = data.data.token
-        router.push({
-          name: 'Dashboard'
-        })
         TyMessage.success('登录成功')
         errCount.value = 0
+        const { data: lsData } = await http.get('/api/menu/list')
+        const routes = generateRoutes(lsData.data)
+        routes.forEach(element => {
+          router.addRoute('home',element)
+        });
+        nextTick(() => {
+          router.push({
+            name: 'dashboard'
+          })
+        })
       }
     } catch (error) {
+      console.log(error)
+
       errCount.value = errCount.value + 1
       if (errCount.value >= 2) {
-
         if (!ccCode) {
           nextTick(() => {
             ccCode = new Captcha(captchaRef.value)
@@ -110,13 +111,11 @@ const login = () => {
           })
         } else {
           restore = ccCode.render()
-
         }
       }
     }
   })
 }
-
 </script>
 <style lang="scss" scoped>
 :deep(.ty-form-item__label) {
@@ -139,7 +138,7 @@ const login = () => {
   }
 }
 
-:deep(.ty-form-item__label ){
+:deep(.ty-form-item__label) {
   color: var(--text-1);
 }
 
@@ -149,7 +148,8 @@ const login = () => {
   border: unset;
   position: absolute;
   right: 25px;
-  &:hover{
+
+  &:hover {
     cursor: pointer;
   }
 }
