@@ -90,6 +90,7 @@ const login = () => {
         errCount.value = 0
         const { data: lsData } = await http.get('/api/menu/list')
         const routes = generateRoutes(lsData.data)
+        localStorage.setItem('dynamicRoutes', JSON.stringify(lsData.data));
         routes.forEach(element => {
           router.addRoute('home',element)
         });

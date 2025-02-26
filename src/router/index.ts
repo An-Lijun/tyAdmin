@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 import type { App } from 'vue';
-
+import generateRoutes from './generateRoutes'
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import installRouterGuard from './guard';
 // 约定式路由源于系统
@@ -408,7 +408,6 @@ export const pageRoute = [
   },
 ]
 
-
 // app router
 // 创建一个可以被 Vue 应用程序使用的路由实例
 export const router = createRouter({
@@ -422,6 +421,14 @@ export const router = createRouter({
   strict: true,
 
 });
+const dyRoutes = localStorage.getItem('dynamicRoutes');
+
+  if(dyRoutes){
+    const routesLs =generateRoutes(JSON.parse(dyRoutes)) 
+    routesLs.forEach((item:any) => {
+      router.addRoute('home',item)
+    })
+  }
 
 // config router
 // 配置路由器
