@@ -1,10 +1,7 @@
 // src/router/generateRoutes.js
 // 动态导入组件
-const loadComponent = (path) => {
-  return () => import(`${path}.vue`)
-};
-
 // 递归生成路由
+import {router} from "./index";
 const generateRoutes = (menuData,basePath='') => {
   let res= menuData.map(item => {
     const route = {
@@ -25,9 +22,9 @@ const generateRoutes = (menuData,basePath='') => {
         };
       }
     }else{
-      let data = basePath?'../views/' +basePath+'/'+item.path:'../views/' +item.path
-      route.component=loadComponent(data)
+      route.component=() => import(`${basePath?'../views/' +basePath+'/'+item.path:'../views/' +item.path}.vue`)
     }
+    router.addRoute('home',route)
 
     return route;
   });

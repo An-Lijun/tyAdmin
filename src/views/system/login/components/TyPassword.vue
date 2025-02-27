@@ -89,11 +89,9 @@ const login = () => {
         TyMessage.success('登录成功')
         errCount.value = 0
         const { data: lsData } = await http.get('/api/menu/list')
-        const routes = generateRoutes(lsData.data)
+        generateRoutes(lsData.data)
         localStorage.setItem('dynamicRoutes', JSON.stringify(lsData.data));
-        routes.forEach(element => {
-          router.addRoute('home',element)
-        });
+ 
         nextTick(() => {
           router.push({
             name: 'dashboard'

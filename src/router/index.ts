@@ -424,10 +424,7 @@ export const router = createRouter({
 const dyRoutes = localStorage.getItem('dynamicRoutes');
 
   if(dyRoutes){
-    const routesLs =generateRoutes(JSON.parse(dyRoutes)) 
-    routesLs.forEach((item:any) => {
-      router.addRoute('home',item)
-    })
+    generateRoutes(JSON.parse(dyRoutes)) 
   }
 
 // config router
