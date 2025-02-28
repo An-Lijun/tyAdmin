@@ -1,12 +1,12 @@
 <template>
   <div class="tyAdmin-logo animationBox" >
-    <h3 class="tyAdmin__logo entry-left">
+    <h3 class="tyAdmin__logo entry-reverse">
       <SvgIcon icon="logov3" />
       <span>
         ToyarAdmin
       </span>
     </h3>
-    <div class="tyAdmin__stripe entry-left"></div>
+    <div class="tyAdmin__stripe entry-reverse"></div>
   </div>
 </template>
 <script setup lang="ts">

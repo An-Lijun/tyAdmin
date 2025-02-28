@@ -1,5 +1,5 @@
 <template>
-  <TyForm ref="formRef" style="width: 500px" size="large" :formData="formData" :rules="rules" class="animationBox">
+  <TyForm ref="formRef" style="width: 500px" size="large" :formData="formData" :rules="rules" >
     <TyFormItem prop="username" class="entry">
       <template #label> 账户 </template>
       <TyInput v-model="formData.username"></TyInput>

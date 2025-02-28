@@ -65,7 +65,7 @@ body {
   }
 }
 
-@keyframes slideIn {
+@keyframes AnimaRightToLeft {
   from {
     transform: translateX(50%);
     opacity: 0;
@@ -77,7 +77,7 @@ body {
   }
 }
 
-@keyframes slideLeft {
+@keyframes AnimaLeftToRight {
   from {
     transform: translateX(-50%);
     opacity: 0;
@@ -90,13 +90,13 @@ body {
 }
 
 .animationBox .entry {
-  animation: slideIn 0.5s ease-out;
+  animation: AnimaRightToLeft 0.5s ease-out;
   animation-fill-mode: forwards;
   opacity: 0;
 }
 
-.animationBox .entry-left {
-  animation: slideLeft 0.5s ease-out;
+.animationBox .entry-reverse {
+  animation: AnimaLeftToRight 0.5s ease-out;
   animation-fill-mode: forwards;
   opacity: 0;
 }
@@ -109,7 +109,7 @@ body {
       animation-delay: $i * 0.1s;
     }
 
-    .entry-left:nth-child(#{$i}) {
+    .entry-reverse:nth-child(#{$i}) {
       // 根据元素的顺序设置不同的动画延迟
       animation-delay: $i * 0.1s;
     }
@@ -118,20 +118,28 @@ body {
 
 }
 
+.animationRightToLeft {
+  overflow-x: hidden;
+  @for $i from 1 through 10 {
+    &>:nth-child(#{$i}) {
+      // 根据元素的顺序设置不同的动画延迟
+      animation-delay: $i * 0.1s;
+      animation: AnimaRightToLeft 0.5s ease-out;
+      animation-fill-mode: forwards;
+      opacity: 0;
+    }
+  }
+}
+
 .animationLeftToRight {
   overflow-x: hidden;
   @for $i from 1 through 10 {
     &>:nth-child(#{$i}) {
       // 根据元素的顺序设置不同的动画延迟
       animation-delay: $i * 0.1s;
-      animation: slideIn 0.5s ease-out;
+      animation: AnimaLeftToRight 0.5s ease-out;
       animation-fill-mode: forwards;
       opacity: 0;
-    }
-
-    &>:nth-child(#{$i}) {
-      // 根据元素的顺序设置不同的动画延迟
-      animation-delay: $i * 0.1s;
     }
   }
 }

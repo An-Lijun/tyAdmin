@@ -1,5 +1,5 @@
 <template>
-    <div class="selfButtonList entry">
+    <div class="selfButtonList entry" style="margin-top: 20px;animation-delay: 0.4s;">
       <TyButton type="secondary"> 手机登录 </TyButton>
       <TyButton type="secondary"> 二维码登录 </TyButton>
       <TyButton type="secondary" @click="toRegistry"> 注册 </TyButton>
