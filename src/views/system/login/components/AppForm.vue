@@ -4,18 +4,18 @@
       <header class="tyAdmin-form__header entry">
         {{ components[formType].header }}
       </header>
-
-      <div style="display: flex;">
-        <!-- <Transition name="fade"> -->
-          <component :is="components[formType].form" @changeType="changeType" />
-        <!-- </Transition> -->
-      </div>
+       <div>
+          <component :is="components[formType].form"  />
+          <component :is="components[formType].footer" @changeType="changeType"/>
+        </div>
     </div>
   </div>
 </template>
-<script setup lang="ts">
+<script setup>
 import TyPassword from './TyPassword.vue'
 import TyRegistry from './TyRegistry.vue'
+import PasswordFooter from './passwordFooter.vue'
+import RegistryFooter from './registryFooter.vue'
 
 import { ref } from 'vue'
 
@@ -24,11 +24,14 @@ const formType = ref('password')
 const components = {
   password: {
     header: '登录',
-    form: TyPassword
+    form: TyPassword,
+    footer: PasswordFooter
   },
   registry: {
     header: '注册',
-    form: TyRegistry
+    form: TyRegistry,
+    footer: RegistryFooter
+
   }
 }
 
@@ -60,26 +63,5 @@ const changeType = val => {
       color: var(--text-1);
     }
   }
-}
-
-
-/* 定义左右移动动画的 CSS 类 */
-.fade-enter-active,
-.fade-leave-active {
-  transition: transform 0.5s ease;
-}
-.fade-enter-from {
-  transform: translateX(100%);
-}
-.fade-enter-to {
-  transform: translateX(0);
-  opacity: 0;
-}
-.fade-leave-from {
-  transform: translateX(0);
-  opacity: 0;
-}
-.fade-leave-to {
-  transform: translateX(-100%);
 }
 </style>

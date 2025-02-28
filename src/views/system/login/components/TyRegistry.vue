@@ -22,11 +22,7 @@
     <TyButton @click="registry" block size="large" style="margin-top: 20px"  class="entry"
       >注册</TyButton
     >
-    <div class="selfButtonList entry">
-      <TyButton type="secondary"> 手机登录 </TyButton>
-      <TyButton type="secondary"> 二维码登录 </TyButton>
-      <TyButton type="secondary" @click="toLogin"> 登录 </TyButton>
-    </div>
+
   </TyForm>
 </template>
 <script setup>
@@ -34,7 +30,6 @@ import http from '@/common/communication/src/http/index'
 import { router } from '@/router'
 import { onMounted, ref } from 'vue'
 import {TyMessage} from 'toyar-design'
-const emit = defineEmits('changeType')
 
 const formData = ref({
   username: '',
@@ -43,9 +38,7 @@ const formData = ref({
   email: ''
 })
 const formRef = ref()
-const toLogin=()=>{
-   emit('changeType','password')
-}
+
 const rules = {
   username: [
     { required: true, message: `用户名是必填字段`, trigger: ['blur'] }
@@ -75,7 +68,6 @@ const registry = () => {
     }
   })
 }
-onMounted(() => {})
 </script>
 <style lang="scss" scoped>
 :deep(.ty-form-item__label) {
@@ -88,15 +80,7 @@ onMounted(() => {})
   }
 }
 
-.selfButtonList {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
 
-  :deep(.ty-button) {
-    padding: 0 45px;
-  }
-}
 
 :deep(.ty-form-item__label){
   color: var(--text-1);
