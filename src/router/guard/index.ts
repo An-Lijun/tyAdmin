@@ -2,7 +2,6 @@ import type { Router} from 'vue-router';
 import useUserStore from '@/store/modules/user'
 
 
-// Don't change the order of creation
 export default function installRouterGuard(router: Router) {
   createPageGuard(router)
 }

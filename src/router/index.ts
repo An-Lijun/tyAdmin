@@ -408,17 +408,11 @@ export const pageRoute = [
   },
 ]
 
-// app router
-// 创建一个可以被 Vue 应用程序使用的路由实例
+// 创建路由实例
 export const router = createRouter({
-
-  // 创建一个 hash 历史记录。
-  // import.meta.env.VITE_PUBLIC_PATH
-  history: createWebHashHistory(),
-  // 应该添加到路由的初始路由列表。
-  routes: systemRouter as unknown as RouteRecordRaw[],
-  // 是否应该禁止尾部斜杠。默认为假
-  strict: true,
+  history: createWebHashHistory(),   // 创建一个 hash 历史记录。
+  routes: systemRouter as unknown as RouteRecordRaw[], // 添加到路由的初始路由列表。
+  strict: true, // 是否应该禁止尾部斜杠。默认为假
 
 });
 const dyRoutes = localStorage.getItem('dynamicRoutes');

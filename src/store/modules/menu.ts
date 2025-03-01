@@ -2,12 +2,10 @@ import { defineStore } from 'pinia';
 // @ts-ignore
 export default defineStore('useMenuStore', {
   state: () => ({
-    // 用户信息
     menu:[], // 全部菜单
     activeMenu:'', // 当前激活的menu菜单
     openedMenu:[], // 当前已经打开的菜单
     visitingMenu:[], // 当前正在访问过的菜单
-    
   }),
   actions:{
     // 设置所有菜单

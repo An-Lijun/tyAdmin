@@ -89,14 +89,7 @@ html[toyar-theme="dark"] {
     }
   }
 }
-// .xl{
-//   .tyAdmin-login {
-//     &::before{
-//       // margin-left: -60%;
-//       display: none;
-//     }
-//   }
-// }
+
 
 html[toyar-theme='light'] {
   .ty-main {

@@ -44,9 +44,7 @@ export default class Captcha {
       this.ctx.strokeRect(0, 0, this.width, this.height)
 
       // 生成干扰线，数量随意
-      for (let i = 0; i < this.dirtyLines; i++) {
-          this.drawline()
-      }
+ 
       // 循环生成5位验证码
       for (let k = 0; k < 5; k++) {
           this.ctx.font = '76px Arial'
@@ -66,6 +64,9 @@ export default class Captcha {
           this.ctx.restore()
           code += ranNum
       }
+      for (let i = 0; i < this.dirtyLines; i++) {
+        this.drawline()
+    }
       // 返回生成的验证码字符串
       return code
   }

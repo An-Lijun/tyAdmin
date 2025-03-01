@@ -26,7 +26,8 @@ async function bootstrap() {
   installComponents(app)
   // 挂载echarts
   installSystem(app)
-  app.config.globalProperties.$echarts = echarts;
+  //暂时不采取全局注册任何东西
+  // app.config.globalProperties.$echarts = echarts;
 
   // 挂载app
   app.mount('#app')
