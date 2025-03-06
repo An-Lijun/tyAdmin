@@ -146,101 +146,101 @@ export const pageRoute = [
       {
         label: 'pdf预览',
         type: 'menu',
-        path: 'pdfView',
+        path: 'pdfViewIndex',
         component: () => import('@/views/viewer/pdfView/index.vue')
       },
       {
         label: 'doc预览',
         type: 'menu',
-        path: 'docView',
+        path: 'docViewIndex',
         component: () => import('@/views/viewer/docView/index.vue')
       },
       {
         label: 'excel预览',
         type: 'menu',
-        path: 'excelView',
+        path: 'excelViewIndex',
         component: () => import('@/views/viewer/excelView/index.vue')
       },
       {
         label: '图片预览',
         type: 'menu',
-        path: 'previewImg',
-        component: () => import('@/views/viewer/preview/index.vue')
+        path: 'previewImgIndex',
+        component: () => import('@/views/viewer/previewImg/index.vue')
       },
       {
         label: '代码预览',
         type: 'code',
-        path: 'codeView',
+        path: 'codeViewIndex',
         component: () => import('@/views/viewer/codeView/index.vue')
       },
       {
         label: '图表',
         type: 'menu',
-        path: 'charts',
+        path: 'chartsIndex',
         component: () => import('@/views/viewer/charts/index.vue')
       },
       {
         label: '图表(放大)',
         type: 'menu',
-        path: 'chartsZoom',
-        component: () => import('@/views/viewer/charts/chartsZoom/index.vue')
+        path: 'chartsZoomIndex',
+        component: () => import('@/views/viewer/chartsZoom/index.vue')
       },
       {
         label: 'shardCard',
         type: 'menu',
-        path: 'shardCard',
+        path: 'shardCardIndex',
         component: () => import('@/views/viewer/shardCard/index.vue')
       },
       {
         label: 'tree',
         type: 'menu',
-        path: 'tree',
+        path: 'treeIndex',
         component: () => import('@/views/viewer/tree/index.vue')
       },
       {
         label: 'soulBall',
         type: 'menu',
-        path: 'soulBall',
+        path: 'soulBallIndex',
         component: () => import('@/views/viewer/soulBall/index.vue')
       },
       {
         label: '条形码',
         type: 'menu',
-        path: 'barcode',
+        path: 'barcodeIndex',
         name: 'barcode',
-        component: () => import('@/views/viewer/qrcode/one.vue')
+        component: () => import('@/views/viewer/barcode/index.vue')
       },
       {
         label: '二维码',
         type: 'menu',
-        path: 'qrcode',
+        path: 'qrcodeIndex',
         name: 'qrcode',
-        component: () => import('@/views/viewer/qrcode/two.vue')
+        component: () => import('@/views/viewer/qrcode/index.vue')
       },
       
       {
         label: 'scrollPage',
         type: 'menu',
-        path: 'scrollPage',
+        path: 'scrollPageIndex',
         component: () => import('@/views/viewer/scrollPage/index.vue')
       },
 
       {
         label: '进度条',
         type: 'menu',
-        path: 'progress',
+        path: 'progressIndex',
         component: () => import('@/views/viewer/progress/index.vue')
       },
       {
         label: '动画',
         type: 'menu',
-        path: 'animation',
-        component: () => import('@/views/viewer/animation/clipath.vue')
+        path: 'animationIndex',
+        component: () => import('@/views/viewer/animation/index.vue')
       },
       {
         label: '马',
         type: 'horse',
-        path: 'horse',
+        path: 'horseIndex',
         component: () => import('@/views/viewer/horse/index.vue')
       },
 
@@ -248,7 +248,7 @@ export const pageRoute = [
       {
         label: '魔法图片',
         type: 'magicImg',
-        path: 'magicImg',
+        path: 'magicImgIndex',
         component: () => import('@/views/viewer/magicImg/index.vue')
       },
     ]
