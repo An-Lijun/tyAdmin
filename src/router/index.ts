@@ -82,8 +82,8 @@ export const pageRoute = [
     label: '外链/页面',
     icon: 'ty-links-line',
     type: 'subMenu',
-    path: '/page',
-    name: 'Page',
+    path: '/website',
+    name: 'website',
     redirect: { name: 'analysis' },
     children: [
       {
@@ -110,10 +110,9 @@ export const pageRoute = [
       {
         label: '打开内部html页面',
         type: 'menu',
-        name: 'openHarfoutByIframe',
-        path: 'openHarfoutByIframe',
+        name: 'outByIframe',
+        path: 'outByIframe',
         component: () => import('@/views/website/outByIframe.vue')
-
       }
     ]
   },
@@ -265,78 +264,78 @@ export const pageRoute = [
       {
         label: 'http',
         type: 'menu',
-        path: 'http',
-        name: 'http',
+        path: 'httpIndex',
+        name: 'httpIndex',
         component: () => import('@/views/operation/http/index.vue'),
 
       },
       {
         label: '图标',
         type: 'menu',
-        path: 'icon',
-        name: 'icon',
-        component: () => import('@/views/operation/feat/icon.vue'),
+        path: 'iconIndex',
+        name: 'iconIndex',
+        component: () => import('@/views/operation/icon/index.vue'),
 
       },
       {
         label: '下载',
         type: 'menu',
-        path: 'download',
-        name: 'download',
+        path: 'downloadIndex',
+        name: 'downloadIndex',
         component: () => import('@/views/operation/download/index.vue'),
 
       },
       {
         label: '打印',
         type: 'menu',
-        path: 'print',
-        name: 'print',
+        path: 'printIndex',
+        name: 'printIndex',
         component: () => import('@/views/operation/print/index.vue'),
       },
       {
         label: '编码',
         type: 'menu',
-        path: 'encode',
-        name: 'encode',
+        path: 'encodeIndex',
+        name: 'encodeIndex',
         component: () => import('@/views/operation/encode/index.vue'),
       },
       {
         label: '加密',
         type: 'menu',
-        path: 'encrypt',
-        name: 'encrypt',
+        path: 'encryptIndex',
+        name: 'encryptIndex',
         component: () => import('@/views/operation/encrypt/index.vue'),
       },
       {
         label: 'excel操作',
         type: 'menu',
-        path: 'excelHandler',
-        name: 'excelHandler',
+        path: 'excelIndex',
+        name: 'excelIndex',
         component: () => import('@/views/operation/excel/index.vue'),
       },
       {
         label: 'full操作',
         type: 'menu',
-        path: 'full',
-        name: 'full',
+        path: 'fullIndex',
+        name: 'fullIndex',
         component: () => import('@/views/operation/full/index.vue'),
       },
       {
         label: '离开提醒',
         type: 'menu',
-        path: 'pageLeaveRem',
+        path: 'pageLeaveRemIndex',
         component: () => import('@/views/operation/pageLeaveRem/index.vue')
       },
       {
         label: '水波纹',
         type: 'menu',
-        path: 'waterButton',
+        path: 'waterButtonIndex',
         component: () => import('@/views/operation/waterButton/index.vue')
       },
       {
         label: '签字版',
         type: 'menu',
-        path: 'signingBoard',
+        path: 'signingBoardIndex',
         component: () => import('@/views/operation/signingboard/index.vue')
       },
     ]
@@ -352,8 +351,8 @@ export const pageRoute = [
       {
         label: '异常页',
         type: 'menu',
-        path: 'errorPage',
-        name: 'errorPage',
+        path: 'errorIndex',
+        name: 'errorIndex',
         component: () => import('@/views/pages/error/index.vue'),
       }
     ]

@@ -16,7 +16,7 @@
           </TyCol>
           <TyCol :span="8">
             <TyFormItem label="状态" name="status">
-              <TySelect v-model="formData.status" placeholder="请选择状态">
+              <TySelect v-model="formData.status" size="large" placeholder="请选择状态">
                 <TyOption value="1">启用</TyOption>
                 <TyOption value="2">禁用</TyOption>
               </TySelect>
@@ -24,9 +24,10 @@
           </TyCol>
           <TyCol :span="8">
             <TySpace>
-              <TyButton @click="formSearch">查询</TyButton>
+              <TyButton @click="formSearch" size="large">查询</TyButton>
               <TyButton
                 type="secondary"
+                size="large"
                 @click="
                   () => {
                     console.log(formData)
@@ -41,15 +42,15 @@
     </TyCard>
 
     <TyCard style="margin-top: 20px">
-      <TySpace>
-        <TyButton @click="addMenu">新增</TyButton>
+      <TySpace style="margin-bottom: 12px;">
+        <TyButton @click="addMenu" size="medium">新增</TyButton>
       </TySpace>
       <TyTable :columns="columns" :data="tableData">
         <template #operation="{ row }">
           <TySpace style="width: 50px">
             <TyButton @click="addMenu(row)">新增</TyButton>
-            <TyButton size="small">编辑</TyButton>
-            <TyButton size="small">删除</TyButton>
+            <TyButton size="small" state="warning">编辑</TyButton>
+            <TyButton size="small" state="danger">删除</TyButton>
           </TySpace>
         </template>
       </TyTable>
