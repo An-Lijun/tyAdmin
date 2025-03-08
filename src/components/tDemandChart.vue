@@ -2,8 +2,7 @@
   <div class="ty-adnin-tChart" ref="myChartsRef" :style="{ height: height, width: width }"></div>
 </template>
 <script setup lang="ts">
-import { init } from 'echarts'
-import type {  ECharts, EChartsOption } from 'echarts'
+import { ECharts, EChartsOption, init } from 'echarts'
 import 'echarts-wordcloud';
 import { ref, onBeforeUnmount, onMounted, watch, defineEmits } from 'vue'
 import useAppStore from '@/store/modules/app'
@@ -22,8 +21,12 @@ const props = withDefaults(defineProps<Props>(), {
   height: '100%',
   option: () => ({}),
   deepDraw: false,
-  deepRender: false
+  deepRender: false,
+  charsType:'',
 })
+
+
+
 const emit = defineEmits(['click','brushselected','brushEnd'])
 const myChartsRef = ref<HTMLDivElement>()
 const appStore =useAppStore()
@@ -150,6 +153,7 @@ onBeforeUnmount(() => {
    *
    */
   removeEvent()
+  myChart.clear()
   myChart.dispose()
   clearTimeout(timer)
   window.removeEventListener('resize', resizeChart)

@@ -17,6 +17,7 @@
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",
     "echarts": "^5.5.0",
+    "echarts-wordcloud": "^2.1.0",
     "handsontable": "^14.6.1",
     "highlight.js": "^11.10.0",
     "jsbarcode": "^3.11.6",
