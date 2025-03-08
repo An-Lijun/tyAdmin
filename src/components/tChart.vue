@@ -32,7 +32,6 @@ let myChart: ECharts
 let timer: null | Timeout
 let timer2: null | Timeout
 
-
 let eventMap: { [key: string]: any } = {
   click: (params: Object) => {
     emit('click', params)
@@ -44,7 +43,6 @@ let eventMap: { [key: string]: any } = {
     emit('brushEnd', params,myChart)
   },
 }
-
 const addEvent = () => {
   //绑定事件
   for (const key in eventMap) {

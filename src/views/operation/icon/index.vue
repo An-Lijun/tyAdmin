@@ -5,6 +5,9 @@
     <h2>Icon组件示例</h2>
   </TyCard>
   <div class="tyAdmin__container">
+    <ty-caution title="推荐使用ToyarIcon组件" style="margin-bottom: 16px;">
+      Icon组件基本包含所有的图标,在下面网址内你可以查询到你想要的任何图标。并且打包只会打包所用到的图标。
+    </ty-caution>
     <TyCard :border="false" >
       <template #header>
           Toyar-Design Icon使用
@@ -43,6 +46,8 @@
       </div>
       <svgIconSelect v-model="iconName"/>
     </TyCard>
+
+
   </div>
   </div>
 </template>

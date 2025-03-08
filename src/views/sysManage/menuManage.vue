@@ -69,7 +69,8 @@
           </TySwitch>
         </TyFormItem>
         <TyFormItem label="菜单图标" name="icon">
-          <TyInput v-model="diaFormData.icon" placeholder="请输入菜单图标" />
+          <!-- <TyInput v-model="diaFormData.icon" placeholder="请输入菜单图标" /> -->
+          <iconSelect v-model="diaFormData.icon" placeholder="请输入菜单图标" />
         </TyFormItem>
         <TyFormItem label="菜单类型" name="type">
           <TySelect v-model="diaFormData.type" placeholder="请选则菜单类型">
@@ -94,7 +95,7 @@
 <script setup>
 import { ref } from 'vue'
 import http from '@/common/communication/src/http/index'
-
+import iconSelect from '@/components/iconSelect.vue'
 const formData = ref({
   label: '',
   status: ''

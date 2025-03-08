@@ -5,7 +5,7 @@
           <TyIcon :icon="item.icon"/>
         </div>
         <div style="display: flex;justify-content: flex-end; width: 100%;">
-          <TyPagination ref="paginationRef" style="margin-top: 10px;" :current="current" :total="total"  @currentChange="currentChange"/>
+          <TyPagination ref="paginationRef" style="margin-top: 10px;" :current="current" :total="total" :pageSize="5"  @currentChange="currentChange"/>
         </div>
     </div>
   </TySelect>
