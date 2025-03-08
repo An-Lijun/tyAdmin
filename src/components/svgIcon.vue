@@ -3,7 +3,7 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref,watch } from 'vue'
 const props = defineProps({
   icon: {
     type: String,
@@ -11,14 +11,20 @@ const props = defineProps({
   }
 })
 const svgIcon = ref()
-;(icon =>
+
+function getIcon(icon) {
   import(`../assets/svgIcon/${icon}.svg?raw`)
     .then(obj => {
       svgIcon.value.innerHTML = obj.default || 'undefined'
     })
     .catch(e => {
       svgIcon.value.innerHTML = 'undefined'
-    }))(props.icon)
+    })
+}
+watch(() => props.icon, (val) => {
+  getIcon(val)
+}, { immediate: true })
+
 
 // 本来打算使用?raw 读出字符串渲染到根html中然后使用svguse 进行使用但是没有这个方式简单
 

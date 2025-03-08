@@ -41,7 +41,9 @@ class TailElement {
       this.position.y += this.velocity.y // y轴移动
       this.lifeSpan-- // 减少生命周期
       this.element.style.transform = "translate3d(" + this.position.x + "px," + this.position.y + "px,0) scale(" + this.lifeSpan / 120 + ")" // 缩放
-  }
+      this.element.className='noclick'
+  
+    }
 
   //销毁
   die() {

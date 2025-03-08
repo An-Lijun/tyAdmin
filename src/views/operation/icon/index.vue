@@ -26,11 +26,34 @@
           </span>
         </div>
     </TyCard>
+    <TyCard :border="false" style="margin-top: 14px;">
+      <template #header>
+          Icon选择器使用
+      </template>
+      <TyIcon :icon="icon" style="font-size: 40px;"></TyIcon>
+      <iconSelect v-model="icon"/>
+    </TyCard>
+
+    <TyCard :border="false" style="margin-top: 14px;">
+      <template #header>
+          svgIcon选择器使用
+      </template>
+      <div style="width: 40px;height: 40px;margin-bottom: 10px;">
+        <svgIcon :icon="iconName" style="width: 40px;height: 40px;margin-bottom: 10px;"></svgIcon>
+      </div>
+      <svgIconSelect v-model="iconName"/>
+    </TyCard>
   </div>
   </div>
 </template>
 <script setup>
 import svgIcon from '@/components/svgIcon.vue'
+import iconSelect from '@/components/iconSelect.vue'
+import svgIconSelect from '@/components/svgIconSelect.vue'
+
+import {ref} from 'vue'
+const iconName =ref('')
+const icon = ref('')
 let tyIconLs=[
   'ty-arrow-up-circle-fill',
   'ty-arrow-down-circle-fill',
