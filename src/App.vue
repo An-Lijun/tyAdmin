@@ -7,6 +7,7 @@
     }" :markInfo="['TyAdmin', formatDate(new Date())]">
       <RouterView />
     </TyWaterMark>
+
   </TyConfigProvider>
 </template>
 
