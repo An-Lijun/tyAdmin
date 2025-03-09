@@ -2,16 +2,13 @@
 <template>
   <div class="tyAdmin__container animationRightToLeft">
     <TyRow :gutter="16" style="margin: 0 -8px -16px">
-      <TyCol
-        :span="{
-          xxl: 6,
-          xl: 6,
-          lg: 12,
-          md: 12,
-          sm: 24
-        }"
-        v-for="item in analysisList"
-      >
+      <TyCol :span="{
+        xxl: 6,
+        xl: 6,
+        lg: 12,
+        md: 12,
+        sm: 24
+      }" v-for="item in analysisList">
         <TyCard :isLoading="isLoading" :border="false">
           <template #header>
             <div class="analysisHead">
@@ -24,7 +21,7 @@
           <div class="analysisBody">
             <div class="line1">
               <countTo :value="item.money" :second="2">
-                <template #default="{value}">
+                <template #default="{ value }">
                   <span class="money">
                     ${{ value }}
                   </span>
@@ -43,7 +40,7 @@
       </TyCol>
     </TyRow>
     <TyCard :isLoading="isLoading" style="margin: 16px 0px; padding: unset" :border="false">
-      <TyRow :gutter="16"  style="margin: 16px 0px;">
+      <TyRow :gutter="16" style="margin: 16px 0px;">
         <TyCol>
           <TyTabs v-model="tabs" style="border: unset;">
             <TyTabItem title="流量趋势" name="a">
@@ -57,7 +54,7 @@
       </TyRow>
     </TyCard>
     <TyRow :gutter="16" style="margin: 0 -8px ">
-      <TyCol :span="8" >
+      <TyCol :span="8">
         <TyCard :isLoading="isLoading" :border="false">
           <template #header> 转化率 </template>
           <tChart height="230px" :option="option3" />
@@ -97,7 +94,7 @@ let analysisList = [
     img: 'assets/analysis/visit-count.svg',
     zTitle: '总访问数',
     num: '120,000',
-    state:'danger'
+    state: 'danger'
   },
   {
     title: '访问数',
@@ -106,7 +103,7 @@ let analysisList = [
     img: '/assets/analysis/total-sales.svg',
     zTitle: '总成交额',
     num: '20,000',
-    state:'success'
+    state: 'success'
 
   },
   {
@@ -116,7 +113,7 @@ let analysisList = [
     img: '/assets/analysis/download-count.svg',
     zTitle: '总下载数',
     num: '20,000',
-    state:'warning'
+    state: 'warning'
   },
   {
     title: '访问数',
@@ -125,7 +122,7 @@ let analysisList = [
     img: '/assets/analysis/transaction.svg',
     zTitle: '总成交数',
     num: '20,000',
-    state:'primary'
+    state: 'primary'
   }
 ]
 let option = {
@@ -215,7 +212,28 @@ let option2 = {
     splitNumber: 4
   },
   series: [
+
     {
+      // ... 其他配置项
+      itemStyle: {
+        normal: {
+          label: {
+            show: true,
+            position: 'top',  // 设置数字显示位置
+            textStyle: {  // 设置文本样式（可以在官方手册配置项里查查都有哪些属性可以设置）
+              color: 'black',
+              fontSize: 14,
+            },
+            formatter: '{c}'  // 设置展示的文本 {c} 代表数量
+          },
+          // barBorderRadius: [30, 30, 0, 0]
+          // color: function (params) {  // 给每个柱子返回一个颜色（从颜色列表里选）
+          //   var colorList = ['#8FC857', '#73BA2C', '#71C6ED', '#4CB8E9', '#FAE5AE', '#F9DE9B', '#F4A179', '#F18858', '#ED747D', '#E8505D']
+          //   return colorList[params.dataIndex]
+          // }
+        }
+
+      },
       data: [
         3000, 2000, 3333, 5000, 3200, 4200, 3200, 2100, 3000, 5100, 6000, 3200,
         4800
@@ -366,23 +384,28 @@ let option5 = {
   justify-content: space-between;
   align-items: center;
 }
+
 .analysisBody {
   padding: 15px;
+
   .line1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 10px 0 20px;
+
     span {
       font-size: 25px;
       color: var(--text-1);
       font-weight: normal;
     }
+
     img {
       width: 40px;
       height: 40px;
     }
   }
+
   .line2 {
     display: flex;
     align-items: center;
@@ -390,6 +413,7 @@ let option5 = {
     color: var(--text-2);
   }
 }
+
 .colBox {
   background-color: var(--primary-6);
   height: 30px;
