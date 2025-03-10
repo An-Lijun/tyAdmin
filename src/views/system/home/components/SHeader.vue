@@ -1,10 +1,20 @@
 <template>
-  <TyHeader height="80" class="tyAdmin-header" style="min-height: 80px; background-color: var(--color-bg-2)">
+  <TyHeader
+    height="80"
+    class="tyAdmin-header"
+    style="min-height: 80px; background-color: var(--color-bg-2)"
+  >
     <div class="tyAdmin-header__content">
       <div class="tyAdmin-header__left">
         <span class="foldBtn">
-          <TyIcon style="color: var(--toyar-gray-10)" :icon="appStore.isFold ? 'ty-indent-increase' : 'ty-indent-decrease'
-            " size="20" @click="toFold"></TyIcon>
+          <TyIcon
+            style="color: var(--toyar-gray-10)"
+            :icon="
+              appStore.isFold ? 'ty-indent-increase' : 'ty-indent-decrease'
+            "
+            size="18"
+            @click="toFold"
+          />
         </span>
         <TyBreadcrumb>
           <TyBreadcrumbItem to="home">首页</TyBreadcrumbItem>
@@ -14,13 +24,20 @@
         </TyBreadcrumb>
       </div>
       <div class="tyAdmin-header__right">
-        <div class="contruller">
-          <TyIcon icon="ty-search-line" size="20" style="color: var(--toyar-gray-10)"></TyIcon>
-        </div>
+        <TyIcon
+          class="contruller"
+          icon="ty-search-line"
+          size="18"
+          style="color: var(--toyar-gray-10)"
+        ></TyIcon>
         <div class="contruller">
           <TyBadge class="message" :dot="true" :max="5" :text="10">
             <TyPoppover trigger="click" placement="bottom">
-              <TyIcon icon="ty-notification-2-line" size="20" style="color: var(--toyar-gray-10)"></TyIcon>
+              <TyIcon
+                icon="ty-notification-2-line"
+                size="18"
+                style="color: var(--toyar-gray-10)"
+              ></TyIcon>
               <template #content>
                 <TyTabs v-model="tabKey">
                   <TyTabItem title="通知(5)" name="inform">
@@ -61,7 +78,11 @@
                       <div class="info">
                         <div class="title">
                           <span>{{ item.title }}</span>
-                          <TyButton type="secondary" size="mini" :state="item.state">
+                          <TyButton
+                            type="secondary"
+                            size="mini"
+                            :state="item.state"
+                          >
                             {{ item.extra }}
                           </TyButton>
                         </div>
@@ -76,38 +97,66 @@
             </TyPoppover>
           </TyBadge>
         </div>
-
-        <div class="contruller">
-          <TyIcon icon="ty-translate-2" size="20" style="color: var(--toyar-gray-10)"></TyIcon>
-        </div>
-        <div class="contruller sys">
-          <TyPoppover trigger="hover" placement="bottom">
-            <div style="display: flex; align-items: center">
-              <TyImage :size="30" fit="contain" :src="getAssetsFile('../../../../assets/system/header.png')"
-                class="bd ml-10" shape="circle" />
-              <span style="margin-left: 5px"> Ty Admin </span>
+        <TyPoppover class="contruller lang" trigger="click" placement="bottom">
+          <TyIcon
+            class="contruller"
+            icon="ty-translate-2"
+            size="18"
+            style="color: var(--toyar-gray-10)"
+          ></TyIcon>
+          <template #content>
+            <div @click="changeLang(item)" class="download-box" v-for="item in localeList">
+              <span> {{item.text}} </span>
             </div>
-            <template #content>
-              <div @click="toLock" class="download-box">
-                <TyIcon icon="ty-lock-line"></TyIcon>
-                <span> 锁定屏幕 </span>
-              </div>
-              <div @click="sureToExit" class="download-box">
-                <TyIcon icon="ty-shut-down-line"></TyIcon>
-                <span> 退出登录 </span>
-              </div>
-            </template>
-          </TyPoppover>
-        </div>
-        <div class="contruller" @click="openCont">
-          <TyIcon icon="ty-settings-4-line" size="20" style="color: var(--toyar-gray-10)"></TyIcon>
-        </div>
+            <!-- <div @click="sureToExit" class="download-box">
+              <TyIcon icon="ty-shut-down-line"></TyIcon>
+              <span> 退出登录 </span>
+            </div> -->
+          </template>
+        </TyPoppover>
+
+        <TyPoppover class="contruller sys" trigger="hover" placement="bottom">
+          <div style="display: flex; align-items: center">
+            <TyImage
+              :size="25"
+              fit="contain"
+              :src="getAssetURL('/assets/system/header.png')"
+              class="bd ml-10"
+              shape="circle"
+            />
+            <span style="margin-left: 5px;font-size:13px"> Ty Admin </span>
+          </div>
+          <template #content>
+            <div @click="toLock" class="download-box">
+              <TyIcon icon="ty-lock-line"></TyIcon>
+              <span> 锁定屏幕 </span>
+            </div>
+            <div @click="sureToExit" class="download-box">
+              <TyIcon icon="ty-shut-down-line"></TyIcon>
+              <span> 退出登录 </span>
+            </div>
+          </template>
+        </TyPoppover>
+        <TyIcon
+          class="contruller"
+          @click="openCont"
+          icon="ty-settings-4-line"
+          size="18"
+          style="color: var(--toyar-gray-10)"
+        ></TyIcon>
       </div>
     </div>
     <div class="tyAdmin-header__visitingList">
-      <span class="tyAdmin-header_visitingMenu" style="margin-right: 5px" v-for="menu in menuStore.visitingMenu" :class="{
-        active: getMkey(menu.path) === menuStore.activeMenu
-      }" @click="changeMenu(menu)" @contextmenu.prevent="closeMenu(menu)">
+      <span
+        class="tyAdmin-header_visitingMenu"
+        style="margin-right: 5px"
+        v-for="menu in menuStore.visitingMenu"
+        :class="{
+          active: getMkey(menu.path) === menuStore.activeMenu
+        }"
+        @click="changeMenu(menu)"
+        @contextmenu.prevent="closeMenu(menu)"
+      >
         {{ menu.label }}
       </span>
     </div>
@@ -121,193 +170,19 @@ import useMenuStore from '@/store/modules/menu'
 import SConfig from './SConfig.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { log } from 'node_modules/handsontable/helpers'
+import dataArr from '../data/dataArr.js'
+import { getAssetURL } from '@/common'
+import {localeList} from '@/locales/lang/constant'
+
 const router = useRouter()
-
-
-let dataArr = {
-  inform: [
-    {
-      id: '000000001',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
-      title: '你收到了 14 份新周报',
-      description: '',
-      datetime: '2017-08-09',
-      type: '1'
-    },
-    {
-      id: '000000002',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
-      title: '你推荐的 曲妮妮 已通过第三轮面试',
-      description: '',
-      datetime: '2017-08-08',
-      type: '1'
-    },
-    {
-      id: '000000003',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/kISTdvpyTAhtGxpovNWd.png',
-      title: '这种模板可以区分多种通知类型',
-      description: '',
-      datetime: '2017-08-07',
-      // read: true,
-      type: '1'
-    },
-    {
-      id: '000000004',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/GvqBnKhFgObvnSGkDsje.png',
-      title: '左侧图标用于区分不同的类型',
-      description: '',
-      datetime: '2017-08-07',
-      type: '1'
-    },
-    {
-      id: '000000005',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/GvqBnKhFgObvnSGkDsje.png',
-      title:
-        '标题可以设置自动显示省略号，本例中标题行数已设为1行，如果内容超过1行将自动截断并支持tooltip显示完整标题。',
-      description: '',
-      datetime: '2017-08-07',
-      type: '1'
-    },
-    {
-      id: '000000006',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/GvqBnKhFgObvnSGkDsje.png',
-      title: '左侧图标用于区分不同的类型',
-      description: '',
-      datetime: '2017-08-07',
-      type: '1'
-    },
-    {
-      id: '000000007',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/GvqBnKhFgObvnSGkDsje.png',
-      title: '左侧图标用于区分不同的类型',
-      description: '',
-      datetime: '2017-08-07',
-      type: '1'
-    },
-    {
-      id: '000000008',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/GvqBnKhFgObvnSGkDsje.png',
-      title: '左侧图标用于区分不同的类型',
-      description: '',
-      datetime: '2017-08-07',
-      type: '1'
-    },
-    {
-      id: '000000009',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/GvqBnKhFgObvnSGkDsje.png',
-      title: '左侧图标用于区分不同的类型',
-      description: '',
-      datetime: '2017-08-07',
-      type: '1'
-    },
-    {
-      id: '000000010',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/GvqBnKhFgObvnSGkDsje.png',
-      title: '左侧图标用于区分不同的类型',
-      description: '',
-      datetime: '2017-08-07',
-      type: '1'
-    }
-  ],
-  message: [
-    {
-      id: '000000006',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/fcHMVNCjPOsbUGdEduuv.jpeg',
-      title: '曲丽丽 评论了你',
-      description: '描述信息描述信息描述信息',
-      datetime: '2017-08-07',
-      type: '2',
-      clickClose: true
-    },
-    {
-      id: '000000007',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/fcHMVNCjPOsbUGdEduuv.jpeg',
-      title: '朱偏右 回复了你',
-      description: '这种模板用于提醒谁与你发生了互动',
-      datetime: '2017-08-07',
-      type: '2',
-      clickClose: true
-    },
-    {
-      id: '000000008',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/fcHMVNCjPOsbUGdEduuv.jpeg',
-      title: '标题',
-      description:
-        '请将鼠标移动到此处，以便测试超长的消息在此处将如何处理。本例中设置的描述最大行数为2，超过2行的描述内容将被省略并且可以通过tooltip查看完整内容',
-      datetime: '2017-08-07',
-      type: '2',
-      clickClose: true
-    }
-  ],
-  waitDone: [
-    {
-      id: '000000009',
-      avatar: '',
-      title: '任务名称',
-      description: '任务需要在 2017-01-12 20:00 前启动',
-      datetime: '',
-      extra: '未开始',
-      color: '',
-      type: '3',
-      state: 'primary'
-    },
-    {
-      id: '000000010',
-      avatar: '',
-      title: '第三方紧急代码变更',
-      description: '冠霖 需在 2017-01-07 前完成代码变更任务',
-      datetime: '',
-      extra: '马上到期',
-      color: 'red',
-      type: '3',
-      state: 'warning'
-    },
-    {
-      id: '000000011',
-      avatar: '',
-      title: '信息安全考试',
-      description: '指派竹尔于 2017-01-09 前完成更新并发布',
-      datetime: '',
-      extra: '已耗时 8 天',
-      color: 'gold',
-      type: '3',
-      state: 'success'
-    },
-    {
-      id: '000000012',
-      avatar: '',
-      title: 'ABCD 版本发布',
-      description: '指派竹尔于 2017-01-09 前完成更新并发布',
-      datetime: '',
-      extra: '进行中',
-      color: 'blue',
-      type: '3',
-      state: 'danger'
-    }
-  ]
-}
-
 const appStore = useAppStore()
 const menuStore = useMenuStore()
 const toFold = () => {
   appStore.isFold = !appStore.isFold
 }
-const getAssetsFile = (url: string) => {
-  return new URL(`${url}`, import.meta.url).href
+
+const changeLang =(val)=>{
+
 }
 
 const model = ref(false)
@@ -327,8 +202,8 @@ const toLock = () => {
     name: 'lock'
   })
 }
-const getMkey = (path) => '/' + path.replaceAll('/', '')
-const changeMenu = (menu) => {
+const getMkey = path => '/' + path.replaceAll('/', '')
+const changeMenu = menu => {
   router.push(menu.path)
   menuStore.activeMenu = getMkey(menu.path)
 }
@@ -343,19 +218,18 @@ const closeMenu = (id, trades, ev) => {
   //   posX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
   //   posY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
   // }
-  
-//   this.$store.state.openDialog('closeMenuDialog', {
-//     id: id,
-//     trades: trades,
-//     x: posX,
-//     y: posY,
-//     tradesys: this,
-//   }, true);
+  //   this.$store.state.openDialog('closeMenuDialog', {
+  //     id: id,
+  //     trades: trades,
+  //     x: posX,
+  //     y: posY,
+  //     tradesys: this,
+  //   }, true);
 }
 </script>
 <style lang="scss" scoped>
 .sys {
-  :deep(.ty-poppover__content ){
+  :deep(.ty-poppover__content) {
     width: 60px;
     padding: 10px 0;
     .download-box {
@@ -372,7 +246,30 @@ const closeMenu = (id, trades, ev) => {
         color: var(--primary-6);
       }
     }
-    main{
+    main {
+      margin-bottom: unset;
+    }
+  }
+}
+.lang{
+  :deep(.ty-poppover__content) {
+    width: 100px;
+    min-width: 100px;
+    padding: 10px 0;
+    .download-box {
+      height: 30px;
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+      span {
+        margin-left: 5px;
+      }
+
+      &:hover {
+        color: var(--primary-6);
+      }
+    }
+    main {
       margin-bottom: unset;
     }
   }
@@ -383,18 +280,18 @@ const closeMenu = (id, trades, ev) => {
     width: 310px;
     padding: unset;
     --border-color-3: transparent;
-    main{
+    main {
       margin-bottom: unset;
     }
-    .ty-tabs.normal{
+    .ty-tabs.normal {
       border: unset;
     }
-    .ty-poppover__arrow{
+    .ty-poppover__arrow {
       top: -16px;
     }
   }
   // var(--bg-2);
-  :deep(.ty-tabs)>main {
+  :deep(.ty-tabs) > main {
     height: 300px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -407,7 +304,7 @@ const closeMenu = (id, trades, ev) => {
     padding: 5px;
     align-items: center;
 
-    .img>img {
+    .img > img {
       width: 30px;
       height: 30px;
     }
@@ -438,7 +335,7 @@ const closeMenu = (id, trades, ev) => {
     padding: 5px;
     align-items: center;
 
-    .img>img {
+    .img > img {
       width: 30px;
       height: 30px;
     }
@@ -556,7 +453,7 @@ const closeMenu = (id, trades, ev) => {
     border-radius: var(--border-radius-8) var(--border-radius-8) 0 0;
     height: 27px;
     line-height: 27px;
-    
+
     &:hover {
       cursor: pointer;
       background-color: var(--primary-7);

@@ -6,6 +6,8 @@
           :src="getAssetURL('/assets/system/header.png')"
           fit="cover"
           shape="circle"
+          size="78"
+          style="margin-left: 10px"
         />
         <div class="main">
           <div class="ty-message">
@@ -317,12 +319,13 @@ setTimeout(() => {
   .ty-message {
     margin-left: 30px;
     .h-title {
-      height: 60px;
-      line-height: 60px;
+      height: 50px;
+      line-height: 50px;
       font-size: 20px;
     }
     .s-title {
       color: #999;
+      font-size: 14px;
     }
   }
 }

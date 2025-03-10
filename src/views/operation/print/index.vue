@@ -2,6 +2,10 @@
   <div class="divRoot">
     <tHeader title="打印函数" info="toyar-admin 自己封装打印函数" />
     <div class="tyAdmin__container">
+      <ty-caution title="推荐使用ToyarIcon组件" style="margin-bottom: 16px;">
+        Toyar-Design 封装了打印函数，方便打印html模板，表格，html字符串，class名，id名。
+      </ty-caution>
+
       <TyCard>
 
         <TySpace>

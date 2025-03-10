@@ -11,8 +11,8 @@
           <TyCol :span="8">
             <TyFormItem label="状态" name="status">
               <TySelect v-model="formData.status" size="large" placeholder="请选择状态">
-                <TyOption value="1">启用</TyOption>
-                <TyOption value="2">禁用</TyOption>
+                <TySelectOption :value="1">启用</TySelectOption>
+                <TySelectOption :value="2">禁用</TySelectOption>
               </TySelect>
             </TyFormItem>
           </TyCol>

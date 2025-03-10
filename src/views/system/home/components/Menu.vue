@@ -1,5 +1,4 @@
 <template>
-  <!-- v-model=""  -->
   <TyMenu theme="rDesign" @open="handleOpenMenu" :isFold="appStore.isFold" style="width: unset" v-model="menuStore.activeMenu"
     :option="routerTransMenu(pageRoute, '')"
     @click="handleOpenMenu"
@@ -23,7 +22,6 @@
             ToyarAdmin
           </span>
         </div>
-   
       </div>
     </template>
   </TyMenu>
@@ -82,7 +80,7 @@ routerTransMenu(pageRoute, '')
   align-items: center;
   .logoNm{
    color: var(--text-1);
-   font-size: 19px;
+   font-size: 17px;
     margin-right: 15px;
     font-weight: bold;
   }

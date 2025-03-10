@@ -2,6 +2,10 @@
   <div>
     <tHeader title="full" info="toyar-admin 全屏" />
     <div class="tyAdmin__container">
+      <ty-caution title="ToyarDesign全屏Hooks" style="margin-bottom: 16px;">
+        Toyar-Design 封装了全屏函数支持部分页面全屏。
+      </ty-caution>
+
       <TyCard style="margin-bottom: 20px;">
         <template #header>
           <div>
@@ -12,6 +16,7 @@
           <TyButton @click="handleFull">页面进入全屏</TyButton>
           <TyButton @click="handleFullTg" state="success">页面全屏切换</TyButton>
           <TyButton @click="handleFullExit" state="danger">页面退出全屏</TyButton>
+          <TyButton @click="handleFull2" >部分页面进入全屏</TyButton>
 
           <span>
             是否全屏 {{ isFull }}
@@ -25,7 +30,6 @@
             <span>部分全屏</span>
           </div>
         </template>
-        <TyButton @click="handleFull2">页面进入全屏</TyButton>
 
         <div ref="tableRef" style="display: flex; justify-content: center; align-items: center;">
           <TyTable :columns="columns" :data="data" />
@@ -45,8 +49,7 @@ const isFull = ref(false)
 const fs = new FullScreen(
   () => {
     console.log("进入全屏");
-    isFull.value =true
-
+      isFull.value =true
   },
   () => {
     console.log("退出全屏");

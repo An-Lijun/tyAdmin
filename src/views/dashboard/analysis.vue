@@ -43,11 +43,11 @@
       <TyRow :gutter="16" style="margin: 16px 0px;">
         <TyCol>
           <TyTabs v-model="tabs" style="border: unset;">
-            <TyTabItem title="流量趋势" name="a">
-              <tChart :deepRender="true" height="270px" :option="option" v-if="tabs === 'a'" />
+            <TyTabItem title="流量趋势" name="trend">
+              <tChart :deepRender="true" height="270px" :option="option" v-if="tabs === 'trend'" />
             </TyTabItem>
-            <TyTabItem title="访问量" name="b">
-              <tChart :deepRender="true" height="270px" :option="option2" v-if="tabs === 'b'" />
+            <TyTabItem title="访问量" name="visit">
+              <tChart :deepRender="true" height="270px" :option="option2" v-if="tabs === 'visit'" />
             </TyTabItem>
           </TyTabs>
         </TyCol>
@@ -77,15 +77,15 @@
 </template>
 <script setup>
 import { getAssetURL } from '@/common'
-// import { numberAnimation } from '@/common';
 import tChart from '@/components/tChart.vue'
 import countTo from '@/components/countTo.vue'
+import { ref } from 'vue'
+
 let isLoading = ref(true)
 setTimeout(() => {
   isLoading.value = false
-}, 1500)
-import { ref } from 'vue'
-let tabs = ref('a')
+}, 1200)
+let tabs = ref('trend')
 let analysisList = [
   {
     title: '访问数',
