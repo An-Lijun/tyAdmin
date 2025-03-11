@@ -1,40 +1,13 @@
 <template>
   <div class="tyAdmin__container">
-    <TyCard >
+    <TyCard>
       <div class="nav-container">
-        <div
-          class="nav__inner"
-          ref="container"
-          :style="{
-            height: height + 'px'
-          }"
-        >
-          <navItem
-            left="27%"
-            :radius="radius"
-            :routes="routes"
-            title="押品管理"
-          />
-          <navItem
-            left="42%"
-            :radius="radius"
-            :routes="routes1"
-            title="动库管理"
-          />
-          <navItem
-            left="58%"
-            :radius="radius"
-            :routes="routes2"
-            title="处置管理"
-          />
+        <div class="nav__inner" ref="container">
+          <navItem left="27%" :radius="radius" :routes="routes" title="押品管理" />
+          <navItem left="42%" :radius="radius" :routes="routes1" title="动库管理" />
+          <navItem left="58%" :radius="radius" :routes="routes2" title="处置管理" />
 
-          <navItem
-            left="70%"
-            :radius="radius"
-            :routes="routes3"
-            title="分类管理"
-          />
-
+          <navItem left="70%" :radius="radius" :routes="routes3" title="分类管理" />
 
         </div>
       </div>
@@ -49,7 +22,7 @@ export default {
   components: {
     navItem
   },
-  data () {
+  data() {
     return {
       radius: 100,
       height: 100,
@@ -96,63 +69,77 @@ export default {
     }
   },
   methods: {
-    init () {
+    init() {
+      this.$refs.container.style.transform = `scale(1.0)`
       const { width } = this.$refs.container.getBoundingClientRect()
-      this.height = width
-      console.log(this.height)
-      this.radius = width / 2
+      this.radius = width / 2;
+      this.$refs.container.style.transform = `scale(1.1)`
     }
   },
-  created () {
+  created() {
     window.addEventListener('resize', this.init)
   },
-  mounted () {
+  mounted() {
     this.init()
   },
-  beforeDestroy () {
+  beforeDestroy() {
     window.removeEventListener('resize', this.init)
   }
 }
 </script>
 <style lang="scss" scoped>
+@keyframes route{
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+}
+}
+
 .nav-container {
   height: 80vh;
   width: 100%;
-  background-image: url('@/assets/analysis/nav.png');
-  background-size: 100% 100%;
-  background-position: 0 50px;
+
   position: relative;
   overflow: hidden;
 
-  // &::before {
-  //   content: '';
-  //   width: 2%;
-  //   height: 50%;
-  //   position: absolute;
-  //   bottom: 0;
-  //   background-color: var(--color-bg-2) ;
-  //   z-index: 5;
-  // }
-  // &::after {
-  //   content: '';
-  //   width: 2%;
-  //   height: 50%;
-  //   position: absolute;
-  //   bottom: 0;
-  //   background-color: var(--color-bg-2);
-  //   z-index: 5;
-  //   right: 0;
-  // }
   .nav__inner {
-    border: 2px solid var(--primary-6);
-    width: 160%;
+    width: 137vw;
+    height: 137vw;
     position: absolute;
     border-radius: 50%;
     box-sizing: border-box;
     left: -30%;
-    transform: scale(1.1);
+    // transform: scale(1.1);
+    top: 60%;
 
-    top: 47%;
+    &::before {
+      content: "";
+      position: absolute;
+      width: 137vw;
+      height: 137vw;
+ 
+      z-index: 1;
+      border-radius: inherit;
+      background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+      animation: route 10s linear infinite;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 137vw;
+      height: 137vw;
+      top: 3px;
+      z-index: 2;
+      border-radius: inherit;
+      background: #fff;
+      background-image: url('@/assets/analysis/nav.png');
+      background-size: 50%;
+      background-position: center -12%;
+      background-repeat: no-repeat;
+      
+    }
   }
 }
 
@@ -160,5 +147,4 @@ export default {
 // /deep/.ant-card-body {
 //   height: 100%;
 //   padding: unset;
-// }
-</style>
+// }</style>
