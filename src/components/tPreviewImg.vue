@@ -14,11 +14,21 @@
         </span>
       </div>
       <div class="tyAdmin_toolbar">
-        <span class="tyAdmin_btn" @click="shrinkHandle">-</span>
-        <span class="tyAdmin_btn" @click="largeHandle">+</span>
-        <span class="tyAdmin_btn" @click="turnLeftHandle">↺</span>
-        <span class="tyAdmin_btn" @click="initImgHandle">▣</span>
-        <span class="tyAdmin_btn" @click="turnRightHandle">↻</span>
+        <span class="tyAdmin_btn" @click="shrinkHandle">
+           <TyIcon icon="ty-subtract-line"></TyIcon>
+        </span>
+        <span class="tyAdmin_btn" @click="largeHandle">
+          <TyIcon icon="ty-add-fill"></TyIcon>
+        </span>
+        <span class="tyAdmin_btn" @click="turnLeftHandle">
+          <TyIcon icon="ty-arrow-turn-forward-fill"></TyIcon>
+        </span>
+        <span class="tyAdmin_btn" @click="initImgHandle">
+        <TyIcon icon="ty-fullscreen-fill"></TyIcon>
+        </span>
+        <span class="tyAdmin_btn" @click="turnRightHandle">
+          <TyIcon icon="ty-arrow-turn-back-line"></TyIcon>
+        </span>
       </div>
     </div>
   </transition>

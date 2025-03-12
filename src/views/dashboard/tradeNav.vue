@@ -122,7 +122,16 @@ export default {
  
       z-index: 1;
       border-radius: inherit;
-      background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+      background: linear-gradient(to right,       var(--toyar-red-6), 
+      var(--toyar-orangered-6),
+      var(--toyar-green-6), 
+      var(--toyar-orange-6), 
+      var(--toyar-cyan-6), 
+      var(--toyar-yellow-6), 
+      var(--toyar-magenta-6), 
+      var(--toyar-blue-6), 
+      var(--toyar-xblue-6), 
+      var(--toyar-pinkpurple-6));
       animation: route 10s linear infinite;
     }
     &::after {
