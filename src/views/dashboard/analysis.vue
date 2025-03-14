@@ -1,7 +1,7 @@
 <!-- 分析页 -->
 <template>
   <div class="tyAdmin__container animationRightToLeft">
-    <TyRow :gutter="16" style="margin: 0 -8px -16px">
+    <TyRow :gutter="16" style="margin: 0 -8px -16px" class="tyAdmin__cardList">
       <TyCol :span="{
         xxl: 6,
         xl: 6,
@@ -415,8 +415,39 @@ let option5 = {
 }
 
 .colBox {
-  background-color: var(--primary-6);
+  background-color: var(--primary-4);
   height: 30px;
   margin: 5px 0;
+}
+.tyAdmin__cardList{
+  :deep(.ty-col):nth-child(1){
+    .ty-card{
+      // background-color: red;
+      background: linear-gradient(to right, var(--toyar-xblue-4),var(--toyar-purple-4));
+      color: #fff;
+    }
+  }
+  :deep(.ty-col):nth-child(2){
+    .ty-card{
+      // background-color: red;
+      background: linear-gradient(to right, var(--toyar-pinkpurple-4),var(--toyar-magenta-4));
+      color: #fff;
+    }
+  }
+  :deep(.ty-col):nth-child(3){
+    .ty-card{
+      // background-color: red;
+      background: linear-gradient(to right, var(--toyar-cyan-4),var(--toyar-green-4));
+      color: #fff;
+    }
+  }
+  :deep(.ty-col):nth-child(4){
+    .ty-card{
+      // background-color: red;
+      background: linear-gradient(to right, var(--toyar-red-4),var(--toyar-orangered-4));
+      color: #fff;
+    }
+  }
+  
 }
 </style>
