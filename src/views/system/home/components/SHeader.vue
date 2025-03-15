@@ -29,6 +29,7 @@
           icon="ty-search-line"
           size="18"
           style="color: var(--toyar-gray-10)"
+          @click="openSearch" 
         ></TyIcon>
         <div class="contruller">
           <TyBadge class="message" :dot="true" :max="5" :text="10">
@@ -161,6 +162,7 @@
       </span>
     </div>
     <SConfig v-model="model" />
+    <Ssearch v-model="isShowSearch"/>
   </TyHeader>
 </template>
 <script setup lang="ts">
@@ -173,14 +175,17 @@ import { useRouter } from 'vue-router'
 import dataArr from '../data/dataArr.js'
 import { getAssetURL } from '@/common'
 import {localeList} from '@/locales/lang/constant'
-
+import Ssearch from '@/components/search/index.vue'
 const router = useRouter()
 const appStore = useAppStore()
 const menuStore = useMenuStore()
+const isShowSearch = ref(false)
 const toFold = () => {
   appStore.isFold = !appStore.isFold
 }
-
+const openSearch = () => {
+  isShowSearch.value = !isShowSearch.value
+}
 const changeLang =(val)=>{
 
 }
