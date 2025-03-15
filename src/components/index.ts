@@ -3,7 +3,7 @@ import type { App } from 'vue';
 import 'toyar-design/dist/index2.js'
 
 // import toyar from 'toyar-design/dist/index.js'
-// import 'toyar-design/dist/style.css'
+import 'toyar-design/dist/style.css'
 import toyar from './dists/index.js'
 import './dists/style.css'
 import mavonEditor from 'mavon-editor'

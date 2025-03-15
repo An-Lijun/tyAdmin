@@ -1,5 +1,5 @@
 <template>
-  <TySelect ref="selectRef" v-model="model">
+  <TySelect ref="selectRef" v-model="model" icon="ty-draggable" width="300px">
     <div class="iconSelectOption">
         <div v-for="item in icons[current-1]" class="iconBox" @click="handleItemClick(item)" :key="item">
           <svgIcon :icon="item" style="font-size: 20px;"></svgIcon>
