@@ -260,7 +260,14 @@ export const pageRoute = [
     name: 'operation',
     redirect: { name: 'icon' },
     children: [
-      
+      {
+        label: 'mock',
+        type: 'menu',
+        path: 'mockIndex',
+        name: 'mockIndex',
+        component: () => import('@/views/operation/mock/index.vue'),
+
+      },
       {
         label: 'http',
         type: 'menu',

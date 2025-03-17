@@ -1,8 +1,9 @@
 <template>
   <div class="divRoot">
-    <codeViewer>
-
-      let a='66'
+    <codeViewer lang="json" >
+      {
+        "name":113
+      }
     </codeViewer>
   </div>
 </template>

@@ -60,10 +60,13 @@ const removeEvent = () => {
   }
 }
 
+let colorArr =[appStore.pColors[3],appStore.tColors[3],appStore.sColors[3]]
+const colors=[...colorArr,...colorArr,...colorArr]
+// ...appStore.pColors.slice(4,5),...appStore.tColors.slice(2,3),...appStore.sColors.slice(4,5)
 const getOption = () => {
   let targetOptions: EChartsOption = {...props.option}
   if (appStore.pColors.length>0) {
-    targetOptions.color = appStore.pColors
+    targetOptions.color = colors
   }
   return targetOptions
 }
