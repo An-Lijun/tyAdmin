@@ -24,6 +24,7 @@
         </TyBreadcrumb>
       </div>
       <div class="tyAdmin-header__right">
+
         <TyIcon
           class="contruller"
           icon="ty-search-line"
@@ -31,6 +32,20 @@
           style="color: var(--toyar-gray-10)"
           @click="openSearch" 
         ></TyIcon>
+
+
+        <TyTooltip content="按住Ctrl键并点击可清除缓存" class="selfTooltip">
+          <TyIcon
+            class="contruller"
+            icon="ty-loop-right-line"
+            size="18"
+            style="color: var(--toyar-gray-10)"
+            @click="reLoad" 
+          ></TyIcon>
+        </TyTooltip>
+        <!-- <i class="ri-fullscreen-fill"></i> -->
+        <!-- <i class="ri-fullscreen-exit-line"></i> -->
+
         <div class="contruller">
           <TyBadge class="message" :dot="true" :max="5" :text="10">
             <TyPoppover trigger="click" placement="bottom">
@@ -188,6 +203,10 @@ const openSearch = () => {
 }
 const changeLang =(val)=>{
 
+}
+
+const reLoad =(e)=>{
+  window.location.reload(e.ctrlKey)
 }
 
 const model = ref(false)
@@ -469,6 +488,11 @@ const closeMenu = (id, trades, ev) => {
       background-color: var(--primary-6);
       color: #fff;
     }
+  }
+}
+.selfTooltip{
+  :deep(.ty-tooltip__tip){
+    width: 100px;
   }
 }
 </style>

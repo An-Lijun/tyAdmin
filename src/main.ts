@@ -9,7 +9,7 @@ import installComponents from './components'
 import installI18n from './locales/index'
 import installAuth from './common/auth'
 import installSystem from './system/index'
-
+import { loadingFadeOut } from 'virtual:app-loading'
 import * as echarts from 'echarts';
 async function bootstrap() {
   // 创建app
@@ -31,6 +31,7 @@ async function bootstrap() {
 
   // 挂载app
   app.mount('#app')
+  loadingFadeOut()
 }
 
 bootstrap()

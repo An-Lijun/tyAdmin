@@ -4,6 +4,7 @@ import customServerPlugin  from './src/vite-mock-server';
 import Pages from 'vite-plugin-pages';
 import { viteMockServe } from 'vite-plugin-mock'
 import { loadEnv } from 'vite'
+import AppLoading from 'vite-plugin-app-loading'
 export default function createPlugins(options): Array<any> {
   // {                                                                                                  13:22:32
   //   mode: 'development',
@@ -24,6 +25,7 @@ export default function createPlugins(options): Array<any> {
         entry: 'src/main.ts',
         template: './index.html',
       }),
+      AppLoading(),
       Pages({
         // 页面文件所在目录，默认为 src/pages
         dirs: 'src/views/system',
