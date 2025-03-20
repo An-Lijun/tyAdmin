@@ -71,7 +71,7 @@ function customServerPlugin(options) {
         name: 'custom-server-plugin',
         configureServer(server) {
 
-            if(env.VITE_MOCK_OPEN === 'true'){
+            if(env.VITE_MOCK_SAVE === 'true'){
                 isPortTaken(env.VITE_MOCK_PORT, (isTaken) => {
                     if (isTaken) {
                         console.log(`端口 ${env.VITE_MOCK_PORT} 已被占用。`);

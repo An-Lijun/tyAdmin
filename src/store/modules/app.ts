@@ -11,7 +11,8 @@ export default defineStore('useAppStore', {
     isBlackModel:false, // 黑白模式
     isTritanopeModel:false, // 三色色盲模式
     themeState:1, // 主题状态 (1:暗黑模式 2:明亮模式)
-    layout:2 // 布局模式
+    layout:2, // 布局模式
+    loading:false
   }),
   persist: {
     enabled: true,// 开启持久化

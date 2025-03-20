@@ -5,7 +5,9 @@
       height: 300,
       antiTamper: true
     }" :markInfo="['TyAdmin', formatDate(new Date())]">
-      <RouterView />
+      <SLoading :loading="appStore.loading">
+        <RouterView />
+      </SLoading>
     </TyWaterMark>
 
   </TyConfigProvider>
@@ -14,6 +16,7 @@
 <script setup lang="ts">
 import { formatDate } from 'robinson'
 import useAppStore from '@/store/modules/app'
+import SLoading from'@/views/system/loading/index.vue'
 const appStore = useAppStore()
 
 // 165DFF

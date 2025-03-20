@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
- import createPlugins from './config/vitePlugin';
+import createPlugins from './config/vitePlugin';
 
 // https://vitejs.dev/config/
 export default defineConfig((options)=>{

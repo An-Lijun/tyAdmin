@@ -44,11 +44,17 @@
         </template>
       </TyTable>
     </TyCard>
-
     <TyDialog v-model="isShowDialog" title="添加菜单">
       <TyForm size="small" :formData="diaFormData" :rules="rules" ref="formRef" class="animationBox">
         <TyFormItem label="菜单名称" name="label">
           <TyInput v-model="diaFormData.label" placeholder="请输入菜单名称" />
+        </TyFormItem>
+        <TyFormItem label="父级菜单" name="label">
+          <TySelect v-model="diaFormData.parentId" placeholder="请输入菜单名称" >
+            <TySelectOption v-for="(item, index) in parentList" :key="index" :label="item.label" :value="item.id">
+            </TySelectOption>
+
+          </TySelect>
         </TyFormItem>
         <TyFormItem label="菜单url" name="path">
           <div style="display: flex;align-items: center;">
@@ -96,6 +102,11 @@
 import { ref } from 'vue'
 import http from '@/common/communication/src/http/index'
 import iconSelect from '@/components/iconSelect.vue'
+const parentList = ref([])
+// const res = (await ) || {}
+http.get('/api/menu/parentList').then(res=>{
+  parentList.value = res.data.data
+})
 const formData = ref({
   label: '',
   status: ''
@@ -104,6 +115,7 @@ const formData = ref({
 const diaFormData = ref({
   label: '',
   path: '',
+  parentId:'',
   menuOrder: '',
   status: '',
   icon: '',
@@ -141,8 +153,12 @@ const handleSubmit = async () => {
 const handleCancel = () => {
   isShowDialog.value = false
 }
+
+
 const formSearch = async () => {
   const { data } = (await http.get('/api/menu/list')) || {}
+
+  
   tableData.value = data.data
 }
 </script>

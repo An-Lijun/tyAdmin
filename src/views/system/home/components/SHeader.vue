@@ -1,20 +1,10 @@
 <template>
-  <TyHeader
-    height="80"
-    class="tyAdmin-header"
-    style="min-height: 80px; background-color: var(--color-bg-2)"
-  >
+  <TyHeader height="80" class="tyAdmin-header" style="min-height: 80px; background-color: var(--color-bg-2)">
     <div class="tyAdmin-header__content">
       <div class="tyAdmin-header__left">
         <span class="foldBtn">
-          <TyIcon
-            style="color: var(--toyar-gray-10)"
-            :icon="
-              appStore.isFold ? 'ty-indent-increase' : 'ty-indent-decrease'
-            "
-            size="18"
-            @click="toFold"
-          />
+          <TyIcon style="color: var(--toyar-gray-10)" :icon="appStore.isFold ? 'ty-indent-increase' : 'ty-indent-decrease'
+            " size="18" @click="toFold" />
         </span>
         <TyBreadcrumb>
           <TyBreadcrumbItem to="home">首页</TyBreadcrumbItem>
@@ -25,35 +15,21 @@
       </div>
       <div class="tyAdmin-header__right">
 
-        <TyIcon
-          class="contruller"
-          icon="ty-search-line"
-          size="18"
-          style="color: var(--toyar-gray-10)"
-          @click="openSearch" 
-        ></TyIcon>
+        <TyIcon class="contruller" icon="ty-search-line" size="18" style="color: var(--toyar-gray-10)"
+          @click="openSearch"></TyIcon>
 
 
         <TyTooltip content="按住Ctrl键并点击可清除缓存" class="selfTooltip">
-          <TyIcon
-            class="contruller"
-            icon="ty-loop-right-line"
-            size="18"
-            style="color: var(--toyar-gray-10)"
-            @click="reLoad" 
-          ></TyIcon>
+          <TyIcon class="contruller" icon="ty-loop-right-line" size="18" style="color: var(--toyar-gray-10)"
+            @click="reLoad"></TyIcon>
         </TyTooltip>
-        <!-- <i class="ri-fullscreen-fill"></i> -->
-        <!-- <i class="ri-fullscreen-exit-line"></i> -->
+        <TyIcon class="contruller" :icon="isFull ? 'ty-fullscreen-exit-line' : 'ty-fullscreen-fill'" size="18"
+          style="color: var(--toyar-gray-10)" @click="fullScreen"></TyIcon>
 
         <div class="contruller">
           <TyBadge class="message" :dot="true" :max="5" :text="10">
             <TyPoppover trigger="click" placement="bottom">
-              <TyIcon
-                icon="ty-notification-2-line"
-                size="18"
-                style="color: var(--toyar-gray-10)"
-              ></TyIcon>
+              <TyIcon icon="ty-notification-2-line" size="18" style="color: var(--toyar-gray-10)"></TyIcon>
               <template #content>
                 <TyTabs v-model="tabKey">
                   <TyTabItem title="通知(5)" name="inform">
@@ -94,11 +70,7 @@
                       <div class="info">
                         <div class="title">
                           <span>{{ item.title }}</span>
-                          <TyButton
-                            type="secondary"
-                            size="mini"
-                            :state="item.state"
-                          >
+                          <TyButton type="secondary" size="mini" :state="item.state">
                             {{ item.extra }}
                           </TyButton>
                         </div>
@@ -113,16 +85,12 @@
             </TyPoppover>
           </TyBadge>
         </div>
-        <TyPoppover class="contruller lang" trigger="click" placement="bottom">
-          <TyIcon
-            class="contruller"
-            icon="ty-translate-2"
-            size="18"
-            style="color: var(--toyar-gray-10)"
-          ></TyIcon>
+        <div class="contruller ">
+          <TyPoppover  trigger="click" class="lang" placement="bottom">
+          <TyIcon  icon="ty-translate-2" size="18" style="color: var(--toyar-gray-10)"></TyIcon>
           <template #content>
             <div @click="changeLang(item)" class="download-box" v-for="item in localeList">
-              <span> {{item.text}} </span>
+              <span> {{ item.text }} </span>
             </div>
             <!-- <div @click="sureToExit" class="download-box">
               <TyIcon icon="ty-shut-down-line"></TyIcon>
@@ -130,16 +98,12 @@
             </div> -->
           </template>
         </TyPoppover>
-
-        <TyPoppover class="contruller sys" trigger="hover" placement="bottom">
+        </div>
+        <div class="contruller sys">
+          <TyPoppover  trigger="hover" placement="bottom">
           <div style="display: flex; align-items: center">
-            <TyImage
-              :size="25"
-              fit="contain"
-              :src="getAssetURL('/assets/system/header.png')"
-              class="bd ml-10"
-              shape="circle"
-            />
+            <TyImage :size="25" fit="contain" :src="getAssetURL('/assets/system/header.png')" class="bd ml-10"
+              shape="circle" />
             <span style="margin-left: 5px;font-size:13px"> Ty Admin </span>
           </div>
           <template #content>
@@ -153,31 +117,22 @@
             </div>
           </template>
         </TyPoppover>
-        <TyIcon
-          class="contruller"
-          @click="openCont"
-          icon="ty-settings-4-line"
-          size="18"
-          style="color: var(--toyar-gray-10)"
-        ></TyIcon>
+        </div>
+
+        <TyIcon class="contruller" @click="openCont" icon="ty-settings-4-line" size="18"
+          style="color: var(--toyar-gray-10)">
+        </TyIcon>
       </div>
     </div>
     <div class="tyAdmin-header__visitingList">
-      <span
-        class="tyAdmin-header_visitingMenu"
-        style="margin-right: 5px"
-        v-for="menu in menuStore.visitingMenu"
-        :class="{
-          active: getMkey(menu.path) === menuStore.activeMenu
-        }"
-        @click="changeMenu(menu)"
-        @contextmenu.prevent="closeMenu(menu)"
-      >
+      <span class="tyAdmin-header_visitingMenu" style="margin-right: 5px" v-for="menu in menuStore.visitingMenu" :class="{
+        active: getMkey(menu.path) === menuStore.activeMenu
+      }" @click="changeMenu(menu)" @contextmenu.prevent="closeMenu(menu)">
         {{ menu.label }}
       </span>
     </div>
     <SConfig v-model="model" />
-    <Ssearch v-model="isShowSearch"/>
+    <Ssearch v-model="isShowSearch" />
   </TyHeader>
 </template>
 <script setup lang="ts">
@@ -189,23 +144,45 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import dataArr from '../data/dataArr.js'
 import { getAssetURL } from '@/common'
-import {localeList} from '@/locales/lang/constant'
+import { localeList } from '@/locales/lang/constant'
 import Ssearch from '@/components/search/index.vue'
+import FullScreen from '@/common/full/index.ts'
+const isFull = ref(false)
+const full = new FullScreen(
+  () => {
+    console.log("进入全屏");
+    isFull.value = true
+  },
+  () => {
+    console.log("退出全屏");
+    isFull.value = false
+
+  },
+  () => {
+    console.log("全屏失败");
+  }
+)
 const router = useRouter()
 const appStore = useAppStore()
 const menuStore = useMenuStore()
 const isShowSearch = ref(false)
+const fullScreen = () => {
+  if (isFull.value) {
+    return full.exitFullscreen()
+  }
+  full.Fullscreen(document.documentElement)
+}
 const toFold = () => {
   appStore.isFold = !appStore.isFold
 }
 const openSearch = () => {
   isShowSearch.value = !isShowSearch.value
 }
-const changeLang =(val)=>{
+const changeLang = (val) => {
 
 }
 
-const reLoad =(e)=>{
+const reLoad = (e) => {
   window.location.reload(e.ctrlKey)
 }
 
@@ -256,6 +233,7 @@ const closeMenu = (id, trades, ev) => {
   :deep(.ty-poppover__content) {
     width: 60px;
     padding: 10px 0;
+
     .download-box {
       height: 30px;
       display: flex;
@@ -270,21 +248,25 @@ const closeMenu = (id, trades, ev) => {
         color: var(--primary-6);
       }
     }
+
     main {
       margin-bottom: unset;
     }
   }
 }
-.lang{
+
+.lang {
   :deep(.ty-poppover__content) {
     width: 100px;
     min-width: 100px;
     padding: 10px 0;
+
     .download-box {
       height: 30px;
       display: flex;
       align-items: center;
       padding-left: 10px;
+
       span {
         margin-left: 5px;
       }
@@ -293,6 +275,7 @@ const closeMenu = (id, trades, ev) => {
         color: var(--primary-6);
       }
     }
+
     main {
       margin-bottom: unset;
     }
@@ -304,18 +287,22 @@ const closeMenu = (id, trades, ev) => {
     width: 310px;
     padding: unset;
     --border-color-3: transparent;
+
     main {
       margin-bottom: unset;
     }
+
     .ty-tabs.normal {
       border: unset;
     }
+
     .ty-poppover__arrow {
       top: -16px;
     }
   }
+
   // var(--bg-2);
-  :deep(.ty-tabs) > main {
+  :deep(.ty-tabs)>main {
     height: 300px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -328,7 +315,7 @@ const closeMenu = (id, trades, ev) => {
     padding: 5px;
     align-items: center;
 
-    .img > img {
+    .img>img {
       width: 30px;
       height: 30px;
     }
@@ -359,7 +346,7 @@ const closeMenu = (id, trades, ev) => {
     padding: 5px;
     align-items: center;
 
-    .img > img {
+    .img>img {
       width: 30px;
       height: 30px;
     }
@@ -490,8 +477,9 @@ const closeMenu = (id, trades, ev) => {
     }
   }
 }
-.selfTooltip{
-  :deep(.ty-tooltip__tip){
+
+.selfTooltip {
+  :deep(.ty-tooltip__tip) {
     width: 100px;
   }
 }

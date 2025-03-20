@@ -52,7 +52,7 @@ export const pageRoute = [
         path: 'menuManage',
         component: () => import('@/views/sysManage/menuManage.vue'),
       },
-   
+
     ]
   },
   {
@@ -116,24 +116,7 @@ export const pageRoute = [
       }
     ]
   },
-  {
-    label: '编辑器',
-    icon: 'ty-pencil-line',
-    type: 'subMenu',
-    path: '/editor',
-    name: 'Editor',
-    redirect: { name: 'icon' },
-    children: [
-      {
-        label: 'mdEditor',
-        type: 'menu',
-        path: 'mdEditor',
-        name: 'mdEditor',
-        component: () => import('@/views/pages/editor/mdEditor.vue'),
 
-      },
-    ]
-  },
   {
     label: '预览',
     icon: 'ty-bar-chart-grouped-line',
@@ -216,7 +199,7 @@ export const pageRoute = [
         name: 'qrcode',
         component: () => import('@/views/viewer/qrcode/index.vue')
       },
-      
+
       {
         label: 'scrollPage',
         type: 'menu',
@@ -345,6 +328,13 @@ export const pageRoute = [
         path: 'signingBoardIndex',
         component: () => import('@/views/operation/signingboard/index.vue')
       },
+      {
+        label: 'md编辑器',
+        type: 'menu',
+        path: 'editorMdEditor',
+        name: 'editorMdEditor',
+        component: () => import('@/views/operation/editor/mdEditor.vue'),
+      },
     ]
   },
   {
@@ -423,9 +413,9 @@ export const router = createRouter({
 });
 const dyRoutes = localStorage.getItem('dynamicRoutes');
 
-  if(dyRoutes){
-    generateRoutes(JSON.parse(dyRoutes)) 
-  }
+if (dyRoutes) {
+  generateRoutes(JSON.parse(dyRoutes))
+}
 
 // config router
 // 配置路由器

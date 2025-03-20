@@ -40,6 +40,7 @@ const generateRoutes = (menuData,basePath='') => {
 
     return route;
   });
+  console.log(res);
   
   return res
 };

@@ -4,7 +4,8 @@ import customServerPlugin  from './src/vite-mock-server';
 import Pages from 'vite-plugin-pages';
 import { viteMockServe } from 'vite-plugin-mock'
 import { loadEnv } from 'vite'
-import AppLoading from 'vite-plugin-app-loading'
+import AppLoading  from 'vite-plugin-app-loading'
+
 export default function createPlugins(options): Array<any> {
   // {                                                                                                  13:22:32
   //   mode: 'development',

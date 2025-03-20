@@ -1,0 +1,7 @@
+export default {
+        url: "/api/menu/parentList", // 接口的请求地址
+        method: "get", // 请求方法
+        response: () => {
+            return {"message":"获取成功~","code":200,"data":[{"id":16,"label":"仪表盘","path":"dashboard","parent_id":1,"menu_order":"0","status":"1","icon":"ty-dashboard-fill","type":"subMenu","redirect":"analysis"},{"id":20,"label":"系统管理","path":"sysManage","parent_id":1,"menu_order":"1","status":"","icon":"ty-road-map-fill","type":"subMenu","redirect":""},{"id":22,"label":"地图","path":"map","parent_id":1,"menu_order":"3","status":"1","icon":"ty-road-map-fill","type":"subMenu","redirect":""},{"id":25,"label":"外链/页面","path":"website","parent_id":1,"menu_order":"4","status":"1","icon":"ty-links-line","type":"subMenu","redirect":""},{"id":32,"label":"预览","path":"viewer","parent_id":1,"menu_order":"6","status":"1","icon":"ty-bar-chart-grouped-line","type":"subMenu","redirect":""},{"id":50,"label":"功能","path":"operation","parent_id":1,"menu_order":"7","status":"1","icon":"ty-plug-2-fill","type":"subMenu","redirect":""},{"id":62,"label":"异常","path":"error","parent_id":1,"menu_order":"8","status":"1","icon":"ty-file-forbid-line","type":"subMenu","redirect":""},{"id":64,"label":"交易","path":"trade","parent_id":1,"menu_order":"8","status":"1","icon":"ty-code-box-line","type":"subMenu","redirect":""}]} // 模拟的响应数据
+        },
+    }

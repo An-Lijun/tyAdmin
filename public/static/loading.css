@@ -1,9 +1,15 @@
 .load-container {
   /* 去除body自带的外边距 */
-  height: calc(100vh - 16px);
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  background-color: var(--opcity-9);
 }
 .boxLoading {
   width: 50px;
@@ -14,7 +20,7 @@
   content: "";
   width: 50px;
   height: 5px;
-  background: #000;
+  background: #00adb5;
   opacity: 0.1;
   position: absolute;
   top: 63px;
@@ -146,6 +152,7 @@
   white-space: nowrap;
   font-weight: 500;
   width: 0;
+  color: #FFF;
   border-right: 1px solid transparent;
   animation: typing 5s steps(14), caret .5s steps(1) infinite;
   animation-fill-mode: forwards;
