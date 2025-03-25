@@ -2,6 +2,11 @@ import RenderTail from '../utils/src/tail'
 import { isProd } from '../common/auth/index'
 import useAppStore from '@/store/modules/app'
 import { generateColor } from 'toyar-design/dist/index.js'
+import  IfVisible from '../utils/src/userActive'
+import {TyAlert} from 'toyar-design'
+// ------------------------------------------------------------------- how to use -------------------------------------------------------------------------
+
+
 
 setTimeout(()=>{
   const appStore =useAppStore()
@@ -94,6 +99,40 @@ export default function (vue) {
         disF12: true
       })
     }
+
+    new IfVisible(4, {
+      statusChanged: (val) => {
+        switch (val) {
+          case 'active':
+            document.title = '欢迎回来 | ToyarAdmin'
+            break
+          case 'hidden':
+            document.title = '【期待您下次使用 | ToyarAdmin】'
+            break
+          case 'idle':
+            vue.config.globalProperties.$router.push({
+              path:'/lock'
+            })
+            const { distroy } = TyAlert('由于您长时间未使用已自动锁屏', {
+              type: 'warning',
+              sure: {
+                code: () => {
+                  distroy()
+                }
+              },
+              cancel: {
+                code: () => {
+                  distroy()
+                }
+              },
+            });
+        }
+      
+      }
+      })
+
+
+
   }
 }
 
