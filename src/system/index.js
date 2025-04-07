@@ -100,7 +100,7 @@ export default function (vue) {
       })
     }
 
-    new IfVisible(4, {
+    new IfVisible(4*1000, {
       statusChanged: (val) => {
         switch (val) {
           case 'active':

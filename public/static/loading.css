@@ -154,7 +154,7 @@
   width: 0;
   color: #FFF;
   border-right: 1px solid transparent;
-  animation: typing 5s steps(14), caret .5s steps(1) infinite;
+  animation: typing 3s steps(14), caret .5s steps(1) infinite;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
 }
