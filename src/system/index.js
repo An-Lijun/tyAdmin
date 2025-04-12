@@ -2,17 +2,20 @@ import RenderTail from '../utils/src/tail'
 import { isProd } from '../common/auth/index'
 import useAppStore from '@/store/modules/app'
 import { generateColor } from 'toyar-design/dist/index.js'
-import  IfVisible from '../utils/src/userActive'
-import {TyAlert} from 'toyar-design'
+import IfVisible from '../utils/src/userActive'
+import { TyAlert } from 'toyar-design'
+
+import useBrowserInterceptor from './history'
+import WinRefreshBlock from './WinRefreshBlock'
 // ------------------------------------------------------------------- how to use -------------------------------------------------------------------------
 
 
 
-setTimeout(()=>{
-  const appStore =useAppStore()
-appStore.tColors = generateColor('#27C346', { list: true }).slice(2, 9)
+setTimeout(() => {
+  const appStore = useAppStore()
+  appStore.tColors = generateColor('#27C346', { list: true }).slice(2, 9)
 
-appStore.sColors = generateColor('#F756A9', { list: true }).slice(2, 9)
+  appStore.sColors = generateColor('#F756A9', { list: true }).slice(2, 9)
 
 })
 class NoDebugger {
@@ -100,7 +103,7 @@ export default function (vue) {
       })
     }
 
-    new IfVisible(4*1000, {
+    new IfVisible(4 * 1000, {
       statusChanged: (val) => {
         switch (val) {
           case 'active':
@@ -111,7 +114,7 @@ export default function (vue) {
             break
           case 'idle':
             vue.config.globalProperties.$router.push({
-              path:'/lock'
+              path: '/lock'
             })
             const { distroy } = TyAlert('由于您长时间未使用已自动锁屏', {
               type: 'warning',
@@ -127,37 +130,63 @@ export default function (vue) {
               },
             });
         }
-      
+
       }
-      })
+    })
 
 
 
+
+    // // 弹窗提示
+    // const showWarnModal = (next) => {
+    //   console.log(next);
+    //   TyAlert('页面即将刷新', {
+    //     type: 'warning',
+    //     sure: {
+    //       code: () => {
+    //         next()
+    //       }
+    //     },
+    //     cancel: {
+    //       code: () => {
+    //         // next(false)
+    //       }
+    //     },
+    //   });
+    // }
+    // // 使用拦截
+    // useBrowserInterceptor('hash',{
+    //   popstate: showWarnModal,
+    // })
+    new WinRefreshBlock({
+      reload:true,
+      close:true
+    })
   }
 }
 
 const paragraph = document.querySelector('#app');
 const mediaQueries = {
-  '(max-width: 575px)':'xs',
-  '(min-width: 576px) and (max-width: 767px)':'sm',
-  '(min-width: 768px) and (max-width: 991px)':'md',
-  '(min-width: 992px) and (max-width: 1199px)':'lg',
-  '(min-width: 1200px) and (max-width: 1399px)':'xl',
-  '(min-width: 1399px)':'xxl'
+  '(max-width: 575px)': 'xs',
+  '(min-width: 576px) and (max-width: 767px)': 'sm',
+  '(min-width: 768px) and (max-width: 991px)': 'md',
+  '(min-width: 992px) and (max-width: 1199px)': 'lg',
+  '(min-width: 1200px) and (max-width: 1399px)': 'xl',
+  '(min-width: 1399px)': 'xxl'
 
 }
 
 function handleMediaQueryChange(mq) {
-        Object.keys(mediaQueries).forEach((key) => {
-            paragraph.classList.remove(mediaQueries[key]);
-        });
-        paragraph.classList.add(mediaQueries[mq.media]);
+  Object.keys(mediaQueries).forEach((key) => {
+    paragraph.classList.remove(mediaQueries[key]);
+  });
+  paragraph.classList.add(mediaQueries[mq.media]);
 }
 
 Object.keys(mediaQueries).forEach(key => {
-    const mq = window.matchMedia(key);
-    handleMediaQueryChange(mq);
-    mq.addEventListener('change', handleMediaQueryChange);
+  const mq = window.matchMedia(key);
+  handleMediaQueryChange(mq);
+  mq.addEventListener('change', handleMediaQueryChange);
 });
 
 
