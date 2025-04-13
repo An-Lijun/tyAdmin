@@ -266,6 +266,7 @@ export default {
 }
 
 .zoom-enter,
+.zoom-enter-from ,
 .zoom-leave-to {
   // 元素进入和离开时的动作
   transform: scale(0);
@@ -277,17 +278,6 @@ export default {
   transition: transform 0.3s;
 }
 
-.slide-enter,
-.slide-leave-to {
-  // 元素进入和离开时的动作
-  transform: translateX(100%);
-}
-
-.slide-enter-active,
-.slide-leave-active {
-  // 元素进入和离开时的过渡动画定义
-  transition: transform 0.3s ease-in-out;
-}
 
 .tyAdmin_navigation_left,
 .tyAdmin_navigation_right {
