@@ -9,14 +9,14 @@
             <img :src="img" style="width: 100%; height: 200px; border-radius: 4px;" @click="open(index)"/>
           </TyCol>
         </TyRow>
-        <tPreviewImg v-model="pre" :previewImgList="previewImgList" :index="index"></tPreviewImg>
+        <tyAPreviewImg v-model="pre" :previewImgList="previewImgList" :index="index"></tyAPreviewImg>
       </TyCard>
     </div>
   </div>
 
 </template>
 <script setup>
-import tPreviewImg from '../../../components/tPreviewImg.vue';
+import tyAPreviewImg from '../../../components/tyAPreviewImg.vue';
 import { ref } from 'vue'
 import tHeader from '@/components/tHeader.vue'
 
