@@ -20,7 +20,7 @@ fs.readdir(path.resolve(__dirname,'./src'), (err, files) => {
   // 过滤出 .js 文件
   const jsFiles = files.filter(file => path.extname(file) === '.js');
 // 要读取的文件夹路径
-  const folderPath = './src';
+  // const folderPath = './src';
   // 遍历 .js 文件并读取内容
   jsFiles.forEach(async file => {
       // const filePath = path.join(folderPath, file);

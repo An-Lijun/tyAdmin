@@ -1,7 +1,7 @@
 <template>
   <!-- v-loading="loading1" -->
   <div style="width: 100%; height: 100%; overflow: hidden;">
-    <iframe @load="handleLoad":src="frameSrc" frameborder="0" style="width: 100%; height: 100%; overflow: hidden;"></iframe>
+    <iframe  ref="iframe" @load="handleLoad":src="frameSrc" frameborder="0" style="width: 100%; height: 100%; overflow: hidden;"></iframe>
   </div>
 </template>
 <script setup>
@@ -13,8 +13,9 @@ const props = defineProps({
   }
 })
 const emit = defineEmits(['load'])
+const iframe = ref(null)
 const handleLoad =()=>{
-  emit('load')
+  emit('load',iframe)
 }
 // let loading1 = ref(false)
   // setTimeout(() => {
