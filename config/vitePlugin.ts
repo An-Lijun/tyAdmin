@@ -6,7 +6,9 @@ import { viteMockServe } from 'vite-plugin-mock'
 import { loadEnv } from 'vite'
 import AppLoading  from 'vite-plugin-app-loading'
 
-export default function createPlugins(options): Array<any> {
+import Components from 'unplugin-vue-components/vite';
+import AutoImport from 'unplugin-auto-import/vite';
+export default function createPlugins(options:any): Array<any> {
   // {                                                                                                  13:22:32
   //   mode: 'development',
   //   command: 'serve',
@@ -26,7 +28,35 @@ export default function createPlugins(options): Array<any> {
         entry: 'src/main.ts',
         template: './index.html',
       }),
+      AutoImport({
+        imports: ['vue'],
+      }),
       AppLoading(),
+      Components({
+        // // 配置自定义组件库的路径
+        // dirs: ['src/components'], // 假设你的组件库在 src/components 目录下
+        // extensions: ['vue'],
+        // deep: true,
+        // // 配置组件库的解析器
+        // resolvers: [],
+        resolvers: [
+          // 假设你的组件库名为 my-component-library
+          (componentName) => {
+            // if (componentName.startsWith('')) {
+            //   return {
+            //     name: componentName,
+            //     from: 'toyar-design'
+            //   }
+            // }
+            if (componentName.startsWith('Ty')) {
+              return {
+                name: componentName,
+                from: 'toyar-design'
+              }
+            }
+          }
+        ]
+      }),
       Pages({
         // 页面文件所在目录，默认为 src/pages
         dirs: 'src/views/system',
