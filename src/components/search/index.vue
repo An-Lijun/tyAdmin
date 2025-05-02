@@ -7,8 +7,7 @@
             <div class="tyAdminSearchItem">
               <TyInput size="large" v-model="searchValue" placeholder="搜索" @input="handleInput">
                 <template #innerPre>
-                  <TyIcon icon="ty-search-line">
-                  </TyIcon>
+                  <TySearchLine/>
                 </template>
               </TyInput>
             </div>
@@ -20,7 +19,7 @@
                     <span>
                       {{ item.parent.label }}
                     </span>
-                    <TyIcon icon="ty-arrow-right-s-line"></TyIcon>
+                    <TyArrowRightSLine/>
 
                   </template>
                   {{ item.label }}

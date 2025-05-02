@@ -11,7 +11,7 @@
         <div class="theme-swatches">
           <div v-for="theme in themeStateLs" :key="theme" class="theme-swatch"
             :class="{ active: theme.value === appStore.themeState }" @click="changeThemeState(theme.value, $event)">
-            <TyIcon :icon="theme.icon" /> {{ theme.label }}
+            <component :is="theme.icon" />{{ theme.label }}
           </div>
         </div>
       </div>
@@ -99,6 +99,7 @@
 import useAppStore from '@/store/modules/app'
 import { ref, watch } from 'vue'
 import {changeThemFn} from '@/hooks/index'
+import {TyiContrastFill, TyiSunLine, TyiMoonLine} from 'toyaricon'
 const props = defineProps(['model'])
 const appStore = useAppStore()
 let body = document.querySelector('body')
@@ -116,17 +117,17 @@ const changeThemeState = (value, e) => {
 const themeStateLs = [
   {
     label: '明亮',
-    icon: 'ty-sun-line',
+    icon: TyiSunLine,
     value: 1
   },
   {
     label: '暗黑',
-    icon: 'ty-moon-line',
+    icon: TyiMoonLine,
     value: 2
   },
   {
     label: '系统',
-    icon: 'ty-contrast-fill',
+    icon: TyiContrastFill,
     value: 3
   }
   // ty-contrast-2-fill
@@ -255,7 +256,9 @@ watch(
     text-align: center;
     font-size: 13px;
     border-radius: 5px;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &:hover {
       cursor: pointer;
       color: var(--primary-6)

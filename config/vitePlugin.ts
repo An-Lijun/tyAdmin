@@ -42,18 +42,21 @@ export default function createPlugins(options:any): Array<any> {
         resolvers: [
           // 假设你的组件库名为 my-component-library
           (componentName) => {
-            // if (componentName.startsWith('')) {
-            //   return {
-            //     name: componentName,
-            //     from: 'toyar-design'
-            //   }
-            // }
+
+            if (componentName.startsWith('Tyi')) {
+              return {
+                name: componentName,
+                from: 'toyaricon'
+              }
+            }
+
             if (componentName.startsWith('Ty')) {
               return {
                 name: componentName,
                 from: 'toyar-design'
               }
             }
+
           }
         ]
       }),

@@ -15,7 +15,7 @@
             {{ value }}
           </span>
         </div>
-        <TyIcon icon="ty-arrow-right-s-line" />
+         <TyArrowRightSLine />
       </main>
     </TyCard>
   </div>

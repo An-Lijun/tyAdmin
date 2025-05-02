@@ -33,6 +33,7 @@
     "robinson": "^1.0.8",
     "sass": "^1.75.0",
     "toyar-design": "0.0.86-0",
+    "toyaricon": "^0.0.5",
     "vite-plugin-app-loading": "^0.3.1",
     "vite-plugin-mock": "^3.0.2",
     "vue": "^3.4.21",

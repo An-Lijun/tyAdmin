@@ -3,8 +3,9 @@
     <div class="tyAdmin-header__content">
       <div class="tyAdmin-header__left">
         <span class="foldBtn">
-          <TyIcon style="color: var(--toyar-gray-10)" :icon="appStore.isFold ? 'ty-indent-increase' : 'ty-indent-decrease'
-            " size="18" @click="toFold" />
+
+            <TyiIndentIncrease size="18" @click="toFold" v-if="appStore.isFold"/>
+            <TyiIndentDecrease size="18" @click="toFold" v-else/>
         </span>
         <TyBreadcrumb>
           <TyBreadcrumbItem to="home">首页</TyBreadcrumbItem>
@@ -15,21 +16,18 @@
       </div>
       <div class="tyAdmin-header__right">
 
-        <TyIcon class="contruller" icon="ty-search-line" size="18" style="color: var(--toyar-gray-10)"
-          @click="openSearch"></TyIcon>
 
-
+        <TyiSearchLine class="contruller"  size="18"  @click="openSearch"/>
         <TyTooltip content="按住Ctrl键并点击可清除缓存" class="selfTooltip">
-          <TyIcon class="contruller" icon="ty-loop-right-line" size="18" style="color: var(--toyar-gray-10)"
-            @click="reLoad"></TyIcon>
+          <TyiLoopRightLine class="contruller"  size="18" 
+          @click="reLoad"/>
         </TyTooltip>
-        <TyIcon class="contruller" :icon="isFull ? 'ty-fullscreen-exit-line' : 'ty-fullscreen-fill'" size="18"
-          style="color: var(--toyar-gray-10)" @click="fullScreen"></TyIcon>
-
+        <TyiFullscreenExitLine class="contruller" size="18" @click="fullScreen" v-if="isFull" />
+        <TyiFullscreenFill class="contruller"   size="18" @click="fullScreen" v-else/>
         <div class="contruller">
           <TyBadge class="message" :dot="true" :max="5" :text="10">
             <TyPoppover trigger="click" placement="bottom">
-              <TyIcon icon="ty-notification-2-line" size="18" style="color: var(--toyar-gray-10)"></TyIcon>
+              <TyiNotification2Line  size="18"/>
               <template #content>
                 <TyTabs v-model="tabKey">
                   <TyTabItem title="通知(5)" name="inform">
@@ -87,15 +85,11 @@
         </div>
         <div class="contruller ">
           <TyPoppover  trigger="click" class="lang" placement="bottom">
-          <TyIcon  icon="ty-translate-2" size="18" style="color: var(--toyar-gray-10)"></TyIcon>
+            <TyiTranslate2  size="18"/>
           <template #content>
             <div @click="changeLang(item)" class="download-box" v-for="item in localeList">
               <span> {{ item.text }} </span>
             </div>
-            <!-- <div @click="sureToExit" class="download-box">
-              <TyIcon icon="ty-shut-down-line"></TyIcon>
-              <span> 退出登录 </span>
-            </div> -->
           </template>
         </TyPoppover>
         </div>
@@ -108,20 +102,19 @@
           </div>
           <template #content>
             <div @click="toLock" class="download-box">
-              <TyIcon icon="ty-lock-line"></TyIcon>
+              <TyiLockLine/>
               <span> 锁定屏幕 </span>
             </div>
             <div @click="sureToExit" class="download-box">
-              <TyIcon icon="ty-shut-down-line"></TyIcon>
+              <TyiShutDownLine/>
               <span> 退出登录 </span>
             </div>
           </template>
         </TyPoppover>
         </div>
 
-        <TyIcon class="contruller" @click="openCont" icon="ty-settings-4-line" size="18"
-          style="color: var(--toyar-gray-10)">
-        </TyIcon>
+        <TyiSettings4Line class="contruller" @click="openCont" size="18"/>
+
       </div>
     </div>
     <div class="tyAdmin-header__visitingList">

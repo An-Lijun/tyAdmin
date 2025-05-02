@@ -1,7 +1,7 @@
 <template>
   <div class="ty-lock">
     <header class="ty-header-lock" @click="unLock">
-        <TyIcon icon="ty-lock-line"></TyIcon>
+         <TyiLockLine :size="16"/>
         <div>点击解锁</div>
     </header>
     <div class="ty-inner">
@@ -32,7 +32,6 @@
 <script setup>
 import { nextTick, ref } from 'vue';
 import { router } from '@/router'
-
   let hourNew =ref('00')
   let hourOld =ref('00')
   let minuteNew =ref('00')

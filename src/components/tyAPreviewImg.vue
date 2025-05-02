@@ -7,27 +7,27 @@
       <div class="tyAdmin_close tyAdmin_btn" @click="closePriview">&times;</div>
       <div class="tyAdmin_navigation">
         <span class="tyAdmin_navigation_left tyAdmin_btn" @click="prevImage">
-          <TyIcon icon="ty-arrow-left-s-fill" style="color: #fff;"></TyIcon>
+          <TyArrowLeftSFill size="16"/>
         </span>
         <span class="tyAdmin_navigation_right tyAdmin_btn" @click="nextImage">
-          <TyIcon icon="ty-arrow-right-s-fill" style="color: #fff;"></TyIcon>
+          <TyArrowRightSFill size="16" style="color: #fff;"/>
         </span>
       </div>
       <div class="tyAdmin_toolbar">
         <span class="tyAdmin_btn" @click="shrinkHandle">
-           <TyIcon icon="ty-subtract-line"></TyIcon>
+           <TySubtractLine size="16" style="color: #fff;"/>
         </span>
         <span class="tyAdmin_btn" @click="largeHandle">
-          <TyIcon icon="ty-add-fill"></TyIcon>
+          <TyAddFill size="16" style="color: #fff;"/>  
         </span>
         <span class="tyAdmin_btn" @click="turnLeftHandle">
-          <TyIcon icon="ty-arrow-turn-forward-fill"></TyIcon>
+          <TyArrowTurnForwardFill size="16" style="color: #fff;"/>
         </span>
         <span class="tyAdmin_btn" @click="initImgHandle">
-        <TyIcon icon="ty-fullscreen-fill"></TyIcon>
+        <TyFullscreenFill size="16" style="color: #fff;"/>
         </span>
         <span class="tyAdmin_btn" @click="turnRightHandle">
-          <TyIcon icon="ty-arrow-turn-back-line"></TyIcon>
+          <TyArrowTurnBackLine size="16" style="color: #fff;"/>
         </span>
       </div>
     </div>
