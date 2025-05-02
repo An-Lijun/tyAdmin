@@ -14,7 +14,7 @@
       </template>
         <div style="display: flex; justify-content: space-around;">
           <span v-for=" item in tyIconLs" >
-            <TyIcon  :icon="item" size="50"></TyIcon>
+            <component :is="item"></component>
           </span>
         </div>
     </TyCard>
@@ -33,7 +33,7 @@
       <template #header>
           Icon选择器使用
       </template>
-      <TyIcon :icon="icon" style="font-size: 40px;"></TyIcon>
+      <component :is="icon"></component>
       <iconSelect v-model="icon"/>
     </TyCard>
 
@@ -55,16 +55,18 @@
 import svgIcon from '@/components/svgIcon.vue'
 import iconSelect from '@/components/iconSelect.vue'
 import svgIconSelect from '@/components/svgIconSelect.vue'
-
 import {ref} from 'vue'
+import {TyiArrowUpCircleFill,TyiArrowDownCircleFill,TyiArrowRightCircleFill,TyiArrowLeftCircleFill} from 'toyaricon'
 const iconName =ref('')
 const icon = ref('')
+
+const getIcons1=()=>{
+  
+}
 let tyIconLs=[
-  'ty-arrow-up-circle-fill',
-  'ty-arrow-down-circle-fill',
-  'ty-arrow-right-circle-fill',
-  'ty-arrow-left-circle-fill'
+  TyiArrowUpCircleFill,TyiArrowDownCircleFill,TyiArrowRightCircleFill,TyiArrowLeftCircleFill
 ]
+
 let tySvgIconLs =[
   'dynamic-avatar-1',
   'dynamic-avatar-2',

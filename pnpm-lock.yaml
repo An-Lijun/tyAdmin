@@ -81,8 +81,8 @@ importers:
         specifier: 0.0.86-0
         version: 0.0.86-0(typescript@5.7.3)(vuepress@2.0.0-rc.20(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3)))
       toyaricon:
-        specifier: ^0.0.5
-        version: 0.0.5(typescript@5.7.3)(vite@5.4.14(@types/node@22.13.5)(sass@1.85.0)(terser@5.39.0))
+        specifier: ^0.0.6
+        version: 0.0.6(typescript@5.7.3)(vite@5.4.14(@types/node@22.13.5)(sass@1.85.0)(terser@5.39.0))
       vite-plugin-app-loading:
         specifier: ^0.3.1
         version: 0.3.1
@@ -2109,8 +2109,8 @@ packages:
   toyar-design@0.0.86-0:
     resolution: {integrity: sha512-mgxpbM+DxHMB3mQyaTebg4Qvy3s3f8CSYteqV1+30S5fIhjO47qP7ei9LNWs6ky3KA0uUl3df+CzcyA6N662JQ==}
 
-  toyaricon@0.0.5:
-    resolution: {integrity: sha512-iQlu9LI2hq9tnNZZFACTrgmVVetImvBhgA2AvGUuu/0kJbunaFtTbDlka/x1tS33LR7QH1XOYQAg3ydKQyH0Qw==}
+  toyaricon@0.0.6:
+    resolution: {integrity: sha512-Xp8T+zd5tu7YXxSDDTnCR62QMfDmtXM8Tog4Cd4yHMOPF1hec8dmaNKv90j4oD3VgBfnZ5rjvLu+Wo3xwN++Jw==}
 
   tslib@2.3.0:
     resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
@@ -4207,7 +4207,7 @@ snapshots:
       - typescript
       - vuepress
 
-  toyaricon@0.0.5(typescript@5.7.3)(vite@5.4.14(@types/node@22.13.5)(sass@1.85.0)(terser@5.39.0)):
+  toyaricon@0.0.6(typescript@5.7.3)(vite@5.4.14(@types/node@22.13.5)(sass@1.85.0)(terser@5.39.0)):
     dependencies:
       sass: 1.87.0
       vite-plugin-style-inject: 0.0.1(vite@5.4.14(@types/node@22.13.5)(sass@1.85.0)(terser@5.39.0))
