@@ -3,7 +3,7 @@
     <template #header> 系统设置 </template>
     <div>
       <ty-divider style="--font-body-3: 14px;--color-bg-1:var(--color-bg-3);--toyar-gray-2:var(--toyar-gray-3)">
-        <ty-icon icon="ty-layout-line" class="mw-10"></ty-icon>
+        <TyiLayoutLine class="mw-10"/>
         颜色风格
       </ty-divider>
 
@@ -40,7 +40,7 @@
 
       <div style="height: 30px">
         <ty-divider style="--font-body-3: 14px;--color-bg-1:var(--color-bg-3);--toyar-gray-2:var(--toyar-gray-3)">
-          <ty-icon icon="ty-layout-line" class="mw-10"></ty-icon>
+          <TyiLayoutLine icon="ty-layout-line" class="mw-10"></TyiLayoutLine>
           排版样式
         </ty-divider>
       </div>
@@ -72,7 +72,7 @@
       </div>
       <div style="height: 30px">
         <ty-divider style="--font-body-3: 14px;--color-bg-1:var(--color-bg-3);--toyar-gray-2:var(--toyar-gray-3)">
-          <ty-icon icon="ty-t-shirt-line" class="mw-10"></ty-icon>
+          <TyiTShirtLine class="mw-10"></TyiTShirtLine>
           全局主题
         </ty-divider>
       </div>
@@ -88,7 +88,7 @@
       </div>
       <div style="height: 30px">
         <ty-divider style="--font-body-3: 14px;--color-bg-1:var(--color-bg-3);--toyar-gray-2:var(--toyar-gray-3)">
-          <ty-icon icon="ty-settings-4-line" class="mw-10"></ty-icon>
+          <TyiSettings4Line  class="mw-10"></TyiSettings4Line>
           界面设置
         </ty-divider>
       </div>
@@ -99,7 +99,7 @@
 import useAppStore from '@/store/modules/app'
 import { ref, watch } from 'vue'
 import {changeThemFn} from '@/hooks/index'
-import {TyiContrastFill, TyiSunLine, TyiMoonLine} from 'toyaricon'
+import {TyiContrastFill, TyiSunLine, TyiMoonLine,TyiLayoutLine ,TyiTShirtLine,TyiSettings4Line} from 'toyaricon'
 const props = defineProps(['model'])
 const appStore = useAppStore()
 let body = document.querySelector('body')

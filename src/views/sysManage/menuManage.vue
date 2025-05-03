@@ -60,7 +60,7 @@
           <div style="display: flex;align-items: center;">
             <TyInput v-model="diaFormData.path" placeholder="请输入菜单url" />
             <TyTooltip content="菜单url是组件位置如@/views/xxx.vue，当存在父级时候会自动拼接如@/views/父级/子级.vue">
-              <TyQuestionLine/>
+              <TyiQuestionLine/>
             </TyTooltip>
           </div>
         </TyFormItem>
@@ -102,7 +102,7 @@
 import { ref } from 'vue'
 import http from '@/common/communication/src/http/index'
 import iconSelect from '@/components/iconSelect.vue'
-import {TyQuestionLine} from 'toyaricon'
+import {TyiQuestionLine} from 'toyaricon'
 const parentList = ref([])
 // const res = (await ) || {}
 http.get('/api/menu/parentList').then(res=>{

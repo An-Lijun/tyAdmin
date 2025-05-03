@@ -7,7 +7,7 @@
             <div class="tyAdminSearchItem">
               <TyInput size="large" v-model="searchValue" placeholder="搜索" @input="handleInput">
                 <template #innerPre>
-                  <TySearchLine/>
+                  <TyiSearchLine/>
                 </template>
               </TyInput>
             </div>
@@ -15,11 +15,11 @@
               <div class="tyAdmin__searchItem" v-for="item in searchEdList" @click="handleJump(item)">
                 <div>
                   <template v-if="item.parent">
-                    <TyIcon :icon="item.parent.icon"></TyIcon>
+                    <!-- <TyIcon :icon="item.parent.icon"></TyIcon> -->
                     <span>
                       {{ item.parent.label }}
                     </span>
-                    <TyArrowRightSLine/>
+                    <TyiArrowRightSLine/>
 
                   </template>
                   {{ item.label }}
