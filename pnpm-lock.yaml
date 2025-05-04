@@ -78,8 +78,8 @@ importers:
         specifier: ^1.75.0
         version: 1.85.0
       toyar-design:
-        specifier: 0.0.90-0
-        version: 0.0.90-0(typescript@5.7.3)(vite@5.4.14(@types/node@22.13.5)(sass@1.85.0)(terser@5.39.0))
+        specifier: 0.0.91-0
+        version: 0.0.91-0(typescript@5.7.3)(vite@5.4.14(@types/node@22.13.5)(sass@1.85.0)(terser@5.39.0))
       toyaricon:
         specifier: ^0.0.6
         version: 0.0.6(typescript@5.7.3)(vite@5.4.14(@types/node@22.13.5)(sass@1.85.0)(terser@5.39.0))
@@ -1675,8 +1675,8 @@ packages:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
-  toyar-design@0.0.90-0:
-    resolution: {integrity: sha512-E8QFYJy4wMbKI22JqlYNL+p6AYg1D0yNI82Ud1QBNQ5EMRldcB2sV1NpSXr7SiWuDag57smy/M4VHEmS2xGkdw==}
+  toyar-design@0.0.91-0:
+    resolution: {integrity: sha512-YSR/yqea+nd/wzw/dNWm0METAQmD4oZ+4tkPnNn2UxuohPmfAXKgsKzqxlI3TEMhB5TcksgEz9GHSo+fXdV7Kw==}
 
   toyaricon@0.0.6:
     resolution: {integrity: sha512-Xp8T+zd5tu7YXxSDDTnCR62QMfDmtXM8Tog4Cd4yHMOPF1hec8dmaNKv90j4oD3VgBfnZ5rjvLu+Wo3xwN++Jw==}
@@ -3297,7 +3297,7 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
-  toyar-design@0.0.90-0(typescript@5.7.3)(vite@5.4.14(@types/node@22.13.5)(sass@1.85.0)(terser@5.39.0)):
+  toyar-design@0.0.91-0(typescript@5.7.3)(vite@5.4.14(@types/node@22.13.5)(sass@1.85.0)(terser@5.39.0)):
     dependencies:
       '@popperjs/core': 2.11.8
       robinson: 1.0.21

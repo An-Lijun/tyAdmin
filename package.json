@@ -32,7 +32,7 @@
     "qrcode": "^1.5.3",
     "robinson": "^1.0.8",
     "sass": "^1.75.0",
-    "toyar-design": "0.0.90-0",
+    "toyar-design": "0.0.91-0",
     "toyaricon": "^0.0.6",
     "vite-plugin-app-loading": "^0.3.1",
     "vite-plugin-mock": "^3.0.2",
