@@ -9,17 +9,18 @@
         <RouterView />
       </SLoading>
     </TyWaterMark>
-
+    
   </TyConfigProvider>
+  <suspensionBoll/>
 </template>
 
 <script setup lang="ts">
 import { formatDate } from 'robinson'
 import useAppStore from '@/store/modules/app'
 import SLoading from'@/views/system/loading/index.vue'
+import suspensionBoll from '@/components/suspensionBoll.vue'
 const appStore = useAppStore()
 
-// 165DFF
 </script>
 <style>
 #app {
