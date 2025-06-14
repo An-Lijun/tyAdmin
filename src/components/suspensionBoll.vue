@@ -1,11 +1,13 @@
 <template>
   <div ref="floatDrag" class="ty-SuspensionBoll" id="float-box"
     :style="{ left: left + 'px', top: top + 'px', right: right + 'px !important', zIndex: zIndex }"
-     @mousemove.prevent @mousedown="mouseDown" @mouseup="mouseUp" :class="[left<=0?'left':left>=clientWidth-70?'right':'']">
+     @mousemove.prevent @mousedown="mouseDown" @mouseup="mouseUp" :class="[left<=0?'left':left>=clientWidth-70?'right':'',flag?'isOpened':'']">
     <div class="drag" @dblclick="handelFlex" >
       <TyiAppsFill color="#fff" :size="30" />
     </div>
-    <div class="content" id="content" >
+    <div class="content" id="content"  :class="{
+      isOpened:flag
+    }">
       <div class="item-container">
         <slot/>
       </div>
@@ -22,10 +24,7 @@ export default {
       type: Number,
       default: 36,
     },
-    distanceBottom: {
-      type: Number,
-      default: 700,
-    },
+
     isScrollHidden: {
       type: Boolean,
       default: false,
@@ -55,7 +54,7 @@ export default {
       mousedownX: 0,
       mousedownY: 0,
 
-      flag: true, // 控制悬浮框是否展开
+      flag: false, // 控制悬浮框是否展开
       box: '', // 悬浮球的dom
       activeIndex: 0, //高亮显示
 
@@ -73,7 +72,7 @@ export default {
         this.floatDragDom = this.floatDrag.getBoundingClientRect();
         // 设置初始位置
         this.right = 0;
-        this.top = this.clientHeight - this.floatDragDom.height - this.distanceBottom;
+        this.top = this.clientHeight - this.floatDragDom.height;
         this.initDraggable();
       });
     window.addEventListener('resize', this.handleResize);
@@ -86,13 +85,7 @@ export default {
   methods: {
     // 伸缩悬浮球
     handelFlex() {
-      if (this.flag) {
-        this.buffer(this.box, "height", 700);
-      } else {
-        this.buffer(this.box, "height", 70);
-      }
       this.flag = !this.flag
-      console.log('是否展开', this.flag)
     },
 
     // 获取要改变得样式属性
@@ -103,25 +96,6 @@ export default {
       } else {
         return window.getComputedStyle(obj, null)[attr];
       }
-    },
-    // 动画函数
-    buffer(eleObj, attr, target) {
-
-      cancelAnimationFrame(eleObj.timer)
-      let speed = 0
-      let begin = 0
-      let _this = this
-      eleObj.timer = requestAnimationFrame(function fn() {
-        begin = parseInt(_this.getStyleAttr(eleObj, attr))
-        // 动画速度
-        speed = (target - begin) * 0.9
-        speed = target > begin ? Math.ceil(speed) : Math.floor(speed)
-        eleObj.style[attr] = begin + speed + "px"
-        eleObj.timer = requestAnimationFrame(fn)
-        if (begin === target) {
-          cancelAnimationFrame(eleObj.timer);
-        }
-      })
     },
     /**
      * 窗口resize监听
@@ -163,7 +137,7 @@ export default {
           event.clientX < 0
         ) {
           this.right = 0;
-          this.top = this.clientHeight - this.floatDragDom.height - this.distanceBottom;
+          this.top = this.clientHeight - this.floatDragDom.height;
           document.onmousemove = null;
           this.floatDrag.style.transition = 'all 0.3s';
           return;
@@ -215,11 +189,8 @@ export default {
   left: 0;
   top: 20%;
   width: 70px;
-  height: 70px;
-  border-radius: 32px;
   // background: rgba(167, 160, 161, .5);
   cursor: pointer;
-  overflow: hidden;
   user-select: none;
 
   display: block;
@@ -233,19 +204,22 @@ export default {
   &.right{
     transform: translateX(80%);
     border-radius: 0;
-
   }
   &:hover{
     transform: translateX(0);
     border-radius: 50%;
+  }
 
+  &.isOpened:hover{
+    transform: translateX(0);
+    border-radius: 40px;
   }
   .drag {
     width: 70px;
     height: 70px;
     // background: #f2e96a;
     text-align: center;
-    border-bottom: 1px solid #fff;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -254,9 +228,14 @@ export default {
 
   .content {
     width: 70px;
-    height: 35px;
-
-    // background: #716af2;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: all 0.3s;
+    overflow: hidden;
+    &.isOpened{
+     grid-template-rows: 1fr;
+      margin-bottom: 20px;
+    }
     .label {
       width: 70px;
       height: 35px;
@@ -271,16 +250,14 @@ export default {
     }
 
     .item-container {
-      margin-top: 10px;
       width: 70px;
-      height: 600px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-direction: column;
-
-
-
+      min-height: 0;
+      overflow: hidden;
+      height: unset;
     }
   }
 }

@@ -11,7 +11,10 @@
     </TyWaterMark>
     
   </TyConfigProvider>
-  <suspensionBoll/>
+  <suspensionBoll>
+    <tyi-account-box-fill :size="30" color="#fff"/>
+    <tyi-alert-fill :size="30" color="#fff"/>
+  </suspensionBoll>
 </template>
 
 <script setup lang="ts">
