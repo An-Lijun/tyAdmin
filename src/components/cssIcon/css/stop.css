@@ -1,0 +1,12 @@
+.ty-cssIcon.stop::before {
+    width: 0.9em;
+    border-top: 2px solid;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .ty-cssIcon.stop::after {
+    width: 0.9em;
+    height: 0.9em;
+    border: 2px solid;
+    border-radius: 50%;
+  }

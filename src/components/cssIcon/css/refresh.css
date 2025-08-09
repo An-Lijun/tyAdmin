@@ -1,0 +1,15 @@
+.ty-cssIcon.refresh::before {
+    width: 0.9em;
+    height: 0.9em;
+    border: 2px solid;
+    border-right-color: transparent;
+    border-radius: 50%;
+  }
+
+  .ty-cssIcon.refresh::after {
+    border: 0.2em solid;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    left: 75%;
+    top: 20%;
+  }

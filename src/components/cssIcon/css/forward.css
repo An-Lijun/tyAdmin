@@ -1,0 +1,12 @@
+.ty-cssIcon.forward::before {
+    height: 0.65em;
+    width: 0.65em;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    transform: translate(-50%, -50%) rotate(135deg);
+  }
+  .ty-cssIcon.forward::after {
+    width: 0.8em;
+    border-top: 2px solid;
+    left: 45%;
+  }

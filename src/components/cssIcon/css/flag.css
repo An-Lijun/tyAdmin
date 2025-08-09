@@ -1,0 +1,16 @@
+.ty-cssIcon.flag::before {
+    height: 0.9em;
+    border-left: 2px solid;
+    left: 10%;
+  }
+
+  .ty-cssIcon.flag::after {
+    width: 0.85em;
+    height: 0.675em;
+    border: 2px solid;
+    border-bottom-right-radius: 0.1em;
+    border-left: 0;
+    border-top-right-radius: 0.1em;
+    left: 52%;
+    top: 35%;
+  }

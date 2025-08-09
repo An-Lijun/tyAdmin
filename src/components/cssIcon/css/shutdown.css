@@ -1,0 +1,13 @@
+.ty-cssIcon.shutdown::before {
+    height: 0.5em;
+    border-left: 2px solid;
+    top: 0.2em;
+  }
+
+  .ty-cssIcon.shutdown::after {
+    width: 0.9em;
+    height: 0.9em;
+    border: 2px solid;
+    border-top-color: transparent;
+    border-radius: 50%;
+  }

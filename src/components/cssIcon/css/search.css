@@ -1,0 +1,17 @@
+.ty-cssIcon.search::before {
+    width: 0.75em;
+    height: 0.75em;
+    border: 2px solid;
+    border-radius: 50%;
+    left: 5%;
+    top: 5%;
+    transform: translate(0, 0) rotate(45deg);
+  }
+
+  .ty-cssIcon.search::after {
+    width: 0.4em;
+    border-top: 2px solid;
+    left: 80%;
+    top: 80%;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }

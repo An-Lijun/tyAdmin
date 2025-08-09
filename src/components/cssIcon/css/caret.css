@@ -1,0 +1,5 @@
+.ty-cssIcon.caret::before {
+    border: 0.3em solid transparent;
+    border-top-color: currentColor;
+    transform: translate(-50%, -25%);
+  }

@@ -73,11 +73,11 @@ export default async function print(el, options: Ioptions = {
     createWaterMark(iframeDoc,options.waterMark)
   }
 
-  iframe.contentWindow.addEventListener("beforeprint", (event) => {
+
+  function handleBeforePrint() {
     options.beforePrint&& options.beforePrint()
-  });
-  iframe.contentWindow.addEventListener("afterprint", (event) => {
-    
+  }
+  function handleAfterprint(){
     options?.afterPrint&& options.afterPrint()
     setTimeout(() => {
       let dialog = document.querySelector('#print__dialog')
@@ -85,8 +85,14 @@ export default async function print(el, options: Ioptions = {
         document.body.removeChild(dialog)
       }
       document.body.removeChild(iframe)
+      iframe.contentWindow.removeEventListener("beforeprint", handleBeforePrint);
+      iframe.contentWindow.removeEventListener("afterprint", handleAfterprint);
     });
-  });
+  }
+
+
+  iframe.contentWindow.addEventListener("beforeprint", handleBeforePrint);
+  iframe.contentWindow.addEventListener("afterprint", handleAfterprint);
   
   //这里由于上面代码挂载需要时间所以用延迟执行
   setTimeout(() => {

@@ -1,0 +1,7 @@
+.ty-cssIcon.arrow-down::before {
+    height: 0.65em;
+    width: 0.65em;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    transform: translate(-50%, -75%) rotate(225deg);
+  }

@@ -24,11 +24,32 @@
           tyAdmin  svgIcon使用
       </template>
         <div style="display: flex; justify-content: space-around;">
-          <span v-for=" item in tySvgIconLs" >
+          <span v-for=" item in tySvgIconLs" :key="item">
             <svgIcon  :icon="item" style="width: 50px;"></svgIcon>
           </span>
         </div>
     </TyCard>
+
+
+
+
+
+
+
+    <TyCard :border="false" style="margin-top: 14px;">
+      <template #header>
+          tyAdmin  cssIcon使用
+      </template>
+        <div style="display: flex; justify-content: space-around; flex-wrap:wrap">
+          <span v-for=" item in cssIconList" :key="item" style="width:50px;height:50px; display: flex; justify-content: center; align-items:center">
+            <cssIcon  :icon="item" style="font-size:18px"></cssIcon>
+          </span>
+        </div>
+    </TyCard>
+
+
+
+
     <TyCard :border="false" style="margin-top: 14px;">
       <template #header>
           Icon选择器使用
@@ -55,14 +76,13 @@
 import svgIcon from '@/components/svgIcon.vue'
 import iconSelect from '@/components/iconSelect.vue'
 import svgIconSelect from '@/components/svgIconSelect.vue'
-import {ref} from 'vue'
+import cssIcon from '@/components/cssIcon/index.vue'
+import {cssIconList} from '@/components/cssIcon/cssIconList.js'
 import {TyiArrowUpCircleFill,TyiArrowDownCircleFill,TyiArrowRightCircleFill,TyiArrowLeftCircleFill} from 'toyaricon'
+
+import {ref} from 'vue'
 const iconName =ref('')
 const icon = ref('')
-
-const getIcons1=()=>{
-  
-}
 let tyIconLs=[
   TyiArrowUpCircleFill,TyiArrowDownCircleFill,TyiArrowRightCircleFill,TyiArrowLeftCircleFill
 ]

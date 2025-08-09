@@ -1,0 +1,16 @@
+.ty-cssIcon.link::before,
+.ty-cssIcon.link::after {
+  width: 0.75em;
+  height: 0.5em;
+  border: 2px solid;
+  border-right: 0;
+  border-radius: 5em 0 0 5em;
+}
+
+.ty-cssIcon.link::before {
+  transform: translate(-70%, -45%) rotate(-45deg);
+}
+
+.ty-cssIcon.link::after {
+  transform: translate(-30%, -55%) rotate(135deg);
+}

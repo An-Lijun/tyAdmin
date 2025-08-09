@@ -68,15 +68,15 @@ importers:
       pinia-plugin-persist:
         specifier: ^1.0.0
         version: 1.0.0(pinia@2.3.1(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3)))(vue@3.5.13(typescript@5.7.3))
+      pinyin-pro:
+        specifier: ^3.27.0
+        version: 3.27.0
       qrcode:
         specifier: ^1.5.3
         version: 1.5.4
       robinson:
         specifier: ^1.0.8
         version: 1.0.21
-      sass:
-        specifier: ^1.75.0
-        version: 1.85.0
       toyar-design:
         specifier: 0.0.91-0
         version: 0.0.91-0(typescript@5.7.3)(vite@5.4.14(@types/node@22.13.5)(sass@1.85.0)(terser@5.39.0))
@@ -111,6 +111,9 @@ importers:
       '@vitejs/plugin-vue':
         specifier: ^5.0.4
         version: 5.2.1(vite@5.4.14(@types/node@22.13.5)(sass@1.85.0)(terser@5.39.0))(vue@3.5.13(typescript@5.7.3))
+      sass:
+        specifier: ^1.75.0
+        version: 1.85.0
       typescript:
         specifier: ^5.2.2
         version: 5.7.3
@@ -1538,6 +1541,9 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  pinyin-pro@3.27.0:
+    resolution: {integrity: sha512-Osdgjwe7Rm17N2paDMM47yW+jUIUH3+0RGo8QP39ZTLpTaJVDK0T58hOLaMQJbcMmAebVuK2ePunTEVEx1clNQ==}
 
   pkg-types@1.3.1:
     resolution: {integrity: sha512-/Jm5M4RvtBFVkKWRu2BLUTNP8/M2a+UwuAX+ae4770q1qVGtfjG+WTCupoZixokjmHiry8uI+dlY8KXYV5HVVQ==}
@@ -3138,6 +3144,8 @@ snapshots:
       typescript: 5.7.3
     transitivePeerDependencies:
       - '@vue/composition-api'
+
+  pinyin-pro@3.27.0: {}
 
   pkg-types@1.3.1:
     dependencies:

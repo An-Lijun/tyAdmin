@@ -1,0 +1,10 @@
+
+.ty-cssIcon.plus::before {
+    width: 90%;
+    border-top: 2px solid;
+  }
+
+  .ty-cssIcon.plus::after {
+    height: 90%;
+    border-left: 2px solid;
+  }

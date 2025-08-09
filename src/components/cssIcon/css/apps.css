@@ -1,0 +1,7 @@
+.ty-cssIcon.apps::before {
+    height: 0.15em;
+    width: 0.15em;
+    background: currentColor;
+    box-shadow: -0.35em -0.35em, -0.35em 0, -0.35em 0.35em, 0 -0.35em, 0 0.35em,
+      0.35em -0.35em, 0.35em 0, 0.35em 0.35em;
+  }

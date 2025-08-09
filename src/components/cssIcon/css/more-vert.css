@@ -1,0 +1,8 @@
+
+.ty-cssIcon.more-vert::before {
+    height: 0.2em;
+    width: 0.2em;
+    background: currentColor;
+    border-radius: 50%;
+    box-shadow: 0 -0.4em, 0 0.4em;
+  }

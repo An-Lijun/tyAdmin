@@ -1,0 +1,15 @@
+.ty-cssIcon.location::before {
+    width: 0.8em;
+    height: 0.8em;
+    border: 2px solid;
+    border-radius: 50% 50% 50% 0;
+    transform: translate(-50%, -60%) rotate(-45deg);
+  }
+
+  .ty-cssIcon.location::after {
+    width: 0.3em;
+    height: 0.3em;
+    border: 2px solid;
+    border-radius: 50%;
+    transform: translate(-50%, -0.25em);
+  }

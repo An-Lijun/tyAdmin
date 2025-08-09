@@ -1,0 +1,5 @@
+.ty-cssIcon.menu::before {
+    box-shadow: 0 -0.35em, 0 0.35em;
+    border-top: 2px solid;
+    width: 100%;
+  }

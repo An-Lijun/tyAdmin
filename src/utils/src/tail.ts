@@ -48,7 +48,7 @@ export default class RenderTail {
 
   constructor(colors, characters, tailType) {
 
-    this.tailType = tailType || 3; //尾拖类型
+    this.tailType = tailType || 1; //尾拖类型
     this.maxWidth = 20; //尾拖最大宽度
     this.minWidth = 5; //尾拖最小宽度
 

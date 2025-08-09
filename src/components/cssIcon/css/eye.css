@@ -1,0 +1,14 @@
+.ty-cssIcon.eye::before {
+    width: 0.9em;
+    height: 0.9em;
+    border: 2px solid;
+    border-radius: 70% 15%;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .ty-cssIcon.eye::after {
+    width: 0.5em;
+    height: 0.5em;
+    border: 2px solid;
+    border-radius: 50%;
+  }

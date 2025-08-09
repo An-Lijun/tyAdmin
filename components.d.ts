@@ -8,10 +8,12 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    All: typeof import('./src/components/cssIcon/all.vue')['default']
     ByCanvas: typeof import('./src/components/waterProgress/byCanvas.vue')['default']
     ByDom: typeof import('./src/components/waterProgress/byDom.vue')['default']
     CodeViewer: typeof import('./src/components/codeViewer.vue')['default']
     CountTo: typeof import('./src/components/countTo.vue')['default']
+    CssIcon: typeof import('./src/components/cssIcon/index.vue')['default']
     ExcelViewer: typeof import('./src/components/excelViewer.vue')['default']
     Flow: typeof import('./src/components/flow/index.vue')['default']
     FlowItem: typeof import('./src/components/flow/flow-item.vue')['default']

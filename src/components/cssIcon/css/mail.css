@@ -1,0 +1,14 @@
+.ty-cssIcon.mail::before {
+    width: 0.9em;
+    height: 0.75em;
+    border: 2px solid;
+    border-radius: 2px;
+  }
+
+  .ty-cssIcon.mail::after {
+    width: 0.4em;
+    height: 0.4em;
+    border-style: solid;
+    border-width: 0 0 2px 2px;
+    transform: translate(-50%, -0.35em) rotate(-45deg) skew(10deg, 10deg);
+  }

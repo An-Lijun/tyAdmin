@@ -1,0 +1,16 @@
+
+.ty-cssIcon.resize-horiz::before,
+.ty-cssIcon.resize-horiz::after {
+  height: 0.4em;
+  width: 0.4em;
+  border-style: solid;
+  border-width: 2px 0 0 2px;
+}
+
+.ty-cssIcon.resize-horiz::before {
+  transform: translate(-90%, -50%) rotate(-45deg);
+}
+
+.ty-cssIcon.resize-horiz::after {
+  transform: translate(-10%, -50%) rotate(135deg);
+}

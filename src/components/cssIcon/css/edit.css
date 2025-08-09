@@ -1,0 +1,15 @@
+.ty-cssIcon.edit::before {
+    border: 2px solid;
+    width: 0.85em;
+    height: 0.4em;
+    transform: translate(-0.35em, -0.25em) rotate(-45deg);
+  }
+
+  .ty-cssIcon.edit::after {
+    border: 0.15em solid;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    left: 5%;
+    top: 95%;
+    transform: translate(0, -100%);
+  }

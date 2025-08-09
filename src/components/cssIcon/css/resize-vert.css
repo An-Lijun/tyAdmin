@@ -1,0 +1,15 @@
+.ty-cssIcon.resize-vert::before,
+.ty-cssIcon.resize-vert::after {
+  height: 0.4em;
+  width: 0.4em;
+  border-style: solid;
+  border-width: 2px 0 0 2px;
+}
+
+.ty-cssIcon.resize-vert::before {
+  transform: translate(-50%, -90%) rotate(45deg);
+}
+
+.ty-cssIcon.resize-vert::after {
+  transform: translate(-50%, -10%) rotate(225deg);
+}

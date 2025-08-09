@@ -1,0 +1,15 @@
+.ty-cssIcon.person::before {
+    width: 0.45em;
+    height: 0.45em;
+    border: 2px solid;
+    border-radius: 50%;
+    top: 25%;
+  }
+
+  .ty-cssIcon.person::after {
+    width: 0.9em;
+    height: 0.4em;
+    border: 2px solid;
+    border-radius: 50% 50% 0 0;
+    top: 75%;
+  }
