@@ -30,9 +30,7 @@ const routerViewWrapperStyles: StyleObject = {
 // 创建侧边栏组件
 const createAside = (appStore: ReturnType<typeof useAppStore>) => {
     const asideHeight = appStore.layout === 1 ? '100vh' : 'calc(100vh - 80px)';
-
     return h(TyAside, {
-        
         style: {
             width: appStore.isFold ? '50px' : '210px',
             ...asideStyles,
@@ -86,7 +84,6 @@ export default defineComponent({
     name: 'Home',
     setup() {
         const appStore = useAppStore();
-
         return () => renderLayout(appStore);
     }
 });

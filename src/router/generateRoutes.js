@@ -1,48 +1,58 @@
 // src/router/generateRoutes.js
-// 动态导入组件
-// 递归生成路由
-import {router} from "./index";
-function capitalizeFirstLetter(str) {
-  return str.replace(/^./, function(match) {
-      return match.toUpperCase();
-  });
+import { router } from './index'
+
+/**
+ * 首字母大写工具
+ */
+const capitalizeFirstLetter = str => str?.charAt(0).toUpperCase() + str.slice(1) || ''
+
+/**
+ * 格式化路由路径：/user/list → userList
+ */
+const formatRoutePath = path => {
+  if (!path.includes('/')) return path
+  const [first, second] = path.split('/').filter(Boolean)
+  return first + capitalizeFirstLetter(second)
 }
 
-
-const getPath=(path)=>{
-  const pathArr = path.split('/')
-  return pathArr[0]+ capitalizeFirstLetter(pathArr[1])
-}
-
-const generateRoutes = (menuData,basePath='') => {
-  let res= menuData.map(item => {
-    const path = item.path.includes('/')?  getPath(item.path):item.path
+/**
+ * 递归生成路由并自动注册到 VueRouter
+ * @param {Array} menuData 菜单数据
+ * @param {String} parentPath 父级路径（用于拼接组件目录）
+ */
+const generateRoutes = (menuData = [], parentPath = '') => {
+  return menuData.map(item => {
+    // 路由基础配置
     const route = {
-      path: `${path}`,
+      path: formatRoutePath(item.path),
       name: item.path,
-      label: item.label,
-      icon: item.icon||"",
-      type: item.type||""
-    };
-    
-
-    if (item.children) {
-      route.children = generateRoutes(item.children,item.path);
-      if (item.redirect) {
-        route.redirect = {
-          name: item.redirect
-        };
+      meta: {
+        label: item.label,
+        icon: item.icon || '',
+        type: item.type || ''
       }
-    }else{
-      route.component=() => import(`${basePath?'../views/' +basePath+'/'+item.path:'../views/' +item.path}.vue`)
     }
-    router.addRoute('home',route)
 
-    return route;
-  });
-  console.log(res);
-  
-  return res
-};
+    // 重定向
+    if (item.redirect) route.redirect = { name: item.redirect }
 
-export default generateRoutes;
+    // 递归子路由
+    if (item.children?.length) {
+      route.children = generateRoutes(item.children, item.path)
+    }
+    // 动态导入组件（叶子节点）
+    else {
+      const componentPath = parentPath
+        ? `../views/${parentPath}/${item.path}.vue`
+        : `../views/${item.path}.vue`
+        
+      route.component = () => import(/* @vite-ignore */componentPath)
+    }
+
+    // 挂载到父路由 home
+    router.addRoute('home', route)
+    return route
+  })
+}
+
+export default generateRoutes
