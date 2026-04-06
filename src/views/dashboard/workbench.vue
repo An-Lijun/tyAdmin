@@ -6,7 +6,7 @@
           :src="getAssetURL('/assets/system/header.png')"
           fit="cover"
           shape="circle"
-          size="78"
+          :size="78"
           style="margin-left: 10px"
         />
         <div class="main">

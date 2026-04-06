@@ -113,7 +113,7 @@
         </TyPoppover>
         </div>
 
-        <TyiSettings4Line class="contruller" @click="openCont" size="18"/>
+        <TyiSettings4Line class="contruller" @click="openCont" :size="18"/>
 
       </div>
     </div>

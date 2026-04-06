@@ -13,8 +13,8 @@ interface Props {
   width?: string
   height?: string
   option: EChartsOption,
-  deepDraw: boolean,
-  deepRender: boolean
+  deepDraw?: boolean,
+  deepRender?: boolean
 
 }
 const props = withDefaults(defineProps<Props>(), {

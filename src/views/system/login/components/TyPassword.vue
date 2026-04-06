@@ -1,16 +1,13 @@
 <template>
-  <TyForm ref="formRef" style="width: 500px" size="large" :formData="formData" :rules="rules" >
-    <TyFormItem prop="username" class="entry">
-      <template #label> 账户 </template>
+  <TyForm ref="formRef" style="width: 500px" size="large" :formData="formData" :rules="rules" :labelWidth="0" >
+    <TyFormItem prop="username" class="entry" :isShowStr="false">
       <TyInput v-model="formData.username"></TyInput>
     </TyFormItem>
     <TyFormItem prop="password" class="entry">
-      <template #label> 密码 </template>
       <TyInputPassword size="large" v-model="formData.password">
       </TyInputPassword>
     </TyFormItem>
     <TyFormItem class="captchaItem entry" prop="account" v-if="errCount > 1" style="position: relative">
-      <template #label> 验证码 </template>
       <div style="display: flex; align-items: center">
         <TyInput v-model="formData.account">
           <template #innerAft>

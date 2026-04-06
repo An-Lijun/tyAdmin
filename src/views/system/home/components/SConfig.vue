@@ -1,5 +1,5 @@
 <template>
-  <TyDrawer :modelValue="model" width="320">
+  <TyDrawer :modelValue="model" :width="320">
     <template #header> 系统设置 </template>
     <div>
       <ty-divider style="--font-body-3: 14px;--color-bg-1:var(--color-bg-3);--toyar-gray-2:var(--toyar-gray-3)">
