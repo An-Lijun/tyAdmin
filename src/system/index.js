@@ -159,7 +159,7 @@ export default function (vue) {
     //   popstate: showWarnModal,
     // })
     new WinRefreshBlock({
-      reload:true,
+      reload:false,
       close:true
     })
   }
