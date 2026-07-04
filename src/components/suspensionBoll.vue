@@ -1,15 +1,16 @@
 <template>
-  <div ref="floatDrag" class="ty-SuspensionBoll" id="float-box"
-    :style="boxStyle"
-     @mousemove.prevent @mousedown="mouseDown" @mouseup="mouseUp" :class="[left<=0?'left':left>=clientWidth-110?'right':'',flag?'isOpened':'']">
-    <div class="drag" @dblclick="handelFlex" >
+  <div ref="floatDrag" class="ty-SuspensionBoll" :class="computedClass" :style="boxStyle" @mousemove.prevent
+    @mousedown="mouseDown" @mouseup="mouseUp">
+    <div class="drag" @dblclick="handelFlex">
       <TyiAppsFill color="#fff" :size="30" />
     </div>
-    <div class="content" id="content"  :class="{
-      isOpened:flag
+    <div class="content" :class="{
+      isOpened: isOpened
     }">
       <div class="item-container">
-        <slot/>
+        <div class="slot-item" v-for="item in $slots.default()" :key="item.key">
+          <component :is="item" />
+        </div>
       </div>
     </div>
   </div>
@@ -19,15 +20,6 @@
 import { ref, onMounted, onBeforeUnmount, nextTick, computed } from 'vue';
 
 const props = defineProps({
-  distanceRight: {
-    type: Number,
-    default: 36,
-  },
-
-  isScrollHidden: {
-    type: Boolean,
-    default: false,
-  },
   isCanDraggable: {
     type: Boolean,
     default: true,
@@ -35,10 +27,6 @@ const props = defineProps({
   zIndex: {
     type: Number,
     default: 50,
-  },
-  value: {
-    type: String,
-    default: '悬浮球！',
   },
 });
 
@@ -51,12 +39,8 @@ const left = ref(null);
 const top = ref(null);
 const right = ref(null);
 const timer = ref(null);
-const currentTop = ref(0);
-const mousedownX = ref(0);
-const mousedownY = ref(0);
 
-const flag = ref(false);
-const box = ref('');
+const isOpened = ref(false);
 const activeIndex = ref(0);
 let canClick = false;
 
@@ -70,6 +54,10 @@ const boxStyle = computed(() => ({
   zIndex: props.zIndex,
 }));
 
+const computedClass = computed(() =>
+  [left.value <= 0 ? 'left' : left.value >= clientWidth.value - 110 ? 'right' : '', isOpened.value ? 'isOpened' : '']
+)
+
 onMounted(() => {
   props.isCanDraggable &&
     nextTick(() => {
@@ -79,7 +67,6 @@ onMounted(() => {
       initDraggable();
     });
   window.addEventListener('resize', handleResize);
-  box.value = document.getElementById("float-box");
 });
 
 onBeforeUnmount(() => {
@@ -88,7 +75,7 @@ onBeforeUnmount(() => {
 });
 
 const handelFlex = () => {
-  flag.value = !flag.value;
+  isOpened.value = !isOpened.value;
 };
 
 const getStyleAttr = (obj, attr) => {
@@ -111,8 +98,6 @@ const initDraggable = () => {
 
 const mouseDown = (e) => {
   const event = e || window.event;
-  mousedownX.value = event.screenX;
-  mousedownY.value = event.screenY;
   let floatDragWidth = floatDragDom.width / 2;
   let floatDragHeight = floatDragDom.height / 2;
   if (event.preventDefault) {
@@ -169,10 +154,10 @@ const checkDraggablePosition = () => {
   }
 };
 
-const handleScroll = () => {};
-const toucheStart = () => {};
-const touchMove = () => {};
-const touchEnd = () => {};
+const handleScroll = () => { };
+const toucheStart = () => { };
+const touchMove = () => { };
+const touchEnd = () => { };
 </script>
 
 <style scoped lang="scss">
@@ -190,15 +175,18 @@ const touchEnd = () => {};
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   margin: 0;
-  &.left{
+
+  &.left {
     transform: translateX(-80%);
     border-radius: 0;
   }
-  &.right{
+
+  &.right {
     transform: translateX(80%);
     border-radius: 0;
   }
-  &:hover{
+
+  &:hover {
     transform: translateX(0);
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.9);
@@ -206,13 +194,14 @@ const touchEnd = () => {};
     -webkit-backdrop-filter: blur(20px);
   }
 
-  &.isOpened:hover{
+  &.isOpened:hover {
     transform: translateX(0);
     border-radius: 40px;
     background: rgba(0, 0, 0, 0.9);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
   }
+
   .drag {
     width: 70px;
     height: 70px;
@@ -231,10 +220,12 @@ const touchEnd = () => {};
     grid-template-rows: 0fr;
     transition: all 0.3s;
     overflow: hidden;
-    &.isOpened{
-     grid-template-rows: 1fr;
+
+    &.isOpened {
+      grid-template-rows: 1fr;
       margin-bottom: 20px;
     }
+
     .label {
       width: 70px;
       height: 35px;
@@ -248,8 +239,15 @@ const touchEnd = () => {};
       transition: all 0.5;
     }
 
+    &.isOpened {
+      .item-container {
+        padding: 0px;
+      }
+    }
+
     .item-container {
-      width: 70px;
+      // width: 70px;
+      padding: 0 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -257,6 +255,10 @@ const touchEnd = () => {};
       min-height: 0;
       overflow: hidden;
       height: unset;
+
+      .slot-item {
+        padding: 12px 0;
+      }
     }
   }
 }
