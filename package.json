@@ -27,6 +27,7 @@
     "localforage": "^1.10.0",
     "mavon-editor": "^3.0.1",
     "normalize.css": "^8.0.1",
+    "pdfjs-dist": "^5.7.284",
     "pinia": "^2.1.7",
     "pinia-plugin-persist": "^1.0.0",
     "pinyin-pro": "^3.27.0",

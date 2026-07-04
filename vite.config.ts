@@ -3,12 +3,12 @@ import { resolve } from 'path'
 import createPlugins from './config/vitePlugin';
 
 // https://vitejs.dev/config/
-export default defineConfig((options)=>{
-  return{
-    build:{
-      rollupOptions:{
-        input:{
-          index:resolve(__dirname,'src/i.html')
+export default defineConfig((options) => {
+  return {
+    build: {
+      rollupOptions: {
+        input: {
+          index: resolve(__dirname, 'src/i.html')
         }
       },
     },
@@ -30,18 +30,22 @@ export default defineConfig((options)=>{
         ]
       }
     },
-    server:{
+    server: {
       // host:'0.0.0.0' ,//ip地址
-      port: 80, // 设置服务启动端口号
+      port: 8088, // 设置服务启动端口号
       open: true, // 设置服务启动时是否自动打开浏览器
-      proxy:{
+      proxy: {
         // 本地开发环境通过代理access接口
         '/api': {
           target: 'http://localhost:3000',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
         }
-      }
+      },
+      optimizeDeps: {
+        // 强制预构建 pdfjs-dist，解决 Vite 解析问题
+        include: ['pdfjs-dist']
+      },
     },
     plugins: createPlugins(options)
   }
