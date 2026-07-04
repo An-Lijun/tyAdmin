@@ -1,7 +1,7 @@
 <template>
   <div ref="floatDrag" class="ty-SuspensionBoll" id="float-box"
-    :style="{ left: left + 'px', top: top + 'px', right: right + 'px !important', zIndex: zIndex }"
-     @mousemove.prevent @mousedown="mouseDown" @mouseup="mouseUp" :class="[left<=0?'left':left>=clientWidth-70?'right':'',flag?'isOpened':'']">
+    :style="boxStyle"
+     @mousemove.prevent @mousedown="mouseDown" @mouseup="mouseUp" :class="[left<=0?'left':left>=clientWidth-110?'right':'',flag?'isOpened':'']">
     <div class="drag" @dblclick="handelFlex" >
       <TyiAppsFill color="#fff" :size="30" />
     </div>
@@ -15,171 +15,164 @@
   </div>
 </template>
 
-<script >
+<script setup>
+import { ref, onMounted, onBeforeUnmount, nextTick, computed } from 'vue';
 
-export default {
-  name: 'DragBall',
-  props: {
-    distanceRight: {
-      type: Number,
-      default: 36,
-    },
+const props = defineProps({
+  distanceRight: {
+    type: Number,
+    default: 36,
+  },
 
-    isScrollHidden: {
-      type: Boolean,
-      default: false,
-    },
-    isCanDraggable: {
-      type: Boolean,
-      default: true,
-    },
-    zIndex: {
-      type: Number,
-      default: 50,
-    },
-    value: {
-      type: String,
-      default: '悬浮球！',
-    },
+  isScrollHidden: {
+    type: Boolean,
+    default: false,
   },
-  data() {
-    return {
-      clientWidth: null,
-      clientHeight: null,
-      left: null,
-      top: null,
-      right: null,
-      timer: null,
-      currentTop: 0,
-      mousedownX: 0,
-      mousedownY: 0,
+  isCanDraggable: {
+    type: Boolean,
+    default: true,
+  },
+  zIndex: {
+    type: Number,
+    default: 50,
+  },
+  value: {
+    type: String,
+    default: '悬浮球！',
+  },
+});
 
-      flag: false, // 控制悬浮框是否展开
-      box: '', // 悬浮球的dom
-      activeIndex: 0, //高亮显示
+const floatDrag = ref(null);
+let floatDragDom = null;
 
-    };
-  },
-  created() {
-    this.clientWidth = document.documentElement.clientWidth;
-    this.clientHeight = document.documentElement.clientHeight;
-  },
-  mounted() {
-    this.isCanDraggable &&
-      this.$nextTick(() => {
-        this.floatDrag = this.$refs.floatDrag;
-        // 获取元素位置属性
-        this.floatDragDom = this.floatDrag.getBoundingClientRect();
-        // 设置初始位置
-        this.right = 0;
-        this.top = this.clientHeight - this.floatDragDom.height;
-        this.initDraggable();
-      });
-    window.addEventListener('resize', this.handleResize);
-    this.box = document.getElementById("float-box")
-  },
-  beforeUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-    window.removeEventListener('resize', this.handleResize);
-  },
-  methods: {
-    // 伸缩悬浮球
-    handelFlex() {
-      this.flag = !this.flag
-    },
+const clientWidth = ref(null);
+const clientHeight = ref(null);
+const left = ref(null);
+const top = ref(null);
+const right = ref(null);
+const timer = ref(null);
+const currentTop = ref(0);
+const mousedownX = ref(0);
+const mousedownY = ref(0);
 
-    // 获取要改变得样式属性
-    getStyleAttr(obj, attr) {
-      if (obj.currentStyle) {
-        // IE 和 opera
-        return obj.currentStyle[attr];
-      } else {
-        return window.getComputedStyle(obj, null)[attr];
-      }
-    },
-    /**
-     * 窗口resize监听
-     */
-    handleResize() {
-      this.checkDraggablePosition();
-    },
-    /**
-     * 初始化draggable
-     */
-    initDraggable() {
-      this.floatDrag.addEventListener('touchstart', this.toucheStart);
-      this.floatDrag.addEventListener('touchmove', (e) => this.touchMove(e));
-      this.floatDrag.addEventListener('touchend', this.touchEnd);
-    },
-    mouseDown(e) {
-      const event = e || window.event;
-      this.mousedownX = event.screenX;
-      this.mousedownY = event.screenY;
-      const that = this;
-      let floatDragWidth = this.floatDragDom.width / 2;
-      let floatDragHeight = this.floatDragDom.height / 2;
-      if (event.preventDefault) {
-        event.preventDefault();
-      }
-      this.canClick = false;
-      this.floatDrag.style.transition = 'none';
-      document.onmousemove = function (e) {
-        var event = e || window.event;
-        that.left = event.clientX - floatDragWidth;
-        that.top = event.clientY - floatDragHeight;
-        if (that.left < 0) that.left = 0;
-        if (that.top < 0) that.top = 0;
-        // 鼠标移出可视区域后给按钮还原
-        if (
-          event.clientY < 0 ||
-          event.clientY > Number(this.clientHeight) ||
-          event.clientX > Number(this.clientWidth) ||
-          event.clientX < 0
-        ) {
-          this.right = 0;
-          this.top = this.clientHeight - this.floatDragDom.height;
-          document.onmousemove = null;
-          this.floatDrag.style.transition = 'all 0.3s';
-          return;
-        }
-        if (that.left >= document.documentElement.clientWidth - floatDragWidth * 2) {
-          that.left = document.documentElement.clientWidth - floatDragWidth * 2;
-        }
-        if (that.top >= that.clientHeight - floatDragHeight * 2) {
-          that.top = that.clientHeight - floatDragHeight * 2;
-        }
-      };
-    },
-    mouseUp(e) {
-      //判断只是单纯的点击，没有拖拽
-      document.onmousemove = null;
-      this.checkDraggablePosition();
-      this.floatDrag.style.transition = 'all 0.3s';
-    },
-    /**
-     * 判断元素显示位置
-     * 在窗口改变和move end时调用
-     */
-    checkDraggablePosition() {
-      this.clientWidth = document.documentElement.clientWidth;
-      this.clientHeight = document.documentElement.clientHeight;
-      if (this.left + this.floatDragDom.width / 2 >= this.clientWidth / 2) {
-        // 判断位置是往左往右滑动
-        this.left = this.clientWidth - this.floatDragDom.width;
-      } else {
-        this.left = 0;
-      }
-      if (this.top < 0) {
-        // 判断是否超出屏幕上沿
-        this.top = 0;
-      }
-      if (this.top + this.floatDragDom.height >= this.clientHeight) {
-        // 判断是否超出屏幕下沿
-        this.top = this.clientHeight - this.floatDragDom.height;
-      }
-    },
-  },
+const flag = ref(false);
+const box = ref('');
+const activeIndex = ref(0);
+let canClick = false;
+
+clientWidth.value = document.documentElement.clientWidth;
+clientHeight.value = document.documentElement.clientHeight;
+
+const boxStyle = computed(() => ({
+  left: left.value + 'px',
+  top: top.value + 'px',
+  right: right.value + 'px !important',
+  zIndex: props.zIndex,
+}));
+
+onMounted(() => {
+  props.isCanDraggable &&
+    nextTick(() => {
+      floatDragDom = floatDrag.value.getBoundingClientRect();
+      right.value = 0;
+      top.value = clientHeight.value - floatDragDom.height;
+      initDraggable();
+    });
+  window.addEventListener('resize', handleResize);
+  box.value = document.getElementById("float-box");
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener('resize', handleResize);
+});
+
+const handelFlex = () => {
+  flag.value = !flag.value;
 };
+
+const getStyleAttr = (obj, attr) => {
+  if (obj.currentStyle) {
+    return obj.currentStyle[attr];
+  } else {
+    return window.getComputedStyle(obj, null)[attr];
+  }
+};
+
+const handleResize = () => {
+  checkDraggablePosition();
+};
+
+const initDraggable = () => {
+  floatDrag.value.addEventListener('touchstart', toucheStart);
+  floatDrag.value.addEventListener('touchmove', (e) => touchMove(e));
+  floatDrag.value.addEventListener('touchend', touchEnd);
+};
+
+const mouseDown = (e) => {
+  const event = e || window.event;
+  mousedownX.value = event.screenX;
+  mousedownY.value = event.screenY;
+  let floatDragWidth = floatDragDom.width / 2;
+  let floatDragHeight = floatDragDom.height / 2;
+  if (event.preventDefault) {
+    event.preventDefault();
+  }
+  canClick = false;
+  floatDrag.value.style.transition = 'none';
+  document.onmousemove = function (e) {
+    var event = e || window.event;
+    left.value = event.clientX - floatDragWidth;
+    top.value = event.clientY - floatDragHeight;
+    if (left.value < 0) left.value = 0;
+    if (top.value < 0) top.value = 0;
+    if (
+      event.clientY < 0 ||
+      event.clientY > Number(clientHeight.value) ||
+      event.clientX > Number(clientWidth.value) ||
+      event.clientX < 0
+    ) {
+      right.value = 0;
+      top.value = clientHeight.value - floatDragDom.height;
+      document.onmousemove = null;
+      floatDrag.value.style.transition = 'all 0.3s';
+      return;
+    }
+    if (left.value >= document.documentElement.clientWidth - floatDragWidth * 2) {
+      left.value = document.documentElement.clientWidth - floatDragWidth * 2;
+    }
+    if (top.value >= clientHeight.value - floatDragHeight * 2) {
+      top.value = clientHeight.value - floatDragHeight * 2;
+    }
+  };
+};
+
+const mouseUp = (e) => {
+  document.onmousemove = null;
+  checkDraggablePosition();
+  floatDrag.value.style.transition = 'all 0.3s';
+};
+
+const checkDraggablePosition = () => {
+  clientWidth.value = document.documentElement.clientWidth;
+  clientHeight.value = document.documentElement.clientHeight;
+  if (left.value + floatDragDom.width / 2 >= clientWidth.value / 2) {
+    left.value = clientWidth.value - floatDragDom.width;
+  } else {
+    left.value = 0;
+  }
+  if (top.value < 0) {
+    top.value = 0;
+  }
+  if (top.value + floatDragDom.height >= clientHeight.value) {
+    top.value = clientHeight.value - floatDragDom.height;
+  }
+};
+
+const handleScroll = () => {};
+const toucheStart = () => {};
+const touchMove = () => {};
+const touchEnd = () => {};
 </script>
 
 <style scoped lang="scss">
@@ -189,13 +182,13 @@ export default {
   left: 0;
   top: 20%;
   width: 70px;
-  // background: rgba(167, 160, 161, .5);
   cursor: pointer;
   user-select: none;
-
   display: block;
-  background: black;
-  // border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   margin: 0;
   &.left{
     transform: translateX(-80%);
@@ -208,11 +201,17 @@ export default {
   &:hover{
     transform: translateX(0);
     border-radius: 50%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
 
   &.isOpened:hover{
     transform: translateX(0);
     border-radius: 40px;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
   .drag {
     width: 70px;
@@ -261,6 +260,4 @@ export default {
     }
   }
 }
-
-
 </style>
