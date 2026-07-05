@@ -166,56 +166,72 @@ const touchEnd = () => { };
   z-index: 10003 !important;
   left: 0;
   top: 20%;
-  width: 70px;
+  width: 50px;
   cursor: pointer;
   user-select: none;
   display: block;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  // border: 1px solid #333;
   margin: 0;
+  backdrop-filter: blur(20px);
 
   &.left {
-    transform: translateX(-80%);
+    transform: translateX(-90%);
     border-radius: 0;
   }
 
   &.right {
-    transform: translateX(80%);
+    transform: translateX(90%);
     border-radius: 0;
   }
 
   &:hover {
     transform: translateX(0);
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+
+    // background: rgba(255, 255, 255, 0.9);
+    .drag {
+      border-radius: 50%;
+
+    }
+
+    .slot-item {
+      &:last-child {
+        border-radius: 0 0 50% 50%;
+      }
+    }
+
+    // backdrop-filter: blur(20px);
+    // -webkit-backdrop-filter: blur(20px);
   }
 
   &.isOpened:hover {
     transform: translateX(0);
     border-radius: 40px;
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+
+    // background: rgba(0, 0, 0, 0.9);
+    // -webkit-backdrop-filter: blur(20px);
+    .drag {
+      border-radius: 50% 50% 0 0;
+    }
   }
 
   .drag {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     // background: #f2e96a;
     text-align: center;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #165DFF;
 
   }
 
   .content {
-    width: 70px;
+    width: 50px;
     display: grid;
     grid-template-rows: 0fr;
     transition: all 0.3s;
@@ -223,7 +239,6 @@ const touchEnd = () => { };
 
     &.isOpened {
       grid-template-rows: 1fr;
-      margin-bottom: 20px;
     }
 
     .label {
@@ -242,6 +257,7 @@ const touchEnd = () => { };
     &.isOpened {
       .item-container {
         padding: 0px;
+
       }
     }
 
@@ -257,7 +273,13 @@ const touchEnd = () => { };
       height: unset;
 
       .slot-item {
-        padding: 12px 0;
+        height: 50px;
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #165DFF;
+
       }
     }
   }
