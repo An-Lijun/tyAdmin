@@ -41,10 +41,6 @@ const changeType = val => {
 </script>
 <style lang="scss" scoped>
 .tyAdmin-form {
-  width: 50%;
-  position: absolute;
-  right: 0;
-  top: 0;
   display: flex;
   align-items: center;
   height: 100%;
