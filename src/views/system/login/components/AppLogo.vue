@@ -15,8 +15,10 @@ import SvgIcon from '@/components/svgIcon.vue';
 </script>
 <style lang="scss" scoped>
 .tyAdmin-logo {
-
-
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 10;
   .tyAdmin__logo {
     display: flex;
     color: #fff;

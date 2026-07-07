@@ -5,7 +5,6 @@
       <AppLogo />
       <div class="logoCard">
       </div>
-
     </div>
 
     <div class="loginCard">
@@ -39,12 +38,14 @@ import AppForm from './components/AppForm.vue'
     display: flex;
     align-items: center;
     justify-content: center;
+     position: relative;
+
     .logoCard{
       position: absolute;
-      left: 0;
-      top: 0;
-      width: calc(100% - 700px);
-      height: 100%;
+      left: -15%;
+      top: -15%;
+      width: 150%;
+      height: 150%;
     }
   }
 
@@ -71,9 +72,8 @@ html[toyar-theme="dark"] {
     }
 
     .logoCard {
-      background: linear-gradient(154deg, rgba(7, 7, 9, .082) 30%, hsl(212 100% 45% / 20%) 48%, rgba(7, 7, 9, .082) 64%);
-      -webkit-filter: blur(100px);
-      filter: blur(100px);
+           background: linear-gradient(154deg, var(--toyar-gray-1)50%,  var(--primary-1) 53%,  var(--toyar-gray-1) 64%);
+      filter: blur(120px);
       height: 100%;
     }
   }
@@ -88,9 +88,8 @@ html[toyar-theme='light'] {
     }
 
     .logoCard {
-      background: linear-gradient(154deg, rgba(7, 7, 9, .082) 30%, hsl(212 100% 45% / 30%) 48%, rgba(7, 7, 9, .082) 64%);
-      -webkit-filter: blur(100px);
-      filter: blur(100px);
+      background: linear-gradient(154deg, var(--toyar-gray-1) 50%,  var(--primary-7) 53%, var(--toyar-gray-1) 64%);
+      filter: blur(120px);
       height: 100%;
 
     }

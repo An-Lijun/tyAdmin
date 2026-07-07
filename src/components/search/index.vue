@@ -182,13 +182,20 @@ const handleClick = () => {
     box-sizing: border-box;
 
     .tyAdminIcon {
-      border: 1px solid var(--border-color-2);
+      // border: 1px solid var(--border-color-2);
+        box-shadow: 
+    inset 0 1px 1px rgba(255,255,255,0.5),
+    inset 0 -1px 1px rgba(0,0,0,0.1),
+    0 1px 0 var(--toyar-gray-6),
+    0 2px 2px rgba(0,0,0,0.1);
+  transform: translateY(2px);
+  margin-top: -3px;
       width: 20px;
       height: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: inset 0 -2px transparent, inset 0 0 1px 1px var(--toyar-gray-5), 0 1px 2px 1px var(--toyar-gray-6);
+      // box-shadow: inset 0 -2px transparent, inset 0 0 1px 1px var(--toyar-gray-5), 0 1px 2px 1px var(--toyar-gray-6);
       border-radius: 3px;
     }
 
