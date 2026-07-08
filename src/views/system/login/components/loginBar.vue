@@ -6,19 +6,26 @@
     </div>
     <div class="tya-control">
       <div class="color" @mouseenter="mouseenter" @mouseleave="mouseleave">
-        <div class="red color-item" v-show="isShowColor" @click="handleChange('red')"></div>
-        <div class="primary color-item" v-show="isShowColor"  @click="handleChange('xblue')"></div>
-        <div class="yellow color-item" v-show="isShowColor"  @click="handleChange('yellow')"></div>
-        <div class="cyan color-item" v-show="isShowColor"  @click="handleChange('cyan')"></div>
-        <div class="magenta color-item" v-show="isShowColor"  @click="handleChange('magenta')"></div>
+        <div class="color-content" :class="{ isShowColor: isShowColor }">
+          <div class="red color-item" @click="handleChange('red')"></div>
+          <div class="primary color-item" @click="handleChange('xblue')"></div>
+          <div class="yellow color-item" @click="handleChange('yellow')"></div>
+          <div class="cyan color-item" @click="handleChange('cyan')"></div>
+          <div
+            class="magenta color-item"
+            @click="handleChange('magenta')"
+          ></div>
+        </div>
         <TyiPaletteLine :size="18" />
-
       </div>
       <TyiLayoutLeftFill :size="18" />
 
-      <TyiMoonFill :size="18" v-if="isDark" @click="changeThemeState($event, false)" />
+      <TyiMoonFill
+        :size="18"
+        v-if="isDark"
+        @click="changeThemeState($event, false)"
+      />
       <TyiSunFill :size="18" v-else @click="changeThemeState($event, true)" />
-
     </div>
   </div>
 </template>
@@ -30,16 +37,15 @@ const appStore = useAppStore()
 
 const isDark = ref(true)
 const isShowColor = ref(false)
-const handleChange =(val)=>{
-  const color ={
-    red:'#F76965',
-    yellow:'#FBE94B',
-    cyan:'#3FD4CF',
-    xblue:'#3C7EFF',
-    magenta:'#F756A9'
+const handleChange = val => {
+  const color = {
+    red: '#F76965',
+    yellow: '#FBE94B',
+    cyan: '#3FD4CF',
+    xblue: '#3C7EFF',
+    magenta: '#F756A9'
   }
   appStore.pColor = color[val]
-  
 }
 const changeThemeState = (e, value) => {
   console.log(e)
@@ -75,29 +81,9 @@ const mouseleave = () => {
     ::v-deep .ty-svgIcon {
       svg {
         width: 34px !important;
-        height: 34px !important;
+        height: 34px!important;
         margin-right: 10px;
       }
-    }
-  }
-
-  :deep(.ty-switch) {
-    .checkedText {
-      font-size: 0 !important;
-      background-image: url('../../../assets/system/sun.svg');
-      display: inline-block;
-      width: 15px;
-      background-size: contain;
-      height: 15px;
-    }
-
-    .uncheckedText {
-      font-size: 0 !important;
-      background-image: url('../../../assets/system/moon.svg');
-      display: inline-block;
-      width: 15px;
-      background-size: contain;
-      height: 15px;
     }
   }
 
@@ -107,20 +93,29 @@ const mouseleave = () => {
     display: inline-flex;
     align-items: center;
     background-color: var(--fill-3);
-    transition: width 0.3s ease;
 
     .ty-icon {
-      margin: 0 5px
+      margin: 0 5px;
     }
 
     .color {
-      transition: width 0.3s ease;
-      display: inline-flex;
-
+      .color-content{
+        width: 0px;
+        overflow: hidden;
+        height: 18px;
+        
+        display: inline-block;
+        &.isShowColor {
+          width: 140px;
+          transition: width 0.5s ease;
+        }
+      }
       .color-item {
         width: 18px;
         height: 18px;
         border-radius: 50%;
+        display: inline-block;
+        width:18px;
         margin: 0 5px;
       }
 

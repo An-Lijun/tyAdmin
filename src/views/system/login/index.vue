@@ -42,10 +42,10 @@ import AppForm from './components/AppForm.vue'
 
     .logoCard{
       position: absolute;
-      left: -15%;
-      top: -15%;
-      width: 150%;
-      height: 150%;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100%;
     }
   }
 
@@ -72,9 +72,8 @@ html[toyar-theme="dark"] {
     }
 
     .logoCard {
-           background: linear-gradient(154deg, var(--toyar-gray-1)50%,  var(--primary-1) 53%,  var(--toyar-gray-1) 64%);
+       background: linear-gradient(154deg, var(--toyar-gray-1)55%,  var(--primary-1) 56%,  var(--toyar-gray-1) 64%);
       filter: blur(120px);
-      height: 100%;
     }
   }
 }
@@ -88,10 +87,8 @@ html[toyar-theme='light'] {
     }
 
     .logoCard {
-      background: linear-gradient(154deg, var(--toyar-gray-1) 50%,  var(--primary-7) 53%, var(--toyar-gray-1) 64%);
+      background: linear-gradient(154deg, var(--toyar-gray-1) 55%,  var(--primary-7) 56%, var(--toyar-gray-1) 64%);
       filter: blur(120px);
-      height: 100%;
-
     }
   }
 }
