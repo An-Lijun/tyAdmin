@@ -1,5 +1,5 @@
 <template>
-  <div class="animationRightToLeft">
+  <div class="animationRightToLeft"  style="--border-radius-4:var( --border-radius-12)">
     <TyCard :border="false">
       <div class="header-card">
         <TyImage

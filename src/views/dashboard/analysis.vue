@@ -1,6 +1,6 @@
 <!-- 分析页 -->
 <template>
-  <div class="tyAdmin__container animationRightToLeft">
+  <div class="tyAdmin__container animationRightToLeft" style="--border-radius-4:var( --border-radius-12)">
     <TyRow :gutter="16" style="margin: 0 -8px -16px" class="tyAdmin__cardList">
       <TyCol :span="{
         xxl: 6,
@@ -9,16 +9,14 @@
         md: 12,
         sm: 24
       }" v-for="item in analysisList">
-        <TyCard :isLoading="isLoading" :border="false">
-          <template #header>
+        <TyCard :isLoading="isLoading">
+          <div class="analysisBody">
             <div class="analysisHead">
               <b> {{ item.title }} </b>
               <TyButton type="secondary" size="mini" :state="item.state">
                 月
               </TyButton>
             </div>
-          </template>
-          <div class="analysisBody">
             <div class="line1">
               <countTo :value="item.money" :second="2">
                 <template #default="{ value }">
@@ -128,64 +126,86 @@ let analysisList = [
 let option = {
   tooltip: {
     trigger: 'axis',
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderColor: '#e8e8e8',
+    borderWidth: 1,
+    padding: [8, 12],
+    textStyle: {
+      color: '#333',
+      fontSize: 12
+    },
     axisPointer: {
+      type: 'cross',
       lineStyle: {
-        width: 1
+        width: 1,
+        type: 'dashed',
+        color: '#ccc'
+      },
+      crossStyle: {
+        color: '#ccc'
       }
     }
   },
   xAxis: {
     type: 'category',
     boundaryGap: false,
-    data: [...new Array(18)].map((_item, index) => `${index + 6}:00`),
-    splitLine: {
-      show: true,
-      lineStyle: {
-        width: 1,
-        type: 'solid'
-      }
+    data: [...new Array(12)].map((_item, index) => `${index + 1}月`),
+    axisLine: {
+      show: false
+    },
+    axisLabel: {
+      fontSize: 11,
+      color: '#999'
     },
     axisTick: {
       show: false
     }
   },
-  yAxis: [
-    {
-      type: 'value',
-      max: 80000,
-      splitNumber: 4,
-      axisTick: {
-        show: false
-      },
-      splitArea: {
-        show: true,
-        areaStyle: {
-          color: ['rgba(255,255,255,0.2)', 'rgba(226,226,226,0.2)']
-        }
+  yAxis: {
+    type: 'value',
+    max: 80,
+    splitNumber: 8,
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      fontSize: 11,
+      color: '#999'
+    },
+    splitLine: {
+      show: true,
+      lineStyle: {
+        width: 1,
+        type: 'solid',
+        opacity: 0.15
       }
     }
-  ],
-  grid: { left: '1%', right: '1%', top: '2  %', bottom: 0, containLabel: true },
+  },
+  grid: { left: '3%', right: '3%', top: '8%', bottom: '10%', containLabel: true },
   series: [
     {
       smooth: true,
+      symbol: 'none',
+      lineStyle: {
+        width: 3
+      },
+      emphasis: {
+        focus: 'series',
+        itemStyle: {
+          shadowBlur: 10,
+          shadowColor: 'rgba(0,0,0,0.2)'
+        }
+      },
       data: [
-        111, 222, 4000, 18000, 33333, 55555, 66666, 33333, 14000, 36000, 66666,
-        44444, 22222, 11111, 4000, 2000, 500, 333, 222, 111
+        50, 30, 40, 25, 70, 60, 55, 35, 45, 50, 42, 45
       ],
       type: 'line',
-      areaStyle: {},
-      itemStyle: {
-      }
-    },
-    {
-      smooth: true,
-      data: [
-        33, 66, 88, 333, 3333, 5000, 18000, 3000, 1200, 13000, 22000, 11000,
-        2221, 1201, 390, 198, 60, 30, 22, 11
-      ],
-      type: 'line',
-      areaStyle: {},
+      areaStyle: {
+        opacity: 0.15
+      },
       itemStyle: {
       }
     }
@@ -195,94 +215,170 @@ let option = {
 let option2 = {
   tooltip: {
     trigger: 'axis',
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderColor: '#e8e8e8',
+    borderWidth: 1,
+    padding: [8, 12],
+    textStyle: {
+      color: '#333',
+      fontSize: 12
+    },
     axisPointer: {
-      lineStyle: {
-        width: 1
+      type: 'shadow',
+      shadowStyle: {
+        color: 'rgba(0,0,0,0.03)'
       }
     }
   },
-  grid: { left: '1%', right: '1%', top: '2  %', bottom: 0, containLabel: true },
+  grid: { left: '3%', right: '3%', top: '10%', bottom: '10%', containLabel: true },
   xAxis: {
     type: 'category',
-    data: [...new Array(12)].map((_item, index) => `${index + 1}月`)
+    data: [...new Array(9)].map((_item, index) => `${index + 1}月`),
+    axisLine: {
+      show: false
+    },
+    axisLabel: {
+      fontSize: 11,
+      color: '#999'
+    },
+    axisTick: {
+      show: false
+    }
   },
   yAxis: {
     type: 'value',
-    max: 8000,
-    splitNumber: 4
+    max: 210,
+    splitNumber: 7,
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      fontSize: 11,
+      color: '#999'
+    },
+    splitLine: {
+      show: true,
+      lineStyle: {
+        width: 1,
+        type: 'solid',
+        opacity: 0.15
+      }
+    }
   },
   series: [
-
     {
-      // ... 其他配置项
       itemStyle: {
-        normal: {
-          label: {
-            show: true,
-            position: 'top',  // 设置数字显示位置
-            textStyle: {  // 设置文本样式（可以在官方手册配置项里查查都有哪些属性可以设置）
-              color: 'black',
-              fontSize: 14,
-            },
-            formatter: '{c}'  // 设置展示的文本 {c} 代表数量
-          },
-          // barBorderRadius: [30, 30, 0, 0]
-          // color: function (params) {  // 给每个柱子返回一个颜色（从颜色列表里选）
-          //   var colorList = ['#8FC857', '#73BA2C', '#71C6ED', '#4CB8E9', '#FAE5AE', '#F9DE9B', '#F4A179', '#F18858', '#ED747D', '#E8505D']
-          //   return colorList[params.dataIndex]
-          // }
+        borderRadius: [4, 4, 0, 0]
+      },
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowColor: 'rgba(0,0,0,0.2)'
         }
-
       },
       data: [
-        3000, 2000, 3333, 5000, 3200, 4200, 3200, 2100, 3000, 5100, 6000, 3200,
-        4800
+        160, 100, 130, 80, 200, 110, 170, 70, 160
       ],
       type: 'bar',
-      barMaxWidth: 80
+      barMaxWidth: 40
     }
   ]
 }
 let option3 = {
   legend: {
-    bottom: 0,
-    data: ['访问', '购买']
+    bottom: '5%',
+    left: 'center',
+    icon: 'circle',
+    itemWidth: 10,
+    itemHeight: 10,
+    itemGap: 20,
+    textStyle: {
+      fontSize: 12,
+      color: '#666'
+    }
   },
-  tooltip: {},
+  tooltip: {
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderColor: '#e8e8e8',
+    borderWidth: 1,
+    padding: [10, 14],
+    textStyle: {
+      color: '#333',
+      fontSize: 12
+    }
+  },
   radar: {
-    radius: '60%',
-    splitNumber: 8,
+    radius: '65%',
+    splitNumber: 5,
+    shape: 'polygon',
+    axisName: {
+      color: '#666',
+      fontSize: 11,
+      fontWeight: 'bold'
+    },
+    splitLine: {
+      lineStyle: {
+        opacity: 0.3
+      }
+    },
+    splitArea: {
+      show: true,
+      areaStyle: {
+        color: ['rgba(255,255,255,0.8)', 'rgba(245,245,245,0.8)']
+      }
+    },
+    axisLine: {
+      lineStyle: {
+        opacity: 0.3
+      }
+    },
     indicator: [
       {
-        name: '电脑'
+        name: '电脑',
+        max: 100
       },
       {
-        name: '充电器'
+        name: '充电器',
+        max: 100
       },
       {
-        name: '耳机'
+        name: '耳机',
+        max: 100
       },
       {
-        name: '手机'
+        name: '手机',
+        max: 100
       },
       {
-        name: 'Ipad'
+        name: 'Ipad',
+        max: 100
       },
       {
-        name: '耳机'
+        name: '耳机',
+        max: 100
       }
     ]
   },
   series: [
     {
       type: 'radar',
-      symbolSize: 0,
+      symbol: 'circle',
+      symbolSize: 6,
+      lineStyle: {
+        width: 2
+      },
+      emphasis: {
+        scale: true,
+        itemStyle: {
+          shadowBlur: 10,
+          shadowColor: 'rgba(0,0,0,0.2)'
+        }
+      },
       areaStyle: {
-        shadowBlur: 0,
-        shadowColor: 'rgba(0,0,0,.2)',
-        shadowOffsetX: 0,
-        shadowOffsetY: 10,
-        opacity: 1
+        opacity: 0.4
       },
       data: [
         {
@@ -304,36 +400,63 @@ let option3 = {
 
 let option4 = {
   tooltip: {
-    trigger: 'item'
+    trigger: 'item',
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderColor: '#e8e8e8',
+    borderWidth: 1,
+    padding: [10, 14],
+    textStyle: {
+      color: '#333',
+      fontSize: 12
+    },
+    formatter: '{b}: {c} ({d}%)'
   },
   legend: {
-    bottom: '1%',
-    left: 'center'
+    bottom: '5%',
+    left: 'center',
+    icon: 'circle',
+    itemWidth: 10,
+    itemHeight: 10,
+    itemGap: 15,
+    textStyle: {
+      fontSize: 11,
+      color: '#666'
+    }
   },
   series: [
     {
       name: '访问来源',
       type: 'pie',
-      radius: ['40%', '70%'],
+      radius: ['45%', '75%'],
+      center: ['50%', '42%'],
       avoidLabelOverlap: false,
       itemStyle: {
-        borderRadius: 10,
+        borderRadius: 8,
         borderColor: '#fff',
         borderWidth: 2
       },
       label: {
-        show: false,
-        position: 'center'
-      },
-      emphasis: {
-        label: {
-          show: true,
-          fontSize: '12',
-          fontWeight: 'bold'
-        }
+        show: true,
+        position: 'outside',
+        fontSize: 10,
+        color: '#666',
+        formatter: '{b}\n{d}%',
+        alignTo: 'edge',
+        edgeDistance: 10
       },
       labelLine: {
-        show: false
+        show: true,
+        length: 10,
+        length2: 5,
+        smooth: true
+      },
+      emphasis: {
+        scale: true,
+        scaleSize: 8,
+        itemStyle: {
+          shadowBlur: 15,
+          shadowColor: 'rgba(0,0,0,0.3)'
+        }
       },
       data: [
         { value: 1048, name: '搜索引擎' },
@@ -351,15 +474,35 @@ let option4 = {
 }
 let option5 = {
   tooltip: {
-    trigger: 'item'
+    trigger: 'item',
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderColor: '#e8e8e8',
+    borderWidth: 1,
+    padding: [10, 14],
+    textStyle: {
+      color: '#333',
+      fontSize: 12
+    },
+    formatter: '{b}: {c} ({d}%)'
   },
-
+  legend: {
+    bottom: '5%',
+    left: 'center',
+    icon: 'circle',
+    itemWidth: 10,
+    itemHeight: 10,
+    itemGap: 15,
+    textStyle: {
+      fontSize: 11,
+      color: '#666'
+    }
+  },
   series: [
     {
-      name: '访问来源',
+      name: '成交占比',
       type: 'pie',
-      radius: '80%',
-      center: ['50%', '50%'],
+      radius: ['30%', '75%'],
+      center: ['50%', '42%'],
       data: [
         { value: 500, name: '电子产品' },
         { value: 310, name: '服装' },
@@ -369,6 +512,31 @@ let option5 = {
         return a.value - b.value
       }),
       roseType: 'radius',
+      itemStyle: {
+        borderRadius: 6,
+        borderColor: '#fff',
+        borderWidth: 2
+      },
+      label: {
+        show: true,
+        fontSize: 10,
+        color: '#666',
+        formatter: '{b}\n{d}%'
+      },
+      labelLine: {
+        show: true,
+        length: 8,
+        length2: 5,
+        smooth: true
+      },
+      emphasis: {
+        scale: true,
+        scaleSize: 8,
+        itemStyle: {
+          shadowBlur: 15,
+          shadowColor: 'rgba(0,0,0,0.3)'
+        }
+      },
       animationType: 'scale',
       animationEasing: 'exponentialInOut',
       animationDelay: function () {
@@ -419,35 +587,36 @@ let option5 = {
   height: 30px;
   margin: 5px 0;
 }
-.tyAdmin__cardList{
-  :deep(.ty-col):nth-child(1){
-    .ty-card{
-      // background-color: red;
-      background: linear-gradient(to right, var(--toyar-xblue-4),var(--toyar-purple-4));
-      color: #fff;
-    }
-  }
-  :deep(.ty-col):nth-child(2){
-    .ty-card{
-      // background-color: red;
-      background: linear-gradient(to right, var(--toyar-pinkpurple-4),var(--toyar-magenta-4));
-      color: #fff;
-    }
-  }
-  :deep(.ty-col):nth-child(3){
-    .ty-card{
-      // background-color: red;
-      background: linear-gradient(to right, var(--toyar-cyan-4),var(--toyar-green-4));
-      color: #fff;
-    }
-  }
-  :deep(.ty-col):nth-child(4){
-    .ty-card{
-      // background-color: red;
-      background: linear-gradient(to right, var(--toyar-red-4),var(--toyar-orangered-4));
-      color: #fff;
-    }
-  }
-  
-}
+
+// .tyAdmin__cardList{
+//   :deep(.ty-col):nth-child(1){
+//     .ty-card{
+//       // background-color: red;
+//       background: linear-gradient(to right, var(--toyar-xblue-4),var(--toyar-purple-4));
+//       color: #fff;
+//     }
+//   }
+//   :deep(.ty-col):nth-child(2){
+//     .ty-card{
+//       // background-color: red;
+//       background: linear-gradient(to right, var(--toyar-pinkpurple-4),var(--toyar-magenta-4));
+//       color: #fff;
+//     }
+//   }
+//   :deep(.ty-col):nth-child(3){
+//     .ty-card{
+//       // background-color: red;
+//       background: linear-gradient(to right, var(--toyar-cyan-4),var(--toyar-green-4));
+//       color: #fff;
+//     }
+//   }
+//   :deep(.ty-col):nth-child(4){
+//     .ty-card{
+//       // background-color: red;
+//       background: linear-gradient(to right, var(--toyar-red-4),var(--toyar-orangered-4));
+//       color: #fff;
+//     }
+//   }
+
+// }
 </style>
