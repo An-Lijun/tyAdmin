@@ -1,5 +1,5 @@
 import useAppStore from '@/store/modules/app'
-import { generateColor } from 'toyar-design/dist/index.js'
+import { generateColor,TyColor } from 'toyar-design/dist/index.js'
 import { onBeforeRouteLeave } from 'vue-router'
 import { TyAlert } from 'toyar-design'
 import { watch } from 'vue'
@@ -8,6 +8,10 @@ export function watchPcolor() {
 
   watch(() => appStore.pColor, (newV) => {
     appStore.pColors = generateColor(newV, { list: true }).slice(2, 9)
+    const color = TyColor(appStore.pColor)           // 十六进制
+
+    appStore.tColors = generateColor(color.rotate(-15).hex(), { list: true }).slice(2, 9)
+    appStore.sColors = generateColor(color.rotate(15).hex(), { list: true }).slice(2, 9)
   }, {
     immediate: true
   })

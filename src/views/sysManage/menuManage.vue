@@ -37,9 +37,9 @@
       <TyTable :columns="columns" :data="tableData">
         <template #operation="{ row }">
           <TySpace style="width: 50px">
-            <TyButton @click="addMenu(row)">新增</TyButton>
-            <TyButton size="small" state="warning">编辑</TyButton>
-            <TyButton size="small" state="danger">删除</TyButton>
+            <TyButton @click="addMenu(row)" type="text">新增</TyButton>
+            <TyButton size="small" state="warning" type="text">编辑</TyButton>
+            <TyButton size="small" state="danger" type="text">删除</TyButton>
           </TySpace>
         </template>
       </TyTable>
@@ -50,7 +50,7 @@
           <TyInput v-model="diaFormData.label" placeholder="请输入菜单名称" />
         </TyFormItem>
         <TyFormItem label="父级菜单" name="label">
-          <TySelect v-model="diaFormData.parentId" placeholder="请输入菜单名称" >
+          <TySelect v-model="diaFormData.parentId" placeholder="请输入菜单名称">
             <TySelectOption v-for="(item, index) in parentList" :key="index" :label="item.label" :value="item.id">
             </TySelectOption>
 
@@ -60,7 +60,7 @@
           <div style="display: flex;align-items: center;">
             <TyInput v-model="diaFormData.path" placeholder="请输入菜单url" />
             <TyTooltip content="菜单url是组件位置如@/views/xxx.vue，当存在父级时候会自动拼接如@/views/父级/子级.vue">
-              <TyiQuestionLine/>
+              <TyiQuestionLine />
             </TyTooltip>
           </div>
         </TyFormItem>
@@ -102,10 +102,10 @@
 import { ref } from 'vue'
 import http from '@/common/communication/src/http/index'
 import iconSelect from '@/components/iconSelect.vue'
-import {TyiQuestionLine} from 'toyaricon'
+import { TyiQuestionLine } from 'toyaricon'
 const parentList = ref([])
 // const res = (await ) || {}
-http.get('/api/menu/parentList').then(res=>{
+http.get('/api/menu/parentList').then(res => {
   parentList.value = res.data.data
 })
 const formData = ref({
@@ -116,7 +116,7 @@ const formData = ref({
 const diaFormData = ref({
   label: '',
   path: '',
-  parentId:'',
+  parentId: '',
   menuOrder: '',
   status: '',
   icon: '',
@@ -159,7 +159,7 @@ const handleCancel = () => {
 const formSearch = async () => {
   const { data } = (await http.get('/api/menu/list')) || {}
 
-  
+
   tableData.value = data.data
 }
 </script>

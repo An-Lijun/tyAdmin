@@ -88,21 +88,34 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@keyframes route{
+@keyframes route {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
+  }
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .nav-container {
   height: 80vh;
   width: 100%;
-
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, var(--fill-2) 0%, var(--toyar-gray-1) 100%);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 
   .nav__inner {
     width: 137vw;
@@ -111,49 +124,49 @@ export default {
     border-radius: 50%;
     box-sizing: border-box;
     left: -30%;
-    // transform: scale(1.1);
     top: 60%;
+    animation: fadeInUp 0.8s ease-out;
 
     &::before {
       content: "";
       position: absolute;
       width: 137vw;
       height: 137vw;
- 
       z-index: 1;
       border-radius: inherit;
-      background: linear-gradient(to right,       var(--toyar-red-6), 
-      var(--toyar-orangered-6),
-      var(--toyar-green-6), 
-      var(--toyar-orange-6), 
-      var(--toyar-cyan-6), 
-      var(--toyar-yellow-6), 
-      var(--toyar-magenta-6), 
-      var(--toyar-blue-6), 
-      var(--toyar-xblue-6), 
-      var(--toyar-pinkpurple-6));
-      animation: route 10s linear infinite;
+      background: linear-gradient(
+        45deg,
+        var(--primary-3),
+        var(--primary-4),
+        var(--toyar-blue-4),
+        var(--toyar-cyan-4),
+        var(--toyar-xblue-4),
+        var(--primary-4),
+        var(--primary-3)
+      );
+      background-size: 400% 400%;
+      animation: route 20s linear infinite;
+      opacity: 0.6;
+      filter: blur(2px);
     }
+
     &::after {
       content: "";
       position: absolute;
-      width: 137vw;
-      height: 137vw;
-      top: 3px;
+      width: calc(137vw - 40px);
+      height: calc(137vw - 40px);
+      top: 20px;
+      left: 20px;
       z-index: 2;
       border-radius: inherit;
-      background: #fff;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
       background-image: url('@/assets/analysis/nav.png');
-      background-size: 50%;
-      background-position: center -12%;
+      background-size: 45%;
+      background-position: center -10%;
       background-repeat: no-repeat;
-      
+      box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.03);
     }
   }
 }
-
-
-// /deep/.ant-card-body {
-//   height: 100%;
-//   padding: unset;
-// }</style>
+</style>

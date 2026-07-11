@@ -1,14 +1,20 @@
 <!-- 分析页 -->
 <template>
-  <div class="tyAdmin__container animationRightToLeft" style="--border-radius-4:var( --border-radius-12)">
+  <div
+    class="tyAdmin__container animationRightToLeft"
+    style="--border-radius-4: var(--border-radius-12)"
+  >
     <TyRow :gutter="16" style="margin: 0 -8px -16px" class="tyAdmin__cardList">
-      <TyCol :span="{
-        xxl: 6,
-        xl: 6,
-        lg: 12,
-        md: 12,
-        sm: 24
-      }" v-for="item in analysisList">
+      <TyCol
+        :span="{
+          xxl: 6,
+          xl: 6,
+          lg: 12,
+          md: 12,
+          sm: 24
+        }"
+        v-for="item in analysisList"
+      >
         <TyCard :isLoading="isLoading">
           <div class="analysisBody">
             <div class="analysisHead">
@@ -20,9 +26,7 @@
             <div class="line1">
               <countTo :value="item.money" :second="2">
                 <template #default="{ value }">
-                  <span class="money">
-                    ${{ value }}
-                  </span>
+                  <span class="money"> ${{ value }} </span>
                 </template>
               </countTo>
 
@@ -37,21 +41,35 @@
         <!-- <div class="colBox"></div> -->
       </TyCol>
     </TyRow>
-    <TyCard :isLoading="isLoading" style="margin: 16px 0px; padding: unset" :border="false">
-      <TyRow :gutter="16" style="margin: 16px 0px;">
+    <TyCard
+      :isLoading="isLoading"
+      style="margin: 16px 0px; padding: unset"
+      :border="false"
+    >
+      <TyRow :gutter="16" style="margin: 16px 0px">
         <TyCol>
-          <TyTabs v-model="tabs" style="border: unset;">
+          <TyTabs v-model="tabs" style="border: unset">
             <TyTabItem title="流量趋势" name="trend">
-              <tChart :deepRender="true" height="270px" :option="option" v-if="tabs === 'trend'" />
+              <tChart
+                :deepRender="true"
+                height="270px"
+                :option="option"
+                v-if="tabs === 'trend'"
+              />
             </TyTabItem>
             <TyTabItem title="访问量" name="visit">
-              <tChart :deepRender="true" height="270px" :option="option2" v-if="tabs === 'visit'" />
+              <tChart
+                :deepRender="true"
+                height="270px"
+                :option="option2"
+                v-if="tabs === 'visit'"
+              />
             </TyTabItem>
           </TyTabs>
         </TyCol>
       </TyRow>
     </TyCard>
-    <TyRow :gutter="16" style="margin: 0 -8px ">
+    <TyRow :gutter="16" style="margin: 0 -8px">
       <TyCol :span="8">
         <TyCard :isLoading="isLoading" :border="false">
           <template #header> 转化率 </template>
@@ -78,6 +96,8 @@ import { getAssetURL } from '@/common'
 import tChart from '@/components/tChart.vue'
 import countTo from '@/components/countTo.vue'
 import { ref } from 'vue'
+import useAppStore from '@/store/modules/app'
+const appStore = useAppStore()
 
 let isLoading = ref(true)
 setTimeout(() => {
@@ -102,7 +122,6 @@ let analysisList = [
     zTitle: '总成交额',
     num: '20,000',
     state: 'success'
-
   },
   {
     title: '访问数',
@@ -184,7 +203,13 @@ let option = {
       }
     }
   },
-  grid: { left: '3%', right: '3%', top: '8%', bottom: '10%', containLabel: true },
+  grid: {
+    left: '3%',
+    right: '3%',
+    top: '8%',
+    bottom: '10%',
+    containLabel: true
+  },
   series: [
     {
       smooth: true,
@@ -199,15 +224,12 @@ let option = {
           shadowColor: 'rgba(0,0,0,0.2)'
         }
       },
-      data: [
-        50, 30, 40, 25, 70, 60, 55, 35, 45, 50, 42, 45
-      ],
+      data: [50, 30, 40, 25, 70, 60, 55, 35, 45, 50, 42, 45],
       type: 'line',
       areaStyle: {
         opacity: 0.15
       },
-      itemStyle: {
-      }
+      itemStyle: {}
     }
   ]
 }
@@ -230,7 +252,13 @@ let option2 = {
       }
     }
   },
-  grid: { left: '3%', right: '3%', top: '10%', bottom: '10%', containLabel: true },
+  grid: {
+    left: '3%',
+    right: '3%',
+    top: '10%',
+    bottom: '10%',
+    containLabel: true
+  },
   xAxis: {
     type: 'category',
     data: [...new Array(9)].map((_item, index) => `${index + 1}月`),
@@ -279,9 +307,7 @@ let option2 = {
           shadowColor: 'rgba(0,0,0,0.2)'
         }
       },
-      data: [
-        160, 100, 130, 80, 200, 110, 170, 70, 160
-      ],
+      data: [160, 100, 130, 80, 200, 110, 170, 70, 160],
       type: 'bar',
       barMaxWidth: 40
     }
@@ -384,14 +410,12 @@ let option3 = {
         {
           value: [90, 50, 86, 40, 50, 20],
           name: '访问',
-          itemStyle: {
-          }
+          itemStyle: {}
         },
         {
           value: [70, 75, 70, 76, 20, 85],
           name: '购买',
-          itemStyle: {
-          }
+          itemStyle: {}
         }
       ]
     }
@@ -432,7 +456,7 @@ let option4 = {
       avoidLabelOverlap: false,
       itemStyle: {
         borderRadius: 8,
-        borderColor: '#fff',
+        borderColor: appStore.themeState === '1' ? '#232324' : '#fff',
         borderWidth: 2
       },
       label: {
@@ -514,7 +538,7 @@ let option5 = {
       roseType: 'radius',
       itemStyle: {
         borderRadius: 6,
-        borderColor: '#fff',
+        borderColor: appStore.themeState === '1' ? '#232324' : '#fff',
         borderWidth: 2
       },
       label: {

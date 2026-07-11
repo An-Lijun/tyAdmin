@@ -66,112 +66,124 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
-@-webkit-keyframes breathe {
-    0% {
-        border: 4px solid var(--primary-2);
-    }
-   
-    100% {
-        opacity: 1;
-        border: 4px solid var(--primary-6);
-    }
+@keyframes breathe {
+  0% {
+    box-shadow: 0 0 0 0 var(--primary-4);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 0 0 0 8px transparent;
+    transform: scale(1.1);
+  }
 }
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
 .nav__item {
-  position: relative;
-  top: 0;
-  transform: translate(-10px, -10px);
   position: absolute;
   z-index: 20;
-  .nav__text{
-    position: absolute;
-    top: -50px;
-    transform: translateX(-40%);
-    font-size: 25px;
-    color: var(--primary-6);
-    text-shadow: 1px 0 var(--primary-2),
-    -1px 0 var(--primary-2),
-    0 1px var(--primary-2),
-    0 -1px var(--primary-2);
-    width: 150px;
-    text-align: center;
+  transform: translate(-10px, -10px);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translate(-10px, -15px);
   }
-  &::before { 
+
+  .nav__text {
+    position: absolute;
+    top: -55px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-7);
+    letter-spacing: 2px;
+    white-space: nowrap;
+    padding: 6px 16px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  &::before {
     content: '';
     display: inline-block;
-
-    background: var(--primary-6);
+    background: var(--primary-5);
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    box-sizing: border-box;
-    box-shadow: var(--color-bg-2) 0px 0px 0px 5px;
-    animation: breathe 1500ms ease-in-out alternate infinite;
-
+    width: 14px;
+    height: 14px;
+    box-shadow: 0 0 0 4px var(--primary-2);
+    animation: breathe 2s ease-in-out infinite;
+    transition: all 0.3s ease;
   }
 
-
-
-  .nav__box{
+  .nav__box {
     transform: translateX(-55px);
-    .nav__item-route{
+    margin-top: 8px;
+
+    .nav__item-route {
       box-sizing: border-box;
-      padding: 10px 20px;
-      width: 130px;
+      padding: 12px 24px;
+      width: 140px;
       text-align: center;
-      background-color: var(--color-bg-2);
-      border-radius: 5px;
-      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-      margin-top: 15px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      margin-top: 10px;
       position: relative;
-      &:first-child{
-        &::before{
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      font-size: 14px;
+      color: var(--primary-7);
+
+      &:first-child {
+        margin-top: 0;
+
+        &::before {
           content: '';
           display: inline-block;
-          height: 15px;
-          border-right: 3px solid  var(--primary-6);
+          height: 12px;
+          border-right: 2px dashed var(--primary-3);
           position: absolute;
-          left: calc(50% - 1.5px);
-          top: -15px;
-        }
-        &::after{
-          content: '';
-          display: inline-block;
-          height: 15px;
-          border-right: 3px solid  var(--primary-6);
-          position: absolute;
-          left: 35px;
-          top: -15px;
-          display: none ;
+          left: calc(50% - 1px);
+          top: -12px;
         }
       }
-      &::before{
+
+      &:not(:first-child)::before {
         content: '';
         display: inline-block;
-        height: 15px;
-        border-right: 3px solid  var(--primary-6);
+        height: 12px;
+        border-right: 2px dashed var(--primary-3);
         position: absolute;
-        left: 35px;
-        top: -15px;
+        left: calc(50% - 1px);
+        top: -12px;
       }
-      &::after{
-        content: '';
-        display: inline-block;
-        height: 15px;
-        border-right: 3px solid var(--primary-6);
-        position: absolute;
-        right: 35px;
-        top: -15px;
-      }
-      &:hover{
-        background-color: var(--primary-4);
+
+      &:hover {
+        background: linear-gradient(135deg, var(--primary-5), var(--primary-6));
         color: #fff;
-        cursor: pointer;
+        box-shadow: 0 8px 24px var(--primary-3);
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
       }
     }
-    
   }
-
-
 }
 </style>
