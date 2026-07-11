@@ -1,6 +1,6 @@
 <template>
-  <div class="tyAdmin-login animationBox">
-    <LoginBar />
+  <div class="tyAdmin-login animationBox" :class="layout">
+    <LoginBar  @changeLayout="changeLayout"/>
     <div class="logo-container">
       <AppLogo />
       <div class="logoCard">
@@ -16,13 +16,17 @@
 import LoginBar from './components/loginBar.vue'
 import AppLogo from './components/AppLogo.vue'
 import AppForm from './components/AppForm.vue'
+const layout =ref('right')
+const changeLayout=(item)=>{
+  layout.value = item.value
+}
 </script>
 <style lang="scss" scoped>
 .tyAdmin-login {
   position: relative;
   height: 100%;
   background: var(--toyar-gray-1);
-
+  display: flex;
   .loginCard {
     position: absolute;
     right: 0;

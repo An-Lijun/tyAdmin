@@ -1,9 +1,34 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import { resolve } from 'path'
 import createPlugins from './config/vitePlugin';
 
-// https://vitejs.dev/config/
 export default defineConfig((options) => {
+  const env = loadEnv(options.mode, process.cwd())
+  
+  const alias = [
+    {
+      find: '@',
+      replacement: resolve(__dirname, 'src'),
+    },
+  ]
+
+  if (env.VITE_AUTO_COMPONENT !== 'NodeModules') {
+    alias.push(
+      {
+        find: /^toyar-design$/,
+        replacement: resolve(__dirname, 'toyar/dist/index.js'),
+      },
+      {
+        find: /^toyar-design\/dist\/index\.js$/,
+        replacement: resolve(__dirname, 'toyar/dist/index.js'),
+      },
+      {
+        find: /^toyar-design\/dist\/toyar-design\.css$/,
+        replacement: resolve(__dirname, 'toyar/dist/toyar-design.css'),
+      }
+    )
+  }
+
   return {
     build: {
       rollupOptions: {
@@ -13,14 +38,7 @@ export default defineConfig((options) => {
       },
     },
     resolve: {
-      // 路径别名
-      alias: [
-        // @/xxxx => src/xxxx
-        {
-          find: '@',
-          replacement: resolve(__dirname, 'src'),
-        },
-      ],
+      alias,
     },
     css: {
       // postcss 配置

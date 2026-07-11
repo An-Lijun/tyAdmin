@@ -3,9 +3,8 @@
     <div class="tyAdmin-header__content">
       <div class="tyAdmin-header__left">
         <span class="foldBtn">
-
-            <TyiIndentIncrease size="18" @click="toFold" v-if="appStore.isFold"/>
-            <TyiIndentDecrease size="18" @click="toFold" v-else/>
+          <TyiIndentIncrease size="18" @click="toFold" v-if="appStore.isFold" />
+          <TyiIndentDecrease size="18" @click="toFold" v-else />
         </span>
         <TyBreadcrumb>
           <TyBreadcrumbItem to="home">首页</TyBreadcrumbItem>
@@ -17,17 +16,16 @@
       <div class="tyAdmin-header__right">
 
 
-        <TyiSearchLine class="contruller"  size="18"  @click="openSearch"/>
+        <TyiSearchLine class="contruller" size="18" @click="openSearch" />
         <TyTooltip content="按住Ctrl键并点击可清除缓存" class="selfTooltip">
-          <TyiLoopRightLine class="contruller"  size="18" 
-          @click="reLoad"/>
+          <TyiLoopRightLine class="contruller" size="18" @click="reLoad" />
         </TyTooltip>
         <TyiFullscreenExitLine class="contruller" size="18" @click="fullScreen" v-if="isFull" />
-        <TyiFullscreenFill class="contruller"   size="18" @click="fullScreen" v-else/>
+        <TyiFullscreenFill class="contruller" size="18" @click="fullScreen" v-else />
         <div class="contruller">
           <TyBadge class="message" :dot="true" :max="5" :text="10">
             <TyPoppover trigger="click" placement="bottom">
-              <TyiNotification2Line  size="18"/>
+              <TyiNotification2Line size="18" />
               <template #content>
                 <TyTabs v-model="tabKey">
                   <TyTabItem title="通知(5)" name="inform">
@@ -84,36 +82,36 @@
           </TyBadge>
         </div>
         <div class="contruller ">
-          <TyPoppover  trigger="click" class="lang" placement="bottom">
-            <TyiTranslate2  size="18"/>
-          <template #content>
-            <div @click="changeLang(item)" class="download-box" v-for="item in localeList">
-              <span> {{ item.text }} </span>
-            </div>
-          </template>
-        </TyPoppover>
+          <TyPoppover trigger="click" class="lang" placement="bottom">
+            <TyiTranslate2 size="18" />
+            <template #content>
+              <div @click="changeLang(item)" class="download-box" v-for="item in localeList">
+                <span> {{ item.text }} </span>
+              </div>
+            </template>
+          </TyPoppover>
         </div>
         <div class="contruller sys">
-          <TyPoppover  trigger="hover" placement="bottom">
-          <div style="display: flex; align-items: center">
-            <TyImage :size="25" fit="contain" :src="getAssetURL('/assets/system/header.png')" class="bd ml-10"
-              shape="circle" />
-            <span style="margin-left: 5px;font-size:13px"> Ty Admin </span>
-          </div>
-          <template #content>
-            <div @click="toLock" class="download-box">
-              <TyiLockLine/>
-              <span> 锁定屏幕 </span>
+          <TyPoppover trigger="hover" placement="bottom">
+            <div style="display: flex; align-items: center">
+              <TyImage :size="25" fit="contain" :src="getAssetURL('/assets/system/header.png')" class="bd ml-10"
+                shape="circle" />
+              <span style="margin-left: 5px;font-size:13px"> Ty Admin </span>
             </div>
-            <div @click="sureToExit" class="download-box">
-              <TyiShutDownLine/>
-              <span> 退出登录 </span>
-            </div>
-          </template>
-        </TyPoppover>
+            <template #content>
+              <div @click="toLock" class="download-box">
+                <TyiLockLine />
+                <span> 锁定屏幕 </span>
+              </div>
+              <div @click="sureToExit" class="download-box">
+                <TyiShutDownLine />
+                <span> 退出登录 </span>
+              </div>
+            </template>
+          </TyPoppover>
         </div>
 
-        <TyiSettings4Line class="contruller" @click="openCont" :size="18"/>
+        <TyiSettings4Line class="contruller" @click="openCont" :size="18" />
 
       </div>
     </div>

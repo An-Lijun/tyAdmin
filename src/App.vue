@@ -1,26 +1,21 @@
 <template>
   <TyConfigProvider style=" height: 100vh;" :options="{ resetPrimary: appStore.pColor }">
-    <TyWaterMark :options="{
-      width: 500,
-      height: 300,
-      antiTamper: true
-    }" :markInfo="['TyAdmin', formatDate(new Date())]">
+    <TyWaterMark  :options="{ width: 500,  height: 300, antiTamper: true,fontColor:'rgba(210,210,230,0.2)'}" :markInfo="['TyAdmin', formatDate(new Date())]">
       <SLoading :loading="appStore.loading">
         <RouterView />
       </SLoading>
     </TyWaterMark>
-    
   </TyConfigProvider>
   <suspensionBoll>
-    <tyi-account-box-fill :size="30" color="#fff"/>
-    <tyi-alert-fill :size="30" color="#fff"/>
+    <tyi-account-box-fill :size="30" color="#fff" />
+    <tyi-alert-fill :size="30" color="#fff" />
   </suspensionBoll>
 </template>
 
 <script setup lang="ts">
 import { formatDate } from 'robinson'
 import useAppStore from '@/store/modules/app'
-import SLoading from'@/views/system/loading/index.vue'
+import SLoading from '@/views/system/loading/index.vue'
 import suspensionBoll from '@/components/suspensionBoll.vue'
 const appStore = useAppStore()
 

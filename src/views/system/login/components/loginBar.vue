@@ -1,5 +1,5 @@
 <template>
-  <div class="tyAdmin-login-btn entry">
+  <div class="tyAdmin-login-btn entry" >
     <div class="logo">
       <SvgIcon icon="logov3" />
       <span> Toyar Admin </span>
@@ -18,8 +18,18 @@
         </div>
         <TyiPaletteLine :size="18" />
       </div>
-      <TyiLayoutLeftFill :size="18" />
-
+      <TyPoppover trigger="click" class="lang" placement="bottom">
+        <TyiLayoutLeftFill :size="18" />
+        <template #content>
+          <div
+            @click="changeLayout(item)"
+            class="download-box"
+            v-for="item in [{label:'居左',value:'left'},{label:'居中',value:'center'},{label:'居右',value:'right'}]"
+          >
+            <span> {{ item.label }} </span>
+          </div>
+        </template>
+      </TyPoppover>
       <TyiMoonFill
         :size="18"
         v-if="isDark"
@@ -32,9 +42,10 @@
 <script setup lang="ts">
 import { changeThemFn } from '@/hooks/index'
 import SvgIcon from '@/components/svgIcon.vue'
+
 import useAppStore from '@/store/modules/app'
 const appStore = useAppStore()
-
+const emit = defineEmits(['changeLayout'])
 const isDark = ref(true)
 const isShowColor = ref(false)
 const handleChange = val => {
@@ -58,6 +69,12 @@ const mouseenter = () => {
 const mouseleave = () => {
   isShowColor.value = false
 }
+
+const changeLayout =(item) =>{
+  // layout.value = item.value
+    emit('changeLayout', item);
+}
+
 </script>
 <style lang="scss" scoped>
 .tyAdmin-login-btn {
@@ -81,7 +98,7 @@ const mouseleave = () => {
     ::v-deep .ty-svgIcon {
       svg {
         width: 34px !important;
-        height: 34px!important;
+        height: 34px !important;
         margin-right: 10px;
       }
     }
@@ -99,11 +116,11 @@ const mouseleave = () => {
     }
 
     .color {
-      .color-content{
+      .color-content {
         width: 0px;
         overflow: hidden;
         height: 18px;
-        
+
         display: inline-block;
         &.isShowColor {
           width: 140px;
@@ -115,7 +132,7 @@ const mouseleave = () => {
         height: 18px;
         border-radius: 50%;
         display: inline-block;
-        width:18px;
+        width: 18px;
         margin: 0 5px;
       }
 
@@ -139,6 +156,9 @@ const mouseleave = () => {
         background: var(--toyar-magenta-6);
       }
     }
+  }
+  &.left{
+
   }
 }
 </style>
