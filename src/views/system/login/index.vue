@@ -1,14 +1,16 @@
 <template>
   <div class="tyAdmin-login animationBox" :class="layout">
-    <LoginBar  @changeLayout="changeLayout"/>
-    <div class="logo-container">
-      <AppLogo />
-      <div class="logoCard">
+    <LoginBar @changeLayout="changeLayout" />
+    <div class="tyAdmin-container">
+      <div class="logo-container">
+        <AppLogo />
+        <div class="logoCard">
+        </div>
       </div>
-    </div>
 
-    <div class="loginCard">
-      <AppForm />
+      <div class="loginCard">
+        <AppForm />
+      </div>
     </div>
   </div>
 </template>
@@ -16,8 +18,8 @@
 import LoginBar from './components/loginBar.vue'
 import AppLogo from './components/AppLogo.vue'
 import AppForm from './components/AppForm.vue'
-const layout =ref('right')
-const changeLayout=(item)=>{
+const layout = ref('right')
+const changeLayout = (item) => {
   layout.value = item.value
 }
 </script>
@@ -27,29 +29,52 @@ const changeLayout=(item)=>{
   height: 100%;
   background: var(--toyar-gray-1);
   display: flex;
-  .loginCard {
-    position: absolute;
-    right: 0;
-    width: 700px;
-    top: 0;
-    // filter:blur(20px);
-    height: 100%;
+
+  .tyAdmin-container {
+    width: 100%;
+    display: flex;
+
+    .loginCard {
+      width: 700px;
+      // filter:blur(20px);
+      height: 100%;
+    }
+
+    .logo-container {
+      width: calc(100% - 700px);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      .logoCard {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 
-  .logo-container {
-    width: calc(100% - 700px);
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-     position: relative;
+  &.left {
+    .tyAdmin-container {
+      flex-direction: row-reverse;
+    }
+  }
 
-    .logoCard{
-      position: absolute;
-      left: 0px;
-      top: 0px;
-      width: 100%;
-      height: 100%;
+  &.center {
+    .tyAdmin-container {
+      justify-content: center;
+      align-items: center;
+      .logo-container{
+        position: absolute;
+      }
+      .loginCard{
+        z-index: 99;
+        height: 600px;
+      }
     }
   }
 
@@ -76,7 +101,7 @@ html[toyar-theme="dark"] {
     }
 
     .logoCard {
-       background: linear-gradient(154deg, var(--toyar-gray-1)55%,  var(--primary-1) 56%,  var(--toyar-gray-1) 64%);
+      background: linear-gradient(154deg, var(--toyar-gray-1)55%, var(--primary-1) 56%, var(--toyar-gray-1) 64%);
       filter: blur(120px);
     }
   }
@@ -91,7 +116,7 @@ html[toyar-theme='light'] {
     }
 
     .logoCard {
-      background: linear-gradient(154deg, var(--toyar-gray-1) 55%,  var(--primary-7) 56%, var(--toyar-gray-1) 64%);
+      background: linear-gradient(154deg, var(--toyar-gray-1) 55%, var(--primary-7) 56%, var(--toyar-gray-1) 64%);
       filter: blur(120px);
     }
   }
