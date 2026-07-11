@@ -56,7 +56,7 @@ const handleChange = val => {
     xblue: '#3C7EFF',
     magenta: '#F756A9'
   }
-  appStore.pColor = color[val]
+  appStore.setPrimaryColor(color[val])
 }
 const changeThemeState = (e, value) => {
   console.log(e)

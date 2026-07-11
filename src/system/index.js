@@ -1,6 +1,5 @@
 import RenderTail from '../utils/src/tail'
 import { isProd } from '../common/auth/index'
-import useAppStore from '@/store/modules/app'
 import { generateColor } from 'toyar-design/dist/index.js'
 import IfVisible from '../utils/src/userActive'
 import { TyAlert } from 'toyar-design'
@@ -11,13 +10,7 @@ import WinRefreshBlock from './WinRefreshBlock'
 
 
 
-setTimeout(() => {
-  const appStore = useAppStore()
-  appStore.tColors = generateColor('#27C346', { list: true }).slice(2, 9)
 
-  appStore.sColors = generateColor('#F756A9', { list: true }).slice(2, 9)
-
-})
 class NoDebugger {
   constructor(options) {
     this.interval = null

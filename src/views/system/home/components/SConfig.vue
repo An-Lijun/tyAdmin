@@ -104,7 +104,7 @@ const props = defineProps(['model'])
 const appStore = useAppStore()
 let body = document.querySelector('body')
 const selectedColor = (color) => {
-  appStore.pColor = color
+  appStore.setPrimaryColor(color)
 }
 const changeLayout = (value) => {
   appStore.layout = value

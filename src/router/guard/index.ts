@@ -25,7 +25,6 @@ function createPageGuard(router: Router) {
   })
   router.afterEach(() => {
     if (appStore) {
-
       appStore.loading = false
     }
   })
