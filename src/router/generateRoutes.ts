@@ -20,9 +20,28 @@ interface MenuRouteMeta {
   type: string
 }
 
+const viewsModules = import.meta.glob('../views/**/*.vue')
+
+const getComponentMap = () => {
+  const map: Record<string, () => Promise<typeof import('*.vue')>> = {}
+  for (const path in viewsModules) {
+    const relativePath = path.replace('../views/', '').replace('.vue', '')
+    map[relativePath] = viewsModules[path]
+  }
+  return map
+}
+
+const componentMap = getComponentMap()
+
+const normalizeMenuPath = (menuPath: string): string => {
+  if (menuPath.endsWith('Index')) {
+    return menuPath.replace(/Index$/, '/index')
+  }
+  return menuPath
+}
+
 const generateRoutes = (menuData: ApiMenu[] = [], parentPath = ''): RouteRecordRaw[] => {
-  return menuData
-    .filter(item => item.status === '1')
+  const res = menuData
     .map(item => {
       const route: RouteRecordRaw = {
         path: item.path,
@@ -36,19 +55,25 @@ const generateRoutes = (menuData: ApiMenu[] = [], parentPath = ''): RouteRecordR
 
       if (item.redirect) route.redirect = { name: item.redirect }
 
-
       if (item.children?.length) {
         route.children = generateRoutes(item.children, item.path)
       } else {
-        const componentPath = parentPath
-          ? `../views/${parentPath}/${item.path}.vue`
-          : `../views/${item.path}.vue`
-        route.component = () => import(/* @vite-ignore */componentPath)
+        const normalizedPath = normalizeMenuPath(item.path)
+        const fullPath = parentPath
+          ? `${parentPath}/${normalizedPath}`
+          : normalizedPath
+        
+        const component = componentMap[fullPath]
+        if (component) {
+          route.component = component
+        }
       }
 
       router.addRoute('home', route)
       return route
     })
+
+  return res
 }
 
 export default generateRoutes

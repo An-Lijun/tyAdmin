@@ -1,8 +1,6 @@
 <template>
-  <TyMenu theme="rDesign" @open="handleOpenMenu" :isFold="appStore.isFold" style="width: unset" v-model="menuStore.activeMenu"
-    :option="menuOptions"
-    @click="handleOpenMenu"
-  >
+  <TyMenu theme="rDesign" @open="handleOpenMenu" :isFold="appStore.isFold" style="width: unset"
+    v-model="menuStore.activeMenu" :option="menuOptions" @click="handleOpenMenu">
     <template #header>
       <div style="
           height: 50px;
@@ -13,11 +11,11 @@
         <svgIcon icon="logov3" v-if="appStore.isFold" style="
             position: relative;
             transform: scale(0.5);
-        "  /> 
+        " />
         <div v-else class="logoContainer">
-          <svgIcon icon="logov3"  style="
+          <svgIcon icon="logov3" style="
           transform: scale(0.5);
-        "  />
+        " />
           <span class="logoNm">
             ToyarAdmin
           </span>
@@ -34,7 +32,7 @@ import useMenuStore from '@/store/modules/menu'
 import { pageRoute } from '@/router/index'
 const menuStore = useMenuStore()
 const appStore = useAppStore()
-const menuOptions= ref([])
+const menuOptions = ref([])
 function routerTransMenu(menuLs, pPath) {
   const getMenuPath = (pPath, path) => {
     if (!pPath) {
@@ -65,25 +63,29 @@ function routerTransMenu(menuLs, pPath) {
     return getMenuItem(item);
   });
 }
-const handleOpenMenu =(menu)=>{
+const handleOpenMenu = (menu) => {
   let list = menuStore.visitingMenu
-  if(menu.label && !list.find(item=>item.path === menu.path) ){
-    
+  if (menu.label && !list.find(item => item.path === menu.path)) {
+
     menuStore.addVisitingMenu(menu)
   }
 }
-menuOptions.value = routerTransMenu(menuStore.menu, '')
+const arr = menuStore.menu.map(item => {
+  item.path = '/' + item.path
+  return item
+})
+menuOptions.value = routerTransMenu(arr, '')
 </script>
 <style lang="scss" scoped>
-.logoContainer{
+.logoContainer {
   display: flex;
   align-items: center;
-  .logoNm{
-   color: var(--text-1);
-   font-size: 17px;
+
+  .logoNm {
+    color: var(--text-1);
+    font-size: 17px;
     margin-right: 15px;
     font-weight: bold;
   }
 }
-
 </style>

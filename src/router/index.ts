@@ -411,11 +411,11 @@ export const router = createRouter({
   strict: true, // 是否应该禁止尾部斜杠。默认为假
 
 });
-const dyRoutes = localStorage.getItem('dynamicRoutes');
+// const dyRoutes = localStorage.getItem('dynamicRoutes');
 
-if (dyRoutes) {
-  generateRoutes(JSON.parse(dyRoutes))
-}
+// if (dyRoutes) {
+//   generateRoutes(JSON.parse(dyRoutes))
+// }
 
 // config router
 // 配置路由器

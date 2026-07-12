@@ -79,12 +79,13 @@ const login = () => {
         TyMessage.success('登录成功')
         errCount.value = 0
         const { data: res } = await http.get('/api/menu/list')
-        const menu =res.data.map(item=>{
-          item.path='/'+item.path
-          return item
-        })
-        menuStore.setMenu(menu)
+   
         generateRoutes(res.data)
+        // const menu =res.data.map(item=>{
+        //   item.path='/'+item.path
+        //   return item
+        // })
+        menuStore.setMenu(res.data)
         router.push('/dashboard')
       }
     } catch (error) {

@@ -71,7 +71,7 @@ export default defineStore('useMenuStore', {
     strategies: [
       {
         storage: window.localStorage,
-        paths: ['openedMenu']
+        paths: ['openedMenu','menu']
       }
     ]
   }
