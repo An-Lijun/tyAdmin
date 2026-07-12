@@ -65,20 +65,13 @@
 <script setup>
 import { ref } from 'vue';
 import svgIcon from '@/components/svgIcon.vue';
-import { pageRoute } from '@/router/index'
 import { transHightLight } from 'robinson'
+import useMenuStore from '@/store/modules/menu'
 import { useRouter } from 'vue-router'
 const router = useRouter()
+const menuStore = useMenuStore()
 
-const sPageRoute = pageRoute.map(item => {
-  if (item.children) {
-    item.children.forEach(ite => {
-      ite.parent = item
-    })
-  }
-})
-
-let list = pageRoute.map(item => {
+let list = menuStore.menu.map(item => {
   return item.children
 })
 const searchValue = ref('');

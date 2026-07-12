@@ -1,6 +1,6 @@
 <template>
   <TyMenu theme="rDesign" @open="handleOpenMenu" :isFold="appStore.isFold" style="width: unset" v-model="menuStore.activeMenu"
-    :option="routerTransMenu(pageRoute, '')"
+    :option="menuOptions"
     @click="handleOpenMenu"
   >
     <template #header>
@@ -34,6 +34,7 @@ import useMenuStore from '@/store/modules/menu'
 import { pageRoute } from '@/router/index'
 const menuStore = useMenuStore()
 const appStore = useAppStore()
+const menuOptions= ref([])
 function routerTransMenu(menuLs, pPath) {
   const getMenuPath = (pPath, path) => {
     if (!pPath) {
@@ -71,8 +72,7 @@ const handleOpenMenu =(menu)=>{
     menuStore.addVisitingMenu(menu)
   }
 }
-routerTransMenu(pageRoute, '')
- 
+menuOptions.value = routerTransMenu(menuStore.menu, '')
 </script>
 <style lang="scss" scoped>
 .logoContainer{

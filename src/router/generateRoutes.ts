@@ -47,7 +47,6 @@ const generateRoutes = (menuData: ApiMenu[] = [], parentPath = ''): RouteRecordR
       }
 
       router.addRoute('home', route)
-      console.log(route)
       return route
     })
 }

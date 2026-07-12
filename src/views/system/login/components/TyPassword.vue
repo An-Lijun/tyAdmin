@@ -25,13 +25,13 @@
 import Captcha from './captcha.js'
 import http from '@/common/communication/src/http/index'
 import { router } from '@/router'
-const userStore = useUserStore()
 import { nextTick, onMounted, ref } from 'vue'
 import useUserStore from '@/store/modules/user'
 import { TyMessage } from 'toyar-design'
 import useMenuStore from '@/store/modules/menu'
 import generateRoutes from '@/router/generateRoutes'
 const menuStore = useMenuStore()
+const userStore = useUserStore()
 
 const errCount = ref(0)
 let ccCode, restore
@@ -78,15 +78,14 @@ const login = () => {
         userStore.token = data.data.token
         TyMessage.success('登录成功')
         errCount.value = 0
-        const { data: lsData } = await http.get('/api/menu/list')
-        generateRoutes(lsData.data)
-        console.log(lsData.data)  
-        
-        localStorage.setItem('dynamicRoutes', JSON.stringify(lsData.data));
-          
-          router.push({
-            name: 'dashboard'
-          })
+        const { data: res } = await http.get('/api/menu/list')
+        const menu =res.data.map(item=>{
+          item.path='/'+item.path
+          return item
+        })
+        menuStore.setMenu(menu)
+        generateRoutes(res.data)
+        router.push('/dashboard')
       }
     } catch (error) {
       console.log(error)
