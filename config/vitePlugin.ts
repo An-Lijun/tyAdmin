@@ -62,7 +62,7 @@ export default function createPlugins(options:any): Array<any> {
       }),
       Pages({
         // 页面文件所在目录，默认为 src/pages
-        dirs: 'src/views/system',
+        dirs: ['src/views/system','src/views/dashboard'],
         // 支持的文件扩展名
         extensions: ['vue', 'js', 'jsx', 'ts', 'tsx'],
         syncIndex: true,

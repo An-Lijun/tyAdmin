@@ -80,15 +80,13 @@ const login = () => {
         errCount.value = 0
         const { data: lsData } = await http.get('/api/menu/list')
         generateRoutes(lsData.data)
-        console.log(lsData.data);
+        console.log(lsData.data)  
         
         localStorage.setItem('dynamicRoutes', JSON.stringify(lsData.data));
-
-        nextTick(() => {
+          
           router.push({
             name: 'dashboard'
           })
-        })
       }
     } catch (error) {
       console.log(error)
