@@ -46,6 +46,7 @@ declare module 'vue' {
     TyBreadcrumbItem: typeof import('toyar-design')['TyBreadcrumbItem']
     TyButton: typeof import('toyar-design')['TyButton']
     TyCard: typeof import('toyar-design')['TyCard']
+    TyCaution: typeof import('toyar-design')['TyCaution']
     TyCol: typeof import('toyar-design')['TyCol']
     TyConfigProvider: typeof import('toyar-design')['TyConfigProvider']
     TyDialog: typeof import('toyar-design')['TyDialog']
