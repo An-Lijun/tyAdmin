@@ -18,7 +18,7 @@ import PdfViewer from '@/components/pdfViewer.vue';
 import { getAssetURL } from '@/common'
 import { ref } from 'vue'
 import THeader from '@/components/tHeader.vue';
-import VueOfficePdf  from '@vue-office/pdf'
+import VueOfficePdf from '@vue-office/pdf'
 
 const activeName = ref('pdfjs')
 

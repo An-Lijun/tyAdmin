@@ -33,7 +33,7 @@ export default defineConfig((options) => {
     build: {
       rollupOptions: {
         input: {
-          index: resolve(__dirname, 'src/i.html')
+          index: resolve(__dirname, 'index.html')
         }
       },
     },
