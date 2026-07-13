@@ -33,6 +33,9 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 
+defineOptions({
+  name:'waterProgress'
+})
 const props = defineProps({
   fill: {
     type: String,
