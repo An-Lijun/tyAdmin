@@ -1,6 +1,6 @@
 import { defineComponent, h } from 'vue';
 import { RouterView } from 'vue-router';
-import { TyContainer, TyAside, TyMain } from 'toyar-design';
+import { TyContainer, TyAside, TyMain,TyScrollBar } from 'toyar-design';
 import Menu from './components/Menu.vue';
 import SHeader from './components/SHeader.vue';
 import SFooter from './components/SFooter.vue';
@@ -19,8 +19,7 @@ const mainContentStyles: StyleObject = {
 
 const routerViewWrapperStyles: StyleObject = {
   width: '100%',
-  'overflow-y': 'auto',
-  'max-height': 'calc(100vh - 130px)'
+  height: 'calc(100vh - 130px)'
 };
 
 const createAside = (appStore: ReturnType<typeof useAppStore>) => {
@@ -38,7 +37,7 @@ const createMainContent = () => {
   return h(TyMain, {
     style: mainContentStyles
   }, {
-    default: () => h('div', {
+    default: () => h(TyScrollBar, {
       class: 'animationRightToLeft',
       style: routerViewWrapperStyles
     }, h(RouterView))
