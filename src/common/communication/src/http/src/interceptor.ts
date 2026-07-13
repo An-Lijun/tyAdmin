@@ -32,9 +32,12 @@ export function addReqInterceptor(http) {
 export function addResInterceptor(http) {
   http.interceptors.response.use(
     function (response) {
-      const data = JSON.parse(response.data)
+      let data = response.data
+      if (typeof response.data === 'string') {
+        data = JSON.parse(response.data)
+        response.data = data
+      }
       if (isDev && import.meta.env.VITE_MOCK_OPEN === 'true') {
-        console.log('请求返回', response);
         AxiosIn.post('/handleCallFunction', {
           url: response.config.url,
           data: data,
@@ -57,9 +60,6 @@ export function addResInterceptor(http) {
         });
         return Promise.reject(response)
       }
-      // 2xx 范围内的状态码都会触发该函数。
-      // 对响应数据做点什么
-      response.data = JSON.parse(response.data)
       return response
     },
     function (error) {

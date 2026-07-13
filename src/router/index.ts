@@ -1,11 +1,9 @@
 import type { RouteRecordRaw } from 'vue-router';
 import type { App } from 'vue';
-import generateRoutes from './generateRoutes'
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import installRouterGuard from './guard';
 // 约定式路由源于系统
 import systemRouter from '~pages';
-
 export const pageRoute = [
   {
     label: '仪表盘',
@@ -413,9 +411,7 @@ export const router = createRouter({
 });
 // const dyRoutes = localStorage.getItem('dynamicRoutes');
 
-// if (dyRoutes) {
-//   generateRoutes(JSON.parse(dyRoutes))
-// }
+
 
 // config router
 // 配置路由器

@@ -73,7 +73,8 @@ export default function createPlugins(options:any): Array<any> {
           return 'async';
         },
         extendRoute(route, parent) {
-          if (route.name === 'home') {
+          if (route.name === 'system-home' || route.name ==='home') {
+            route.name = 'home'
             route.path='/'
           }
 

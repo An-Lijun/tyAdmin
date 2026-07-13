@@ -1,44 +1,38 @@
 import type { Router } from 'vue-router';
 import useUserStore from '@/store/modules/user'
 import useAppStore from '@/store/modules/app'
-import useMenuStore from '@/store/modules/menu'
-import generateRoutes from '@/router/generateRoutes'
-
-let isDynamicRoutesLoaded = false
 
 export default function installRouterGuard(router: Router) {
   createPageGuard(router)
 }
 
 function createPageGuard(router: Router) {
-
   const appStore = useAppStore()
-  router.beforeEach((to) => {
+  
+  router.beforeEach((to, from) => {
     const userStore = useUserStore()
-    const menuStore = useMenuStore()
 
-    if (appStore) {
-      appStore.loading = true
-    }
-    
     if (!userStore.token && to.fullPath !== '/login') {
       return { name: 'login' }
     }
     
-    if (userStore.token && !isDynamicRoutesLoaded) {
-      const persistedMenu = menuStore.menu
-      if (persistedMenu && persistedMenu.length > 0) {
-        generateRoutes(persistedMenu)
-        isDynamicRoutesLoaded = true
-        return { path: to.fullPath, replace: true }
-      }
+    if (appStore && to.fullPath !== '/login') {
+      appStore.loading = true
     }
     
     return true
   })
-  router.afterEach(() => {
+  
+  router.afterEach((to) => {
     if (appStore) {
       appStore.loading = false
     }
+  })
+  
+  router.onError((error) => {
+    if (appStore) {
+      appStore.loading = false
+    }
+    console.error('Navigation error:', error)
   })
 }

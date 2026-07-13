@@ -66,11 +66,11 @@ function routerTransMenu(menuLs, pPath) {
 const handleOpenMenu = (menu) => {
   let list = menuStore.visitingMenu
   if (menu.label && !list.find(item => item.path === menu.path)) {
-
     menuStore.addVisitingMenu(menu)
   }
 }
-const arr = menuStore.menu.map(item => {
+const menus = JSON.parse(JSON.stringify(menuStore.menu))
+const arr = menus.map(item => {
   item.path = '/' + item.path
   return item
 })

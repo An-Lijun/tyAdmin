@@ -1,5 +1,5 @@
 <template>
-  <TyForm ref="formRef" style="width: 500px" size="large" :formData="formData" :rules="rules" :labelWidth="0" >
+  <TyForm ref="formRef" style="width: 500px" size="large" :formData="formData" :rules="rules" :labelWidth="0" @submit.prevent>
     <TyFormItem prop="username" class="entry" :isShowStr="false">
       <TyInput v-model="formData.username"></TyInput>
     </TyFormItem>
@@ -17,7 +17,7 @@
         <canvas @click="resetCaptcha" ref="captchaRef" class="captcha"></canvas>
       </div>
     </TyFormItem>
-    <TyButton @click="login" block size="large" style="margin-top: 20px" class="entry">登录</TyButton>
+    <TyButton html-type="button" @click.prevent="login" block size="large" style="margin-top: 20px" class="entry">登录</TyButton>
 
   </TyForm>
 </template>
@@ -81,12 +81,12 @@ const login = () => {
         const { data: res } = await http.get('/api/menu/list')
    
         generateRoutes(res.data)
-        // const menu =res.data.map(item=>{
-        //   item.path='/'+item.path
-        //   return item
-        // })
+        // // const menu =res.data.map(item=>{
+        // //   item.path='/'+item.path
+        // //   return item
+        // // })
         menuStore.setMenu(res.data)
-        router.push('/dashboard')
+        router.push('/dashboard/analysis')
       }
     } catch (error) {
       console.log(error)

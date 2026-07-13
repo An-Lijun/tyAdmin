@@ -39,7 +39,8 @@ export default class AxiosPro {
     return new Promise(async (resolve, reject) => {
       try {
         await this.waitStack();
-       resolve(this.instance.request(config))
+        const result = await this.instance.request(config);
+        resolve(result);
       } catch (error) {
         reject(error);
       } finally {
