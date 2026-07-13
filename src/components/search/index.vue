@@ -88,7 +88,9 @@ const isShowSearch = defineModel();
 const emit = defineEmits(['update:modelValue'])
 const wrapRef = ref();
 const handleJump = (item) => {
-  router.push(item.path)
+  router.push({
+    name:item.path
+  })
   emit('update:modelValue', false)
 }
 const searchEdList = ref([]);
