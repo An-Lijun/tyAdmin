@@ -22,8 +22,7 @@
                     <TyiArrowRightSLine/>
 
                   </template>
-                  {{ item.label }}
-                  <span v-html="transHightLight(item.label, searchValue, 'var(--primary-6)')">
+                  <span v-html="highlightLabel(item)">
                   </span>
                 </div>
                 <div>
@@ -65,18 +64,25 @@
 <script setup>
 import { ref } from 'vue';
 import svgIcon from '@/components/svgIcon.vue';
-import { transHightLight } from 'robinson'
 import useMenuStore from '@/store/modules/menu'
 import { useRouter } from 'vue-router'
+import { pinyin } from 'pinyin-pro'
 const router = useRouter()
 const menuStore = useMenuStore()
 
 let list = menuStore.menu.map(item => {
   return item.children
 })
+list = [].concat(...list).map(item => {
+  const pinyinArr = pinyin(item.label, { type: 'array', toneType: 'none' }).map(p => p.toLowerCase())
+  return {
+    ...item,
+    pinyinFull: pinyinArr.join(''),
+    pinyinFirst: pinyinArr.map(char => char[0]).join(''),
+    pinyinArr
+  }
+})
 const searchValue = ref('');
-
-list = [].concat(...list);
 
 const isShowSearch = defineModel();
 const emit = defineEmits(['update:modelValue'])
@@ -89,12 +95,58 @@ const searchEdList = ref([]);
 const handleInput = () => {
   searchEdList.value = list.filter(item => {
     if (item.label && searchValue.value) {
-      return item.label.includes(searchValue.value)
+      const keyword = searchValue.value.toLowerCase()
+      return item.label.toLowerCase().includes(keyword) || item.pinyinFull.includes(keyword) || item.pinyinFirst.includes(keyword)
     }
   })
 }
 const handleClick = () => {
   emit('update:modelValue', false)
+}
+const highlightLabel = (item) => {
+  const keyword = searchValue.value.toLowerCase()
+  if (!keyword) return item.label
+  if (item.label.toLowerCase().includes(keyword)) {
+    return item.label.replace(new RegExp(keyword, 'gi'), match => `<span style="color: var(--primary-6);">${match}</span>`)
+  }
+  const pinyinFirstMatch = item.pinyinFirst.indexOf(keyword)
+  if (pinyinFirstMatch !== -1) {
+    const chars = item.label.split('')
+    const highlighted = chars.map((char, index) => {
+      if (index >= pinyinFirstMatch && index < pinyinFirstMatch + keyword.length) {
+        return `<span style="color: var(--primary-6);">${char}</span>`
+      }
+      return char
+    })
+    return highlighted.join('')
+  }
+  const pinyinFullMatch = item.pinyinFull.indexOf(keyword)
+  if (pinyinFullMatch !== -1) {
+    const pinyinLengths = item.pinyinArr.map(p => p.length)
+    let charIndex = 0
+    let currentLength = 0
+    const startChar = []
+    while (charIndex < pinyinLengths.length && currentLength + pinyinLengths[charIndex] <= pinyinFullMatch) {
+      currentLength += pinyinLengths[charIndex]
+      charIndex++
+    }
+    startChar.push(charIndex)
+    let endChar = charIndex
+    let remainingLength = keyword.length
+    while (endChar < pinyinLengths.length && remainingLength > 0) {
+      remainingLength -= pinyinLengths[endChar]
+      endChar++
+    }
+    const chars = item.label.split('')
+    const highlighted = chars.map((char, index) => {
+      if (index >= startChar[0] && index < endChar) {
+        return `<span style="color: var(--primary-6);">${char}</span>`
+      }
+      return char
+    })
+    return highlighted.join('')
+  }
+  return item.label
 }
 </script>
 <style lang="scss" scoped>
