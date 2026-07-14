@@ -1,71 +1,90 @@
 <template>
-  <div class="ty-lock">
+  <div class="ty-lock" @keydown.enter="unLock" tabindex="0">
     <header class="ty-header-lock" @click="unLock">
-         <TyiLockLine :size="16"/>
-        <div>点击解锁</div>
+      <TyiLockLine :size="16" />
+      <div>点击解锁</div>
     </header>
     <div class="ty-inner">
-        <div class="left">
-          <div class="top">
-              {{ topValue }}
-          </div>
-          <div class="card1 card-item ">{{ hourNew }}</div>
-          <div class="card2 card-item ">{{ hourNew }}</div>
-          <div class="card3 card-item ">{{ hourOld }}</div>
-          <div class="card4 card-item ">{{ hourOld }}</div>
-        </div>
-        <div class="right" :class="{
-          flip:isFlip
-        }" ref="min">
-          <div class="card1 card-item ">{{ minuteNew }}</div>
-          <div class="card2 card-item ">{{ minuteNew }}</div>
-          <div class="card3 card-item ">{{ minuteOld }}</div>
-          <div class="card4 card-item ">{{ minuteOld }}</div>
-        </div>
+      <div class="left">
+        <div class="top">{{ period }}</div>
+        <div class="card1 card-item">{{ hourNew }}</div>
+        <div class="card2 card-item">{{ hourNew }}</div>
+        <div class="card3 card-item">{{ hourOld }}</div>
+        <div class="card4 card-item">{{ hourOld }}</div>
+      </div>
+      <div class="right" :class="{ flip: isFlip }" ref="min">
+        <div class="card1 card-item">{{ minuteNew }}</div>
+        <div class="card2 card-item">{{ minuteNew }}</div>
+        <div class="card3 card-item">{{ minuteOld }}</div>
+        <div class="card4 card-item">{{ minuteOld }}</div>
+      </div>
     </div>
 
-    <foote class="ty-footer-lock">
-        {{ allTime }}
-    </foote>
+    <footer class="ty-footer-lock">
+      {{ formattedDate }}
+    </footer>
   </div>
 </template>
+
 <script setup>
-import { nextTick, ref } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import { router } from '@/router'
-  let hourNew =ref('00')
-  let hourOld =ref('00')
-  let minuteNew =ref('00')
-  let minuteOld =ref('00')
-  const min = ref()
-  let isFlip =ref(false)
 
-  let topValue = ref('AM')
-  let allTime =ref('2024/6/4 星期二')
+const hourNew = ref('00')
+const hourOld = ref('00')
+const minuteNew = ref('00')
+const minuteOld = ref('00')
+const min = ref(null)
+const isFlip = ref(false)
+const period = ref('AM')
+const formattedDate = ref('')
 
-  const render =(date)=>{
-    isFlip.value=false
-    nextTick(()=>{
-      hourOld.value = hourNew.value
-      hourNew.value = date.getHours().toString().padStart(2, "0");
-      topValue.value = hourNew.value >=12 ? 'PM':'AM'
-      minuteOld.value = minuteNew.value
-      minuteNew.value = date.getSeconds().toString().padStart(2, "0");
-      min.value?.clientHeight
-      isFlip.value=true
-    })
-  }
+let timerId = null
 
-  render(new Date())
-  setInterval(()=>{
-      render(new Date())
-  },1000)
+const formatTwoDigits = (num) => {
+  return num.toString().padStart(2, '0')
+}
 
-const unLock =()=>{
-  router.push({
-    name:'System'
+const formatFullDate = (date) => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const weekDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+  const weekDay = weekDays[date.getDay()]
+  return `${year}/${month}/${day} ${weekDay}`
+}
+
+const updateTime = () => {
+  isFlip.value = false
+  nextTick(() => {
+    const date = new Date()
+    hourOld.value = hourNew.value
+    hourNew.value = formatTwoDigits(date.getHours())
+    period.value = date.getHours() >= 12 ? 'PM' : 'AM'
+    minuteOld.value = minuteNew.value
+    minuteNew.value = formatTwoDigits(date.getMinutes())
+    formattedDate.value = formatFullDate(date)
+    min.value?.clientHeight
+    isFlip.value = true
   })
 }
+
+const unLock = () => {
+  router.push({ name: 'System' })
+}
+
+onMounted(() => {
+  updateTime()
+  timerId = setInterval(updateTime, 1000 * 60)
+})
+
+onUnmounted(() => {
+  if (timerId) {
+    clearInterval(timerId)
+  }
+})
 </script>
+
 <style lang="scss" scoped>
 .ty-lock {
   height: 100vh;
@@ -85,18 +104,22 @@ const unLock =()=>{
     align-items: center;
     --un-text-opacity: 1;
     color: rgb(255 255 255 / var(--un-text-opacity));
+
     div {
       margin-top: 5px;
     }
   }
-  .ty-inner{
+
+  .ty-inner {
     height: 100%;
     --un-text-opacity: 1;
     color: rgb(255 255 255 / var(--un-text-opacity));
     display: flex;
     align-items: center;
     justify-content: space-around;
-    .left,.right{
+
+    .left,
+    .right {
       height: 70vh;
       display: flex;
       align-items: center;
@@ -108,7 +131,8 @@ const unLock =()=>{
       position: relative;
       border-radius: 30px;
       overflow: hidden;
-      .top{
+
+      .top {
         position: absolute;
         z-index: 5;
         left: 3vw;
@@ -116,56 +140,56 @@ const unLock =()=>{
         top: 3vw;
       }
     }
+
     .card-item {
       position: absolute;
       width: 100%;
-      /* 因为每个卡片只有半个数字，所以高度只有百分之50 */
       height: 50%;
       left: 0;
       top: 0;
-      overflow: hidden !important;
+      overflow: hidden;
       text-align: center;
       color: rgb(186, 186, 186);
       background-color: #141313;
-
     }
 
     .card1 {
       line-height: 70vh;
     }
-    .card2{
+
+    .card2 {
       top: 50%;
-      line-height: 0px;
+      line-height: 0;
       transform-origin: center top;
-       /* 向上折 180 度 */
       transform: rotateX(180deg);
-      /* 通过这个属性让元素的背面隐藏 */
-      backface-visibility: hidden !important;
+      backface-visibility: hidden;
       z-index: 2;
     }
 
-    .card3{
+    .card3 {
       line-height: 70vh;
       transform-origin: center bottom;
-      backface-visibility: hidden !important;
-       z-index: 2;
-
+      backface-visibility: hidden;
+      z-index: 2;
     }
-    .card4{
+
+    .card4 {
       top: 50%;
       line-height: 0;
+    }
 
-    }
-    .flip .card2{
+    .flip .card2 {
       transform: rotateX(0deg);
-      transition: transform .5s;
+      transition: transform 0.5s;
     }
-    .flip .card3{
+
+    .flip .card3 {
       transform: rotateX(-180deg);
-      transition: transform .5s;
+      transition: transform 0.5s;
     }
   }
-  .ty-footer-lock{
+
+  .ty-footer-lock {
     position: absolute;
     z-index: 5;
     bottom: 0;

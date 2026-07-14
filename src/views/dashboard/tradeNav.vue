@@ -76,10 +76,9 @@ export default {
       this.$refs.container.style.transform = `scale(1.1)`
     }
   },
-  created() {
-    window.addEventListener('resize', this.init)
-  },
   mounted() {
+    window.addEventListener('resize', this.init)
+
     this.init()
   },
   beforeDestroy() {
